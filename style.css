@@ -166,6 +166,13 @@ img:hover{
 
 @media  screen and (max-width: 780px) {
   
+    body {
+    display: flex;
+    align-items: center;
+    font-family: Roboto,sans-serif;
+    color: rgb(255, 255, 255);
+    background-image: url('./imag/fundo_mob.jpg'); 
+  }
   .posi{
     position: relative;
     left: 260px;
