@@ -1,68 +1,164 @@
+*{
 
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 
+}
 body {
-    font-family: 'Roboto Mono',monospace;
-    text-align:left;
-    background-image: url('https://www.alura.com.br/assets/img/imersoes/dev-2021/dia-04-aluraflix-e-filmes.png');
-    background-color: #000000;
-    background-size: cover;
-    background-position: center left;
-    background-repeat: no-repeat;
+    display: flex;
+    align-items: center;
+    font-family: Roboto,sans-serif;
+    color: rgb(255, 255, 255);
+    background-image: url('./imag/fundo_pc\ \(1\).jpg');
+
+    
   }
-  
-  .container {
+
+  .line{
     text-align: center;
-    padding: 20px;
+    position:relative;
+    left: -900px;
+    top: -100px;
+    font-family: Arial, Helvetica, sans-serif;
+    color: rgb(255, 255, 255);
+    font-size: 3em;
+    margin: 0;
+    white-space: nowrap;
+    overflow: hidden;
+    border-right: 17px solid #119400;
+
   }
   
-  .page-title {
-    color: #ffffff;
-    margin: 0 0 5px;
+  .animar{
+    animation: cursor 500ms steps(40) infinite normal, type 4s  steps(40) 1s normal;
+
   }
-  
-  .page-subtitle {
-    color: #ffffff;
-    margin-top: 5px;
+  @keyframes type{
+    from{
+      width: 0;
+    }
+    to{
+      width: 15em;
+    }
   }
-  
-  .page-logo {
-    width: 200px;
+  @keyframes cursor
+  {
+    from{
+
+      border-right-color: #ffffff;
+      
+    }
+    to {
+      border-right-color: transparent ;
+
+    }
   }
-  
+
   .alura-logo {
-    width: 40px;
+    width: 30px;
     position: absolute;
-    top: 10px;
-    right:10px;
+    top: 11px;
+    right:210px;
   }
+  .alura-logo1 {
+    width: 56px;
+    position: absolute;
+    top: 0px;
+    right:260px;
+  }
+  .alura-logo2 {
+    width: 55px;
+    position: absolute;
+    top: 8px;
+    right:320px;
+  }
+
+
+  .controls__photo {
+    border-radius: 50%;
+    position: absolute;
+    width: 100px;
+    position: absolute;
+    left: 270px;
+    top: 170px;
+
+  }
+  .texto{
+    display: flex;
+    align-items: center;
+    font-weight: inherit;
+    color: rgb(255, 255, 255);
+    background-color: rgba(0, 0, 0, 0);
+    font-size: 1em;
   
-  #listaFilmes img {
-    margin: 10px;
   }
+  .text_cor{
+    color: var(--highlight-color,#119400);
+    display: inline-block;
+    font-weight: 300;
+    margin: 0 3px;
+  }
+  .text_simples{
+    color: var(--highlight-color,#ffffff);
+    display: inline-block;
+    font-weight: 300;
+    margin: 0 3px;
+
+  }
+
+  .link {
+    border: 1px solid transparent;
+    color: var(--highlight-color,#119400);
+    display: inline-block;
+    text-decoration: underline;
+}
+.posi{
+  position: relative;
+  left: 260px;
+  top: 150px;
+}
+.menu{
+  position: relative;
+  left: -700px;
+  top: -300px;
+   
+}
+.menu2{
+  position: relative;
+  left: -400px;
+  top: -300px;
+   
+}
+.menu_text{
+  font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  color: rgb(255, 255, 255);
+  display: inline-block;  
+}
+
+ul{
+  list-style-type: none;
+  align-items: center;
   
-  .form-wrapper {
-    margin: 0 0 15px;
-  }
+}
+a{
+  color: #ffffff;
+  text-decoration: none;
+}
+.s{
+
+  color: #ffffff00;
+    
+}
+
+nav a:hover {
+  color: #119400;
+  transform: scale(1.5);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0);
+}
+img:hover{
   
-  .form-wrapper input {
-    display: block;
-    margin: 0 auto;
-    padding: 10px 15px;
-  }
-  
-  .form-wrapper button {
-    border: 0;
-    color: #ffffff;
-    background: #DA1E26;
-    font-weight:bold;
-    padding: 15px 20px;
-    font-size: 16px;
-    borde-radius: 4px;
-    margin-top: 20px;
-    cursor: pointer;
-    transition: .3s;
-  }
-  
-  .form-wrapper button:hover {
-    opacity:.8;
-  }
+  transform: scale(1.5);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0);
+}
+
