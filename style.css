@@ -10,16 +10,14 @@ body {
     align-items: center;
     font-family: Roboto,sans-serif;
     color: rgb(255, 255, 255);
-    background-image: url('./imag/fundo_pc\ \(1\).jpg');
-
-    
+    background-image: url('./imag/fundo.jpg'); 
   }
 
   .line{
     text-align: center;
     position:relative;
     left: -900px;
-    top: -100px;
+    top: 50px;
     font-family: Arial, Helvetica, sans-serif;
     color: rgb(255, 255, 255);
     font-size: 3em;
@@ -116,18 +114,18 @@ body {
 .posi{
   position: relative;
   left: 260px;
-  top: 150px;
+  top: 310px;
 }
 .menu{
   position: relative;
-  left: -700px;
-  top: -300px;
+  left: -650px;
+  top: -130px;
    
 }
 .menu2{
   position: relative;
-  left: -400px;
-  top: -300px;
+  left: -500px;
+  top: -130px;
    
 }
 .menu_text{
@@ -160,5 +158,65 @@ img:hover{
   
   transform: scale(1.5);
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0);
+}
+
+
+
+
+
+@media  screen and (max-width: 780px) {
+  
+  .posi{
+    position: relative;
+    left: 260px;
+    top: 0px;
+  }
+  .menu{
+    position: relative;
+    left: -650px;
+    top: 0px;
+     
+  }
+  .menu2{
+    position: relative;
+    left: -500px;
+    top: 0px;
+     
+  }
+  .controls__photo {
+    border-radius: 50%;
+    position: absolute;
+    width: 100px;
+    position: absolute;
+    left: 270px;
+    top: 0px;
+
+  }
+  .alura-logo2 {
+    width: 55px;
+    position: absolute;
+    top: 0px;
+    right:320px;
+  }
+  .alura-logo {
+    width: 30px;
+    position: absolute;
+    top: 0px;
+    right:210px;
+  }
+  .line{
+    text-align: center;
+    position:relative;
+    left: -900px;
+    top: 0px;
+    font-family: Arial, Helvetica, sans-serif;
+    color: rgb(255, 255, 255);
+    font-size: 3em;
+    margin: 0;
+    white-space: nowrap;
+    overflow: hidden;
+    border-right: 17px solid #119400;
+
+  }
 }
 
