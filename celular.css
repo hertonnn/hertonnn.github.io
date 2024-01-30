@@ -1,0 +1,85 @@
+/*Responsividade*/
+/*NAVBAR*/
+/*APRESENTACAO*/
+
+.inicio-container{
+    font-size: 30px;
+    width: 95%;
+}
+.inicio-container h2{
+    font-size: 2.7rem;
+    font-weight: 200;
+
+}
+.img-container{
+    width: 98%;
+    justify-content: center;
+}
+
+.social{
+    border: 1px solid transparent;
+    text-decoration: none;
+}
+.social__icon {
+    fill: rgb(255, 255, 255);
+    transition: opacity .1s;
+}
+
+@media screen and (max-width: 350px) {
+    .inicio-container{
+        font-size: 25px;
+        width: 100%;
+    }
+    .inicio-container h2{
+        font-size: 2rem;
+    }
+    .img-container{
+        width: 98%;
+        justify-content: center;
+    }
+    .social__icon {
+        width: 35px;
+        padding-left: 2px;
+    }
+    .social__icon-3{
+        width: 48px;
+        padding-top: 5px;
+        padding-left: 4px;
+    }
+    img{
+        width: 50%;
+    }
+
+    .sobre-container h1{
+        font-size: 25px;
+    }
+  }
+/*SOBRE MIN*/
+
+#sobre{
+    padding-left: 25px;
+    padding-right: 15px;
+    padding-bottom: 20px;
+}
+.sobre-container{
+    font-size: 16px;
+
+}
+.sobre-container p {
+    font-size: 20px;
+}
+.sobre-container li {
+    margin-left: 15px;
+}
+.sobre-container h2{
+    font-size: 2.7rem;
+    font-weight: 200;
+}
+.sobre-container h3{
+    font-size: 2rem;
+    padding-top: 30px;
+    font-weight: 200;
+}
+.sobre-container h1{
+    font-size: 30px;
+}

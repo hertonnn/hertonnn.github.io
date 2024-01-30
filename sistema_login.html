@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+    <head>
+        <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="./imag/pngwing.com.ico" type="image/x-icon">
+    <title>
+        Projetos | Herton Silveira
+    </title>
+    <link href="projetos.css" rel = "stylesheet" />
+    <link href="style.css" rel = "stylesheet" />
+    <link href="variaiveis.css" rel = "stylesheet" />  
+    <link rel="stylesheet" media = "screen  and (max-width: 900px)" href="tablet.css">
+    <link rel="stylesheet" media = "screen  and (max-width: 450px)" href="celular.css">
+</head>
+
+
+
+<body>
+    <nav class = "navbar">
+        <div class = "mobile-menu">
+            <div class = "line1"></div>
+            <div class = "line2"></div>
+            <div class = "line3"></div>
+        </div>
+        <div class ="navbar-itens">
+            <li><a href= "index.html"> Início</a> </li>
+            <li><a href = "index.html"> Sobre </a></li>
+            <li><a href = "./projetos.html"> Projetos </a></li>
+        </div>
+    </nav>
+    
+    <header  id = "sobre">
+        <div class = "sobre-container">
+            <h1>Sistema Login em
+            <b class = "text_cor"> Python,</b>
+             com uma interface gráfica 
+            e conexão ao banco de dados
+            <b class = "text_cor"> MySQL.</b>
+            </h1>
+            <br>
+            <br>
+            <p>É importante salientar que iriei abordar de forma superficial o que foi feito durante todo processo, caso queira saber mais entre no link ao final do post para ver todos os documentos no meu GitHub. Apartir do aprendizado da liguagem de programação SQL, linguagem utilizada pelo MySQL que é um banco de dados open source e gratuito, eu pretendia de alguma forma pôr em prática o que foi aprendido na teoria. De forma análoga, já havia aprendido C no primeiro semestre da faculdade e posto em prática criando um simples sistema de login e cadastro (como os que redes sociais usam) que possibilitou a lógica de base para esse simples projeto em Python. </p>
+            <br>
+            <h1> Iniciando</h1>
+            <br>
+            <p>O desafio inicial era colocar os dados do input(entrada de informações), como senha e nome em um lugar mais apropriado, pois em C eu havia utilizado um arquivo em formato binário (como os arquivos em texto, porém com uma linguagem mais apropriada para a máquina ler), o que não é muito utilizado, em comparação com os grandes bancos de dados. E é aí que entra o MySQL.</p>
+            
+            <img class = "imagens" src = "./imagens_projeto1/Entrando Mysql.png" width="550">
+            <br>
+            <br>
+            <h1> Criando o banco de dados</h1>
+            <br>
+            
+            <p>Com o MySQL instalado optei por utilizar o próprio terminal para fazer as modificações, como criar um usuário, um root, uma senha, um database e por fim uma tabela, é nessas belezas que pode ser armazenado as informações do input com os comandos de CREATE.</p>
+            
+            <br>
+            <img  class = "imagens" src = "./imagens_projeto1/acessando banco.png" width="550">
+            <br>
+            <br>
+            <h1> Lógica do login e interface gráfica </h1>
+            <br>
+
+            <p>Basicamente o Login funciona com uma autenticação por meio do nome do user e uma senha de no mínimo 5 dígitos. Ao ler as informações na tela a máquina se conecta com o database e informa os comandos da linguagem SQL que devem ser executados por meio da linguagem Python (mesma usada na criação do código fonte do login e cadastro), como por exemplo o comando SELECT que talvez seja um dos mais importantes dessa linguagem. O SELECT e seus derivados realizam consultas (chamadas de query) de dados na base de dados.</p>
+
+            <img  class = "imagens" src = "imagens_projeto1/Interface.png" width="300">
+            
+
+            <p>Como o foco era pôr em prática o aprendizado em bancos de dados optei por uma interface simples e intuitiva, usando a biblioteca do Python Tkinter para criá-la. Além do mais, aqui não uso nenhum algoritmo de criptografia para guardar, futuramente pretendo estudar mais segurança de dados e etc, e assim modificar esse código.</p>
+            <img class = "imagens" src = "imagens_projeto1/login invalido (1).png"width="250">
+            <img class = "imagens" src = "imagens_projeto1/cadastrado (1).png"width="250">
+            <img class = "imagens" src = "imagens_projeto1/tentando de novo (1).png"width="250">
+            <img class = "imagens" src = "imagens_projeto1/logada.png"width="200">
+            <img class = "imagens" src = "imagens_projeto1/banco pós cadastro.png"width="300">
+            <br>
+            <br>
+
+            <h1>Conclusão</h1>
+            <br>
+            <p>Ao fim, o programa é capaz de cadastrar uma quantidade ilimitada de pessoas em um banco de dados, checar o text_correto nome e senha de cada, permitindo assim a entrada do usuário. Caso algo visto acima tenha algum erro ou possa ser melhorado de alguma forma, peço que você que está lendo entre em contato e me avise, a idéia aqui é evoluir cada vez mais.</p>
+            <br>
+            <a href = "https://github.com/hertonnn/Login_Cadastro_Python-Mysql"> Documentos no GitHub aqui! </a> 
+            <br>
+            <br>
+            <img class = "imagens" src = "imagens_projeto1/final.png"width="300">
+            <br>
+            <br>
+        </div>
+    </header>
+    
+<!-- Footer -->
+
+<footer class="footer"><small class="footer__text">From Brasil to the world<svg class="footer__icon footer__icon--pulse" width="24" height="24" viewBox="0 0 24 24"><title> love </title><path d="M12 4.248c-3.148-5.402-12-3.825-12 2.944 0 4.661 5.571 9.427 12 15.808 6.43-6.381 12-11.147 12-15.808 0-6.792-8.875-8.306-12-2.944z"></path></svg>  <svg class="footer__icon footer__icon--rotate" viewBox="-11.5 -10.23174 23 20.46348"><title></title><g stroke="#61dafb" stroke-width="1" fill="none">rx="11" ry="4.2"></g></svg> </small></footer>
+<script
+src="https://code.jquery.com/jquery-3.6.1.min.js"
+integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ="
+crossorigin="anonymous"></script>
+<script src="main.js"></script>
+</body>
+
+</html>

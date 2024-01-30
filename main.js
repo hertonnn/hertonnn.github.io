@@ -1,5 +1,5 @@
 // Smooth Scrolling
-$("#navbar a, .btn").on("click", function (event) {
+$(".navbar a, .btn").on("click", function (event) {
     if (this.hash !== "") {
         event.preventDefault();
 
@@ -14,19 +14,46 @@ $("#navbar a, .btn").on("click", function (event) {
     }
 });
 
-// Sticky menu background
-window.addEventListener("scroll", function () {
-    if (window.scrollY > 150) {
-        document.querySelector("#navbar").style.opacity = 0.5;
-    } else {
-        document.querySelector("#navbar").style.opacity = 1;
+// NavBar Responsiva
+class MobileNavbar{
+    constructor(mobileMenu, navList, navLinks){
+        this.mobileMenu =  document.querySelector(mobileMenu);
+        this.navList = document.querySelector(navList);
+        this.navLinks = document.querySelectorAll(navLinks);
+        this.activeClass = "active"; 
+
+        this.handleClick = this.handleClick.bind(this);
     }
-});
-// Sticky menu background
-window.addEventListener("scroll", function () {
-    if (window.scrollY > 150) {
-        document.querySelector(".footer").style.opacity = 1;
-    } else {
-        document.querySelector(".footer").style.opacity = 0.1;
+
+    animateLinks(){
+        this.navLinks.forEach((link, index) => {
+            link.style.animation
+            ? (link.style.animation = "")
+            : (link.style.animation = `navLinkFade 0.5s ease forwards ${index / 7+ 0.3}s`); 
+        });
     }
-});
+    handleClick(){
+        this.navList.classList.toggle(this.activeClass); 
+        this.mobileMenu.classList.toggle(this.activeClass);
+        this.animateLinks();
+    }
+    addClickEvent(){
+        this.mobileMenu.addEventListener("click", this.handleClick);
+        this.navList.addEventListener("click", this.handleClick)
+        this.navBar.addEventListener("click", this.handleClick)
+    }
+    init(){
+        if(this.mobileMenu){
+            this.addClickEvent();
+        }
+        return this;
+    }
+}
+
+const mobileNavBar = new MobileNavbar(
+    ".mobile-menu",
+    ".navbar-itens",
+    ".navbar-itens li",
+);
+
+mobileNavBar.init();

@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+    <head>
+        <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="./imag/pngwing.com.ico" type="image/x-icon">
+    <title>
+        Projects | Herton Silveira
+    </title>
+    <link href="projetos.css" rel = "stylesheet" />
+    <link href="style.css" rel = "stylesheet" />
+    <link href="variaiveis.css" rel = "stylesheet" />  
+    <link rel="stylesheet" media = "screen  and (max-width: 900px)" href="tablet.css">
+    <link rel="stylesheet" media = "screen  and (max-width: 450px)" href="celular.css">
+
+</head>
+<body>
+    <nav class = "navbar">
+        <div class = "mobile-menu">
+            <div class = "line1"></div>
+            <div class = "line2"></div>
+            <div class = "line3"></div>
+        </div>
+        <div class ="navbar-itens">
+            <li><a href= "index.html"> Início</a> </li>
+            <li><a href = "index.html"> Sobre </a></li>
+            <li><a href = "./projetos.html"> Projetos </a></li>
+        </div>
+    </nav>
+    
+    <header id = "sobre">
+        <div class = "sobre-container">
+            <br>
+            <br>
+            <h1>Escrevendo código fonte de uma 
+                <b class = "text_cor"> Rede Neural</b>
+                e 
+                implementando a 
+                <b class = "text_cor "> Inteligência Artificial</b>
+                em jogos
+            </h1>
+            <br>
+            <br>
+            <h1> Ferramentas Utilizadas</h1>
+            <br>
+            <p> A linguagem escolhida foi o <b class = "text_cor">Python</b>, e como forma de acelerar os cálculos e dar ênfase no tratamento e estudo dos dados submetidos para a <b class = "text_cor">Rede Neural</b> eu usei:
+                <br>
+               <br> - Biblioteca <b class = "text_cor">Pickle</b> para perpetuar os objetos.
+               <br>
+               <br>  - Biblioteca <b class = "text_cor">Matplotlib </b>para a plotagem de Gráficos em tempo real para estudo dos dados.
+               <br>
+               <br> - Biblioteca <b class = "text_cor">Numpy</b> para os cálculos envolvendo Matrizes (que serão utilizadas basicamente em todo código da rede).
+               <br>
+               <br>  - Biblioteca <b class = "text_cor">Pygame</b> para a criação do jogo em que a IA será implementada. </p>
+               <br>
+               <br>
+            <br>
+            <h1> Introdução </h1>
+            <br>
+            
+            <p>Redes Neurais são modelos matemáticos que estão relacionados com o <b class = "text_cor">aprendizado</b> de Máquina. Em sumo são funções matemáticas que possuem pesos adaptáveis conforme o seu treinamento com entradas e saídas desejadas. A idéia nesse projeto era não só <b class = "text_cor">aprender</b> como o código de uma Rede Neural funciona, mas pôr em <b class = "text_cor">prática</b> a sua criação, bem como a implementação desses modelos de aprendizagem. Portanto, é importante salientar a que este projeto tentou ao máximo se aproximar ao real de uma rede neural tanto na teoria, quanto na prática, mas está sujeito a falhas, uma vez que sou um estudante iniciante na área das Redes Neurais, bem como na Ciência de Dados e este projeto é justamente para dar esse passo inicial.</p>
+            
+            <br>
+            <br>
+            <h1> Iniciando </h1>
+            <br>
+
+            <p>Para escrever o código da Rede Neural era preciso estudar o seu funcionamento básico, implemantar as fórmulas matemáticas e aprender os tópicos principais, como as redes neurais <b class = "text_cor">FeedFoward</b>, algoritmo de <b class = "text_cor">Backpropagation</b> e etc. É importante destacar que as imagens relacionadas a teoria estão na direita e suas respectivas implementações em Python estão na esquerda.</p>
+
+            <br>
+            <br>
+            <h1> FeedForward</h1>
+            <br>
+            <img class = "imagens" src = "./imagens_projeto2/IMAGEM1.jpeg" >
+            <img class = "imagens" src = "./imagens_projeto2/IMAGEM1.1.png" >
+            <br>
+            <br>
+            <p>De forma resumida é nesse processo em que as entradas, com entradas quero dizer os números iniciais que a Rede Neural terá contato para a aprendizagem, são multiplicadas pelos <b class = "text_cor">pesos</b>, (inicialmente valores randômicos entre 0 e 1). Resumidamente, esses pesos dão relevância aos valores de entrada, isto é, um peso de 30% implica em menos relevância em compararação a uma entrada que possui um peso de 50%, por exemplo. 
+                <br>Ademais, os <b class = "text_cor">Bias</b> ou <b class = "text_cor">Viés</b>, são elementos somados ao cálculo também, influenciando nos resultados de várias formas.</p>
+            <br>
+            <br>
+            <h1> Função de Ativação </h1>
+            <br>
+            <img src = "./imagens_projeto2/IMAGEM2.jpeg"class = "imagens">
+            <img src = "./imagens_projeto2/IMAGEM2.2.png" class = "imagens">
+            <br>
+            <br>
+            A função usada nesse projeto é a <b class = "text_cor">Sigmoid</b>, como visto acima em um desenho de aparência duvidosa feito por min. As <b class = "text_cor">Funções de Ativação</b> conferem um caráter não-linear, uma vez que esses cálculos iniciais de soma e produto estabelecem uma relação linear. E por fim aplica-se todos esses cálculos:
+            <br>
+            <br>
+            <img src = "./imagens_projeto2/IMAGEM3.jpeg"class = "imagens">
+            <img src = "./imagens_projeto2/IMAGEM3.3.png" class = "imagens">
+            <br>
+            <br>
+            <h1> Backpropagation </h1>
+            <br>
+            <br>
+            Pode-se dizer que essa parte é a mais importante da Rede Neural, uma vez que é aqui em que o cálculo dos novos <b class = "text_cor">Pesos</b> e novos <b class = "text_cor">Bias</b> serão feitos, ou seja, é aqui que ocorrerá uma adaptação visando alcançar a proximidade do valor de saída desejado.
+            <br>
+            <br>
+            <img src = "./imagens_projeto2/IMAGEM4.jpeg"class = "imagens">
+            <img src = "./imagens_projeto2/IMAGEM4.4.png" class = "imagens">
+            <br>
+            <br>
+            <h1> Implementando </h1>
+            <br>
+            <br>
+            Bom, um dos pontos positivos do código acima é que na class RedeNeural pode-se definir o número de entradas, números de neurônios da camada oculta, bem como o número de neurônios de saída com diversos valores, uma vez que os cálculos de matrizes irão se manter independente da estrutura da Rede Neural, dando uma maior flexibilidade de utilização do código.
+            <br>
+            <br>
+
+            Antes de implementar é importante dar ênfase em duas funções específicas da class RedeNeural. As duas são a usaSalvo() e a salvaDados(), pois é nessas funções que ocorre o salvamento e a utilização dos <b class = "text_cor">Pesos</b> e <b class = "text_cor">Bias</b> já atualizados, ou seja, com os números especícos que produzem o comportamento esperado pela <b class = "text_cor">IA</b>.
+ 
+            <br>
+            <br>
+            <img src = "./imagens_projeto2/IMAGEM5.png"class = "imagens">
+            <img src = "./imagens_projeto2/IMAGEM5.1.png" class = "imagens">
+            <br>
+            <br>
+            <h1> Jogo para implementação </h1>
+            <br>
+            <br>
+            Por ser o meu primeiro projeto com Redes Neurais decidi usar como teste um jogo simples, sendo esse o Pong. Não vou entrar em detalhes da criação dele, pois o objetivo não é a criação de jogos aqui. O processo vai funcionar da seguinte forma, as entradas serão as posições em um plano cartesiano, com os valores das abscissas e ordenadas da bola, bem como da raquete. A "tarefa" da IA é a partir dessas entradas tentar ao máximo evitar o erro, que é a diferença entre as coordenadas da bola e da raquete. Ora, se o objetivo do Pong é defender a bolinha com a raquete, está claro que suas coordenadas precisam ser similares, ao menos no eixo das ordenadas. A saída será um valor maior do que 0.5 (raquete vai pra cima) ou menor que 0.5 (raquete vai pra baixo), tentando assim diminuir o erro.
+            <br>
+            <br>
+            <img src = "./imagens_projeto2/IMAGEM6.jpeg" class = "imagens">
+            <br>
+            <br>
+            Com o jogo criado, a tarefa agora é treinar a Rede Neural. Para isso é importante estar a par do comportamento dos dados, por isso implementei o modo gráfico. A cada 30 frames o jogo atualiza um gráfico que mostra a variação do erro, perceba que esse erro precisa ser o mais próximo de zero.
+            <br>
+            <br>
+            <video src = "imagens_projeto2/VIDEO1.webm" class = "video" controls autoplay loop muted preload poster="./imagens_projeto2/IMAGEM7.png" ></video>
+            <br>
+            <br>
+            Inicialmente o erro tem uma variação grande, pois a IA está aprendendo, isto é, os pesos e bias estão constantemente sendo atualizados(a cada frame) para valores que impliquem em um resultado mais próximo do desejado. Perceba que caso o erro seja zero o valor dos pesos se conservam, como visto na fórmula para o cálculo de novos pesos.
+ 
+            Ao notar que a IA não vai mais perder, basta parar o programa e gravar os pesos atuais em um arquivo. Agora com esses valores ela é capaz de responder com o movimento correto qualquer posição em que a bola esteja, a tornando uma adversária *invencível. Mas é claro que vou testar isso...
+            <br>
+            <br>
+            <img src = "./imagens_projeto2/IMAGEM7.png" class = "imagens">
+            <br>
+            <br>
+            <h1> Desligo o modo gráfico, o treinamento da IA e ligo o modo <b class = "text_cor">Contra a IA!!</b> </h1>
+            <br>
+            <br>
+            <img src = "./imagens_projeto2/IMAGEM8.png" class = "imagens">
+            <br>
+            <br>
+            E como já era esperado eu levei uma surra da minha própria criação...
+            <br>
+            <br>
+            <h1>Conclusão</h1>
+            <br>
+            <br>
+            Em sumo, ainda que a aplicação tenha sido simples, acredito que isso abre muitas portas para futuros projetos mais complexos com <b class = "text_cor">Redes Neurais</b> e a curto prazo foi de grande importância para o aprendizado de diversas ferramentas voltadas para o controle de <b class = "text_cor">dados</b> em <b class = "text_cor">Python</b>. Caso ache que as informações acima possuem melhorias a serem feitas, erros ou deslizes, peço que entre em contato comigo, pois o objetivo aqui é sempre evoluir. 
+            <br>
+            <br>
+            <a href = "https://github.com/hertonnn/Rede_Neural"> Documentos no GitHub aqui! </a>
+            <br>
+            <br>
+            Referências bibliográficas:
+
+            <a href = "https://www.ibm.com/br-pt/cloud/learn/neural-networks">https://www.ibm.com/br-pt/cloud/learn/neural-networks </a>
+        </div>
+    </div>
+</header>
+    
+<!-- Footer -->
+
+<footer class="footer"><small class="footer__text">From Brasil to the world<svg class="footer__icon footer__icon--pulse" width="24" height="24" viewBox="0 0 24 24"><title> love </title><path d="M12 4.248c-3.148-5.402-12-3.825-12 2.944 0 4.661 5.571 9.427 12 15.808 6.43-6.381 12-11.147 12-15.808 0-6.792-8.875-8.306-12-2.944z"></path></svg>  <svg class="footer__icon footer__icon--rotate" viewBox="-11.5 -10.23174 23 20.46348"><title></title><g stroke="#61dafb" stroke-width="1" fill="none">rx="11" ry="4.2"></g></svg> </small></footer>
+<script
+src="https://code.jquery.com/jquery-3.6.1.min.js"
+integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ="
+crossorigin="anonymous"></script>
+<script src="main.js"></script>
+</body>
+
+</html>

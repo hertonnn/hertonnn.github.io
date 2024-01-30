@@ -1,0 +1,63 @@
+body{
+    background:  var(--color_bg);
+    position: relative;
+}
+
+/*Projetos*/
+
+.sobre-container{
+    padding: 10%;
+    
+}
+.sobre-container h1 {
+    font-size: 35px;
+    font-weight: 300;
+}
+
+.sobre-container p{
+    padding-top: 0%;
+}
+.anos{
+    font-size: 3rem;
+    border-bottom: 4px solid var(--color_padrao);   
+    left:0;
+    bottom:0;
+    width: 100px;
+    border-radius: 1px;
+}
+
+.post{
+    padding-top: 5%;
+}
+.post p{
+    padding-top: 2%;
+    font-size: 30px;
+}
+.post h1{
+    font-weight: 500;
+}
+.logos{
+    padding-top: 3%;
+    width: 100px;
+    align-items: center;
+}
+.logos_maior{
+    padding-top: 0%;
+    width: 50px;
+    padding-left: 2%;
+}
+.thumbs{
+    padding-top: 2%;
+    width: 70%;
+}
+.imagens{
+    padding:2%;
+    width: 70%;
+}
+video{
+    width: 50%;
+}
+.sobre-container a:hover{
+    color: var(--color_padrao);
+    text-decoration:underline;
+}
