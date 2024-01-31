@@ -38,18 +38,19 @@ nav{
 #inicio{
     flex-direction: column-reverse;
     align-items: center;
+    justify-content: center;
 }
 .inicio-container{
     padding-top: 0%;
     font-size: 18px;
     align-items: center;
-    font-size: 4rem;
+    font-size: clamp(1em, 1em + 3vw, 10em);
     padding-left: 0%;
     padding-bottom: 10%;
 
 }
 .inicio-container h2{
-    font-size: 4rem;
+    font-size: clamp(1em, 1em + 3vw, 10em);
     font-weight: 200;
 }
 .img-container{
