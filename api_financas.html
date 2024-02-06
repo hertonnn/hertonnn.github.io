@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+    <head>
+        <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="./imag/pngwing.com.ico" type="image/x-icon">
+    <title>
+        Projetos | Herton Silveira
+    </title>
+    <link href="projetos.css" rel = "stylesheet" />
+    <link href="style.css" rel = "stylesheet" />
+    <link href="variaiveis.css" rel = "stylesheet" />  
+    <link rel="stylesheet" media = "screen  and (max-width: 900px)" href="tablet.css">
+    <link rel="stylesheet" media = "screen  and (max-width: 450px)" href="celular.css">
+
+</head>
+<body>
+    <nav class = "navbar">
+        <div class = "mobile-menu">
+            <div class = "line1"></div>
+            <div class = "line2"></div>
+            <div class = "line3"></div>
+        </div>
+        <div class ="navbar-itens">
+            <li><a href= "index.html"> Início</a> </li>
+            <li><a href = "index.html"> Sobre </a></li>
+            <li><a href = "./projetos.html"> Projetos </a></li>
+        </div>
+    </nav>
+    
+    <header id = "sobre">
+        <div class = "sobre-container">
+            <br>
+            <br>
+            <h1>Desenvolvendo um aplicação desktop de controle de
+                <b class = "text_cor"> Finanças Pessoais</b>
+                em 
+                <b class = "text_cor "> Java,</b>
+                com 
+                <b class = "text_cor "> Java Swing</b>
+                e
+                <b class = "text_cor "> PostgreSQL.</b>
+            </h1>
+            <div class = "meu-video">
+                <iframe src="https://www.youtube.com/embed/W3SZnzQo-sg" frameborder="0"></iframe>
+            </div>
+            <div class = "corpo">
+                <p>
+                    Na disciplina de <b class="text_cor">Programação Orientada a Objetos </b> ministrada em minha faculdade (Universidade Estadual de Santa Catarina - UDESC), foi apresentada como proposta de trabalho individual final a implementação de um programa em três etapas. Na primeira fase, serão modeladas e implementadas, em Java, as camadas de <b class = "text_cor"> dados</b> e <b class="text_cor">negócio</b>; na segunda, a <b class="text_cor">interface gráfica</b>. Por fim, na terceira etapa, ocorrerá a projeção e implementação do <b class="text_cor">banco de dados</b> para a aplicação, denominada persistência.
+                    <br>
+                    <br>
+                    Neste post, detalharei as etapas do projeto, do <b class="text_cor">backend</b> ao <b class="text_cor">frontend</b>, com o tema Sistema de Finanças. Trata-se de uma aplicação ligeiramente complexa que visa ser um programa de gerenciamento de finanças pessoais. Nessa aplicação, o usuário adiciona suas receitas e despesas em categorias específicas, permitindo que o programa:
+                </p>
+                <br>
+                <li>
+                    Plote <b class="text_cor">gráficos</b> e faça estimativas a partir dos dados de entradas e saídas financeiras do usuário no <b class="text_cor">dashboard</b> principal.
+                </li>
+                <br>
+                <li>
+                    Possibilite que o usuário gerencie e monitore suas transações financeiras por meio de históricos de registros em suas próprias categorias pré-definidas.
+                </li>
+                <br>
+                <li>
+                    Ofereça uma interface intuitiva e de fácil uso, incorporando elementos de <b class="text_cor">experiência do usuário (UX)</b>.
+                </li>
+                <br>
+                <li>
+                    Possua sistema de login e cadastro.
+                </li>
+                <br>
+                <li>
+                    Permita a previsão de receitas/despesas através da adição de orçamentos pelo usuário.
+                </li>
+
+                <div class = "carrossel">
+                    <div class="container" id = "img">
+                        <img src="imagens_projeto3/img1.0.png" alt="">
+                        <img src="imagens_projeto3/img1.1.png" alt="">
+                        <img src="imagens_projeto3/img1.2.png" alt="">
+                        <img src="imagens_projeto3/img1.3.png" alt="">
+                        <img src="imagens_projeto3/img1.4.png" alt="">
+                    </div>
+                </div>
+                <br>
+                <h1>Arquitetura do Back-and </h1>
+                <b class = "italic">O banco de dados</b>
+                <p>
+                    Inicialmente, a ferramenta utilizada para a persistência de dados é o <b class="text_cor">PostgreSQL.</b> Conforme a documentação oficial, o PostgreSQL é um sistema de gerenciamento de banco de dados objeto-relacional capaz de suportar os principais recursos da área, tais como consultas complexas, chaves estrangeiras, controle de concorrência de várias versões, além da adição de novos tipos de dados, funções, entre outros.
+                    <br><br>
+                    Em uma análise mais aprofundada, destaca-se a organização do projeto em tabelas que representam as classes da camada de dados, concebida para armazenar os objetos que o programa manipulará, juntamente com seus atributos e métodos. Além disso, como linguagem para documentar e visualizar o banco de dados, optou-se pelo tradicional e eficiente diagrama de classes da <b class="text_cor">UML (Unified Modeling Language).</b>
+                </p>
+                <img src="imagens_projeto3/img2.png" class = "imagens" alt="">
+                <p>
+                    Portanto, a UML de classes acima representa a organização dos dados no banco, incluindo as cardinalidades que representam os relacionamentos entre as tabelas Usuário, Conta, Categoria, Registro e Orçamento. Isso possibilita uma visualização organizada da estrutura dos dados. Por exemplo, a tabela Registro possui duas chaves estrangeiras (FK): uma referente à conta e outra à categoria de receita/despesa daquele registro. Adicionalmente, a tabela Conta faz referência a um usuário da tabela Usuário, sendo este o proprietário da conta que realizou o registro.
+ 
+                </p>
+                <br>
+                <b class = "italic">Encapsulamento e Padrão de projeto DAO</b>
+                <p>
+                    De forma geral, estabelecer a conexão com o banco de dados e realizar operações <b class="text_cor">CRUD (Create, Update e Delete)</b> em tabelas parece ser inicialmente simples. Basta consultar a documentação oficial da biblioteca utilizada, seguir as etapas de conexão, baixar o driver necessário na pasta lib e escrever algumas poucas linhas de código, incluindo informações como usuário, senha e caminho do banco de dados.
+                    <br><br>
+                    Contudo, dependendo do projeto e se realizado de maneira incorreta, o código pode se tornar confuso, com várias conexões ao banco espalhadas em camadas que nem  foram criadas para essa finalidade. Isso pode resultar em futuros erros e dificultar a manutenção do código. Pensando nisso, esse projeto adota o padrão <b class="text_cor">DAO (Data Access Object)</b>, que, embora relativamente simples, tem se mostrado altamente eficaz, simplificando significativamente o processo de implementação desse código.
+                </p>
+                <img src="imagens_projeto3/img3.0.png" class = "imagens" alt="">
+                <img src="imagens_projeto3/img3.1.png" class = "imagens" alt="">
+                <p>
+                    Em resumo, esse padrão consiste em criar uma classe DAO para cada objeto de domínio, e cada uma dessas classes terá as operações de CRUD correspondentes, comunicando-se com o banco e encapsulando o acesso aos dados. Dessa forma, ao utilizar também o padrão singleton, em que apenas uma instância pode ser criada de cada classe, o projeto não só se torna mais organizado e limpo, mas também limita o número de conexões desnecessárias ao banco, resultando em uma <b class="text_cor">otimização</b> mais eficiente.
+                    <br><br>
+                    A estrutura do banco de dados final ficou assim:
+                    <img src="imagens_projeto3/img4.png" class = "imagens" alt="">
+                </p>
+                <b class = "italic">O Sistema</b>
+                <p>
+                    Na camada de <b class="text_cor">negócios</b>, a lógica da aplicação atua como uma ponte, conectando-se às camadas DAO, para possibilitar a persistência, acesso ou remoção de dados específicos na camada de apresentação. As operações, tais como cadastro, validação e remoção de cada objeto do programa, são executadas pela classe Sistema nessa camada. Essa abordagem possibilita a integração eficiente das camadas visíveis da aplicação, como as telas de login, cadastro, etc.
+                    <br><br>
+                    A estrutura geral do projeto ficará assim:
+                </p>
+                <img src="imagens_projeto3/img5.png" class = "imagens" alt="">
+                <h1>A experiência do usuário</h1>
+                <br>
+                <b class = "italic">Paleta de cores, formas e fonte</b>
+                <p>
+                    A primeira etapa que decidi seguir ao criar a interface dessa aplicação(camada de apresentação) foi criar uma identidade visual para ser usada em todas as janelas do programa. Dessa forma, a aplicação vai possuir ícones, paleta de cores, fonte e vários outros elementos gráficos que são de suma importância para dar <b class="text_cor">personalidade</b> ao projeto. 
+                </p>
+                <img src="imagens_projeto3/img6.png" class = "imagens" alt="">
+                <p>
+                    A paleta de cores é composta por tons azuis que estão por toda parte, seja em botões, textos, fundos ou em bordas. Da mesma forma, a fonte escolhida está na maioria dos textos em destaque,  assim como os ícones que seguem os mesmos padrões.
+                </p>
+                <br>
+                <b class = "italic">Janelas intuitivas e Designer</b>
+                <p>
+                    A intenção por trás de cada janela ou função era torná-las intuitivas, buscando uma semelhança com o design de programas de desktop ou web, utilizando HTML e CSS como referência. No entanto, a ferramenta <b class="text_cor">Java Swing</b>, que foi utilizada, não oferece nativamente um layout com elementos tão modernos quanto as ferramentas mais atualizadas, o que tornou o processo de design um tanto mais desafiador. Por exemplo, componentes como botões, comboboxes ou campos de texto possuem, por padrão, uma aparência antiquada e são mais difíceis de manipular, mas eu os modifiquei ao máximo para se aproximarem de aparências mais modernas e minimalistas.
+                </p>
+                <img src="imagens_projeto3/img7.png" class = "imagens" alt="">
+                <br>
+                <b class = "italic">Gráficos e tabelas</b>
+                <p>
+                    Os gráficos do painel principal foram elaborados utilizando a biblioteca <b class="text_cor">JFreeChart</b> do Java, que oferece uma variedade de modelos, como gráficos de linha, de barras, radiais, entre outros. Os dados selecionados são alimentados nos eixos x e y, representando os registros financeiros da pessoa, sendo filtrados e modificados dinamicamente durante a aplicação. Além disso, as tabelas são atualizadas em conjunto com os gráficos, refletindo as alterações feitas pelo usuário nos filtros.
+                </p>
+                <img src="imagens_projeto3/img8.png" class = "imagens" alt="">
+                <h1>Conclusão</h1>
+                <p>
+                    Em resumo, este projeto, parcialmente pronto para a fase beta, incluiria: um executável testado em pelo menos algumas máquinas com sistemas Linux e Windows, uma implementação eficiente de criptografia, uma bateria de testes de performance e, pelo menos, a disponibilização para download durante a fase beta para testes com usuários. No entanto, cada um desses tópicos é complexo o suficiente para demandar vários meses de estudo e renderia um post exclusivo nesta página se fossem implementados por uma única pessoa (eu), o que não é viável neste momento. Portanto, ainda é necessário dedicar mais tempo de estudo a este projeto, o que resultará em mais aprendizado, bem como mais prática em <b class="text_cor">Java</b>.
+                </p>
+                <br>
+                <h1>Referências</h1>
+                <br>
+                <li>
+                    PostgreSQL Documentation - <a href="https://www.postgresql.org/docs/current/intro-whatis.html">https://www.postgresql.org/docs/current/intro-whatis.html</a>
+                </li>
+                <br>
+                <li>
+                    Programação orientada a objetos(IBM) - <a href="https://www.ibm.com/docs/pt-br/watsonx-as-a-service?topic=language-object-oriented-programming">https://www.ibm.com/docs/pt-br/watsonx-as-a-service?topic=language-object-oriented-programming</a>
+                </li>
+                <br>
+                <li>
+                    UML - <a href="https://www.microsoft.com/pt-br/microsoft-365/business-insights-ideas/resources/guide-to-uml-diagramming-and-database-modeling">https://www.microsoft.com/pt-br/microsoft-365/business-insights-ideas/resources/guide-to-uml-diagramming-and-database-modeling</a>
+                </li>
+                <br>
+                <li>
+                    Padrão DAO - <a href="https://www.macoratti.net/11/10/pp_dao1.htm">https://www.macoratti.net/11/10/pp_dao1.htm</a>
+                </li>
+
+            </div>
+    </div>
+</header>
+    
+<!-- Footer -->
+
+<footer class="footer"><small class="footer__text">From Brasil to the world<svg class="footer__icon footer__icon--pulse" width="24" height="24" viewBox="0 0 24 24"><title> love </title><path d="M12 4.248c-3.148-5.402-12-3.825-12 2.944 0 4.661 5.571 9.427 12 15.808 6.43-6.381 12-11.147 12-15.808 0-6.792-8.875-8.306-12-2.944z"></path></svg>  <svg class="footer__icon footer__icon--rotate" viewBox="-11.5 -10.23174 23 20.46348"><title></title><g stroke="#61dafb" stroke-width="1" fill="none">rx="11" ry="4.2"></g></svg> </small></footer>
+<script
+src="https://code.jquery.com/jquery-3.6.1.min.js"
+integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ="
+crossorigin="anonymous"></script>
+<script src="main.js"></script>
+</body>
+
+</html>

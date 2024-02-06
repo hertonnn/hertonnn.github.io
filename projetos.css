@@ -7,8 +7,7 @@ body{
 
 .carrossel{
     overflow: hidden;
-    height: 80%;
-    width: 80%;
+    width: 75%;
     align-items: center;
 }
 .container{
@@ -17,6 +16,7 @@ body{
     transform: translateX(0);
 }
 .container img{
+    padding-top: 2%;
     object-fit: cover;
     height: 100%;
     width: 100%;
@@ -80,7 +80,29 @@ body{
 video{
     width: 50%;
 }
+
 .sobre-container a:hover{
     color: var(--color_padrao);
     text-decoration:underline;
+}
+
+
+/*API-FINANCAS*/
+iframe{
+    width: 60%;
+    height: 280px;
+    padding-top: 4%;
+    padding-bottom: 2%;
+}
+.corpo p{
+    padding-top: 2%;
+    font-size: 18px;
+}
+.corpo li{
+    font-size: 15px;
+}
+.italic{
+    font-size: 28px;
+    font-style: italic;
+    font-weight: 350;
 }

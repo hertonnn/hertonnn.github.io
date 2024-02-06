@@ -6,13 +6,14 @@ const img = document.querySelectorAll("#img img");
 let idx = 0;
 
 function carrossel(){
+    var tam_width = imgs.clientWidth;
     idx++;
 
     if(idx > img.length - 1){
         idx = 0;
     }
 
-    imgs.style.transform = `translateX(${-idx * 500}px)`;
+    imgs.style.transform = `translateX(${-idx * tam_width }px)`;
 
 }
 
