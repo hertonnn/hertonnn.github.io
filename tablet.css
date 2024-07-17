@@ -6,7 +6,8 @@ body{
 nav{
     height: 8vh;
     border-bottom: 2px solid #8E8E8E;
-} 
+}  
+
 .navbar-itens{
     flex-direction: column;
     position: absolute;
