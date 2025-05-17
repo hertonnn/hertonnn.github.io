@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <title>Passarinhos Aleatórios</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background-color: white;
+      overflow: hidden;
+      position: relative;
+      height: 100vh;
+      width: 100vw;
+      cursor: pointer;
+    }
+
+    .passaro {
+      position: absolute;
+      width: 100px;
+      height: 100px;
+      object-fit: cover;
+      user-select: none;
+      pointer-events: none;
+    }
+
+    .explosao {
+      position: absolute;
+      width: 100px;
+      height: 100px;
+      pointer-events: none;
+      user-select: none;
+    }
+  </style>
+</head>
+<body>
+
+<script>
+  const imagens = ['bird1.png', 'bird2.png', 'bird3.png', 'bird4.png', 'bird5.png'];
+  const pasta = 'fotos_passaros/';
+  const pastaExplosao = 'explosao/';
+  const larguraImg = 100;
+  const alturaImg = 100;
+  const tentativasMaximas = 30;
+
+  const ocupados = []; // [{x, y}]
+  const elementosPassaros = []; // [{el, x, y}]
+
+  function imagemAleatoria() {
+    const nome = imagens[Math.floor(Math.random() * imagens.length)];
+    return pasta + nome;
+  }
+
+  function colisao(x1, y1, x2, y2) {
+    return !(x2 + larguraImg <= x1 || x2 >= x1 + larguraImg || y2 + alturaImg <= y1 || y2 >= y1 + alturaImg);
+  }
+
+  function posicaoValida(x, y) {
+    return !ocupados.some(coord => colisao(coord.x, coord.y, x, y));
+  }
+
+  function encontrarPosicao() {
+    const larguraTela = window.innerWidth;
+    const alturaTela = window.innerHeight;
+
+    for (let i = 0; i < tentativasMaximas; i++) {
+      const x = Math.floor(Math.random() * (larguraTela - larguraImg));
+      const y = Math.floor(Math.random() * (alturaTela - alturaImg));
+      if (posicaoValida(x, y)) {
+        return { x, y };
+      }
+    }
+    return null;
+  }
+
+  function adicionarImagem(x, y, src) {
+    const img = document.createElement('img');
+    img.src = src;
+    img.className = 'passaro';
+    img.style.left = x + 'px';
+    img.style.top = y + 'px';
+    document.body.appendChild(img);
+    ocupados.push({ x, y });
+    elementosPassaros.push({ el: img, x, y });
+  }
+
+ function criarExplosao(x, y) {
+  const explosao = document.createElement('img');
+  explosao.className = 'explosao';
+  explosao.src = `${pastaExplosao}explosao.gif`; // nome do GIF
+  explosao.style.left = x + 'px';
+  explosao.style.top = y + 'px';
+  document.body.appendChild(explosao);
+
+  // Remove o gif após 1 segundo
+  setTimeout(() => {
+    explosao.remove();
+  }, 1000); // ajuste conforme a duração do seu GIF
+}
+
+
+  function removerImagemAleatoria() {
+    if (elementosPassaros.length === 0) return;
+
+    const index = Math.floor(Math.random() * elementosPassaros.length);
+    const item = elementosPassaros[index];
+
+    // Remove do DOM
+    item.el.remove();
+    criarExplosao(item.x, item.y);
+
+    // Remove da lista de passáros
+    elementosPassaros.splice(index, 1);
+
+    // Remove da lista de colisões (com base na posição, não no índice)
+    const posIndex = ocupados.findIndex(p => p.x === item.x && p.y === item.y);
+    if (posIndex !== -1) {
+      ocupados.splice(posIndex, 1);
+    }
+  }
+
+  window.addEventListener('load', () => {
+    const centroX = (window.innerWidth - larguraImg) / 2;
+    const centroY = (window.innerHeight - alturaImg) / 2;
+    adicionarImagem(centroX, centroY, imagemAleatoria());
+  });
+
+  window.addEventListener('click', (e) => {
+    if (e.button === 0) {
+      const pos = encontrarPosicao();
+      if (pos) {
+        adicionarImagem(pos.x, pos.y, imagemAleatoria());
+      } else {
+        console.log("Sem espaço disponível para nova imagem.");
+      }
+    }
+  });
+
+  window.addEventListener('contextmenu', (e) => {
+    e.preventDefault();
+  });
+
+  window.addEventListener('mousedown', (e) => {
+    if (e.button === 2) {
+      removerImagemAleatoria();
+    }
+  });
+</script>
+
+</body>
+</html>
