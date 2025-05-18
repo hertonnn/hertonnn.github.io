@@ -2,7 +2,8 @@
 <html lang="pt-br">
 <head>
   <meta charset="UTF-8" />
-  <title>Verificador de Atenção com Passarinhos</title>
+  <title>BoopLoop</title>
+  <link rel="icon" type="image/png" href="fotos_passaros/logo.png" />
   <!-- Estilo geral da página -->
   <style>
     html, body {
@@ -102,17 +103,21 @@
     }
 
     /* Contador de eventos */
+        /* Contador de eventos */
     #counter {
-       position: absolute;
-       bottom: 20px;
-       right: 20px;
-       color: white;
-       font-size: 24px;
-       background-color: rgba(0, 0, 0, 0.6);
-       padding: 8px 12px;
-       border-radius: 8px;
-       z-index: 10;
-    }
+        position: absolute;
+        bottom: 20px;
+        right: 20px;
+        color: white;
+        font-size: 24px;
+        background-color: rgba(0, 0, 0, 0.6);
+        padding: 8px 12px;
+        border-radius: 8px;
+        z-index: 10;
+        display: flex;
+        align-items: center;
+      }
+
 
     .attention-message {
         position: absolute;
@@ -187,7 +192,10 @@
   
   <div id="achievement" class="achievement hidden"></div>
 
-<div id="counter">0</div>
+<div id="counter">
+    <img src="fotos_passaros/morte.png" alt="Ícone" style="width: 24px; height: auto; margin-right: 8px;">
+    <span id="count-value">0</span>
+  </div>
   <!-- Janela de debug da webcam -->
   <div id="popup">
     <div id="popup-header">
@@ -201,13 +209,16 @@
     </div>
   </div>
   <div style="position: fixed; top: 20px; right: 20px; z-index: 1000;">
-    <button onclick="window.location.href='https://hertonnn.github.io/CODECON/codecon/oficial_gatos.html'" style="padding: 10px 20px; font-size: 16px; margin-right: 10px; border: none; border-radius: 8px; background-color: #4CAF50; color: white; cursor: pointer;">
-      Gatinhos
-    </button>
-    <button onclick="window.location.href='https://hertonnn.github.io/CODECON/codecon/oficial_passaros.html'" style="padding: 10px 20px; font-size: 16px; border: none; border-radius: 8px; background-color: #2196F3; color: white; cursor: pointer;">
-      Pássaros
-    </button>
-  </div>
+  <div style="position: fixed; top: 20px; right: 20px; z-index: 1000; display: flex; gap: 15px;">
+      <button onclick="window.location.href='https://hertonnn.github.io/CODECON/codecon/oficial_gatos.html'" style="padding: 0; border: none; border-radius: 8px; background-color: transparent; cursor: pointer;">
+        <img src="fotos_passaros/gatinho_botao.png" alt="Gatinhos" style="width: 35px; height: auto; border-radius: 8px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);">
+      </button>
+      <button onclick="window.location.href='https://hertonnn.github.io/CODECON/codecon/oficial_passaros.html'" style="padding: 0; border: none; border-radius: 8px; background-color: transparent; cursor: pointer;">
+        <img src="fotos_passaros/passaro_botao.png" alt="Pássaros" style="width: 35px; height: auto; border-radius: 8px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);">
+      </button>
+    </div>
+
+
   <!-- Face-api.js (carregamento deferido) -->
   <script defer src="https://cdn.jsdelivr.net/npm/face-api.js@0.22.2/dist/face-api.min.js"></script>
 
@@ -219,7 +230,7 @@
       // 0 gato
       // 1 passaro
       // Recupera a escolha salva ou usa padrão (gato)
-      var animal = 0;
+      var animal = 1;
       if (animal === 0) {
         document.getElementById('bg').style.backgroundImage = "url('fundos/gato_fundo.jpeg')";
       } 
@@ -312,7 +323,7 @@
         gifs = ['bird_1.gif','bird_2.gif','bird_3.gif','bird_4.gif', 'bird_5.gif', 'bird_6.gif'];
       }
       if(animal == 0){
-        gifs = ['gatinho_1.gif', 'gatinho_2.gif', 'gatinho_3.gif', 'gatinho_4.gif', 'gatinho_5.gif'];
+        gifs = ['gatinho_1.gif', 'gatinho_2.gif', 'gatinho_3.gif', 'gatinho_4.gif'];
       }
       
       const pasta = 'fotos_passaros/';
@@ -394,22 +405,22 @@
         explosionAudio.currentTime = 0;
         explosionAudio.play();
       }
-      function removerImagemAleatoria() {
-        if (elementos.length <= 1) return;
-        const idx = Math.floor(Math.random() * elementos.length);
-        const item = elementos[idx];
-        item.el.remove();
-        criarExplosao(item.x, item.baseY);
-        counter++;
-        counterEl.textContent = counter;
-        elementos.splice(idx, 1);
-        ocupados.splice(ocupados.findIndex(p => p.x === item.x && p.y === item.baseY), 1);
-        atualizarInstrucao();
-        currentAbsenceThreshold = INITIAL_ABSENCE_SECONDS;
-        const playing = animaisAudios.find(a => !a.paused);
-        if (playing) playing.pause();
-        
-      }
+function removerImagemAleatoria() {
+            if (elementos.length <= 1) return;
+            const idx = Math.floor(Math.random() * elementos.length);
+            const item = elementos[idx];
+            item.el.remove();
+            criarExplosao(item.x, item.baseY);
+            counter++;
+
+            counterEl.textContent = counter; // agora atualiza apenas o número
+            elementos.splice(idx, 1);
+            ocupados.splice(ocupados.findIndex(p => p.x === item.x && p.y === item.baseY), 1);
+            atualizarInstrucao();
+            currentAbsenceThreshold = INITIAL_ABSENCE_SECONDS;
+            const playing = animaisAudios.find(a => !a.paused);
+            if (playing) playing.pause();
+        }
 
       // INSTRUÇÃO NA TELA (visível com 1 pássaro)
       function atualizarInstrucao() {
@@ -577,20 +588,31 @@
         }, 3000);
         }
 
-        // Intervalo aleatório entre 5 e 15 segundos
-        function startAchievementLoop() {
-        const interval = Math.floor(Math.random() * 10000) + 5000; // 5 a 15s
-        setTimeout(() => {
-            showAchievement();
-            startAchievementLoop();
-        }, interval);
-        }
 
-        startAchievementLoop();
 
+    // Exibição de "Você perdeu XX segundos da sua vida" a cada 20 segundos
+        let tempoPerdido = 0;
+        const achievementEl = document.getElementById('achievement');
+
+        setInterval(() => {
+          tempoPerdido += 20;
+
+          // Atualiza o conteúdo e mostra o achievement
+          achievementEl.textContent = `Você perdeu ${tempoPerdido} segundos da sua vida`;
+          achievementEl.classList.add('show');
+          achievementEl.classList.remove('hidden');
+
+          // Esconde após 4 segundos
+          setTimeout(() => {
+            achievementEl.classList.remove('show');
+            achievementEl.classList.add('hidden');
+          }, 4000);
+        }, 20000); // A cada 20.000 milissegundos (20 segundos)
 
 
     });
+
+
   </script>
 </body>
 </html>
