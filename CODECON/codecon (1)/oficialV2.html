@@ -16,7 +16,6 @@
       position: relative;
     }
 
-    /* Fundo com parallax */
     #bg {
       position: fixed;
       top: 0; left: 0;
@@ -26,23 +25,36 @@
       z-index: -2;
     }
 
-    /* Instrução central exibida quando só resta 1 pássaro */
     #instruction {
       position: absolute;
       left: 50%; top: 50%;
       transform: translate(-50%, -50%);
-      padding: 4px 8px;
-      background: rgba(0,0,0,0.7);
       color: #fff;
-      font-size: 16px;
-      border-radius: 4px;
+      font-size: 80px;
+      font-weight: bold;
+      text-align: center;
       pointer-events: none;
       white-space: nowrap;
-      display: none;
-      z-index: 50;
+    }
+    #instruction span {
+      display: block;
+      z-index: 150;
+      font-size: 24px;
+      font-weight: normal;
     }
 
-    /* Popup de debug da webcam */
+    #timer {
+      position: absolute;
+      top: 8px;
+      right: 12px;
+      font-size: 18px;
+      background: rgba(255, 255, 255, 0.8);
+      padding: 6px 10px;
+      border-radius: 6px;
+      z-index: 51;
+      font-weight: bold;
+    }
+
     #popup {
       position: absolute;
       top: 20px; left: 20px;
@@ -57,7 +69,6 @@
       z-index: 100;
     }
 
-    /* Cabeçalho do popup (permite arrastar) */
     #popup-header {
       background: #444; color: #fff;
       padding: 4px 8px;
@@ -69,7 +80,6 @@
       border-top-right-radius: 6px;
     }
 
-    /* Botão minimizar do popup */
     #popup-header button {
       background: transparent;
       border: none;
@@ -78,7 +88,6 @@
       cursor: pointer;
     }
 
-    /* Área de conteúdo do popup (vídeo + canvas) */
     #popup-content {
       position: relative;
       flex: 1;
@@ -86,7 +95,6 @@
       overflow: hidden;
     }
 
-    /* Canto inferior para redimensionar o popup */
     #resizer {
       width: 10px; height: 10px;
       background: #444;
@@ -96,65 +104,22 @@
       border-radius: 2px;
     }
 
-    /* Vídeo e canvas da webcam */
     #video, #overlay {
       position: absolute;
       top: 0; left: 0;
     }
 
-    /* Contador de eventos */
     #counter {
-       position: absolute;
-       bottom: 20px;
-       right: 20px;
-       color: white;
-       font-size: 24px;
-       background-color: rgba(0, 0, 0, 0.6);
-       padding: 8px 12px;
-       border-radius: 8px;
-       z-index: 10;
+      position: absolute;
+      top: 4px; left: 8px;
+      font-size: 12px;
+      background: rgba(255,255,255,0.8);
+      padding: 2px 4px;
+      border-radius: 4px;
+      z-index: 5;
+      pointer-events: none;
     }
 
-    .attention-message {
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        font-size: 32px;
-        color: red;
-        font-weight: bold;
-        background-color: rgba(0, 0, 0, 0.7);
-        padding: 20px;
-        border-radius: 10px;
-        z-index: 15;
-        text-align: center;
-        max-width: 90%;
-    }
-
-    .hidden {
-       display: none;
-    }
-
-    .achievement {
-        position: absolute;
-        top: 30px;
-        right: -400px;
-        background: #1c1c1c;
-        color: #00ff00;
-        font-size: 18px;
-        padding: 12px 20px;
-        border-radius: 12px;
-        box-shadow: 0 0 15px rgba(0,0,0,0.7);
-        z-index: 9999;
-        transition: right 0.5s ease-in-out;
-        white-space: nowrap;
-    }
-
-    .achievement.show {
-        right: 30px;
-    }
-
-    /* Estilo dos pássaros */
     .passaro {
       position: absolute;
       width: 180px; height: 180px;
@@ -165,7 +130,6 @@
       transition: transform 0.1s;
     }
 
-    /* Animação de explosão */
     .explosao {
       position: absolute;
       width: 200px; height: 200px;
@@ -175,21 +139,10 @@
     }
   </style>
 </head>
-
 <body>
-  <!-- Fundo -->
   <div id="bg"></div>
-
-  <!-- Instrução ao jogador -->
-  <div id="instruction">
-    <div id="bird-count" style="font-size: 72px; font-weight: bold;">1</div>
-  </div>
-  <div id="attention-message" class="attention-message hidden">Não desvie o olhar do pássaro</div>
-  
-  <div id="achievement" class="achievement hidden"></div>
-
-<div id="counter">0</div>
-  <!-- Janela de debug da webcam -->
+  <div id="instruction">1<span>Não devie o olhar do pássaro</span></div>
+  <div id="timer">Tempo: 0s</div>
   <div id="popup">
     <div id="popup-header">
       <span>Debug Webcam</span>
@@ -198,18 +151,61 @@
     <div id="popup-content">
       <video id="video" autoplay muted></video>
       <canvas id="overlay"></canvas>
+      <div id="counter">0</div>
       <div id="resizer"></div>
     </div>
   </div>
 
-  <!-- Face-api.js (carregamento deferido) -->
   <script defer src="https://cdn.jsdelivr.net/npm/face-api.js@0.22.2/dist/face-api.min.js"></script>
 
-  <!-- Lógica do jogo -->
   <script>
     window.addEventListener('DOMContentLoaded', async () => {
 
-      // CONFIGURAÇÕES GERAIS
+
+
+
+      let secondBirdTime = null;
+      let timerInterval = null;
+      const timerEl = document.getElementById('timer');
+
+      function startTimer() {
+        if (!timerInterval) {
+          timerInterval = setInterval(() => {
+            const elapsed = Math.floor((Date.now() - secondBirdTime) / 1000);
+            timerEl.textContent = `Tempo: ${elapsed}s`;
+          }, 1000);
+        }
+      }
+
+      function stopTimer() {
+        clearInterval(timerInterval);
+        timerInterval = null;
+      }
+
+      function atualizarInstrucao() {
+        if (elementos.length >= 2 && !secondBirdTime) {
+          secondBirdTime = Date.now();
+          startTimer();
+        }
+
+        if (elementos.length === 1) {
+          instruction.innerHTML = `1<span>Não pare de desviar o olhar do pássaro</span>`;
+          instruction.style.display = 'block';
+        } else {
+          instruction.innerHTML = `${elementos.length}`;
+          instruction.style.display = 'block';
+        }
+
+        if (elementos.length < 2) {
+          stopTimer();
+          secondBirdTime = null;
+          timerEl.textContent = 'Tempo: 0s';
+        }
+     
+      }
+
+
+       // CONFIGURAÇÕES GERAIS
       const DETECTION_INTERVAL_MS = 1000;
       const MIN_CONFIDENCE = 0.80;
       const EXPLODE_AFTER_SECONDS = 2;
@@ -217,8 +213,6 @@
       const ABSENCE_DECREMENT_SECONDS = 0.3;
       const MIN_ABSENCE_SECONDS = 0.5;
       const larguraImg = 100, alturaImg = 100;
-      const MIN_EXPLODE_SECONDS = 0.2;
-      const EXPLODE_DECREMENT = 0.15; 
       let currentAbsenceThreshold = INITIAL_ABSENCE_SECONDS;
 
       // PRÉ-CARREGAMENTO DOS ÁUDIOS
@@ -254,8 +248,6 @@
       let minimized = false;
       let presentSeconds = 0;
       let absenceSeconds = 0;
-      let currentExplodeThreshold = EXPLODE_AFTER_SECONDS;
-
 
       // LISTAS DE PÁSSAROS
       const imagens = ['bird_1.gif','bird_2.gif','bird_3.gif','bird_4.gif'];
@@ -338,33 +330,17 @@
         const item = elementos[idx];
         item.el.remove();
         criarExplosao(item.x, item.baseY);
-        counter++;
-        counterEl.textContent = counter;
         elementos.splice(idx, 1);
         ocupados.splice(ocupados.findIndex(p => p.x === item.x && p.y === item.baseY), 1);
         atualizarInstrucao();
         currentAbsenceThreshold = INITIAL_ABSENCE_SECONDS;
         const playing = pioAudios.find(a => !a.paused);
         if (playing) playing.pause();
-        
       }
 
       // INSTRUÇÃO NA TELA (visível com 1 pássaro)
       function atualizarInstrucao() {
-        const attentionMessage = document.getElementById('attention-message');
-        if (!attentionMessage) return;
-
-        if (elementos.length === 1) {
-            attentionMessage.classList.remove('hidden');
-
-            // Oculta após 5 segundos (ajuste conforme necessário)
-            clearTimeout(attentionMessage.timeoutId); // limpa timeout anterior se houver
-            attentionMessage.timeoutId = setTimeout(() => {
-            attentionMessage.classList.add('hidden');
-            }, 5000);
-        } else {
-            attentionMessage.classList.add('hidden');
-        }
+        instruction.style.display = elementos.length === 1 ? 'block' : 'none';
       }
 
       // ÁUDIOS ALEATÓRIOS DE PIO
@@ -389,7 +365,7 @@
         faceapi.matchDimensions(canvas, {width: w, height: h});
       }
 
-      // LÓGICA PRINCIPAL DE DETECÇÃO FACIAL 
+      // LÓGICA PRINCIPAL DE DETECÇÃO FACIAL
       function startDetection() {
         if (detectionInterval) return;
         detectionInterval = setInterval(async () => {
@@ -404,10 +380,10 @@
             // Nenhuma face detectada
             absenceSeconds += DETECTION_INTERVAL_MS / 1000;
             presentSeconds = 0;
-            currentExplodeThreshold = EXPLODE_AFTER_SECONDS;
 
             if (absenceSeconds >= currentAbsenceThreshold) {
               absenceSeconds = 0;
+              counterEl.textContent = ++counter;
               const p = encontrarPosicao();
               if (p) adicionarImagem(p.x, p.y, imagemAleatoria());
               playPios(elementos.length);
@@ -420,10 +396,9 @@
             absenceSeconds = 0;
             pioAudios.forEach(a => a.pause());
 
-            if (presentSeconds >= currentExplodeThreshold) {
+            if (presentSeconds >= EXPLODE_AFTER_SECONDS) {
               presentSeconds = 0;
               removerImagemAleatoria();
-              currentExplodeThreshold = Math.max(MIN_EXPLODE_SECONDS, currentExplodeThreshold - EXPLODE_DECREMENT);
             }
           }
         }, DETECTION_INTERVAL_MS);
@@ -495,37 +470,6 @@
           minBtn.textContent = '_';
         }
       });
-
-      let lifetimeStart = Date.now();
-
-        function getTotalSecondsLost() {
-        return Math.floor((Date.now() - lifetimeStart) / 1000);
-        }
-
-        function showAchievement() {
-        const achievement = document.getElementById('achievement');
-        const secondsLost = getTotalSecondsLost();
-
-        achievement.textContent = `Você já perdeu ${secondsLost} segundos da sua vida aqui`;
-        achievement.classList.add('show');
-        achievement.classList.remove('hidden');
-
-        setTimeout(() => {
-            achievement.classList.remove('show');
-            setTimeout(() => {
-            achievement.classList.add('hidden');
-            }, 500);
-        }, 3000);
-        }
-
-        // Exibe achievement a cada X segundos (por exemplo, a cada 20s)
-        function startAchievementLoop() {
-        setInterval(showAchievement, 20000); // 20.000 ms = 20s
-        }
-
-        startAchievementLoop();
-
-
 
 
     });

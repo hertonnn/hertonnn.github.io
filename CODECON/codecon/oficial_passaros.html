@@ -1,0 +1,596 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <title>Verificador de Atenção com Passarinhos</title>
+  <!-- Estilo geral da página -->
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      font-family: sans-serif;
+      position: relative;
+    }
+
+    /* Fundo com parallax */
+    #bg {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: url('fundos/fundo.png') no-repeat center/cover;
+      background-size: cover;
+      z-index: -2;
+    }
+
+    /* Instrução central exibida quando só resta 1 pássaro */
+    #instruction {
+      position: absolute;
+      left: 50%; top: 50%;
+      transform: translate(-50%, -50%);
+      padding: 4px 8px;
+      background: rgba(0,0,0,0.7);
+      color: #fff;
+      font-size: 16px;
+      border-radius: 4px;
+      pointer-events: none;
+      white-space: nowrap;
+      display: none;
+      z-index: 50;
+    }
+
+    /* Popup de debug da webcam */
+    #popup {
+      position: absolute;
+      top: 20px; left: 20px;
+      width: 240px; height: 180px;
+      background: #f0f0f0;
+      border: 1px solid rgba(0,0,0,0.2);
+      box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+      border-radius: 6px;
+      display: flex;
+      flex-direction: column;
+      user-select: none;
+      z-index: 100;
+    }
+
+    /* Cabeçalho do popup (permite arrastar) */
+    #popup-header {
+      background: #444; color: #fff;
+      padding: 4px 8px;
+      cursor: move;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-top-left-radius: 6px;
+      border-top-right-radius: 6px;
+    }
+
+    /* Botão minimizar do popup */
+    #popup-header button {
+      background: transparent;
+      border: none;
+      color: #fff;
+      font-size: 14px;
+      cursor: pointer;
+    }
+
+    /* Área de conteúdo do popup (vídeo + canvas) */
+    #popup-content {
+      position: relative;
+      flex: 1;
+      background: #000;
+      overflow: hidden;
+    }
+
+    /* Canto inferior para redimensionar o popup */
+    #resizer {
+      width: 10px; height: 10px;
+      background: #444;
+      position: absolute;
+      right: 2px; bottom: 2px;
+      cursor: nwse-resize;
+      border-radius: 2px;
+    }
+
+    /* Vídeo e canvas da webcam */
+    #video, #overlay {
+      position: absolute;
+      top: 0; left: 0;
+    }
+
+    /* Contador de eventos */
+    #counter {
+       position: absolute;
+       bottom: 20px;
+       right: 20px;
+       color: white;
+       font-size: 24px;
+       background-color: rgba(0, 0, 0, 0.6);
+       padding: 8px 12px;
+       border-radius: 8px;
+       z-index: 10;
+    }
+
+    .attention-message {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        font-size: 32px;
+        color: red;
+        font-weight: bold;
+        background-color: rgba(0, 0, 0, 0.7);
+        padding: 20px;
+        border-radius: 10px;
+        z-index: 15;
+        text-align: center;
+        max-width: 90%;
+    }
+
+    .hidden {
+       display: none;
+    }
+
+    .achievement {
+        position: absolute;
+        top: 30px;
+        right: -400px;
+        background: #1c1c1c;
+        color: #00ff00;
+        font-size: 18px;
+        padding: 12px 20px;
+        border-radius: 12px;
+        box-shadow: 0 0 15px rgba(0,0,0,0.7);
+        z-index: 9999;
+        transition: right 0.5s ease-in-out;
+        white-space: nowrap;
+    }
+
+    .achievement.show {
+        right: 30px;
+    }
+
+    /* Estilo dos pássaros */
+    .passaro {
+      position: absolute;
+      width: 180px; height: 180px;
+      object-fit: cover;
+      user-select: none;
+      pointer-events: none;
+      z-index: 1;
+      transition: transform 0.1s;
+    }
+
+    /* Animação de explosão */
+    .explosao {
+      position: absolute;
+      width: 200px; height: 200px;
+      user-select: none;
+      pointer-events: none;
+      z-index: 1;
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Fundo -->
+  <div id="bg"></div>
+
+  <!-- Instrução ao jogador -->
+  <div id="instruction">
+    <div id="bird-count" style="font-size: 72px; font-weight: bold;">1</div>
+  </div>
+  <div id="attention-message" class="attention-message hidden">Não desvie o olhar do pássaro</div>
+  
+  <div id="achievement" class="achievement hidden"></div>
+
+<div id="counter">0</div>
+  <!-- Janela de debug da webcam -->
+  <div id="popup">
+    <div id="popup-header">
+      <span>Debug Webcam</span>
+      <button id="min-btn">_</button>
+    </div>
+    <div id="popup-content">
+      <video id="video" autoplay muted></video>
+      <canvas id="overlay"></canvas>
+      <div id="resizer"></div>
+    </div>
+  </div>
+  <div style="position: fixed; top: 20px; right: 20px; z-index: 1000;">
+    <button onclick="window.location.href='http://127.0.0.1:5500/oficial_gatos.html'" style="padding: 10px 20px; font-size: 16px; margin-right: 10px; border: none; border-radius: 8px; background-color: #4CAF50; color: white; cursor: pointer;">
+      Gatinhos
+    </button>
+    <button onclick="window.location.href='http://127.0.0.1:5500/oficial_passaros.html'" style="padding: 10px 20px; font-size: 16px; border: none; border-radius: 8px; background-color: #2196F3; color: white; cursor: pointer;">
+      Pássaros
+    </button>
+  </div>
+  <!-- Face-api.js (carregamento deferido) -->
+  <script defer src="https://cdn.jsdelivr.net/npm/face-api.js@0.22.2/dist/face-api.min.js"></script>
+
+  <!-- Lógica do jogo -->
+  <script>
+    window.addEventListener('DOMContentLoaded', async () => {
+
+      // SELECAO DO ANIMAL
+      // 0 gato
+      // 1 passaro
+      // Recupera a escolha salva ou usa padrão (gato)
+      var animal = 1;
+      if (animal === 0) {
+        document.getElementById('bg').style.backgroundImage = "url('fundos/gato_fundo.jpeg')";
+      } 
+      if (animal == 1){
+        document.getElementById('bg').style.backgroundImage = "url('fundos/passaro_fundo.png')";
+      }
+      // CONFIGURAÇÕES GERAIS
+      const DETECTION_INTERVAL_MS = 1000;
+      const MIN_CONFIDENCE = 0.80;
+      const EXPLODE_AFTER_SECONDS = 2;
+      const INITIAL_ABSENCE_SECONDS = 2;
+      const ABSENCE_DECREMENT_SECONDS = 0.3;
+      const MIN_ABSENCE_SECONDS = 0.5;
+      const larguraImg = 100, alturaImg = 100;
+      const MIN_EXPLODE_SECONDS = 0.2;
+      const EXPLODE_DECREMENT = 0.15; 
+      let currentAbsenceThreshold = INITIAL_ABSENCE_SECONDS;
+
+      // PRÉ-CARREGAMENTO DOS ÁUDIOS
+      const pioFiles = [
+        'audios_passaros/pio1.mp3',
+        'audios_passaros/pio2.mp3',
+        'audios_passaros/pio3.mp3',
+        'audios_passaros/pio4.mp3',
+        'audios_passaros/pio5.mp3',
+        'audios_passaros/pio7.mp3',
+        'audios_passaros/pio8.mp3',
+        'audios_passaros/pio9.mp3',
+        'audios_passaros/pio10.mp3',
+        'audios_passaros/pio11.mp3',
+        'audios_passaros/pio12.mp3',
+        'audios_passaros/pio13.mp3',
+        'audios_passaros/pio15.mp3',
+        'audios_passaros/pio14.mp3'
+      ];
+      const miadoFiles = [
+        'audios_passaros/miado1.mp3',
+        'audios_passaros/miado2.mp3',
+        'audios_passaros/miado3.mp3',
+        'audios_passaros/miado4.mp3',
+        'audios_passaros/miado5.mp3',
+        'audios_passaros/miado6.mp3',
+        'audios_passaros/miado7.mp3',
+        'audios_passaros/miado8.mp3',
+        'audios_passaros/miado9.mp3',
+        'audios_passaros/miado10.mp3'
+      ];
+      let animaisAudios;
+      if (animal == 0){
+        animaisAudios = miadoFiles.map(src => {
+            const a = new Audio(src);
+            a.volume = 0.8;
+            return a;
+          });
+      }
+      if(animal == 1){
+        animaisAudios = pioFiles.map(src => {
+            const a = new Audio(src);
+            a.volume = 0.8;
+            return a;
+          });
+      }
+      
+      const explosionAudio = new Audio('audios_passaros/explosao_pop.mp3');
+      explosionAudio.volume = 0.6;
+
+      // ELEMENTOS DOM
+      const popup = document.getElementById('popup');
+      const header = document.getElementById('popup-header');
+      const content = document.getElementById('popup-content');
+      const resizer = document.getElementById('resizer');
+      const minBtn = document.getElementById('min-btn');
+      const video = document.getElementById('video');
+      const canvas = document.getElementById('overlay');
+      const counterEl = document.getElementById('counter');
+      const instruction = document.getElementById('instruction');
+
+      // VARIÁVEIS DE ESTADO
+      let counter = 0;
+      let detectionInterval = null;
+      let minimized = false;
+      let presentSeconds = 0;
+      let absenceSeconds = 0;
+      let currentExplodeThreshold = EXPLODE_AFTER_SECONDS;
+
+
+      // LISTAS DE ANIMAIS
+      let gifs;
+      if(animal == 1){
+        gifs = ['bird_1.gif','bird_2.gif','bird_3.gif','bird_4.gif', 'bird_5.gif', 'bird_6.gif'];
+      }
+      if(animal == 0){
+        gifs = ['gatinho_1.gif', 'gatinho_2.gif', 'gatinho_3.gif', 'gatinho_4.gif', 'gatinho_5.gif'];
+      }
+      
+      const pasta = 'fotos_passaros/';
+      const pastaExplosao = 'explosao/';
+      const ocupados = [];      // posições já ocupadas
+      const elementos = [];     // objetos {el,x,baseY,dx,phase,amplitude}
+
+      // FUNÇÕES AUXILIARES DE POSICIONAMENTO
+      function imagemAleatoria() {
+        return pasta + gifs[Math.floor(Math.random() * gifs.length)];
+      }
+      function colisao(x1,y1,x2,y2) {
+        return !(x2+larguraImg <= x1 || x2 >= x1+larguraImg || y2+alturaImg <= y1 || y2 >= y1+alturaImg);
+      }
+      function posicaoValida(x,y) {
+        return !ocupados.some(p => colisao(p.x,p.y,x,y));
+      }
+      function encontrarPosicao() {
+        const W = innerWidth, H = innerHeight;
+        for (let i = 0; i < 30; i++) {
+          const x = Math.random() * (W - larguraImg) | 0;
+          const y = Math.random() * (H - alturaImg) | 0;
+          if (posicaoValida(x,y)) return {x, y};
+        }
+        return null;
+      }
+
+      // ADICIONA UM NOVO PÁSSARO
+      function adicionarImagem(x,y,src) {
+        const img = document.createElement('img');
+        img.src = src;
+        img.className = 'passaro';
+        img.style.left = x + 'px';
+        img.style.top = y + 'px';
+        document.body.appendChild(img);
+
+        const dx = (Math.random()*2+1) * (Math.random()<0.5 ? 1 : -1);
+        const phase = Math.random() * Math.PI * 2;
+        const amplitude = 10 + Math.random() * 10;
+        img.style.transform = dx > 0 ? 'scaleX(1)' : 'scaleX(-1)';
+
+        ocupados.push({x,y});
+        elementos.push({el: img, x, baseY: y, dx, phase, amplitude});
+        atualizarInstrucao();
+      }
+
+      // ANIMAÇÃO DOS PÁSSAROS (movimento em onda)
+      function animateBirds() {
+        elementos.forEach(item => {
+          item.x += item.dx;
+          if (item.x <= 0 || item.x >= window.innerWidth - larguraImg) {
+            item.dx = -item.dx;
+            item.x = Math.max(0, Math.min(item.x, window.innerWidth - larguraImg));
+            item.el.style.transform = item.dx > 0 ? 'scaleX(1)' : 'scaleX(-1)';
+          }
+          item.phase += 0.05;
+          const dy = Math.sin(item.phase) * item.amplitude;
+          item.el.style.left = item.x + 'px';
+          item.el.style.top = (item.baseY + dy) + 'px';
+        });
+        requestAnimationFrame(animateBirds);
+      }
+
+      // REMOVE UM PÁSSARO COM EXPLOSÃO
+      function criarExplosao(x, y) {
+        const ex = document.createElement('img');
+        if(animal == 1){
+            ex.src = pastaExplosao + 'explosao.gif';
+        }
+        if(animal == 0){
+            ex.src = pastaExplosao + 'coracao.gif';
+        }
+        
+        ex.className = 'explosao';
+        ex.style.left = x + 'px';
+        ex.style.top = y + 'px';
+        document.body.appendChild(ex);
+        setTimeout(() => ex.remove(), 1000);
+        explosionAudio.currentTime = 0;
+        explosionAudio.play();
+      }
+      function removerImagemAleatoria() {
+        if (elementos.length <= 1) return;
+        const idx = Math.floor(Math.random() * elementos.length);
+        const item = elementos[idx];
+        item.el.remove();
+        criarExplosao(item.x, item.baseY);
+        counter++;
+        counterEl.textContent = counter;
+        elementos.splice(idx, 1);
+        ocupados.splice(ocupados.findIndex(p => p.x === item.x && p.y === item.baseY), 1);
+        atualizarInstrucao();
+        currentAbsenceThreshold = INITIAL_ABSENCE_SECONDS;
+        const playing = animaisAudios.find(a => !a.paused);
+        if (playing) playing.pause();
+        
+      }
+
+      // INSTRUÇÃO NA TELA (visível com 1 pássaro)
+      function atualizarInstrucao() {
+        const attentionMessage = document.getElementById('attention-message');
+        if (!attentionMessage) return;
+
+        if (elementos.length === 1) {
+            attentionMessage.classList.remove('hidden');
+
+            // Oculta após 5 segundos (ajuste conforme necessário)
+            clearTimeout(attentionMessage.timeoutId); // limpa timeout anterior se houver
+            attentionMessage.timeoutId = setTimeout(() => {
+            attentionMessage.classList.add('hidden');
+            }, 5000);
+        } else {
+            attentionMessage.classList.add('hidden');
+        }
+      }
+
+      // ÁUDIOS ALEATÓRIOS DE PIO
+      function playPios(qtd) {
+        const shuffled = animaisAudios.sort(() => Math.random() - 0.5).slice(0, qtd);
+        shuffled.forEach((a, i) => {
+          a.pause();
+          a.currentTime = 0;
+          a.playbackRate = 0.8 + 0.4 * (i / (qtd - 1 || 1));
+          a.play();
+        });
+      }
+
+      // REDIMENSIONA CANVAS DO VÍDEO
+      function resizeVideoCanvas() {
+        const w = content.clientWidth;
+        const h = content.clientHeight;
+        video.style.width = w + 'px';
+        video.style.height = h + 'px';
+        canvas.width = w;
+        canvas.height = h;
+        faceapi.matchDimensions(canvas, {width: w, height: h});
+      }
+
+      // LÓGICA PRINCIPAL DE DETECÇÃO FACIAL 
+      function startDetection() {
+        if (detectionInterval) return;
+        detectionInterval = setInterval(async () => {
+          if (minimized) return;
+          const det = await faceapi.detectAllFaces(video, new faceapi.SsdMobilenetv1Options({minConfidence: MIN_CONFIDENCE}));
+          const rd = faceapi.resizeResults(det, {width: canvas.width, height: canvas.height});
+          const ctx = canvas.getContext('2d');
+          ctx.clearRect(0, 0, canvas.width, canvas.height);
+          faceapi.draw.drawDetections(canvas, rd);
+
+          if (rd.length === 0) {
+            // Nenhuma face detectada
+            absenceSeconds += DETECTION_INTERVAL_MS / 1000;
+            presentSeconds = 0;
+            currentExplodeThreshold = EXPLODE_AFTER_SECONDS;
+
+            if (absenceSeconds >= currentAbsenceThreshold) {
+              absenceSeconds = 0;
+              const p = encontrarPosicao();
+              if (p) adicionarImagem(p.x, p.y, imagemAleatoria());
+              playPios(elementos.length);
+              currentAbsenceThreshold = Math.max(MIN_ABSENCE_SECONDS, currentAbsenceThreshold - ABSENCE_DECREMENT_SECONDS);
+            }
+
+          } else {
+            // Face detectada
+            presentSeconds += DETECTION_INTERVAL_MS / 1000;
+            absenceSeconds = 0;
+            animaisAudios.forEach(a => a.pause());
+
+            if (presentSeconds >= currentExplodeThreshold) {
+              presentSeconds = 0;
+              removerImagemAleatoria();
+              currentExplodeThreshold = Math.max(MIN_EXPLODE_SECONDS, currentExplodeThreshold - EXPLODE_DECREMENT);
+            }
+          }
+        }, DETECTION_INTERVAL_MS);
+      }
+
+      function stopDetection() {
+        clearInterval(detectionInterval);
+        detectionInterval = null;
+      }
+
+      // INICIALIZAÇÕES
+      adicionarImagem((innerWidth - larguraImg) / 2, (innerHeight - alturaImg) / 2, imagemAleatoria());
+      animateBirds();
+
+      // Carregamento dos modelos da face-api
+      await faceapi.nets.ssdMobilenetv1.loadFromUri('https://justadudewhohacks.github.io/face-api.js/models/');
+      try {
+        video.srcObject = await navigator.mediaDevices.getUserMedia({video: true});
+      } catch (e) {
+        console.error('Webcam indisponível:', e);
+        return;
+      }
+
+      video.addEventListener('play', () => {
+        resizeVideoCanvas();
+        startDetection();
+      });
+
+      window.addEventListener('resize', resizeVideoCanvas);
+
+      // Funções de movimentação e redimensionamento do popup
+      header.addEventListener('mousedown', e => {
+        const dx = e.clientX - popup.offsetLeft;
+        const dy = e.clientY - popup.offsetTop;
+        function mv(e) {
+          popup.style.left = (e.clientX - dx) + 'px';
+          popup.style.top = (e.clientY - dy) + 'px';
+        }
+        document.addEventListener('mousemove', mv);
+        document.addEventListener('mouseup', () => document.removeEventListener('mousemove', mv), {once: true});
+      });
+
+      resizer.addEventListener('mousedown', e => {
+        e.preventDefault();
+        const sx = e.clientX, sy = e.clientY;
+        const w0 = popup.offsetWidth, h0 = popup.offsetHeight;
+        function mv(e) {
+          popup.style.width = (w0 + e.clientX - sx) + 'px';
+          popup.style.height = (h0 + e.clientY - sy) + 'px';
+          resizeVideoCanvas();
+        }
+        document.addEventListener('mousemove', mv);
+        document.addEventListener('mouseup', () => document.removeEventListener('mousemove', mv), {once: true});
+      });
+
+      // Minimizar e restaurar o popup
+      minBtn.addEventListener('click', () => {
+        minimized = !minimized;
+        if (minimized) {
+          content.style.display = 'none';
+          popup.style.height = header.offsetHeight + 'px';
+          stopDetection();
+          minBtn.textContent = '🔼';
+        } else {
+          content.style.display = 'block';
+          popup.style.height = '';
+          resizeVideoCanvas();
+          startDetection();
+          minBtn.textContent = '_';
+        }
+      });
+
+      let totalLifetimeSecondsLost = 0;
+
+        function showAchievement() {
+        const achievement = document.getElementById('achievement');
+        const secondsLost = Math.floor(Math.random() * 15) + 5;
+        totalLifetimeSecondsLost += secondsLost;
+
+        achievement.textContent = `Você perdeu ${secondsLost} segundos da sua vida`;
+        achievement.classList.add('show');
+        achievement.classList.remove('hidden');
+
+        setTimeout(() => {
+            achievement.classList.remove('show');
+            setTimeout(() => {
+            achievement.classList.add('hidden');
+            }, 500);
+        }, 3000);
+        }
+
+        // Intervalo aleatório entre 5 e 15 segundos
+        function startAchievementLoop() {
+        const interval = Math.floor(Math.random() * 10000) + 5000; // 5 a 15s
+        setTimeout(() => {
+            showAchievement();
+            startAchievementLoop();
+        }, interval);
+        }
+
+        startAchievementLoop();
+
+
+
+    });
+  </script>
+</body>
+</html>

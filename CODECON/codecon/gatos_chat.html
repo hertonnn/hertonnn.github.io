@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Jogo Interativo</title>
+  <style>
+    body { margin: 0; overflow: hidden; font-family: sans-serif; }
+    #selector-container {
+      position: absolute;
+      top: 10px; left: 10px;
+      background: rgba(255, 255, 255, 0.9);
+      padding: 10px;
+      border-radius: 8px;
+      z-index: 10;
+    }
+    canvas { position: absolute; top: 0; left: 0; }
+    video { display: none; }
+  </style>
+</head>
+<body>
+  <div id="selector-container">
+    <label for="animalSelector">Escolha o modo:</label>
+    <select id="animalSelector">
+      <option value="cat">Gatos</option>
+      <option value="bird">Pássaros</option>
+    </select>
+    <button onclick="startGame()">Iniciar</button>
+  </div>
+  <video id="video" autoplay></video>
+  <canvas id="canvas"></canvas>
+
+  <script>
+    let video = document.getElementById('video');
+    let canvas = document.getElementById('canvas');
+    let ctx = canvas.getContext('2d');
+    let width = window.innerWidth;
+    let height = window.innerHeight;
+    canvas.width = width;
+    canvas.height = height;
+
+    let objects = [];
+    let images = [];
+    let sounds = [];
+    let animalType = "cat";
+
+    const assets = {
+      cat: {
+        images: ["cat1.png", "cat2.png"],
+        sounds: ["meow1.mp3", "meow2.mp3"]
+      },
+      bird: {
+        images: ["bird1.png", "bird2.png"],
+        sounds: ["chirp1.mp3", "chirp2.mp3"]
+      }
+    };
+
+    function loadAssets(type) {
+      images = assets[type].images.map(src => {
+        let img = new Image();
+        img.src = `assets/${type}/${src}`;
+        return img;
+      });
+      sounds = assets[type].sounds.map(src => new Audio(`assets/${type}/${src}`));
+    }
+
+    function randomSound() {
+      const sound = sounds[Math.floor(Math.random() * sounds.length)];
+      sound.currentTime = 0;
+      sound.play();
+    }
+
+    function createObject() {
+      let x = Math.random() * width;
+      let y = -50;
+      let speed = 2 + Math.random() * 3;
+      let img = images[Math.floor(Math.random() * images.length)];
+      objects.push({ x, y, speed, img });
+    }
+
+    function update() {
+      ctx.clearRect(0, 0, width, height);
+      for (let obj of objects) {
+        obj.y += obj.speed;
+        ctx.drawImage(obj.img, obj.x, obj.y, 80, 80);
+        if (obj.y > height) {
+          obj.y = -50;
+          obj.x = Math.random() * width;
+          randomSound();
+        }
+      }
+      requestAnimationFrame(update);
+    }
+
+    function startGame() {
+      animalType = document.getElementById("animalSelector").value;
+      loadAssets(animalType);
+      objects = [];
+      for (let i = 0; i < 5; i++) createObject();
+      update();
+    }
+
+    navigator.mediaDevices.getUserMedia({ video: true }).then(stream => {
+      video.srcObject = stream;
+    });
+  </script>
+</body>
+</html>

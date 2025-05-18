@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <title>Verificador de Atenção</title>
+  <style>
+    /* ======== Estilos Gerais ======== */
+    html, body {
+      margin: 0;
+      padding: 0;
+      background: #fff;        /* Tela branca */
+      height: 100%;
+      overflow: hidden;
+    }
+
+    /* ======== Imagem do pássaro centralizada ======== */
+    #bird {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      max-width: 80vw;
+      max-height: 80vh;
+    }
+
+    /* ======== Container da webcam de debug ======== */
+    #video-container {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      width: 160px;   /* vídeo pequeno */
+      height: 120px;
+      border: 1px solid rgba(0,0,0,0.2);
+      background: #000;
+    }
+    video, canvas {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 160px;
+      height: 120px;
+    }
+    canvas {
+      pointer-events: none;  /* não bloqueia interação */
+    }
+
+    /* ======== Contador pequeno no canto ======== */
+    #counter {
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      font-size: 14px;
+      background: rgba(255,255,255,0.7);
+      padding: 2px 6px;
+      border-radius: 4px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Imagem do pássaro (inicia parada) -->
+  <img id="bird" src="fotos_passaros/bird1.png" alt="Pássaro" />
+
+  <!-- Debug: webcam + canvas de detecção -->
+  <div id="video-container">
+    <video id="video" autoplay muted></video>
+    <canvas id="overlay"></canvas>
+  </div>
+
+  <!-- Debug: contador de ausência de rosto -->
+  <div id="counter">0</div>
+
+  <!-- Som do pássaro -->
+  <audio id="bird-audio" src="audios_passaros/song.mp3" loop></audio>
+
+  <!-- face-api.js -->
+  <script defer src="https://cdn.jsdelivr.net/npm/face-api.js@0.22.2/dist/face-api.min.js"></script>
+
+  <script>
+    window.addEventListener('DOMContentLoaded', async () => {
+      const video = document.getElementById('video');
+      const canvas = document.getElementById('overlay');
+      const counterDisplay = document.getElementById('counter');
+      const birdAudio = document.getElementById('bird-audio');
+      let counter = 0;
+
+      console.log("Carregando modelo SSD MobileNet...");
+      await faceapi.nets.ssdMobilenetv1.loadFromUri('https://justadudewhohacks.github.io/face-api.js/models/');
+      console.log("Modelo carregado.");
+
+      // Inicia webcam de debug
+      try {
+        const stream = await navigator.mediaDevices.getUserMedia({ video: true });
+        video.srcObject = stream;
+        console.log("Webcam iniciada.");
+      } catch (e) {
+        console.error("Não foi possível acessar a webcam:", e);
+        return;
+      }
+
+      video.addEventListener('play', () => {
+        // Ajusta canvas ao tamanho real do vídeo
+        const disp = { width: video.videoWidth, height: video.videoHeight };
+        canvas.width = disp.width;
+        canvas.height = disp.height;
+        faceapi.matchDimensions(canvas, disp);
+        const ctx = canvas.getContext('2d');
+
+        // Loop de detecção (1× por segundo)
+        setInterval(async () => {
+          // Detecta rostos com confiança alta
+          const detections = await faceapi.detectAllFaces(
+            video,
+            new faceapi.SsdMobilenetv1Options({ minConfidence: 0.95 })
+          );
+          const rd = faceapi.resizeResults(detections, disp);
+
+          // Desenha retângulos de debug
+          ctx.clearRect(0, 0, canvas.width, canvas.height);
+          faceapi.draw.drawDetections(canvas, rd);
+
+          // Se nenhum rosto → usuário não está olhando
+          if (rd.length === 0) {
+            counter++;
+            counterDisplay.textContent = counter;
+            // Toca áudio (se ainda não estiver tocando)
+            if (birdAudio.paused) {
+              birdAudio.currentTime = 0;
+              birdAudio.play();
+            }
+          } else {
+            console.log("Rosto detectado.");
+            // Para e reseta áudio ao voltar o olhar
+            if (!birdAudio.paused) {
+              birdAudio.pause();
+              birdAudio.currentTime = 0;
+            }
+          }
+        }, 1000);
+      });
+    });
+  </script>
+</body>
+</html>
