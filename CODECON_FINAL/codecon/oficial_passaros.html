@@ -420,7 +420,14 @@ function removerImagemAleatoria() {
             currentAbsenceThreshold = INITIAL_ABSENCE_SECONDS;
             const playing = animaisAudios.find(a => !a.paused);
             if (playing) playing.pause();
-        }
+
+            // Seleciona a imagem dentro do div#counter
+            const imgElement = document.querySelector('#counter img');
+
+            // Atualiza o atributo 'src' da imagem
+            imgElement.src = 'fotos_passaros/morte.png?t=' + new Date().getTime();
+
+}
 
       // INSTRUÇÃO NA TELA (visível com 1 pássaro)
       function atualizarInstrucao() {

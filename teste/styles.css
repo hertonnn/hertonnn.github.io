@@ -1,0 +1,293 @@
+:root {
+    --primary-color: #4A90E2;
+    --secondary-color: #E6A4E4;
+    --accent-color: #FF69B4;
+    --background-color: #F8F9FA;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Quicksand', sans-serif;
+    background-color: var(--background-color);
+    overflow-x: hidden;
+}
+
+h1, h2 {
+    font-family: 'Pacifico', cursive;
+    color: var(--primary-color);
+    text-align: center;
+    margin-bottom: 1rem;
+}
+
+.section {
+    min-height: 100vh;
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+
+/* Loading Screen */
+#loading-screen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: var(--background-color);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    transition: opacity 0.5s;
+}
+
+.loading-stitch {
+    width: 150px;
+    margin-bottom: 1rem;
+}
+
+/* Welcome Section */
+#welcome {
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 1rem;
+}
+
+#welcome .content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    width: 100%;
+    max-width: 500px;
+    padding: 1rem;
+}
+
+#welcome h1 {
+    font-size: 2.5rem;
+    margin-bottom: 2rem;
+    color: white;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.welcome-stitch {
+    width: 200px;
+    height: auto;
+    margin: 2rem 0;
+    animation: bounce 2s infinite;
+}
+
+@keyframes bounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-20px); }
+}
+
+.start-btn {
+    padding: 1rem 2rem;
+    font-size: 1.2rem;
+    background-color: var(--accent-color);
+    color: white;
+    border: none;
+    border-radius: 25px;
+    cursor: pointer;
+    transition: transform 0.3s;
+    margin-top: 2rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.start-btn:hover {
+    transform: scale(1.1);
+}
+
+/* Ajustes responsivos para mobile */
+@media (max-width: 768px) {
+    #welcome h1 {
+        font-size: 2rem;
+        margin-bottom: 1.5rem;
+    }
+
+    .welcome-stitch {
+        width: 150px;
+        margin: 1.5rem 0;
+    }
+
+    .start-btn {
+        padding: 0.8rem 1.6rem;
+        font-size: 1.1rem;
+        margin-top: 1.5rem;
+    }
+}
+
+@media (max-width: 480px) {
+    #welcome h1 {
+        font-size: 1.8rem;
+    }
+
+    .welcome-stitch {
+        width: 120px;
+    }
+
+    .start-btn {
+        padding: 0.7rem 1.4rem;
+        font-size: 1rem;
+    }
+}
+
+/* Gallery Section */
+.carousel {
+    width: 100%;
+    max-width: 400px;
+    position: relative;
+    overflow: hidden;
+}
+
+.carousel-container {
+    display: flex;
+    transition: transform 0.5s ease;
+}
+
+.carousel-container img {
+    width: 100%;
+    height: auto;
+    flex-shrink: 0;
+}
+
+.carousel-controls {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin-top: 1rem;
+}
+
+.carousel-controls button {
+    padding: 0.5rem 1rem;
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    border-radius: 15px;
+    cursor: pointer;
+}
+
+/* Timeline Section */
+.timeline-container {
+    width: 100%;
+    max-width: 600px;
+}
+
+.timeline-item {
+    margin: 2rem 0;
+    padding: 1rem;
+    background-color: white;
+    border-radius: 15px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.timeline-item img {
+    width: 100%;
+    height: auto;
+    border-radius: 10px;
+}
+
+/* Stitch Animation Section */
+.stitch-container {
+    text-align: center;
+}
+
+.floating-stitch {
+    width: 200px;
+    animation: float 3s ease-in-out infinite;
+}
+
+@keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-20px); }
+}
+
+/* Final Message Section */
+.message-container {
+    text-align: center;
+    max-width: 600px;
+}
+
+.final-stitch {
+    width: 150px;
+    margin-bottom: 1rem;
+}
+
+.final-text {
+    font-size: 1.2rem;
+    line-height: 1.6;
+    margin: 1rem 0;
+}
+
+/* Hearts Animation */
+.heart {
+    position: fixed;
+    pointer-events: none;
+    animation: heartFall linear forwards;
+    z-index: 1000;
+}
+
+@keyframes heartFall {
+    0% {
+        transform: translateY(-10vh) rotate(0deg);
+        opacity: 1;
+    }
+    100% {
+        transform: translateY(100vh) rotate(360deg);
+        opacity: 0;
+    }
+}
+
+#love-button {
+    padding: 1rem 2rem;
+    background-color: var(--accent-color);
+    color: white;
+    border: none;
+    border-radius: 25px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-size: 1.2rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+#love-button:hover {
+    transform: scale(1.1);
+    box-shadow: 0 6px 8px rgba(0, 0, 0, 0.2);
+}
+
+#love-button:active {
+    transform: scale(0.95);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .section {
+        padding: 1rem;
+    }
+
+    h1 {
+        font-size: 1.8rem;
+    }
+
+    h2 {
+        font-size: 1.5rem;
+    }
+
+    .welcome-stitch, .floating-stitch {
+        width: 150px;
+    }
+} 

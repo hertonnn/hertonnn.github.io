@@ -1,0 +1,498 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grid Quadriculado - Three.js</title>
+    <style>
+        body {
+            margin: 0;
+            overflow: hidden;
+        }
+        canvas {
+            display: block;
+        }
+        #gui-container {
+            position: absolute;
+            top: 10px;
+            right: 10px; /* Ajuste a posição se necessário para não sobrepor a descrição */
+            z-index: 100; /* Garante que o menu fique acima do canvas */
+        }
+        #description-container {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            z-index: 100; /* Garante que o texto fique acima do canvas */
+            color: white; /* Cor do texto para visibilidade no fundo preto */
+            font-family: sans-serif; /* Fonte legível */
+            max-width: 300px; /* Limita a largura para não ocupar muito espaço */
+            background-color: rgba(0, 0, 0, 0.5); /* Fundo semi-transparente */
+            padding: 10px;
+            border-radius: 5px;
+            pointer-events: none; /* Permite cliques através do texto no canvas */
+        }
+    </style>
+</head>
+<body>
+    <div id="gui-container"></div> <!-- Container para o menu -->
+    <div id="description-container">
+        <p>O jogo da vida é um autómato celular desenvolvido pelo matemático britânico John Horton Conway em 1970. É o exemplo mais bem conhecido de autômato celular.</p>
+        <p><small>Obs: Se trocar o primeiro 'o' de Horton por 'e', o sobrenome dele se torna o nome do criador dessa versão hehe</small></p>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/lil-gui@0.19.1/dist/lil-gui.umd.min.js"></script> <!-- Adiciona a biblioteca lil-gui -->
+    <script>
+        // Configuração inicial
+        const scene = new THREE.Scene();
+        const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+        const renderer = new THREE.WebGLRenderer();
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        document.body.appendChild(renderer.domElement);
+
+        // Add OrbitControls initialization
+        const controls = new THREE.OrbitControls(camera, renderer.domElement);
+        controls.enableDamping = true; // Optional: adds smooth damping effect
+        controls.dampingFactor = 0.05;
+
+        // Definir as dimensões do grid
+        let gridSize = 50; // Exemplo: grid de 41x41 (se gridSize for par, halfGridSize arredonda para baixo)
+        // halfGridSize não será usado diretamente para a criação do loop, mas mantido para lógica de centralização se necessário
+        let halfGridSize = Math.floor(gridSize / 2);
+
+        // Criar os materiais para os quadrados
+        const cell = new THREE.MeshBasicMaterial({
+            color: 0x000000,
+            side: THREE.DoubleSide
+        });
+        const borderMaterial = new THREE.LineBasicMaterial({
+            color: 0x808080  // Cor cinza
+        });
+        const squareGeometry = new THREE.PlaneGeometry(1, 1);
+
+        // Matriz para armazenar os quadrados (agora armazenará os objetos Mesh diretamente)
+        let squares = [];
+
+        // Raycaster para detecção de clique
+        const raycaster = new THREE.Raycaster();
+        const mouse = new THREE.Vector2();
+
+        // Array para armazenar apenas os objetos Mesh dos quadrados (para raycasting)
+        let squareMeshes = []; // Agora é 'let' para poder ser reatribuído
+
+        // Função para criar o grid 3D
+        function createGrid() {
+            // Limpar a cena atual antes de criar uma nova (se já existir)
+            if (scene.children.length > 0) {
+                 scene.traverse(function (object) {
+                    if (!object.isMesh && !object.isLineSegments) return;
+                    if (object.geometry) object.geometry.dispose();
+                    if (object.material) {
+                        if (Array.isArray(object.material)) {
+                            for (const material of object.material) material.dispose();
+                        } else {
+                             // Verifica se o material não foi descartado por outro objeto
+                            if (object.material.dispose) object.material.dispose();
+                        }
+                    }
+                 });
+                while (scene.children.length > 0) {
+                    scene.remove(scene.children[0]);
+                }
+            }
+
+            // Limpar as matrizes
+            squares = [];
+            squareMeshes = [];
+
+            // Ajustar halfGridSize com base no novo gridSize
+            halfGridSize = Math.floor(gridSize / 2);
+
+
+            // Preencher a grade com objetos Mesh e LineSegments
+            // Os loops agora usam 0 a gridSize-1 para corresponder aos índices da matriz
+            for(let x = 0; x < gridSize; x++) {
+                squares[x] = [];
+                for(let z = 0; z < gridSize; z++) {
+                    // Calcula a posição 3D central para o quadrado (usando halfGridSize para centralizar no espaço 3D)
+                    const posX = x - halfGridSize + 0.5; // +0.5 para centralizar o quadrado na posição inteira
+                    const posZ = z - halfGridSize + 0.5; // +0.5 para centralizar o quadrado na posição inteira
+
+                    const square = new THREE.Mesh(squareGeometry, cell.clone());
+                    square.rotation.x = -Math.PI / 2;
+                    square.position.set(posX, 0.01, posZ); // Posição no espaço 3D
+
+                    // Adicionar borda
+                    const edges = new THREE.EdgesGeometry(squareGeometry);
+                    const border = new THREE.LineSegments(edges, borderMaterial);
+                    border.rotation.x = -Math.PI / 2;
+                    border.position.set(posX, 0.05, posZ);  // Ligeiramente acima do quadrado
+
+                    scene.add(square);
+                    scene.add(border);
+                    squares[x][z] = square; // Armazena o objeto Mesh na matriz usando índices 0 a gridSize-1
+                    squareMeshes.push(square); // Adiciona o mesh ao array para raycasting
+                }
+            }
+
+            // Posicionar a câmera para visualização de cima, ajustada ao tamanho do grid
+            // A câmera foca no centro (0,0,0) e se afasta dependendo do tamanho do grid
+            camera.position.set(0, Math.max(gridSize, 20) * 1.5, 0); // Ajusta a altura da câmera com base no tamanho do grid
+            camera.lookAt(0, 0, 0);
+
+            // Atualizar o target dos controles para o centro do novo grid
+            controls.target.set(0, 0, 0);
+            controls.update();
+
+            console.log(`Grid criado com tamanho: ${gridSize}x${gridSize}`);
+        }
+
+        // Criar o grid inicial
+        createGrid();
+
+
+        // Variáveis para controle da animação contínua
+        let isSpaceDown = false;
+        let lastUpdateTime = performance.now();
+        let generationInterval = 100; // Intervalo em milissegundos entre as gerações (ajuste conforme necessário)
+
+        // Função de animação
+        function animate() {
+            requestAnimationFrame(animate);
+
+            const currentTime = performance.now();
+
+            // Avança a geração se a barra de espaço estiver pressionada e o intervalo passou
+            if (isSpaceDown && (currentTime - lastUpdateTime > generationInterval)) {
+                 nextScene();
+                 lastUpdateTime = currentTime;
+            }
+
+
+            controls.update();
+            renderer.render(scene, camera); // Renderiza a cena única
+        }
+
+        // Iniciar a animação
+        animate();
+
+        // --- Definição de Padrões Famosos ---
+        // Os padrões são definidos usando coordenadas relativas à sua própria origem (geralmente o canto superior esquerdo do padrão)
+        const patterns = {
+            'Limpar Grid': [], // Padrão vazio para limpar
+            'Olá': [ // Padrão "Olá" (simplificado) - adaptado para usar 0,0 como canto
+                 {x: 0, z: 0}, {x: 1, z: 0}, {x: 0, z: 1}, {x: 1, z: 1}, // Bloco esquerdo
+                 {x: 6, z: -1}, {x: 7, z: -1}, {x: 5, z: 0}, {x: 9, z: 0}, {x: 5, z: 1}, {x: 9, z: 1}, {x: 6, z: 2}, {x: 7, z: 2}, // "O"
+                 {x: 14, z: -1}, {x: 15, z: -1}, {x: 16, z: -1}, // "e" (cima)
+                 {x: 14, z: 0}, {x: 17, z: 0}, // "e" (meio)
+                 {x: 14, z: 1}, {x: 15, z: 1}, {x: 16, z: 1}, // "e" (baixo)
+                 {x: 15, z: 2}, {x: 17, z: 2}, {x: 16, z: 3}, // "e" (perna)
+                 {x: 23, z: 0}, {x: 24, z: 0}, {x: 23, z: 1}, {x: 24, z: 1} // Bloco direito
+            ],
+            'Glider': [ // Adaptado para usar 0,0 como canto
+                {x: 1, z: 0}, {x: 2, z: 1}, {x: 0, z: 2}, {x: 1, z: 2}, {x: 2, z: 2}
+            ],
+             'Small Spaceship': [ // Adaptado para usar 0,0 como canto
+                {x: 0, z: 0}, {x: 3, z: 0},
+                {x: 4, z: 1},
+                {x: 0, z: 2}, {x: 4, z: 2},
+                {x: 1, z: 3}, {x: 2, z: 3}, {x: 3, z: 3}, {x: 4, z: 3}
+             ],
+             'Pulsar': [ // Adaptado para usar 0,0 como canto
+                 {x: 2, z: 0}, {x: 3, z: 0}, {x: 4, z: 0},
+                 {x: 8, z: 0}, {x: 9, z: 0}, {x: 10, z: 0},
+
+                 {x: 0, z: 2}, {x: 5, z: 2}, {x: 7, z: 2}, {x: 12, z: 2},
+                 {x: 0, z: 3}, {x: 5, z: 3}, {x: 7, z: 3}, {x: 12, z: 3},
+                 {x: 0, z: 4}, {x: 5, z: 4}, {x: 7, z: 4}, {x: 12, z: 4},
+
+                 {x: 2, z: 5}, {x: 5, z: 5}, {x: 7, z: 5}, {x: 10, z: 5},
+
+                 {x: 2, z: 7}, {x: 5, z: 7}, {x: 7, z: 7}, {x: 10, z: 7},
+
+                 {x: 0, z: 8}, {x: 5, z: 8}, {x: 7, z: 8}, {x: 12, z: 8},
+                 {x: 0, z: 9}, {x: 5, z: 9}, {x: 7, z: 9}, {x: 12, z: 9},
+                 {x: 0, z: 10}, {x: 5, z: 10}, {x: 7, z: 10}, {x: 12, z: 10},
+
+                 {x: 2, z: 12}, {x: 3, z: 12}, {x: 4, z: 12},
+                 {x: 8, z: 12}, {x: 9, z: 12}, {x: 10, z: 12}
+             ]
+        };
+
+        // Função para limpar o grid (definir todas as células como mortas/pretas)
+        function clearGrid() {
+            for(let x = 0; x < gridSize; x++) {
+                for(let z = 0; z < gridSize; z++) {
+                    if (squares[x] && squares[x][z] && squares[x][z].material) {
+                        squares[x][z].material.color.set(0x000000); // Define a cor como preta
+                    }
+                }
+            }
+        }
+
+        // Função para aplicar um padrão ao grid
+        function applyPattern(patternName) {
+            clearGrid(); // Limpa o grid antes de aplicar o novo padrão
+
+            const patternToApply = patterns[patternName];
+            if (!patternToApply) {
+                console.error(`Pattern "${patternName}" not found.`);
+                return;
+            }
+
+            // Encontrar as dimensões do padrão para centralizá-lo
+            let minX = Infinity, maxX = -Infinity, minZ = Infinity, maxZ = -Infinity;
+            patternToApply.forEach(cellPos => {
+                minX = Math.min(minX, cellPos.x);
+                maxX = Math.max(maxX, cellPos.x);
+                minZ = Math.min(minZ, cellPos.z);
+                maxZ = Math.max(maxZ, cellPos.z);
+            });
+
+            const patternWidth = maxX - minX + 1;
+            const patternHeight = maxZ - minZ + 1;
+
+            // Calcular o offset para posicionar o canto superior esquerdo do padrão
+            // na posição correta da matriz do grid para centralizá-lo visualmente
+            const startX_matrix = Math.floor((gridSize - patternWidth) / 2);
+            const startZ_matrix = Math.floor((gridSize - patternHeight) / 2);
+
+
+            // Aplicar o padrão com o offset calculado
+            patternToApply.forEach(cellPos => {
+                // Converte a posição relativa do padrão para a posição na matriz do grid
+                const gridX = cellPos.x + startX_matrix;
+                const gridZ = cellPos.z + startZ_matrix;
+
+
+            // Verificar se as coordenadas estão dentro dos limites do grid antes de tentar acessar
+            if (gridX >= 0 && gridX < gridSize && gridZ >= 0 && gridZ < gridSize) {
+                     // Verifica se o objeto Mesh existe antes de tentar acessar o material
+                     if (squares[gridX] && squares[gridX][gridZ] && squares[gridX][gridZ].material) {
+                 squares[gridX][gridZ].material.color.set(0xffffff); // Célula viva (branca)
+                     }
+            } else {
+                    console.warn(`Cell position for pattern "${patternName}" out of bounds: (${gridX}, ${gridZ}). Grid Size: ${gridSize}`);
+            }
+        });
+
+             console.log(`Padrão "${patternName}" aplicado.`);
+        }
+
+
+        function nextScene(){
+            // Não limpamos a cena aqui, apenas atualizamos os objetos existentes.
+
+            // Matriz temporária para armazenar as cores da próxima geração
+            const nextColors = [];
+
+            // Inicializar a matriz nextColors com o tamanho correto (0 a gridSize-1)
+            for(let x = 0; x < gridSize; x++) {
+                nextColors[x] = [];
+                for(let z = 0; z < gridSize; z++) {
+                    nextColors[x][z] = 0x000000; // Inicializa com preto
+                }
+            }
+
+            // Primeiro, calcular o próximo estado para cada célula com base na cena ATUAL (squares)
+            // Os loops agora usam índices 0 a gridSize-1 para percorrer a matriz
+            for(let x = 0; x < gridSize; x++) {
+                for(let z = 0; z < gridSize; z++) {
+                    const matrixX = x;
+                    const matrixZ = z;
+
+                    let liveNeighbor = 0;
+
+                    // Acessar os 8 vizinhos na matriz ATUAL (squares)
+                    const neighbors = [
+                        {dx: -1, dz: -1}, {dx: 0, dz: -1}, {dx: 1, dz: -1},
+                        {dx: -1, dz: 0},                   {dx: 1, dz: 0},
+                        {dx: -1, dz: 1}, {dx: 0, dz: 1}, {dx: 1, dz: 1}
+                    ];
+
+                    // Contar vizinhos vivos na cena ATUAL com bordas envolventes
+                    neighbors.forEach(delta => {
+                        // Calcula as coordenadas do vizinho com bordas envolventes
+                        const neighborX_matrix = (matrixX + delta.dx + gridSize) % gridSize;
+                        const neighborZ_matrix = (matrixZ + delta.dz + gridSize + gridSize) % gridSize; // Adicionado mais gridSize para garantir resultado positivo antes do módulo
+
+
+                         // Verifica se o objeto Mesh do vizinho existe antes de verificar a cor
+                        if (squares[neighborX_matrix] && squares[neighborX_matrix][neighborZ_matrix] && squares[neighborX_matrix][neighborZ_matrix].material.color.getHex() === 0xffffff){
+                            liveNeighbor++;
+                        }
+                    });
+
+                    // Determinar o estado da célula atual para a PRÓXIMA geração
+                     // Verifica se o objeto Mesh da célula atual existe antes de verificar a cor
+                     const currentCellIsAlive = squares[matrixX] && squares[matrixX][matrixZ] && squares[matrixX][matrixZ].material.color.getHex() === 0xffffff;
+                    let nextStateColor = 0x000000; // Assume que morre/permanece morta
+
+                    if (currentCellIsAlive) {
+                        // Célula viva na geração atual
+                        if (liveNeighbor === 2 || liveNeighbor === 3) {
+                            nextStateColor = 0xffffff; // Sobrevive
+                        }
+                    } else {
+                        // Célula morta na geração atual
+                        if (liveNeighbor === 3) {
+                            nextStateColor = 0xffffff; // Nasce
+                        }
+                    }
+
+                    // Armazena a cor do próximo estado na matriz temporária
+                    nextColors[matrixX][matrixZ] = nextStateColor;
+                }
+            }
+
+            // Segundo, atualizar as cores dos objetos 3D existentes
+             for(let x = 0; x < gridSize; x++) { // Usando índices 0 a gridSize-1
+                 for(let z = 0; z < gridSize; z++) { // Usando índices 0 a gridSize-1
+                    // Verifica se o objeto Mesh existe antes de atualizar a cor
+                     if (squares[x] && squares[x][z] && squares[x][z].material) {
+                    squares[x][z].material.color.set(nextColors[x][z]); // Atualiza a cor do objeto Mesh existente
+                     }
+                 }
+             }
+
+            // Não precisamos atualizar activeScene ou squares aqui, pois estamos modificando in-place.
+            // squares continua sendo a referência para a matriz de objetos na cena única.
+
+            // (Opcional) Manter o target dos controles no centro do grid
+            controls.target.set(0, 0, 0);
+            controls.update();
+        }
+
+        // Adicionar evento de tecla para ativar nextScene (agora controlando isSpaceDown)
+        document.addEventListener('keydown', (event) => {
+            if (event.code === 'Space') {
+                isSpaceDown = true;
+            }
+        });
+
+         document.addEventListener('keyup', (event) => {
+             if (event.code === 'Space') {
+                 isSpaceDown = false;
+             }
+         });
+
+
+         // Função para lidar com o clique do mouse
+         function onMouseClick(event) {
+             // Normalizar as coordenadas do mouse (-1 a +1)
+             mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
+             mouse.y = - (event.clientY / window.innerHeight) * 2 + 1;
+
+             // Atualizar o raycaster com a câmera e a posição do mouse
+             raycaster.setFromCamera(mouse, camera);
+
+             // Calcular objetos que intersectam o raio
+             // Intersectamos apenas com os meshes dos quadrados
+             const intersects = raycaster.intersectObjects(squareMeshes);
+
+             // Se houver interseções (clicou em um quadrado)
+             if (intersects.length > 0) {
+                 const clickedSquare = intersects[0].object; // O primeiro objeto intersectado é o mais próximo
+
+                 // Obter as coordenadas do grid a partir da posição do objeto
+                 // Converte a posição 3D de volta para índices da matriz (0 a gridSize-1)
+                 const gridX = Math.floor(clickedSquare.position.x + halfGridSize - 0.5);
+                 const gridZ = Math.floor(clickedSquare.position.z + halfGridSize - 0.5);
+
+
+                 // Verificar se as coordenadas estão dentro dos limites do grid antes de tentar acessar
+                 if (gridX >= 0 && gridX < gridSize && gridZ >= 0 && gridZ < gridSize) {
+                     // Verificar o estado atual da célula e alternar a cor
+                     if (squares[gridX][gridZ].material.color.getHex() === 0xffffff) {
+                         // Se estiver viva (branca), torna morta (preta)
+                         squares[gridX][gridZ].material.color.set(0x000000);
+                     } else {
+                         // Se estiver morta (preta), torna viva (branca)
+                         squares[gridX][gridZ].material.color.set(0xffffff);
+                     }
+                 } else {
+                     console.warn(`Clicked position out of bounds: (${gridX}, ${gridZ})`);
+                 }
+             }
+         }
+
+         // Adicionar o listener de clique ao elemento do renderer
+         renderer.domElement.addEventListener('click', onMouseClick, false);
+
+         // Ajustar o tamanho da janela quando a tela for redimensionada
+         window.addEventListener('resize', onWindowResize, false);
+
+         function onWindowResize() {
+             camera.aspect = window.innerWidth / window.innerHeight;
+             camera.updateProjectionMatrix();
+             renderer.setSize(window.innerWidth, window.innerHeight);
+             controls.update();
+         }
+
+         // --- Configuração do Menu Interativo (lil-gui) ---
+         const gui = new lil.GUI({ container: document.getElementById('gui-container') });
+
+         // Objeto para armazenar as variáveis e funções controláveis
+         const params = {
+             'Próxima Geração': () => {
+                 nextScene();
+                 // Remover o foco do elemento ativo (o botão)
+                 if (document.activeElement && typeof document.activeElement.blur === 'function') {
+                     document.activeElement.blur();
+                 }
+             },
+             'Limpar Grid': () => {
+                 applyPattern('Limpar Grid'); // Usa applyPattern com o padrão vazio
+                 // Remover o foco do elemento ativo (o botão)
+                 if (document.activeElement && typeof document.activeElement.blur === 'function') {
+                     document.activeElement.blur();
+                 }
+             },
+             'Velocidade (ms)': generationInterval,
+             'Tamanho do Grid': gridSize,
+             'Padrão Inicial': 'Olá' // Valor inicial para o seletor de padrão
+         };
+
+         // Adicionar os botões e controles ao menu
+         gui.add(params, 'Próxima Geração');
+         gui.add(params, 'Limpar Grid');
+
+         // Controle para a velocidade da simulação
+         gui.add(params, 'Velocidade (ms)', 10, 1000).onChange(value => {
+             generationInterval = value;
+             // Remover o foco do elemento ativo (o slider)
+             if (document.activeElement && typeof document.activeElement.blur === 'function') {
+                 document.activeElement.blur();
+             }
+         });
+
+         // Controle para o tamanho do grid
+         gui.add(params, 'Tamanho do Grid', 10, 100, 1).onChange(value => {
+             // Atualiza as variáveis de tamanho e recria o grid
+             gridSize = Math.round(value); // Garante que o tamanho seja um número inteiro
+             createGrid(); // Recria o grid com o novo tamanho
+             // Opcional: aplicar o padrão 'Limpar Grid' após redimensionar
+              applyPattern('Limpar Grid');
+             // Remover o foco do elemento ativo (o slider)
+             if (document.activeElement && typeof document.activeElement.blur === 'function') {
+                 document.activeElement.blur();
+             }
+         });
+
+         // Seletor para os padrões iniciais
+         gui.add(params, 'Padrão Inicial', Object.keys(patterns)).onChange(patternName => {
+             applyPattern(patternName); // Aplica o padrão selecionado
+             // Remover o foco do elemento ativo (o seletor)
+             if (document.activeElement && typeof document.activeElement.blur === 'function') {
+                 document.activeElement.blur();
+             }
+         });
+
+         // Aplica o padrão inicial definido no params ao carregar a página
+         applyPattern(params['Padrão Inicial']);
+
+         // --- Fim da Configuração do Menu Interativo ---
+
+    </script>
+</body>
+</html> 
