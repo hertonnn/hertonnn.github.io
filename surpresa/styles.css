@@ -3,12 +3,14 @@
     --secondary-color: #E6A4E4;
     --accent-color: #FF69B4;
     --background-color: #F8F9FA;
+    color-scheme: light;
 }
 
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    color-scheme: light;
 }
 
 body {
@@ -16,6 +18,8 @@ body {
     font-weight: 300;
     background-color: var(--background-color);
     overflow-x: hidden;
+    color-scheme: light;
+    forced-color-adjust: none;
 }
 
 h1, h2 {
@@ -156,6 +160,193 @@ h1, h2 {
     }
 }
 
+/* Ajustes específicos para iPhone XR e similares */
+@media screen and (device-width: 414px) and (device-height: 896px) and (-webkit-device-pixel-ratio: 2) {
+    .section {
+        padding: 1.5rem;
+        min-height: 100vh;
+        height: 100vh; /* Força altura total da viewport */
+    }
+
+    #welcome {
+        padding: 1rem;
+        min-height: 100vh;
+        height: 100vh;
+    }
+
+    #welcome .content {
+        padding: 0.5rem;
+        max-width: 100%;
+    }
+
+    #welcome h1 {
+        font-size: 1.8rem;
+        margin-bottom: 1rem;
+    }
+
+    .welcome-stitch {
+        width: 130px;
+        margin: 1rem 0;
+    }
+
+    .start-btn {
+        padding: 0.7rem 1.4rem;
+        font-size: 1rem;
+        margin-top: 1rem;
+    }
+
+    .carousel {
+        max-width: 100%;
+        margin: 0 0.5rem;
+    }
+
+    .carousel-container img {
+        width: 100%;
+        height: auto;
+        object-fit: cover;
+    }
+
+    .timeline-container {
+        max-width: 100%;
+        padding: 0 0.5rem;
+    }
+
+    .timeline-item {
+        margin: 1rem 0;
+        padding: 0.8rem;
+    }
+
+    .message-container {
+        padding: 1.5rem 1rem;
+        margin: 0 0.5rem;
+    }
+
+    .final-stitch {
+        width: 120px;
+    }
+
+    .final-text {
+        font-size: 1.1rem;
+        line-height: 1.5;
+        margin: 1rem 0;
+    }
+
+    #love-button {
+        padding: 0.8rem 1.6rem;
+        font-size: 1rem;
+        margin-top: 1rem;
+    }
+}
+
+/* Ajustes específicos para Galaxy A34 e similares */
+@media screen and (min-width: 412px) and (max-width: 428px) and (min-height: 915px) and (max-height: 926px) {
+    .section {
+        padding: 1.2rem;
+        min-height: 100vh;
+        height: 100vh;
+    }
+
+    #welcome {
+        padding: 0.8rem;
+        min-height: 100vh;
+        height: 100vh;
+    }
+
+    #welcome .content {
+        padding: 0.4rem;
+        max-width: 100%;
+    }
+
+    #welcome h1 {
+        font-size: 2rem;
+        margin-bottom: 1.2rem;
+        padding: 0 0.5rem;
+    }
+
+    .welcome-stitch {
+        width: 140px;
+        margin: 1.2rem 0;
+    }
+
+    .start-btn {
+        padding: 0.8rem 1.6rem;
+        font-size: 1.1rem;
+        margin-top: 1.2rem;
+    }
+
+    .carousel {
+        max-width: 100%;
+        margin: 0 0.4rem;
+    }
+
+    .carousel-container img {
+        width: 100%;
+        height: auto;
+        object-fit: cover;
+        max-height: 400px;
+    }
+
+    .timeline-container {
+        max-width: 100%;
+        padding: 0 0.4rem;
+    }
+
+    .timeline-item {
+        margin: 1.2rem 0;
+        padding: 0.8rem;
+    }
+
+    .timeline-item img {
+        max-height: 300px;
+        object-fit: cover;
+    }
+
+    .message-container {
+        padding: 1.2rem 0.8rem;
+        margin: 0 0.4rem;
+    }
+
+    .final-stitch {
+        width: 130px;
+    }
+
+    .final-text {
+        font-size: 1.2rem;
+        line-height: 1.6;
+        margin: 1.2rem 0;
+        padding: 0 0.5rem;
+    }
+
+    #love-button {
+        padding: 0.9rem 1.8rem;
+        font-size: 1.1rem;
+        margin-top: 1.2rem;
+    }
+
+    /* Ajustes para os Stitchs flutuantes */
+    .floating-stitch-1,
+    .floating-stitch-2,
+    .floating-stitch-3,
+    .floating-stitch-4,
+    .floating-stitch-5,
+    .floating-stitch-6,
+    .floating-stitch-7,
+    .floating-stitch-8 {
+        width: 90px;
+    }
+
+    /* Ajustes para o carrossel */
+    .carousel-controls {
+        margin-top: 0.8rem;
+    }
+
+    .carousel-controls button {
+        padding: 0.4rem 0.8rem;
+        font-size: 0.9rem;
+    }
+}
+
+/* Ajustes para telas menores que 480px */
 @media (max-width: 480px) {
     #welcome h1 {
         font-size: 1.8rem;
