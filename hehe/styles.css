@@ -28,6 +28,7 @@ h1, h2 {
 
 .section {
     min-height: 100vh;
+    height: -webkit-fill-available; /* For iOS Safari */
     padding: 2rem;
     display: flex;
     flex-direction: column;
@@ -56,6 +57,7 @@ h1, h2 {
     width: 150px;
     margin-bottom: 1rem;
     animation: loadingBounce 2s infinite;
+    will-change: transform;
 }
 
 @keyframes loadingBounce {
@@ -109,6 +111,7 @@ h1, h2 {
     height: auto;
     margin: 2rem 0;
     animation: bounce 2s infinite;
+    will-change: transform;
 }
 
 @keyframes bounce {
@@ -180,6 +183,7 @@ h1, h2 {
 .carousel-container {
     display: flex;
     transition: transform 0.5s ease;
+    will-change: transform;
 }
 
 .carousel-container img {
@@ -232,6 +236,7 @@ h1, h2 {
 .floating-stitch {
     width: 200px;
     animation: float 3s ease-in-out infinite;
+    will-change: transform;
 }
 
 @keyframes float {
