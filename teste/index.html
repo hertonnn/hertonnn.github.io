@@ -17,21 +17,34 @@
     <!-- Seção 1: Boas-vindas -->
     <section id="welcome" class="section">
         <div class="content">
-            <h1>Feliz Aniversário Natália ❤️</h1>
+            <h1>Feliz Aniversário, Natália! ❤️</h1>
             <img src="resources/stitch2.gif" alt="Stitch animado" class="welcome-stitch">
             <button class="start-btn">Começar a Surpresa</button>
+            <p id="volume-hint" class="hidden-message">Aumente o som! 🔊</p>
         </div>
     </section>
 
     <!-- Seção 2: Galeria -->
     <section id="gallery" class="section">
-        <h2>Nossos Momentos</h2>
+        <h2 class="gallery-heading">Mais um ano de vida princesa!!</h2>
+        <p class="gallery-intro">Agora vai um carrossel de fotos suas, pq? Pq sim.</p>
         <div class="carousel">
+            <div class="floating-stitches">
+                <img src="resources/stitch5.gif" alt="Stitch flutuante" class="floating-stitch-1">
+                <img src="resources/stitch6.gif" alt="Stitch flutuante" class="floating-stitch-2">
+                <img src="resources/stitch3.gif" alt="Stitch flutuante" class="floating-stitch-3">
+                <img src="resources/stitch4.gif" alt="Stitch flutuante" class="floating-stitch-4">
+                <img src="resources/stitch5.gif" alt="Stitch flutuante" class="floating-stitch-5">
+                <img src="resources/stitch2.gif" alt="Stitch flutuante" class="floating-stitch-6">
+                <img src="resources/stitch3.gif" alt="Stitch flutuante" class="floating-stitch-7">
+                <img src="resources/stitch7.gif" alt="Stitch flutuante" class="floating-stitch-8">
+            </div>
+            
             <div class="carousel-container">
-                <img src="resources/ela1.JPG" alt="Carla">
-                <img src="resources/ela2.JPG" alt="Carla">
-                <img src="resources/ela3.JPG" alt="Carla">
-                <img src="resources/ela4.JPG" alt="Carla">
+                <img src="resources/ela1.JPG" alt="Natalia">
+                <img src="resources/ela2.JPG" alt="Natalia">
+                <img src="resources/ela3.JPG" alt="Natalia">
+                <img src="resources/ela4.JPG" alt="Natalia">
             </div>
             <div class="carousel-controls">
                 <button class="prev">←</button>
@@ -42,19 +55,19 @@
 
     <!-- Seção 3: Timeline -->
     <section id="timeline" class="section">
-        <h2>Nossa História</h2>
+        <h2>Por mais que tenham sido poucos, vc me fez muito feliz em nossos momentos juntos! Mais fotos hehe</h2>
         <div class="timeline-container">
             <div class="timeline-item">
-                <img src="resources/eu_e_ela.GIF" alt="Nós dois">
-                <p>Nosso primeiro encontro...</p>
-            </div>
-            <div class="timeline-item">
                 <img src="resources/eu_e_ela2.jpg" alt="Nós dois">
-                <p>Aquele dia especial...</p>
+                <p>Saímos pela primeira vez</p>
             </div>
             <div class="timeline-item">
                 <img src="resources/eu_e_ela3.jpg" alt="Nós dois">
-                <p>Momentos inesquecíveis...</p>
+                <p>Segunda vez...</p>
+            </div>
+            <div class="timeline-item">
+                <img src="resources/eu_e_ela.GIF" alt="Nós dois">
+                <p>Ultima vez (n sou criativo para título de fotos...)</p>
             </div>
             <div class="timeline-item">
                 <img src="resources/eu_e_ela4.PNG" alt="Nós dois">
@@ -76,9 +89,16 @@
         <div class="message-container">
             <img src="resources/stitch4.gif" alt="Stitch final" class="final-stitch">
             <p class="final-text">
-                Natália, você é meu Stitch favorito, e essa é só uma pequena forma de te lembrar o quanto te amo ❤️
+                Natália, você é incrível, essa é só uma pequena forma de te lembrar o quanto te amo, espero comemorar muitos aniversários seus daqui pra frente,  aproveite seu dia! ❤️ 
             </p>
+            <p>Esse site se auto destruirá 23h59 do dia 18 de junho. </p>
             <button id="love-button">Clique para uma surpresa!</button>
+            
+            <!-- Nova mensagem surpresa -->
+            <div id="surprise-message" class="hidden-message">
+                <h2>Ti enganei! Não tem mais surpresas! 🥰</h2>
+                <img src="resources/eu_e_ela.GIF" alt="Eu e Natália" style="width: 150px; margin-top: 1rem; border-radius: 10px;">
+            </div>
         </div>
     </section>
 
