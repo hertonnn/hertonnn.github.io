@@ -21,11 +21,9 @@ body {
 h1, h2 {
     font-family: 'Pacifico', cursive;
     font-weight: 400;
+    color: var(--primary-color);
     text-align: center;
     margin-bottom: 1rem;
-    transform: translateZ(0);
-    -webkit-font-smoothing: antialiased;
-    backface-visibility: hidden;
 }
 
 .section {
@@ -105,9 +103,7 @@ h1, h2 {
     font-size: 2.5rem;
     margin-bottom: 2rem;
     color: white;
-    text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.4);
-    font-weight: 400;
-    transform: translateZ(0);
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
 }
 
 .welcome-stitch {
@@ -230,18 +226,6 @@ h1, h2 {
     width: 100%;
     height: auto;
     border-radius: 10px;
-}
-
-.timeline-item p {
-    color: #333;
-    font-weight: 300;
-    font-family: 'Quicksand', sans-serif;
-}
-
-/* Add specific styling for h2 within timeline section */
-#timeline h2 {
-    color: #333;
-    text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.5);
 }
 
 /* Stitch Animation Section */
@@ -580,20 +564,39 @@ h1, h2 {
 #gallery h2.gallery-heading {
     font-family: 'Pacifico', cursive;
     font-size: 2.2rem;
-    color: white;
+    color: var(--primary-color);
     margin-bottom: 0.5rem;
-    text-shadow: 1px 1px 4px rgba(0,0,0,0.4);
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
     text-align: center;
 }
 
 #gallery p.gallery-intro {
     font-family: 'Pacifico', cursive;
     font-size: 1.5rem;
-    color: white;
+    color: var(--primary-color);
     margin-bottom: 2rem;
     text-align: center;
     line-height: 1.4;
-    text-shadow: 1px 1px 4px rgba(0,0,0,0.4);
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+}
+
+/* Responsive adjustments for the new text */
+@media (max-width: 768px) {
+    #gallery h2.gallery-heading {
+        font-size: 1.8rem;
+    }
+    #gallery p.gallery-intro {
+        font-size: 1.2rem;
+    }
+}
+
+@media (max-width: 480px) {
+    #gallery h2.gallery-heading {
+        font-size: 1.5rem;
+    }
+    #gallery p.gallery-intro {
+        font-size: 1rem;
+    }
 }
 
 /* Estilo para a mensagem de volume */
@@ -627,7 +630,7 @@ h1, h2 {
 
 /* Estilo para a nova mensagem surpresa */
 #surprise-message {
-    background-color: var(--primary-color);
+    background-color: var(--primary-color); /* Fundo azul para a mensagem */
     color: white;
     padding: 1.5rem;
     border-radius: 15px;
@@ -635,17 +638,17 @@ h1, h2 {
     font-family: 'Quicksand', sans-serif;
     font-size: 1.1rem;
     line-height: 1.6;
-    opacity: 0;
-    transform: translateY(20px);
-    transition: opacity 0.8s ease-out, transform 0.8s ease-out;
-    max-width: 90%;
+    opacity: 0; /* Inicia invisível */
+    transform: translateY(20px); /* Inicia um pouco para baixo */
+    transition: opacity 0.8s ease-out, transform 0.8s ease-out; /* Transição suave */
+    max-width: 90%; /* Limita a largura em telas menores */
     margin-left: auto;
     margin-right: auto;
 }
 
 #surprise-message.visible {
-    opacity: 1;
-    transform: translateY(0);
+    opacity: 1; /* Torna visível */
+    transform: translateY(0); /* Sobe para a posição original */
 }
 
 #surprise-message h2 {
