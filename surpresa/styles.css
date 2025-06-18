@@ -45,8 +45,9 @@ h1, h2, h4, .gallery-heading, .gallery-intro, .final-text, .stitch-container p, 
     justify-content: flex-start;
     align-items: center;
     position: relative;
-    overflow: visible;
-    margin-bottom: 2rem;
+    overflow: hidden;
+    -webkit-overflow-scrolling: touch; /* Melhor scroll em iOS */
+    z-index: 2;
 }
 
 /* Loading Screen */
@@ -92,13 +93,12 @@ h1, h2, h4, .gallery-heading, .gallery-intro, .final-text, .stitch-container p, 
 
 /* Welcome Section */
 #welcome {
-    min-height: 100vh;
-    height: auto;
-    padding: 2rem 1rem;
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
     display: flex;
     justify-content: center;
     align-items: center;
-    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    min-height: 100vh;
+    padding: 1rem;
 }
 
 #welcome .content {
@@ -110,7 +110,6 @@ h1, h2, h4, .gallery-heading, .gallery-intro, .final-text, .stitch-container p, 
     width: 100%;
     max-width: 500px;
     padding: 1rem;
-    margin: 2rem 0;
 }
 
 #welcome h1 {
@@ -176,19 +175,22 @@ h1, h2, h4, .gallery-heading, .gallery-intro, .final-text, .stitch-container p, 
 /* Ajustes específicos para iPhone XR e similares */
 @media screen and (device-width: 414px) and (device-height: 896px) and (-webkit-device-pixel-ratio: 2) {
     .section {
-        min-height: auto;
-        height: auto;
-        padding: 3rem 1rem 2rem 1rem;
+        min-height: auto !important; /* Força altura automática */
+        height: auto !important;
+        padding: 1.5rem 1rem;
+        margin-bottom: 2rem;
+        overflow: visible !important;
     }
 
     #welcome {
-        min-height: auto;
-        height: auto;
-        padding: 2rem 1rem;
+        padding: 1rem;
+        min-height: 100vh;
+        height: 100vh;
     }
 
     #welcome .content {
-        margin: 1rem 0;
+        padding: 0.5rem;
+        max-width: 100%;
     }
 
     #welcome h1 {
@@ -219,9 +221,9 @@ h1, h2, h4, .gallery-heading, .gallery-intro, .final-text, .stitch-container p, 
     }
 
     #timeline {
-        min-height: auto;
-        height: auto;
-        padding: 3rem 1rem 2rem 1rem;
+        min-height: auto !important;
+        height: auto !important;
+        padding: 2rem 1rem;
         margin-bottom: 3rem; /* Aumenta margem inferior */
         overflow: visible !important;
     }
@@ -466,7 +468,7 @@ h1, h2, h4, .gallery-heading, .gallery-intro, .final-text, .stitch-container p, 
 #timeline {
     min-height: 100vh;
     height: auto;
-    padding: 4rem 1rem 2rem 1rem;
+    padding: 2rem 1rem;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
@@ -479,7 +481,8 @@ h1, h2, h4, .gallery-heading, .gallery-intro, .final-text, .stitch-container p, 
 .timeline-container {
     width: 100%;
     max-width: 600px;
-    margin: 1rem 0 3rem 0;
+    margin: 1rem 0;
+    padding-bottom: 2rem; /* Adiciona padding inferior */
 }
 
 .timeline-item {
@@ -501,11 +504,10 @@ h1, h2, h4, .gallery-heading, .gallery-intro, .final-text, .stitch-container p, 
 /* Stitch Animation Section */
 #stitch-animation {
     min-height: 100vh;
-    height: auto;
-    padding: 4rem 1rem 2rem 1rem;
     display: flex;
     justify-content: center;
     align-items: center;
+    padding: 3rem 1rem;
 }
 
 .stitch-container {
@@ -577,10 +579,8 @@ h1, h2, h4, .gallery-heading, .gallery-intro, .final-text, .stitch-container p, 
 
 /* Final Message Section */
 #final-message {
-    min-height: 100vh;
-    height: auto;
-    padding: 4rem 1rem 2rem 1rem;
     background: linear-gradient(45deg, var(--secondary-color), var(--accent-color));
+    padding: 2rem 1rem;
 }
 
 .message-container {
@@ -594,7 +594,7 @@ h1, h2, h4, .gallery-heading, .gallery-intro, .final-text, .stitch-container p, 
     overflow: hidden;
     transform: translateY(0);
     transition: transform 0.5s ease-out, box-shadow 0.3s ease;
-    margin: 2rem 0;
+    margin: 1rem 0;
 }
 
 .message-container:hover {
@@ -619,57 +619,68 @@ h1, h2, h4, .gallery-heading, .gallery-intro, .final-text, .stitch-container p, 
     padding: 0 1rem;
 }
 
-/* Estilo melhorado para o botão de surpresa */
 #love-button {
+    margin-top: 2rem;
     padding: 1.2rem 2.5rem;
-    background: linear-gradient(45deg, var(--accent-color), var(--secondary-color));
-    color: white;
-    border: none;
+    font-size: 1.3rem;
+    -webkit-appearance: none; /* Remove estilo padrão em iOS */
+    appearance: none;
     border-radius: 25px;
     cursor: pointer;
     transition: all 0.3s ease;
-    font-size: 1.3rem;
-    font-family: 'Waltograph', cursive;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
-    margin-top: 2rem;
-    position: relative;
-    overflow: hidden;
+    -webkit-tap-highlight-color: transparent;
 }
 
 #love-button:hover {
-    transform: scale(1.05);
-    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+    transform: scale(1.1);
+    box-shadow: 0 6px 8px rgba(0, 0, 0, 0.2);
 }
 
 #love-button:active {
-    transform: scale(0.98);
+    transform: scale(0.95);
 }
 
-/* Ajustes responsivos para o botão */
+/* Ajustes responsivos para a mensagem final */
 @media (max-width: 768px) {
-    #love-button {
-        padding: 1rem 2rem;
-        font-size: 1.2rem;
-        margin-top: 1.5rem;
+    #final-message {
+        padding: 2rem 1rem;
     }
-}
-
-/* Ajustes específicos para iPhone XR */
-@media screen and (device-width: 414px) and (device-height: 896px) and (-webkit-device-pixel-ratio: 2) {
+    .message-container {
+        padding: 2rem 1.5rem;
+        border-radius: 20px;
+    }
+    .final-stitch {
+        width: 140px;
+        margin-bottom: 1rem;
+    }
+    .final-text {
+        font-size: 1.5rem;
+        line-height: 1.7;
+        margin: 1rem 0;
+    }
     #love-button {
         padding: 1rem 2rem;
-        font-size: 1.2rem;
+        font-size: 1.1rem;
         margin-top: 1.5rem;
-        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
     }
 }
 
 @media (max-width: 480px) {
+    .message-container {
+        padding: 1.5rem 1rem;
+        border-radius: 15px;
+    }
+    .final-stitch {
+        width: 120px;
+    }
+    .final-text {
+        font-size: 1.4rem;
+        line-height: 1.6;
+        padding: 0 0.5rem;
+    }
     #love-button {
         padding: 0.9rem 1.8rem;
-        font-size: 1.1rem;
-        margin-top: 1.2rem;
+        font-size: 1rem;
     }
 }
 
@@ -695,9 +706,8 @@ h1, h2, h4, .gallery-heading, .gallery-intro, .final-text, .stitch-container p, 
 /* Responsive Design */
 @media (max-width: 768px) {
     .section {
+        padding: 1.5rem 1rem;
         min-height: auto;
-        height: auto;
-        padding: 3rem 1rem 2rem 1rem;
     }
 
     h1 {
@@ -1094,17 +1104,133 @@ h1, h2, h4, .gallery-heading, .gallery-intro, .final-text, .stitch-container p, 
 @media screen and (device-width: 414px) and (device-height: 896px) and (-webkit-device-pixel-ratio: 2) {
     /* Ajustes gerais para seções */
     .section {
-        min-height: auto;
-        height: auto;
-        padding: 3rem 1rem 2rem 1rem;
+        min-height: auto !important; /* Força altura automática */
+        height: auto !important;
+        padding: 1.5rem 1rem;
+        margin-bottom: 2rem;
+        overflow: visible !important;
     }
 
     /* Ajustes específicos para timeline */
     #timeline {
-        min-height: auto;
-        height: auto;
-        padding: 3rem 1rem 2rem 1rem;
+        min-height: auto !important;
+        height: auto !important;
+        padding: 2rem 1rem;
         margin-bottom: 3rem; /* Aumenta margem inferior */
+        overflow: visible !important;
+    }
+
+    .timeline-container {
+        max-width: 100%;
+        padding: 0 0.5rem;
+        margin-bottom: 2rem;
+    }
+
+    .timeline-item {
+        margin: 1.5rem 0;
+        padding: 1rem;
+    }
+
+    .timeline-item:last-child {
+        margin-bottom: 3rem; /* Aumenta margem do último item */
+    }
+
+    /* Ajustes para o conteúdo da timeline */
+    .timeline-item img {
+        max-height: none;
+        object-fit: contain;
+        margin-bottom: 1rem;
+    }
+
+    .timeline-item p {
+        font-size: 1.1rem;
+        line-height: 1.5;
+        margin-bottom: 1rem;
+    }
+}
+
+/* Ajustes para os títulos e textos das seções */
+h1, h2, h4, .gallery-heading, .gallery-intro, .final-text, .stitch-container p, #surprise-message h2 {
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+/* Ajustes específicos para cada tipo de texto */
+#welcome h1 {
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.gallery-heading {
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.gallery-intro {
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
+}
+
+.final-text {
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.15);
+}
+
+.stitch-container p {
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.25);
+}
+
+#surprise-message h2 {
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+/* Ajustes para textos em fundos claros */
+.timeline-item p {
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+/* Ajustes responsivos */
+@media (max-width: 768px) {
+    h1, h2, h4, .gallery-heading, .gallery-intro, .final-text, .stitch-container p, #surprise-message h2 {
+        text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
+    }
+}
+
+@media (max-width: 480px) {
+    h1, h2, h4, .gallery-heading, .gallery-intro, .final-text, .stitch-container p, #surprise-message h2 {
+        text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.15);
+    }
+}
+
+/* Ajustes específicos para iOS */
+@supports (-webkit-touch-callout: none) {
+    /* Corrige a fonte Waltograph para iOS */
+    h1, h2, h4, .gallery-heading, .gallery-intro, .final-text, .stitch-container p, #surprise-message h2 {
+        font-family: 'Waltograph', cursive;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+    }
+
+    /* Ajustes para os Stitchs flutuantes em iOS */
+    .floating-stitches {
+        position: fixed;
+        width: 100%;
+        height: 100%;
+        top: 0;
+        left: 0;
+        pointer-events: none;
+        z-index: 1;
+        display: block !important; /* Força a exibição */
+        -webkit-transform: translateZ(0); /* Força aceleração de hardware */
+        transform: translateZ(0);
+    }
+
+    .floating-stitch-1,
+    .floating-stitch-2,
+    .floating-stitch-3,
+    .floating-stitch-4,
+    .floating-stitch-5,
+    .floating-stitch-6,
+    .floating-stitch-7,
+    .floating-stitch-8 {
+        position: absolute;
+        width: 120px;
+        height: auto;
         pointer-events: none;
         opacity: 0.4;
         -webkit-transform: translateZ(0);
