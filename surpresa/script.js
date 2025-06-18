@@ -13,25 +13,39 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Smooth Scroll
     document.querySelector('.start-btn').addEventListener('click', () => {
-        // Reproduzir música quando o botão "Começar a Surpresa" é clicado
+        // Tenta reproduzir a música
         if (backgroundMusic) {
-            backgroundMusic.play().then(() => {
-                console.log('Música tocando após interação do usuário.');
-            }).catch(error => {
-                console.error('Falha ao reproduzir música:', error);
-                // Opcional: Se a música falhar ao tocar mesmo com o clique,
-                // você pode exibir uma mensagem de erro ou um fallback.
-            });
-            // Esconder a mensagem de volume após o clique
-            const volumeHint = document.getElementById('volume-hint');
-            volumeHint.style.opacity = '0'; // Faz sumir suavemente
-            // Remove o elemento do DOM depois da transição para evitar que ocupe espaço
+            // Reseta o tempo da música
+            backgroundMusic.currentTime = 15;
+            
+            // Tenta reproduzir
+            let playPromise = backgroundMusic.play();
+            
+            if (playPromise !== undefined) {
+                playPromise.then(() => {
+                    console.log('Música iniciada com sucesso');
+                }).catch(error => {
+                    console.error('Erro ao iniciar música:', error);
+                    // Tenta novamente após um pequeno delay
+                    setTimeout(() => {
+                        backgroundMusic.play().catch(e => console.error('Segunda tentativa falhou:', e));
+                    }, 1000);
+                });
+            }
+        }
+        
+        // Esconde a mensagem de volume
+        const volumeHint = document.getElementById('volume-hint');
+        if (volumeHint) {
+            volumeHint.style.opacity = '0';
             volumeHint.addEventListener('transitionend', () => {
                 if (volumeHint.style.opacity === '0') {
                     volumeHint.style.display = 'none';
                 }
             }, { once: true });
         }
+        
+        // Rola para a próxima seção
         document.getElementById('gallery').scrollIntoView({ behavior: 'smooth' });
     });
 
@@ -139,11 +153,21 @@ document.addEventListener('DOMContentLoaded', () => {
     window.onload = function() {
         window.scrollTo(0, 0);
         
-        // Apenas inicializa a música, mas não a reproduz automaticamente aqui
+        // Inicializa a música
         backgroundMusic = new Audio('resources/musica.mp3');
         backgroundMusic.loop = true;
         backgroundMusic.volume = 0.5;
         backgroundMusic.currentTime = 15;
+        
+        // Adiciona evento de carregamento da música
+        backgroundMusic.addEventListener('canplaythrough', function() {
+            console.log('Música carregada e pronta para tocar');
+        });
+
+        // Adiciona evento de erro
+        backgroundMusic.addEventListener('error', function(e) {
+            console.error('Erro ao carregar música:', e);
+        });
     };
 
     // Também adicionar para quando a página for recarregada

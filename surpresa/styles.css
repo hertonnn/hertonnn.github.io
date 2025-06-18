@@ -175,9 +175,11 @@ h1, h2, h4, .gallery-heading, .gallery-intro, .final-text, .stitch-container p, 
 /* Ajustes específicos para iPhone XR e similares */
 @media screen and (device-width: 414px) and (device-height: 896px) and (-webkit-device-pixel-ratio: 2) {
     .section {
-        padding: 1.5rem;
-        min-height: 100vh;
-        height: 100vh; /* Força altura total da viewport */
+        min-height: auto !important; /* Força altura automática */
+        height: auto !important;
+        padding: 1.5rem 1rem;
+        margin-bottom: 2rem;
+        overflow: visible !important;
     }
 
     #welcome {
@@ -218,19 +220,39 @@ h1, h2, h4, .gallery-heading, .gallery-intro, .final-text, .stitch-container p, 
         object-fit: cover;
     }
 
+    #timeline {
+        min-height: auto !important;
+        height: auto !important;
+        padding: 2rem 1rem;
+        margin-bottom: 3rem; /* Aumenta margem inferior */
+        overflow: visible !important;
+    }
+
     .timeline-container {
         max-width: 100%;
         padding: 0 0.5rem;
+        margin-bottom: 2rem;
     }
 
     .timeline-item {
-        margin: 1rem 0;
-        padding: 0.8rem;
+        margin: 1.5rem 0;
+        padding: 1rem;
+    }
+
+    .timeline-item:last-child {
+        margin-bottom: 3rem; /* Aumenta margem do último item */
     }
 
     .timeline-item img {
         max-height: none;
         object-fit: contain;
+        margin-bottom: 1rem;
+    }
+
+    .timeline-item p {
+        font-size: 1.1rem;
+        line-height: 1.5;
+        margin-bottom: 1rem;
     }
 
     .final-stitch {
@@ -245,9 +267,31 @@ h1, h2, h4, .gallery-heading, .gallery-intro, .final-text, .stitch-container p, 
     }
 
     #love-button {
-        padding: 0.8rem 1.6rem;
-        font-size: 1rem;
-        margin-top: 1rem;
+        padding: 0.9rem 1.8rem;
+        font-size: 1.1rem;
+        margin-top: 1.2rem;
+    }
+
+    /* Ajustes para os Stitchs flutuantes */
+    .floating-stitch-1,
+    .floating-stitch-2,
+    .floating-stitch-3,
+    .floating-stitch-4,
+    .floating-stitch-5,
+    .floating-stitch-6,
+    .floating-stitch-7,
+    .floating-stitch-8 {
+        width: 90px;
+    }
+
+    /* Ajustes para o carrossel */
+    .carousel-controls {
+        margin-top: 0.8rem;
+    }
+
+    .carousel-controls button {
+        padding: 0.4rem 0.8rem;
+        font-size: 0.9rem;
     }
 }
 
@@ -1058,26 +1102,50 @@ h1, h2, h4, .gallery-heading, .gallery-intro, .final-text, .stitch-container p, 
 
 /* Ajustes específicos para iPhone XR */
 @media screen and (device-width: 414px) and (device-height: 896px) and (-webkit-device-pixel-ratio: 2) {
-    #timeline {
-        min-height: auto; /* Alterado de 100vh para auto */
-        height: auto;
+    /* Ajustes gerais para seções */
+    .section {
+        min-height: auto !important; /* Força altura automática */
+        height: auto !important;
         padding: 1.5rem 1rem;
-        margin-bottom: 1.5rem;
+        margin-bottom: 2rem;
+        overflow: visible !important;
+    }
+
+    /* Ajustes específicos para timeline */
+    #timeline {
+        min-height: auto !important;
+        height: auto !important;
+        padding: 2rem 1rem;
+        margin-bottom: 3rem; /* Aumenta margem inferior */
+        overflow: visible !important;
     }
 
     .timeline-container {
         max-width: 100%;
         padding: 0 0.5rem;
-        margin-bottom: 1.5rem;
+        margin-bottom: 2rem;
     }
 
     .timeline-item {
-        margin: 1rem 0;
-        padding: 0.8rem;
+        margin: 1.5rem 0;
+        padding: 1rem;
     }
 
     .timeline-item:last-child {
-        margin-bottom: 2rem; /* Adiciona margem extra no último item */
+        margin-bottom: 3rem; /* Aumenta margem do último item */
+    }
+
+    /* Ajustes para o conteúdo da timeline */
+    .timeline-item img {
+        max-height: none;
+        object-fit: contain;
+        margin-bottom: 1rem;
+    }
+
+    .timeline-item p {
+        font-size: 1.1rem;
+        line-height: 1.5;
+        margin-bottom: 1rem;
     }
 }
 
