@@ -45,9 +45,8 @@ h1, h2, h4, .gallery-heading, .gallery-intro, .final-text, .stitch-container p, 
     justify-content: flex-start;
     align-items: center;
     position: relative;
-    overflow: hidden;
-    -webkit-overflow-scrolling: touch; /* Melhor scroll em iOS */
-    z-index: 2;
+    overflow: visible;
+    margin-bottom: 2rem;
 }
 
 /* Loading Screen */
@@ -93,12 +92,13 @@ h1, h2, h4, .gallery-heading, .gallery-intro, .final-text, .stitch-container p, 
 
 /* Welcome Section */
 #welcome {
-    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    min-height: 100vh;
+    height: auto;
+    padding: 2rem 1rem;
     display: flex;
     justify-content: center;
     align-items: center;
-    min-height: 100vh;
-    padding: 1rem;
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
 }
 
 #welcome .content {
@@ -110,6 +110,7 @@ h1, h2, h4, .gallery-heading, .gallery-intro, .final-text, .stitch-container p, 
     width: 100%;
     max-width: 500px;
     padding: 1rem;
+    margin: 2rem 0;
 }
 
 #welcome h1 {
@@ -175,22 +176,19 @@ h1, h2, h4, .gallery-heading, .gallery-intro, .final-text, .stitch-container p, 
 /* Ajustes específicos para iPhone XR e similares */
 @media screen and (device-width: 414px) and (device-height: 896px) and (-webkit-device-pixel-ratio: 2) {
     .section {
-        min-height: auto !important; /* Força altura automática */
-        height: auto !important;
-        padding: 1.5rem 1rem;
-        margin-bottom: 2rem;
-        overflow: visible !important;
+        min-height: auto;
+        height: auto;
+        padding: 3rem 1rem 2rem 1rem;
     }
 
     #welcome {
-        padding: 1rem;
-        min-height: 100vh;
-        height: 100vh;
+        min-height: auto;
+        height: auto;
+        padding: 2rem 1rem;
     }
 
     #welcome .content {
-        padding: 0.5rem;
-        max-width: 100%;
+        margin: 1rem 0;
     }
 
     #welcome h1 {
@@ -221,9 +219,9 @@ h1, h2, h4, .gallery-heading, .gallery-intro, .final-text, .stitch-container p, 
     }
 
     #timeline {
-        min-height: auto !important;
-        height: auto !important;
-        padding: 2rem 1rem;
+        min-height: auto;
+        height: auto;
+        padding: 3rem 1rem 2rem 1rem;
         margin-bottom: 3rem; /* Aumenta margem inferior */
         overflow: visible !important;
     }
@@ -468,7 +466,7 @@ h1, h2, h4, .gallery-heading, .gallery-intro, .final-text, .stitch-container p, 
 #timeline {
     min-height: 100vh;
     height: auto;
-    padding: 2rem 1rem;
+    padding: 4rem 1rem 2rem 1rem;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
@@ -481,8 +479,7 @@ h1, h2, h4, .gallery-heading, .gallery-intro, .final-text, .stitch-container p, 
 .timeline-container {
     width: 100%;
     max-width: 600px;
-    margin: 1rem 0;
-    padding-bottom: 2rem; /* Adiciona padding inferior */
+    margin: 1rem 0 3rem 0;
 }
 
 .timeline-item {
@@ -504,10 +501,11 @@ h1, h2, h4, .gallery-heading, .gallery-intro, .final-text, .stitch-container p, 
 /* Stitch Animation Section */
 #stitch-animation {
     min-height: 100vh;
+    height: auto;
+    padding: 4rem 1rem 2rem 1rem;
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 3rem 1rem;
 }
 
 .stitch-container {
@@ -579,8 +577,10 @@ h1, h2, h4, .gallery-heading, .gallery-intro, .final-text, .stitch-container p, 
 
 /* Final Message Section */
 #final-message {
+    min-height: 100vh;
+    height: auto;
+    padding: 4rem 1rem 2rem 1rem;
     background: linear-gradient(45deg, var(--secondary-color), var(--accent-color));
-    padding: 2rem 1rem;
 }
 
 .message-container {
@@ -594,7 +594,7 @@ h1, h2, h4, .gallery-heading, .gallery-intro, .final-text, .stitch-container p, 
     overflow: hidden;
     transform: translateY(0);
     transition: transform 0.5s ease-out, box-shadow 0.3s ease;
-    margin: 1rem 0;
+    margin: 2rem 0;
 }
 
 .message-container:hover {
@@ -695,8 +695,9 @@ h1, h2, h4, .gallery-heading, .gallery-intro, .final-text, .stitch-container p, 
 /* Responsive Design */
 @media (max-width: 768px) {
     .section {
-        padding: 1.5rem 1rem;
         min-height: auto;
+        height: auto;
+        padding: 3rem 1rem 2rem 1rem;
     }
 
     h1 {
@@ -1093,133 +1094,17 @@ h1, h2, h4, .gallery-heading, .gallery-intro, .final-text, .stitch-container p, 
 @media screen and (device-width: 414px) and (device-height: 896px) and (-webkit-device-pixel-ratio: 2) {
     /* Ajustes gerais para seções */
     .section {
-        min-height: auto !important; /* Força altura automática */
-        height: auto !important;
-        padding: 1.5rem 1rem;
-        margin-bottom: 2rem;
-        overflow: visible !important;
+        min-height: auto;
+        height: auto;
+        padding: 3rem 1rem 2rem 1rem;
     }
 
     /* Ajustes específicos para timeline */
     #timeline {
-        min-height: auto !important;
-        height: auto !important;
-        padding: 2rem 1rem;
-        margin-bottom: 3rem; /* Aumenta margem inferior */
-        overflow: visible !important;
-    }
-
-    .timeline-container {
-        max-width: 100%;
-        padding: 0 0.5rem;
-        margin-bottom: 2rem;
-    }
-
-    .timeline-item {
-        margin: 1.5rem 0;
-        padding: 1rem;
-    }
-
-    .timeline-item:last-child {
-        margin-bottom: 3rem; /* Aumenta margem do último item */
-    }
-
-    /* Ajustes para o conteúdo da timeline */
-    .timeline-item img {
-        max-height: none;
-        object-fit: contain;
-        margin-bottom: 1rem;
-    }
-
-    .timeline-item p {
-        font-size: 1.1rem;
-        line-height: 1.5;
-        margin-bottom: 1rem;
-    }
-}
-
-/* Ajustes para os títulos e textos das seções */
-h1, h2, h4, .gallery-heading, .gallery-intro, .final-text, .stitch-container p, #surprise-message h2 {
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
-}
-
-/* Ajustes específicos para cada tipo de texto */
-#welcome h1 {
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
-}
-
-.gallery-heading {
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
-}
-
-.gallery-intro {
-    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
-}
-
-.final-text {
-    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.15);
-}
-
-.stitch-container p {
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.25);
-}
-
-#surprise-message h2 {
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
-}
-
-/* Ajustes para textos em fundos claros */
-.timeline-item p {
-    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
-}
-
-/* Ajustes responsivos */
-@media (max-width: 768px) {
-    h1, h2, h4, .gallery-heading, .gallery-intro, .final-text, .stitch-container p, #surprise-message h2 {
-        text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
-    }
-}
-
-@media (max-width: 480px) {
-    h1, h2, h4, .gallery-heading, .gallery-intro, .final-text, .stitch-container p, #surprise-message h2 {
-        text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.15);
-    }
-}
-
-/* Ajustes específicos para iOS */
-@supports (-webkit-touch-callout: none) {
-    /* Corrige a fonte Waltograph para iOS */
-    h1, h2, h4, .gallery-heading, .gallery-intro, .final-text, .stitch-container p, #surprise-message h2 {
-        font-family: 'Waltograph', cursive;
-        -webkit-font-smoothing: antialiased;
-        -moz-osx-font-smoothing: grayscale;
-    }
-
-    /* Ajustes para os Stitchs flutuantes em iOS */
-    .floating-stitches {
-        position: fixed;
-        width: 100%;
-        height: 100%;
-        top: 0;
-        left: 0;
-        pointer-events: none;
-        z-index: 1;
-        display: block !important; /* Força a exibição */
-        -webkit-transform: translateZ(0); /* Força aceleração de hardware */
-        transform: translateZ(0);
-    }
-
-    .floating-stitch-1,
-    .floating-stitch-2,
-    .floating-stitch-3,
-    .floating-stitch-4,
-    .floating-stitch-5,
-    .floating-stitch-6,
-    .floating-stitch-7,
-    .floating-stitch-8 {
-        position: absolute;
-        width: 120px;
+        min-height: auto;
         height: auto;
+        padding: 3rem 1rem 2rem 1rem;
+        margin-bottom: 3rem; /* Aumenta margem inferior */
         pointer-events: none;
         opacity: 0.4;
         -webkit-transform: translateZ(0);
