@@ -157,7 +157,7 @@ document.addEventListener('DOMContentLoaded', () => {
         backgroundMusic = new Audio('resources/musica.mp3');
         backgroundMusic.loop = true;
         backgroundMusic.volume = 0.5;
-        backgroundMusic.currentTime = 15;
+        backgroundMusic.currentTime = 20;
         
         // Adiciona evento de carregamento da música
         backgroundMusic.addEventListener('canplaythrough', function() {

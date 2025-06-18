@@ -619,68 +619,57 @@ h1, h2, h4, .gallery-heading, .gallery-intro, .final-text, .stitch-container p, 
     padding: 0 1rem;
 }
 
+/* Estilo melhorado para o botão de surpresa */
 #love-button {
-    margin-top: 2rem;
     padding: 1.2rem 2.5rem;
-    font-size: 1.3rem;
-    -webkit-appearance: none; /* Remove estilo padrão em iOS */
-    appearance: none;
+    background: linear-gradient(45deg, var(--accent-color), var(--secondary-color));
+    color: white;
+    border: none;
     border-radius: 25px;
     cursor: pointer;
     transition: all 0.3s ease;
-    -webkit-tap-highlight-color: transparent;
+    font-size: 1.3rem;
+    font-family: 'Waltograph', cursive;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+    margin-top: 2rem;
+    position: relative;
+    overflow: hidden;
 }
 
 #love-button:hover {
-    transform: scale(1.1);
-    box-shadow: 0 6px 8px rgba(0, 0, 0, 0.2);
+    transform: scale(1.05);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
 }
 
 #love-button:active {
-    transform: scale(0.95);
+    transform: scale(0.98);
 }
 
-/* Ajustes responsivos para a mensagem final */
+/* Ajustes responsivos para o botão */
 @media (max-width: 768px) {
-    #final-message {
-        padding: 2rem 1rem;
-    }
-    .message-container {
-        padding: 2rem 1.5rem;
-        border-radius: 20px;
-    }
-    .final-stitch {
-        width: 140px;
-        margin-bottom: 1rem;
-    }
-    .final-text {
-        font-size: 1.5rem;
-        line-height: 1.7;
-        margin: 1rem 0;
-    }
     #love-button {
         padding: 1rem 2rem;
-        font-size: 1.1rem;
+        font-size: 1.2rem;
         margin-top: 1.5rem;
     }
 }
 
+/* Ajustes específicos para iPhone XR */
+@media screen and (device-width: 414px) and (device-height: 896px) and (-webkit-device-pixel-ratio: 2) {
+    #love-button {
+        padding: 1rem 2rem;
+        font-size: 1.2rem;
+        margin-top: 1.5rem;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    }
+}
+
 @media (max-width: 480px) {
-    .message-container {
-        padding: 1.5rem 1rem;
-        border-radius: 15px;
-    }
-    .final-stitch {
-        width: 120px;
-    }
-    .final-text {
-        font-size: 1.4rem;
-        line-height: 1.6;
-        padding: 0 0.5rem;
-    }
     #love-button {
         padding: 0.9rem 1.8rem;
-        font-size: 1rem;
+        font-size: 1.1rem;
+        margin-top: 1.2rem;
     }
 }
 
