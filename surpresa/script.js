@@ -128,6 +128,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function playStitchSound() {
         const audio = new Audio('resources/stitch-ohana.mp3');
+        audio.currentTime = 15;
         audio.play().catch(() => {
             console.log('Audio play failed - user interaction required');
         });

@@ -37,7 +37,7 @@ h1, h2, h4, .gallery-heading, .gallery-intro, .final-text, .stitch-container p, 
 }
 
 .section {
-    min-height: 100vh;
+    min-height: auto;
     height: auto;
     padding: 2rem 1rem;
     display: flex;
@@ -45,8 +45,8 @@ h1, h2, h4, .gallery-heading, .gallery-intro, .final-text, .stitch-container p, 
     justify-content: flex-start;
     align-items: center;
     position: relative;
-    overflow: hidden;
-    -webkit-overflow-scrolling: touch; /* Melhor scroll em iOS */
+    overflow: visible;
+    -webkit-overflow-scrolling: touch;
     z-index: 2;
 }
 
@@ -420,12 +420,20 @@ h1, h2, h4, .gallery-heading, .gallery-intro, .final-text, .stitch-container p, 
 }
 
 /* Timeline Section */
+#timeline {
+    min-height: auto;
+    height: auto;
+    padding: 2rem 1rem 4rem 1rem;
+    overflow: visible;
+}
+
 .timeline-container {
     width: 100%;
     max-width: 600px;
     margin: 1rem 0;
     position: relative;
     z-index: 3;
+    padding-bottom: 2rem;
 }
 
 .timeline-item {
@@ -649,8 +657,9 @@ h1, h2, h4, .gallery-heading, .gallery-intro, .final-text, .stitch-container p, 
 /* Responsive Design */
 @media (max-width: 768px) {
     .section {
-        padding: 1.5rem 1rem;
         min-height: auto;
+        height: auto;
+        padding: 1.5rem 1rem;
     }
 
     h1 {
@@ -1045,6 +1054,14 @@ h1, h2, h4, .gallery-heading, .gallery-intro, .final-text, .stitch-container p, 
 
 /* Ajustes específicos para iPhone XR */
 @media screen and (device-width: 414px) and (device-height: 896px) and (-webkit-device-pixel-ratio: 2) {
+    #timeline {
+        padding: 1rem 0.8rem 3rem 0.8rem;
+    }
+
+    .timeline-container {
+        padding-bottom: 1.5rem;
+    }
+
     #timeline h4 {
         font-size: 1.8rem;
         margin-bottom: 1rem;
