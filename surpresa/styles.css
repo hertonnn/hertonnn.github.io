@@ -421,10 +421,24 @@ h1, h2, h4, .gallery-heading, .gallery-intro, .final-text, .stitch-container p, 
 }
 
 /* Timeline Section */
+#timeline {
+    min-height: 100vh;
+    height: auto;
+    padding: 2rem 1rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    position: relative;
+    overflow: visible; /* Alterado de hidden para visible */
+    margin-bottom: 2rem; /* Adiciona margem inferior */
+}
+
 .timeline-container {
     width: 100%;
     max-width: 600px;
     margin: 1rem 0;
+    padding-bottom: 2rem; /* Adiciona padding inferior */
 }
 
 .timeline-item {
@@ -1044,11 +1058,26 @@ h1, h2, h4, .gallery-heading, .gallery-intro, .final-text, .stitch-container p, 
 
 /* Ajustes específicos para iPhone XR */
 @media screen and (device-width: 414px) and (device-height: 896px) and (-webkit-device-pixel-ratio: 2) {
-    #timeline h4 {
-        font-size: 1.8rem;
-        margin-bottom: 1rem;
+    #timeline {
+        min-height: auto; /* Alterado de 100vh para auto */
+        height: auto;
+        padding: 1.5rem 1rem;
+        margin-bottom: 1.5rem;
+    }
+
+    .timeline-container {
+        max-width: 100%;
         padding: 0 0.5rem;
-        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+        margin-bottom: 1.5rem;
+    }
+
+    .timeline-item {
+        margin: 1rem 0;
+        padding: 0.8rem;
+    }
+
+    .timeline-item:last-child {
+        margin-bottom: 2rem; /* Adiciona margem extra no último item */
     }
 }
 
@@ -1145,7 +1174,6 @@ h1, h2, h4, .gallery-heading, .gallery-intro, .final-text, .stitch-container p, 
         .section {
             min-height: 100vh;
             height: 100vh;
-            padding: 1.5rem 1rem;
         }
 
         #welcome {
