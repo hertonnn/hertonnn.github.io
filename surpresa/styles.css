@@ -443,11 +443,16 @@ h1, h2, h4, .gallery-heading, .gallery-intro, .final-text, .stitch-container p, 
 }
 
 .timeline-item {
-    margin: 1.5rem 0;
-    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     background-color: white;
     border-radius: 15px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    padding: 1rem;
+    margin: 1.5rem 0;
+    width: 100%;
+    box-sizing: border-box;
 }
 
 .timeline-item img {
@@ -457,8 +462,7 @@ h1, h2, h4, .gallery-heading, .gallery-intro, .final-text, .stitch-container p, 
     object-fit: contain;
     border-radius: 10px;
     display: block;
-    margin: 0 auto;
-    max-height: none;
+    margin-bottom: 1rem;
 }
 
 /* Stitch Animation Section */
