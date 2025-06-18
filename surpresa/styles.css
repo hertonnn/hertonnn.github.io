@@ -23,7 +23,7 @@ body {
 }
 
 h1, h2 {
-    font-family: 'Pacifico', cursive;
+    font-family: 'Waltograph', cursive;
     font-weight: 400;
     color: var(--primary-color);
     text-align: center;
@@ -105,7 +105,7 @@ h1, h2 {
 }
 
 #welcome h1 {
-    font-size: 2.5rem;
+    font-size: 2.8rem;
     margin-bottom: 2rem;
     color: white;
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
@@ -145,7 +145,7 @@ h1, h2 {
 /* Ajustes responsivos para mobile */
 @media (max-width: 768px) {
     #welcome h1 {
-        font-size: 2rem;
+        font-size: 2.2rem;
         margin-bottom: 1.5rem;
     }
 
@@ -215,11 +215,6 @@ h1, h2 {
     .timeline-item {
         margin: 1rem 0;
         padding: 0.8rem;
-    }
-
-    .message-container {
-        padding: 1.5rem 1rem;
-        margin: 0 0.5rem;
     }
 
     .final-stitch {
@@ -420,22 +415,84 @@ h1, h2 {
     width: 100%;
     height: auto;
     border-radius: 10px;
+    object-fit: contain;
+    max-height: none;
 }
 
 /* Stitch Animation Section */
+#stitch-animation {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 3rem 1rem;
+}
+
 .stitch-container {
     text-align: center;
+    width: 100%;
+    max-width: 500px;
+    padding: 2rem;
+    background-color: rgba(255, 255, 255, 0.9);
+    border-radius: 20px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
 .floating-stitch {
-    width: 200px;
+    width: 250px;
+    height: auto;
+    margin: 1rem 0;
     animation: float 3s ease-in-out infinite;
     will-change: transform;
 }
 
-@keyframes float {
-    0%, 100% { transform: translateY(0); }
-    50% { transform: translateY(-20px); }
+.stitch-container p {
+    font-family: 'Waltograph', cursive;
+    font-size: 2rem;
+    color: var(--primary-color);
+    margin-top: 1.5rem;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+}
+
+/* Ajustes responsivos para a seção de animação */
+@media (max-width: 768px) {
+    #stitch-animation {
+        padding: 2rem 1rem;
+    }
+
+    .stitch-container {
+        padding: 1.5rem;
+        max-width: 400px;
+    }
+
+    .floating-stitch {
+        width: 200px;
+    }
+
+    .stitch-container p {
+        font-size: 1.8rem;
+        margin-top: 1rem;
+    }
+}
+
+@media (max-width: 480px) {
+    #stitch-animation {
+        padding: 1.5rem 1rem;
+    }
+
+    .stitch-container {
+        padding: 1rem;
+        max-width: 300px;
+    }
+
+    .floating-stitch {
+        width: 180px;
+    }
+
+    .stitch-container p {
+        font-size: 1.5rem;
+        margin-top: 0.8rem;
+    }
 }
 
 /* Final Message Section */
@@ -470,8 +527,8 @@ h1, h2 {
 }
 
 .final-text {
-    font-family: 'Pacifico', cursive;
-    font-size: 1.4rem;
+    font-family: 'Waltograph', cursive;
+    font-size: 1.6rem;
     line-height: 1.8;
     margin: 1.5rem 0;
     color: #333;
@@ -500,7 +557,7 @@ h1, h2 {
         margin-bottom: 1rem;
     }
     .final-text {
-        font-size: 1.3rem;
+        font-size: 1.4rem;
         line-height: 1.7;
         margin: 1rem 0;
     }
@@ -587,6 +644,17 @@ h1, h2 {
 
     .welcome-stitch, .floating-stitch {
         width: 150px;
+    }
+
+    /* Ajustes para a timeline em mobile */
+    .timeline-item {
+        margin: 1rem 0;
+        padding: 0.8rem;
+    }
+
+    .timeline-item img {
+        max-height: none;
+        object-fit: contain;
     }
 }
 
@@ -758,8 +826,8 @@ h1, h2 {
 
 /* Gallery Section specific styles */
 #gallery h2.gallery-heading {
-    font-family: 'Pacifico', cursive;
-    font-size: 2.2rem;
+    font-family: 'Waltograph', cursive;
+    font-size: 2.4rem;
     color: var(--primary-color);
     margin-bottom: 0.5rem;
     text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
@@ -767,8 +835,8 @@ h1, h2 {
 }
 
 #gallery p.gallery-intro {
-    font-family: 'Pacifico', cursive;
-    font-size: 1.5rem;
+    font-family: 'Waltograph', cursive;
+    font-size: 1.8rem;
     color: var(--primary-color);
     margin-bottom: 2rem;
     text-align: center;
@@ -779,19 +847,19 @@ h1, h2 {
 /* Responsive adjustments for the new text */
 @media (max-width: 768px) {
     #gallery h2.gallery-heading {
-        font-size: 1.8rem;
+        font-size: 2rem;
     }
     #gallery p.gallery-intro {
-        font-size: 1.2rem;
+        font-size: 1.5rem;
     }
 }
 
 @media (max-width: 480px) {
     #gallery h2.gallery-heading {
-        font-size: 1.5rem;
+        font-size: 1.6rem;
     }
     #gallery p.gallery-intro {
-        font-size: 1rem;
+        font-size: 1.3rem;
     }
 }
 
@@ -848,7 +916,7 @@ h1, h2 {
 }
 
 #surprise-message h2 {
-    font-family: 'Pacifico', cursive;
+    font-family: 'Waltograph', cursive;
     color: white;
     font-size: 1.8rem;
     margin-bottom: 1rem;
@@ -967,11 +1035,12 @@ h1, h2 {
     /* Ajustes para a timeline em mobile */
     .timeline-item {
         margin: 1rem 0;
+        padding: 0.8rem;
     }
 
     .timeline-item img {
-        max-height: 250px;
-        object-fit: cover;
+        max-height: none;
+        object-fit: contain;
     }
 
     /* Ajustes para a mensagem final em mobile */
@@ -1017,7 +1086,8 @@ h1, h2 {
     }
 
     .timeline-item img {
-        max-height: 200px;
+        max-height: none;
+        object-fit: contain;
     }
 
     .message-container {
