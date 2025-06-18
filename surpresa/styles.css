@@ -31,7 +31,7 @@ h1, h2, h4, .gallery-heading, .gallery-intro, .final-text, .stitch-container p, 
     color: var(--primary-color);
     text-align: center;
     margin-bottom: 1rem;
-    text-shadow: 3px 3px 10px rgba(0, 0, 0, 0.35), 0 2px 8px rgba(0,0,0,0.18);
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.13);
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
 }
@@ -1082,7 +1082,7 @@ h1, h2, h4, .gallery-heading, .gallery-intro, .final-text, .stitch-container p, 
 
 /* Ajustes para os títulos e textos das seções */
 h1, h2, h4, .gallery-heading, .gallery-intro, .final-text, .stitch-container p, #surprise-message h2 {
-    text-shadow: 3px 3px 10px rgba(0, 0, 0, 0.35), 0 2px 8px rgba(0,0,0,0.18);
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.13);
 }
 
 /* Ajustes específicos para cada tipo de texto */
@@ -1118,7 +1118,7 @@ h1, h2, h4, .gallery-heading, .gallery-intro, .final-text, .stitch-container p, 
 /* Ajustes responsivos */
 @media (max-width: 768px) {
     h1, h2, h4, .gallery-heading, .gallery-intro, .final-text, .stitch-container p, #surprise-message h2 {
-        text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.40), 0 1px 6px rgba(0,0,0,0.22);
+        text-shadow: 0.5px 0.5px 1.2px rgba(0,0,0,0.10);
         font-size: 2rem;
     }
     .timeline-item p {
@@ -1128,7 +1128,7 @@ h1, h2, h4, .gallery-heading, .gallery-intro, .final-text, .stitch-container p, 
 
 @media (max-width: 480px) {
     h1, h2, h4, .gallery-heading, .gallery-intro, .final-text, .stitch-container p, #surprise-message h2 {
-        text-shadow: 1.5px 1.5px 6px rgba(0, 0, 0, 0.45), 0 1px 4px rgba(0,0,0,0.25);
+        text-shadow: 0.5px 0.5px 1px rgba(0,0,0,0.08);
         font-size: 1.4rem;
     }
     .timeline-item p {
