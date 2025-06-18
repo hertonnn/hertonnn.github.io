@@ -618,8 +618,8 @@ h1, h2, h4, .gallery-heading, .gallery-intro, .final-text, .stitch-container p, 
         margin-bottom: 1rem;
     }
     .final-text {
-        font-size: 1.4rem;
-        line-height: 1.7;
+        font-size: 1.6rem;
+        line-height: 1.8;
         margin: 1rem 0;
     }
     #love-button {
@@ -638,8 +638,8 @@ h1, h2, h4, .gallery-heading, .gallery-intro, .final-text, .stitch-container p, 
         width: 120px;
     }
     .final-text {
-        font-size: 1.2rem;
-        line-height: 1.6;
+        font-size: 1.3rem;
+        line-height: 1.7;
         padding: 0 0.5rem;
     }
     #love-button {
@@ -987,16 +987,16 @@ h1, h2, h4, .gallery-heading, .gallery-intro, .final-text, .stitch-container p, 
 @media (max-width: 768px) {
     #surprise-message {
         padding: 1.2rem;
-        font-size: 1rem;
+        font-size: 1.2rem;
     }
     #surprise-message h2 {
-        font-size: 1.5rem;
+        font-size: 1.7rem;
     }
 }
 @media (max-width: 480px) {
     #surprise-message {
         padding: 1rem;
-        font-size: 0.9rem;
+        font-size: 1.05rem;
     }
     #surprise-message h2 {
         font-size: 1.3rem;
@@ -1119,12 +1119,20 @@ h1, h2, h4, .gallery-heading, .gallery-intro, .final-text, .stitch-container p, 
 @media (max-width: 768px) {
     h1, h2, h4, .gallery-heading, .gallery-intro, .final-text, .stitch-container p, #surprise-message h2 {
         text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.40), 0 1px 6px rgba(0,0,0,0.22);
+        font-size: 2rem;
+    }
+    .timeline-item p {
+        font-size: 1.2rem;
     }
 }
 
 @media (max-width: 480px) {
     h1, h2, h4, .gallery-heading, .gallery-intro, .final-text, .stitch-container p, #surprise-message h2 {
         text-shadow: 1.5px 1.5px 6px rgba(0, 0, 0, 0.45), 0 1px 4px rgba(0,0,0,0.25);
+        font-size: 1.4rem;
+    }
+    .timeline-item p {
+        font-size: 1.05rem;
     }
 }
 
