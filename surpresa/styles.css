@@ -228,20 +228,14 @@ h1, h2, h4, .gallery-heading, .gallery-intro, .final-text, .stitch-container p, 
         padding: 0.8rem;
     }
 
-    .timeline-item img {
-        max-height: none;
-        object-fit: contain;
-    }
-
     .final-stitch {
         width: 120px;
     }
 
     .final-text {
-        font-size: 1.6rem;
-        line-height: 1.8;
-        margin: 1.2rem 0;
-        padding: 0 0.5rem;
+        font-size: 1.1rem;
+        line-height: 1.5;
+        margin: 1rem 0;
     }
 
     #love-button {
@@ -421,24 +415,12 @@ h1, h2, h4, .gallery-heading, .gallery-intro, .final-text, .stitch-container p, 
 }
 
 /* Timeline Section */
-#timeline {
-    min-height: 100vh;
-    height: auto;
-    padding: 2rem 1rem;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    align-items: center;
-    position: relative;
-    overflow: visible; /* Alterado de hidden para visible */
-    margin-bottom: 2rem; /* Adiciona margem inferior */
-}
-
 .timeline-container {
     width: 100%;
     max-width: 600px;
     margin: 1rem 0;
-    padding-bottom: 2rem; /* Adiciona padding inferior */
+    position: relative;
+    z-index: 3;
 }
 
 .timeline-item {
@@ -566,12 +548,12 @@ h1, h2, h4, .gallery-heading, .gallery-intro, .final-text, .stitch-container p, 
 
 .final-text {
     font-family: 'Waltograph', cursive;
-    font-size: 1.4rem;
+    font-size: 1.6rem;
     line-height: 1.8;
     margin: 1.5rem 0;
     color: #333;
     font-weight: 400;
-    text-shadow: 0.5px 0.5px 1px rgba(0,0,0,0.05);
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.15);
     padding: 0 1rem;
 }
 
@@ -610,7 +592,7 @@ h1, h2, h4, .gallery-heading, .gallery-intro, .final-text, .stitch-container p, 
         margin-bottom: 1rem;
     }
     .final-text {
-        font-size: 1.5rem;
+        font-size: 1.4rem;
         line-height: 1.7;
         margin: 1rem 0;
     }
@@ -630,7 +612,7 @@ h1, h2, h4, .gallery-heading, .gallery-intro, .final-text, .stitch-container p, 
         width: 120px;
     }
     .final-text {
-        font-size: 1.4rem;
+        font-size: 1.2rem;
         line-height: 1.6;
         padding: 0 0.5rem;
     }
@@ -1058,26 +1040,11 @@ h1, h2, h4, .gallery-heading, .gallery-intro, .final-text, .stitch-container p, 
 
 /* Ajustes específicos para iPhone XR */
 @media screen and (device-width: 414px) and (device-height: 896px) and (-webkit-device-pixel-ratio: 2) {
-    #timeline {
-        min-height: auto; /* Alterado de 100vh para auto */
-        height: auto;
-        padding: 1.5rem 1rem;
-        margin-bottom: 1.5rem;
-    }
-
-    .timeline-container {
-        max-width: 100%;
+    #timeline h4 {
+        font-size: 1.8rem;
+        margin-bottom: 1rem;
         padding: 0 0.5rem;
-        margin-bottom: 1.5rem;
-    }
-
-    .timeline-item {
-        margin: 1rem 0;
-        padding: 0.8rem;
-    }
-
-    .timeline-item:last-child {
-        margin-bottom: 2rem; /* Adiciona margem extra no último item */
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
     }
 }
 
@@ -1174,6 +1141,7 @@ h1, h2, h4, .gallery-heading, .gallery-intro, .final-text, .stitch-container p, 
         .section {
             min-height: 100vh;
             height: 100vh;
+            padding: 1.5rem 1rem;
         }
 
         #welcome {
@@ -1254,8 +1222,8 @@ h1, h2, h4, .gallery-heading, .gallery-intro, .final-text, .stitch-container p, 
         }
 
         .timeline-item img {
-            max-height: none;
-            object-fit: contain;
+            max-height: 300px;
+            object-fit: cover;
         }
 
         /* Ajustes para a mensagem final no iPhone XR */
@@ -1269,8 +1237,8 @@ h1, h2, h4, .gallery-heading, .gallery-intro, .final-text, .stitch-container p, 
         }
 
         .final-text {
-            font-size: 1.6rem;
-            line-height: 1.8;
+            font-size: 1.2rem;
+            line-height: 1.6;
             margin: 1.2rem 0;
             padding: 0 0.5rem;
         }
