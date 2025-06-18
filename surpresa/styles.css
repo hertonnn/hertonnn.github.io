@@ -40,6 +40,7 @@ h1, h2 {
     align-items: center;
     position: relative;
     overflow: hidden;
+    z-index: 2;
 }
 
 /* Loading Screen */
@@ -108,7 +109,7 @@ h1, h2 {
     font-size: 2.8rem;
     margin-bottom: 2rem;
     color: white;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
 }
 
 .welcome-stitch {
@@ -365,7 +366,7 @@ h1, h2 {
     margin: 1rem 0 2rem 0;
     position: relative;
     overflow: hidden;
-    z-index: 1;
+    z-index: 3;
 }
 
 .carousel-container {
@@ -401,6 +402,8 @@ h1, h2 {
     width: 100%;
     max-width: 600px;
     margin: 1rem 0;
+    position: relative;
+    z-index: 3;
 }
 
 .timeline-item {
@@ -451,7 +454,7 @@ h1, h2 {
     font-size: 2rem;
     color: var(--primary-color);
     margin-top: 1.5rem;
-    text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.25);
 }
 
 /* Ajustes responsivos para a seção de animação */
@@ -533,7 +536,7 @@ h1, h2 {
     margin: 1.5rem 0;
     color: #333;
     font-weight: 400;
-    text-shadow: 0.5px 0.5px 1px rgba(0,0,0,0.05);
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.15);
     padding: 0 1rem;
 }
 
@@ -660,13 +663,14 @@ h1, h2 {
 
 /* Estilos para os Stitchs flutuantes */
 .floating-stitches {
-    position: absolute;
+    position: fixed;
     width: 100%;
     height: 100%;
     top: 0;
     left: 0;
     pointer-events: none;
-    z-index: 2;
+    z-index: 1;
+    display: block;
 }
 
 .floating-stitch-1,
@@ -681,35 +685,36 @@ h1, h2 {
     width: 120px;
     height: auto;
     pointer-events: none;
+    opacity: 0.4;
 }
 
-/* Posicionamento inicial dos Stitchs */
+/* Posicionamento dos Stitchs */
 .floating-stitch-1 {
-    left: -5%;
-    top: -10%;
+    left: 5%;
+    top: 10%;
     animation: floatRandom1 8s infinite;
 }
 
 .floating-stitch-2 {
     left: 20%;
-    top: -15%;
+    top: 15%;
     animation: floatRandom2 7s infinite;
 }
 
 .floating-stitch-3 {
     left: 45%;
-    top: -20%;
+    top: 20%;
     animation: floatRandom3 9s infinite;
 }
 
 .floating-stitch-4 {
     left: 70%;
-    top: -15%;
+    top: 15%;
     animation: floatRandom4 6s infinite;
 }
 
 .floating-stitch-5 {
-    left: -10%;
+    left: 10%;
     top: 60%;
     animation: floatRandom5 8.5s infinite;
 }
@@ -797,7 +802,7 @@ h1, h2 {
     100% { transform: translate(0, 0) rotate(0deg); }
 }
 
-/* Ajuste responsivo para os Stitchs */
+/* Ajustes responsivos para os Stitchs flutuantes */
 @media (max-width: 768px) {
     .floating-stitch-1,
     .floating-stitch-2,
@@ -807,7 +812,8 @@ h1, h2 {
     .floating-stitch-6,
     .floating-stitch-7,
     .floating-stitch-8 {
-        width: 100px;
+        width: 90px;
+        opacity: 0.35;
     }
 }
 
@@ -820,7 +826,8 @@ h1, h2 {
     .floating-stitch-6,
     .floating-stitch-7,
     .floating-stitch-8 {
-        width: 80px;
+        width: 70px;
+        opacity: 0.3;
     }
 }
 
@@ -830,7 +837,7 @@ h1, h2 {
     font-size: 2.4rem;
     color: var(--primary-color);
     margin-bottom: 0.5rem;
-    text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
     text-align: center;
 }
 
@@ -841,7 +848,7 @@ h1, h2 {
     margin-bottom: 2rem;
     text-align: center;
     line-height: 1.4;
-    text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
 }
 
 /* Responsive adjustments for the new text */
@@ -873,9 +880,13 @@ h1, h2 {
     font-size: 1.1rem;
     color: white;
     margin-top: 1.5rem;
-    text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
     font-family: 'Quicksand', sans-serif;
     font-weight: 400;
+    background-color: rgba(0, 0, 0, 0.3);
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    backdrop-filter: blur(2px);
 }
 
 /* Ajustes responsivos para a mensagem */
@@ -883,12 +894,14 @@ h1, h2 {
     #volume-hint {
         font-size: 1rem;
         margin-top: 1rem;
+        padding: 0.4rem 0.8rem;
     }
 }
 
 @media (max-width: 480px) {
     #volume-hint {
         font-size: 0.9rem;
+        padding: 0.3rem 0.6rem;
     }
 }
 
@@ -920,7 +933,7 @@ h1, h2 {
     color: white;
     font-size: 1.8rem;
     margin-bottom: 1rem;
-    text-shadow: 1px 1px 3px rgba(0,0,0,0.3);
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
 }
 
 #surprise-message p {
@@ -948,154 +961,96 @@ h1, h2 {
     }
 }
 
-/* Ajustes gerais para melhor responsividade vertical */
-.section {
-    min-height: 100vh;
-    height: auto;
-    padding: 2rem 1rem;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    align-items: center;
-    position: relative;
-    overflow: hidden;
+/* Adicionar estilo para h3 na timeline */
+#timeline h3 {
+    font-family: 'Waltograph', cursive;
+    font-weight: 400;
+    color: var(--primary-color);
+    text-align: center;
+    margin-bottom: 1rem;
+    font-size: 2.2rem;
 }
 
-/* Ajustes específicos para a seção de galeria */
-#gallery {
-    padding-top: 4rem;
-}
-
-.carousel {
-    width: 100%;
-    max-width: 400px;
-    margin: 1rem 0 2rem 0;
-}
-
-/* Ajustes para a timeline */
-.timeline-container {
-    width: 100%;
-    max-width: 600px;
-    margin: 1rem 0;
-}
-
-.timeline-item {
-    margin: 1.5rem 0;
-    padding: 1rem;
-}
-
-/* Ajustes para a mensagem final */
-#final-message {
-    padding: 2rem 1rem;
-}
-
-.message-container {
-    margin: 1rem 0;
-    padding: 1.5rem 1rem;
-}
-
-/* Ajustes específicos para dispositivos móveis */
+/* Ajustes responsivos para h3 */
 @media (max-width: 768px) {
-    .section {
-        padding: 1.5rem 1rem;
-        min-height: auto;
-    }
-
-    #welcome {
-        min-height: 100vh;
-        padding: 1rem;
-    }
-
-    #welcome .content {
-        margin-top: 2rem;
-    }
-
-    .welcome-stitch {
-        margin: 1rem 0;
-    }
-
-    .start-btn {
-        margin: 1rem 0;
-    }
-
-    /* Ajustes para os Stitchs flutuantes em mobile */
-    .floating-stitches {
-        display: none;
-    }
-
-    /* Ajustes para o carrossel em mobile */
-    .carousel-container {
-        margin: 1rem 0;
-    }
-
-    .carousel-controls {
-        margin: 1rem 0;
-    }
-
-    /* Ajustes para a timeline em mobile */
-    .timeline-item {
-        margin: 1rem 0;
-        padding: 0.8rem;
-    }
-
-    .timeline-item img {
-        max-height: none;
-        object-fit: contain;
-    }
-
-    /* Ajustes para a mensagem final em mobile */
-    .message-container {
-        margin: 1rem 0;
-        padding: 1.2rem 1rem;
-    }
-
-    .final-stitch {
-        width: 120px;
-        margin: 1rem 0;
-    }
-
-    .final-text {
-        margin: 1rem 0;
-        font-size: 1.1rem;
-    }
-
-    #love-button {
-        margin: 1rem 0;
+    #timeline h3 {
+        font-size: 1.8rem;
     }
 }
 
-/* Ajustes específicos para telas muito pequenas */
 @media (max-width: 480px) {
-    .section {
-        padding: 1rem 0.8rem;
-    }
-
-    h1 {
-        font-size: 1.8rem;
-        margin-bottom: 1rem;
-    }
-
-    h2 {
+    #timeline h3 {
         font-size: 1.5rem;
-        margin-bottom: 0.8rem;
     }
+}
 
-    .timeline-item {
-        margin: 0.8rem 0;
-        padding: 0.8rem;
+/* Adicionar estilo para h4 na timeline */
+#timeline h4 {
+    font-family: 'Waltograph', cursive;
+    font-weight: 400;
+    color: var(--primary-color);
+    text-align: center;
+    margin-bottom: 1rem;
+    font-size: 2.2rem;
+}
+
+/* Ajustes responsivos para h4 */
+@media (max-width: 768px) {
+    #timeline h4 {
+        font-size: 1.8rem;
     }
+}
 
-    .timeline-item img {
-        max-height: none;
-        object-fit: contain;
+@media (max-width: 480px) {
+    #timeline h4 {
+        font-size: 1.5rem;
     }
+}
 
-    .message-container {
-        padding: 1rem 0.8rem;
+/* Ajustes para os títulos e textos das seções */
+h1, h2, h4, .gallery-heading, .gallery-intro, .final-text, .stitch-container p, #surprise-message h2 {
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+/* Ajustes específicos para cada tipo de texto */
+#welcome h1 {
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.gallery-heading {
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.gallery-intro {
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
+}
+
+.final-text {
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.15);
+}
+
+.stitch-container p {
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.25);
+}
+
+#surprise-message h2 {
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+/* Ajustes para textos em fundos claros */
+.timeline-item p {
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+/* Ajustes responsivos */
+@media (max-width: 768px) {
+    h1, h2, h4, .gallery-heading, .gallery-intro, .final-text, .stitch-container p, #surprise-message h2 {
+        text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
     }
+}
 
-    .final-text {
-        font-size: 1rem;
-        line-height: 1.4;
+@media (max-width: 480px) {
+    h1, h2, h4, .gallery-heading, .gallery-intro, .final-text, .stitch-container p, #surprise-message h2 {
+        text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.15);
     }
 } 
