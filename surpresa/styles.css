@@ -10,6 +10,7 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    -webkit-tap-highlight-color: transparent; /* Remove highlight ao tocar em iOS */
     color-scheme: light;
 }
 
@@ -18,16 +19,21 @@ body {
     font-weight: 300;
     background-color: var(--background-color);
     overflow-x: hidden;
-    color-scheme: light;
+    -webkit-text-size-adjust: 100%; /* Previne ajuste automático de fonte em iOS */
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
     forced-color-adjust: none;
 }
 
-h1, h2 {
+h1, h2, h4, .gallery-heading, .gallery-intro, .final-text, .stitch-container p, #surprise-message h2 {
     font-family: 'Waltograph', cursive;
     font-weight: 400;
     color: var(--primary-color);
     text-align: center;
     margin-bottom: 1rem;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
 }
 
 .section {
@@ -40,6 +46,7 @@ h1, h2 {
     align-items: center;
     position: relative;
     overflow: hidden;
+    -webkit-overflow-scrolling: touch; /* Melhor scroll em iOS */
     z-index: 2;
 }
 
@@ -137,6 +144,9 @@ h1, h2 {
     margin-top: 2rem;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     font-weight: 300;
+    -webkit-appearance: none; /* Remove estilo padrão em iOS */
+    appearance: none;
+    -webkit-tap-highlight-color: transparent;
 }
 
 .start-btn:hover {
@@ -366,19 +376,23 @@ h1, h2 {
     margin: 1rem 0 2rem 0;
     position: relative;
     overflow: hidden;
-    z-index: 3;
+    z-index: 1;
+    -webkit-overflow-scrolling: touch;
 }
 
 .carousel-container {
     display: flex;
     transition: transform 0.5s ease;
     will-change: transform;
+    -webkit-overflow-scrolling: touch;
 }
 
 .carousel-container img {
     width: 100%;
     height: auto;
     flex-shrink: 0;
+    -webkit-user-drag: none; /* Previne drag de imagens em iOS */
+    user-drag: none;
 }
 
 .carousel-controls {
@@ -395,6 +409,9 @@ h1, h2 {
     border: none;
     border-radius: 15px;
     cursor: pointer;
+    -webkit-appearance: none; /* Remove estilo padrão em iOS */
+    appearance: none;
+    -webkit-tap-highlight-color: transparent;
 }
 
 /* Timeline Section */
@@ -544,6 +561,21 @@ h1, h2 {
     margin-top: 2rem;
     padding: 1.2rem 2.5rem;
     font-size: 1.3rem;
+    -webkit-appearance: none; /* Remove estilo padrão em iOS */
+    appearance: none;
+    border-radius: 25px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    -webkit-tap-highlight-color: transparent;
+}
+
+#love-button:hover {
+    transform: scale(1.1);
+    box-shadow: 0 6px 8px rgba(0, 0, 0, 0.2);
+}
+
+#love-button:active {
+    transform: scale(0.95);
 }
 
 /* Ajustes responsivos para a mensagem final */
@@ -609,27 +641,6 @@ h1, h2 {
     }
 }
 
-#love-button {
-    padding: 1rem 2rem;
-    background-color: var(--accent-color);
-    color: white;
-    border: none;
-    border-radius: 25px;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    font-size: 1.2rem;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-}
-
-#love-button:hover {
-    transform: scale(1.1);
-    box-shadow: 0 6px 8px rgba(0, 0, 0, 0.2);
-}
-
-#love-button:active {
-    transform: scale(0.95);
-}
-
 /* Responsive Design */
 @media (max-width: 768px) {
     .section {
@@ -670,7 +681,10 @@ h1, h2 {
     left: 0;
     pointer-events: none;
     z-index: 1;
-    display: block;
+    display: block !important;
+    -webkit-transform: translateZ(0);
+    transform: translateZ(0);
+    will-change: transform;
 }
 
 .floating-stitch-1,
@@ -686,6 +700,9 @@ h1, h2 {
     height: auto;
     pointer-events: none;
     opacity: 0.4;
+    -webkit-transform: translateZ(0);
+    transform: translateZ(0);
+    will-change: transform;
 }
 
 /* Posicionamento dos Stitchs */
@@ -881,12 +898,13 @@ h1, h2 {
     color: white;
     margin-top: 1.5rem;
     text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
-    font-family: 'Quicksand', sans-serif;
-    font-weight: 400;
     background-color: rgba(0, 0, 0, 0.3);
     padding: 0.5rem 1rem;
     border-radius: 20px;
     backdrop-filter: blur(2px);
+    -webkit-backdrop-filter: blur(2px);
+    position: relative;
+    z-index: 10;
 }
 
 /* Ajustes responsivos para a mensagem */
@@ -992,9 +1010,22 @@ h1, h2 {
     text-align: center;
     margin-bottom: 1rem;
     font-size: 2.2rem;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
 }
 
-/* Ajustes responsivos para h4 */
+/* Ajustes específicos para iOS */
+@supports (-webkit-touch-callout: none) {
+    #timeline h4 {
+        font-family: 'Waltograph', cursive;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+    }
+}
+
+/* Ajustes responsivos para o h4 */
 @media (max-width: 768px) {
     #timeline h4 {
         font-size: 1.8rem;
@@ -1004,6 +1035,16 @@ h1, h2 {
 @media (max-width: 480px) {
     #timeline h4 {
         font-size: 1.5rem;
+    }
+}
+
+/* Ajustes específicos para iPhone XR */
+@media screen and (device-width: 414px) and (device-height: 896px) and (-webkit-device-pixel-ratio: 2) {
+    #timeline h4 {
+        font-size: 1.8rem;
+        margin-bottom: 1rem;
+        padding: 0 0.5rem;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
     }
 }
 
