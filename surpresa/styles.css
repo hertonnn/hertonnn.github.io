@@ -32,13 +32,14 @@ h1, h2 {
 
 .section {
     min-height: 100vh;
-    height: -webkit-fill-available; /* For iOS Safari */
-    padding: 2rem;
+    height: auto;
+    padding: 2rem 1rem;
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: flex-start;
     align-items: center;
     position: relative;
+    overflow: hidden;
 }
 
 /* Loading Screen */
@@ -366,6 +367,7 @@ h1, h2 {
 .carousel {
     width: 100%;
     max-width: 400px;
+    margin: 1rem 0 2rem 0;
     position: relative;
     overflow: hidden;
     z-index: 1;
@@ -403,10 +405,11 @@ h1, h2 {
 .timeline-container {
     width: 100%;
     max-width: 600px;
+    margin: 1rem 0;
 }
 
 .timeline-item {
-    margin: 2rem 0;
+    margin: 1.5rem 0;
     padding: 1rem;
     background-color: white;
     border-radius: 15px;
@@ -438,20 +441,21 @@ h1, h2 {
 /* Final Message Section */
 #final-message {
     background: linear-gradient(45deg, var(--secondary-color), var(--accent-color));
-    padding: 3rem 1rem;
+    padding: 2rem 1rem;
 }
 
 .message-container {
     text-align: center;
     max-width: 650px;
     background-color: rgba(255, 255, 255, 0.95);
-    padding: 2.5rem 2rem;
+    padding: 1.5rem 1rem;
     border-radius: 25px;
     box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
     position: relative;
     overflow: hidden;
     transform: translateY(0);
     transition: transform 0.5s ease-out, box-shadow 0.3s ease;
+    margin: 1rem 0;
 }
 
 .message-container:hover {
@@ -569,7 +573,8 @@ h1, h2 {
 /* Responsive Design */
 @media (max-width: 768px) {
     .section {
-        padding: 1rem;
+        padding: 1.5rem 1rem;
+        min-height: auto;
     }
 
     h1 {
@@ -872,5 +877,155 @@ h1, h2 {
     }
     #surprise-message h2 {
         font-size: 1.3rem;
+    }
+}
+
+/* Ajustes gerais para melhor responsividade vertical */
+.section {
+    min-height: 100vh;
+    height: auto;
+    padding: 2rem 1rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Ajustes específicos para a seção de galeria */
+#gallery {
+    padding-top: 4rem;
+}
+
+.carousel {
+    width: 100%;
+    max-width: 400px;
+    margin: 1rem 0 2rem 0;
+}
+
+/* Ajustes para a timeline */
+.timeline-container {
+    width: 100%;
+    max-width: 600px;
+    margin: 1rem 0;
+}
+
+.timeline-item {
+    margin: 1.5rem 0;
+    padding: 1rem;
+}
+
+/* Ajustes para a mensagem final */
+#final-message {
+    padding: 2rem 1rem;
+}
+
+.message-container {
+    margin: 1rem 0;
+    padding: 1.5rem 1rem;
+}
+
+/* Ajustes específicos para dispositivos móveis */
+@media (max-width: 768px) {
+    .section {
+        padding: 1.5rem 1rem;
+        min-height: auto;
+    }
+
+    #welcome {
+        min-height: 100vh;
+        padding: 1rem;
+    }
+
+    #welcome .content {
+        margin-top: 2rem;
+    }
+
+    .welcome-stitch {
+        margin: 1rem 0;
+    }
+
+    .start-btn {
+        margin: 1rem 0;
+    }
+
+    /* Ajustes para os Stitchs flutuantes em mobile */
+    .floating-stitches {
+        display: none;
+    }
+
+    /* Ajustes para o carrossel em mobile */
+    .carousel-container {
+        margin: 1rem 0;
+    }
+
+    .carousel-controls {
+        margin: 1rem 0;
+    }
+
+    /* Ajustes para a timeline em mobile */
+    .timeline-item {
+        margin: 1rem 0;
+    }
+
+    .timeline-item img {
+        max-height: 250px;
+        object-fit: cover;
+    }
+
+    /* Ajustes para a mensagem final em mobile */
+    .message-container {
+        margin: 1rem 0;
+        padding: 1.2rem 1rem;
+    }
+
+    .final-stitch {
+        width: 120px;
+        margin: 1rem 0;
+    }
+
+    .final-text {
+        margin: 1rem 0;
+        font-size: 1.1rem;
+    }
+
+    #love-button {
+        margin: 1rem 0;
+    }
+}
+
+/* Ajustes específicos para telas muito pequenas */
+@media (max-width: 480px) {
+    .section {
+        padding: 1rem 0.8rem;
+    }
+
+    h1 {
+        font-size: 1.8rem;
+        margin-bottom: 1rem;
+    }
+
+    h2 {
+        font-size: 1.5rem;
+        margin-bottom: 0.8rem;
+    }
+
+    .timeline-item {
+        margin: 0.8rem 0;
+        padding: 0.8rem;
+    }
+
+    .timeline-item img {
+        max-height: 200px;
+    }
+
+    .message-container {
+        padding: 1rem 0.8rem;
+    }
+
+    .final-text {
+        font-size: 1rem;
+        line-height: 1.4;
     }
 } 
