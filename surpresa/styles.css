@@ -31,7 +31,7 @@ h1, h2, h4, .gallery-heading, .gallery-intro, .final-text, .stitch-container p, 
     color: var(--primary-color);
     text-align: center;
     margin-bottom: 1rem;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+    text-shadow: 3px 3px 10px rgba(0, 0, 0, 0.35), 0 2px 8px rgba(0,0,0,0.18);
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
 }
@@ -215,7 +215,7 @@ h1, h2, h4, .gallery-heading, .gallery-intro, .final-text, .stitch-container p, 
     .carousel-container img {
         width: 100%;
         height: auto;
-        object-fit: cover;
+        object-fit: contain;
     }
 
     .timeline-container {
@@ -289,7 +289,7 @@ h1, h2, h4, .gallery-heading, .gallery-intro, .final-text, .stitch-container p, 
     .carousel-container img {
         width: 100%;
         height: auto;
-        object-fit: cover;
+        object-fit: contain;
         max-height: 400px;
     }
 
@@ -305,7 +305,7 @@ h1, h2, h4, .gallery-heading, .gallery-intro, .final-text, .stitch-container p, 
 
     .timeline-item img {
         max-height: 300px;
-        object-fit: cover;
+        object-fit: contain;
     }
 
     .message-container {
@@ -398,6 +398,12 @@ h1, h2, h4, .gallery-heading, .gallery-intro, .final-text, .stitch-container p, 
     flex-shrink: 0;
     -webkit-user-drag: none; /* Previne drag de imagens em iOS */
     user-drag: none;
+    max-width: 100%;
+    object-fit: contain;
+    border-radius: 10px;
+    display: block;
+    margin: 0 auto;
+    max-height: none;
 }
 
 .carousel-controls {
@@ -447,8 +453,11 @@ h1, h2, h4, .gallery-heading, .gallery-intro, .final-text, .stitch-container p, 
 .timeline-item img {
     width: 100%;
     height: auto;
-    border-radius: 10px;
+    max-width: 100%;
     object-fit: contain;
+    border-radius: 10px;
+    display: block;
+    margin: 0 auto;
     max-height: none;
 }
 
@@ -713,7 +722,7 @@ h1, h2, h4, .gallery-heading, .gallery-intro, .final-text, .stitch-container p, 
     width: 120px;
     height: auto;
     pointer-events: none;
-    opacity: 0.4;
+    opacity: 0.15;
     -webkit-transform: translateZ(0);
     transform: translateZ(0);
     will-change: transform;
@@ -833,7 +842,7 @@ h1, h2, h4, .gallery-heading, .gallery-intro, .final-text, .stitch-container p, 
     100% { transform: translate(0, 0) rotate(0deg); }
 }
 
-/* Ajustes responsivos para os Stitchs flutuantes */
+/* Responsivo: mantém opacidade baixa em telas menores */
 @media (max-width: 768px) {
     .floating-stitch-1,
     .floating-stitch-2,
@@ -843,11 +852,9 @@ h1, h2, h4, .gallery-heading, .gallery-intro, .final-text, .stitch-container p, 
     .floating-stitch-6,
     .floating-stitch-7,
     .floating-stitch-8 {
-        width: 90px;
-        opacity: 0.35;
+        opacity: 0.12;
     }
 }
-
 @media (max-width: 480px) {
     .floating-stitch-1,
     .floating-stitch-2,
@@ -857,8 +864,7 @@ h1, h2, h4, .gallery-heading, .gallery-intro, .final-text, .stitch-container p, 
     .floating-stitch-6,
     .floating-stitch-7,
     .floating-stitch-8 {
-        width: 70px;
-        opacity: 0.3;
+        opacity: 0.10;
     }
 }
 
@@ -1072,7 +1078,7 @@ h1, h2, h4, .gallery-heading, .gallery-intro, .final-text, .stitch-container p, 
 
 /* Ajustes para os títulos e textos das seções */
 h1, h2, h4, .gallery-heading, .gallery-intro, .final-text, .stitch-container p, #surprise-message h2 {
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+    text-shadow: 3px 3px 10px rgba(0, 0, 0, 0.35), 0 2px 8px rgba(0,0,0,0.18);
 }
 
 /* Ajustes específicos para cada tipo de texto */
@@ -1108,13 +1114,13 @@ h1, h2, h4, .gallery-heading, .gallery-intro, .final-text, .stitch-container p, 
 /* Ajustes responsivos */
 @media (max-width: 768px) {
     h1, h2, h4, .gallery-heading, .gallery-intro, .final-text, .stitch-container p, #surprise-message h2 {
-        text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
+        text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.40), 0 1px 6px rgba(0,0,0,0.22);
     }
 }
 
 @media (max-width: 480px) {
     h1, h2, h4, .gallery-heading, .gallery-intro, .final-text, .stitch-container p, #surprise-message h2 {
-        text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.15);
+        text-shadow: 1.5px 1.5px 6px rgba(0, 0, 0, 0.45), 0 1px 4px rgba(0,0,0,0.25);
     }
 }
 
@@ -1229,7 +1235,7 @@ h1, h2, h4, .gallery-heading, .gallery-intro, .final-text, .stitch-container p, 
         .carousel-container img {
             width: 100%;
             height: auto;
-            object-fit: cover;
+            object-fit: contain;
         }
 
         /* Ajustes para a timeline no iPhone XR */
@@ -1245,7 +1251,7 @@ h1, h2, h4, .gallery-heading, .gallery-intro, .final-text, .stitch-container p, 
 
         .timeline-item img {
             max-height: 300px;
-            object-fit: cover;
+            object-fit: contain;
         }
 
         /* Ajustes para a mensagem final no iPhone XR */
