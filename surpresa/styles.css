@@ -228,14 +228,20 @@ h1, h2, h4, .gallery-heading, .gallery-intro, .final-text, .stitch-container p, 
         padding: 0.8rem;
     }
 
+    .timeline-item img {
+        max-height: none;
+        object-fit: contain;
+    }
+
     .final-stitch {
         width: 120px;
     }
 
     .final-text {
-        font-size: 1.1rem;
-        line-height: 1.5;
-        margin: 1rem 0;
+        font-size: 1.6rem;
+        line-height: 1.8;
+        margin: 1.2rem 0;
+        padding: 0 0.5rem;
     }
 
     #love-button {
@@ -419,8 +425,6 @@ h1, h2, h4, .gallery-heading, .gallery-intro, .final-text, .stitch-container p, 
     width: 100%;
     max-width: 600px;
     margin: 1rem 0;
-    position: relative;
-    z-index: 3;
 }
 
 .timeline-item {
@@ -548,12 +552,12 @@ h1, h2, h4, .gallery-heading, .gallery-intro, .final-text, .stitch-container p, 
 
 .final-text {
     font-family: 'Waltograph', cursive;
-    font-size: 1.6rem;
+    font-size: 1.4rem;
     line-height: 1.8;
     margin: 1.5rem 0;
     color: #333;
     font-weight: 400;
-    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.15);
+    text-shadow: 0.5px 0.5px 1px rgba(0,0,0,0.05);
     padding: 0 1rem;
 }
 
@@ -592,7 +596,7 @@ h1, h2, h4, .gallery-heading, .gallery-intro, .final-text, .stitch-container p, 
         margin-bottom: 1rem;
     }
     .final-text {
-        font-size: 1.4rem;
+        font-size: 1.5rem;
         line-height: 1.7;
         margin: 1rem 0;
     }
@@ -612,7 +616,7 @@ h1, h2, h4, .gallery-heading, .gallery-intro, .final-text, .stitch-container p, 
         width: 120px;
     }
     .final-text {
-        font-size: 1.2rem;
+        font-size: 1.4rem;
         line-height: 1.6;
         padding: 0 0.5rem;
     }
@@ -1222,8 +1226,8 @@ h1, h2, h4, .gallery-heading, .gallery-intro, .final-text, .stitch-container p, 
         }
 
         .timeline-item img {
-            max-height: 300px;
-            object-fit: cover;
+            max-height: none;
+            object-fit: contain;
         }
 
         /* Ajustes para a mensagem final no iPhone XR */
@@ -1237,8 +1241,8 @@ h1, h2, h4, .gallery-heading, .gallery-intro, .final-text, .stitch-container p, 
         }
 
         .final-text {
-            font-size: 1.2rem;
-            line-height: 1.6;
+            font-size: 1.6rem;
+            line-height: 1.8;
             margin: 1.2rem 0;
             padding: 0 0.5rem;
         }
