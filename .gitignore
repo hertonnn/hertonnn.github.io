@@ -1,12 +1,5 @@
 # Ignora todas as imagens pessoais na pasta resources
-resources/*.jpg
-resources/*.jpeg
-resources/*.png
-resources/*.gif
-resources/*.JPG
-resources/*.JPEG
-resources/*.PNG
-resources/*.GIF
+resources/*
 
 # Exceto stitch4.gif (não será ignorado)
 !resources/stitch4.gif
