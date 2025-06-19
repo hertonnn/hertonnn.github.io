@@ -1,0 +1,18 @@
+# Ignora todas as imagens pessoais na pasta resources
+resources/*.jpg
+resources/*.jpeg
+resources/*.png
+resources/*.gif
+resources/*.JPG
+resources/*.JPEG
+resources/*.PNG
+resources/*.GIF
+
+# Ignora o arquivo principal da surpresa
+index.html
+
+# (opcional) Não ignore o styles.css, script.js, index2.html, etc.
+!styles.css
+!script.js
+!index2.html
+!resources/stitch4.gif
