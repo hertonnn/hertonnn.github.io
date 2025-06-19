@@ -8,11 +8,13 @@ resources/*.JPEG
 resources/*.PNG
 resources/*.GIF
 
-# Ignora o arquivo principal da surpresa
-index.html
+# Exceto stitch4.gif (não será ignorado)
+!resources/stitch4.gif
 
-# (opcional) Não ignore o styles.css, script.js, index2.html, etc.
+# Ignora o arquivo index2.html (mensagem de tempo excedido)
+index2.html
+
+# Não ignora os arquivos principais do projeto
+!index.html
 !styles.css
 !script.js
-!index2.html
-!resources/stitch4.gif
