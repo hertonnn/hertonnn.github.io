@@ -3,10 +3,11 @@ const projects = [
     {
         title: "Far.IA Agent",
         category: "Generative AI & LLM Agents",
-        description: "Agente autônomo para extração contábil complexa, superando limitações de contexto de LLMs via arquitetura RAG.",
+        description: "Estágio Ottimizza - Agente autônomo para extração contábil complexa.",
         tech: ["Python", "LangChain", "OpenAI API", "Vector DB"],
         type: "dev",
-        image: "https://placehold.co/600x400/1e293b/ff6b00?text=Far.IA+Architecture" 
+        link: "https://www.youtube.com/watch?v=xZfNax5ZrGw",
+        image: "img/WhatsApp Image 2025-11-13 at 10.12.05.jpeg" 
     },
     {
         title: "Ciência da Computação - UDESC",
@@ -15,7 +16,7 @@ const projects = [
         tech: ["Python", "C", "Java", "Haskell"],
         type: "research",
         link: "https://github.com/hertonnn/UDESC-Computacao",
-        image: "https://placehold.co/600x400/1e293b/ff6b00?text=Research+Paper"
+        image: "img/Fundo_Branco_Colorido__RGB.png"
     },
     {
         title: "Iris Flower Dataset, grafos e métricas de Machine Learning",
@@ -24,7 +25,7 @@ const projects = [
         tech: ["Python", "C", "Matplotlib", "TEC"],
         type: "research",
         link: "https://github.com/hertonnn/UDESC-Computacao/tree/48f44e99bb4f739ff70fa2e769810e3a33ac10da/TEG%20-%20Teoria%20dos%20Grafos/Trabalhos/Grafo%20%C3%8Dris",
-        image: "https://placehold.co/600x400/1e293b/ff6b00?text=Research+Paper"
+        image: "img/Gemini_Generated_Image_5tgyd65tgyd65tgy.png"
     },
     {
         title: "Descomplicando um Compilador!",
@@ -33,7 +34,7 @@ const projects = [
         tech: ["Haskell", "Java", "Shell", "Jasmim", "COM"],
         type: "research",
         link: "https://github.com/hertonnn/Compilador-Java",
-        image: "https://placehold.co/600x400/1e293b/ff6b00?text=Research+Paper"
+        image: "https://optim.tildacdn.net/tild6638-3234-4266-b630-646530643738/-/resize/760x/-/format/webp/compiler.jpg.webp"
     },
     {
         title: "API Finance",
@@ -42,7 +43,7 @@ const projects = [
         tech: ["Java", "PostgreSQL", "POO"],
         type: "dev",
         link: "https://github.com/hertonnn/API-Financas",
-        image: "https://placehold.co/600x400/1e293b/ff6b00?text=Aplication"
+        image: "imag/Thunb_projeto3.png"
     },
     {
         title: "Modelagem de sistema de trânsito utilizando autômatos",
@@ -51,7 +52,7 @@ const projects = [
         tech: ["Python", "POO", "LFA"],
         type: "research",
         link: "https://github.com/hertonnn/UDESC-Computacao/tree/f69d092a873219270d94ab1de8f510da709bd37c/LFA%20-%20Linguagens%20Formais%20de%20Aut%C3%B4matos/Trabalho%20final/Simula%C3%A7%C3%A3o-Tr%C3%A2nsito-2024",
-        image: "https://placehold.co/600x400/1e293b/ff6b00?text=Research+Paper"
+        image: "img/Gemini_Generated_Image_b275s1b275s1b275.png"
     },
     {
         title: "Sistema Jurídico",
@@ -60,7 +61,7 @@ const projects = [
         tech: ["Java", "PostgreSQL", "BAN1"],
         type: "dev",
         link: "https://github.com/hertonnn/Sistema-Juridico-BD",
-        image: "https://placehold.co/600x400/1e293b/ff6b00?text=Research+Paper"
+        image: "img/Gemini_Generated_Image_lnj79ilnj79ilnj7.png"
     },
     {
         title: "Complexidade algorítmica de operações em árvores",
@@ -69,7 +70,16 @@ const projects = [
         tech: ["Python", "Matplotlib", "EDA2"],
         type: "research",
         link: "https://github.com/hertonnn/UDESC-Computacao/tree/285d32a6088c53ad5143f2d941b4fedf65ad44f7/EDA%20II%20-%20Estrutura%20de%20Dados%202/Trabalho%20Final",
-        image: "https://placehold.co/600x400/1e293b/ff6b00?text=Research+Paper"
+        image: "img/Gemini_Generated_Image_7gwhuc7gwhuc7gwh.png"
+    },
+    {
+        title: "Sistema Login",
+        category: "Basic Learning",
+        description: "Meu primeiro projeto ; ). Sistema Login em Python, com uma interface gráfica e conexão ao banco de dados MySQL.",
+        tech: ["Python", "MySQL", "Tkinter"],
+        type: "dev",
+        link: "https://hertonnn.github.io/sistema_login.html",
+        image: "imagens_projeto1/Interface.png"
     }
 ];
 
