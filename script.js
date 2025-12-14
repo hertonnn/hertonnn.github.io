@@ -1,0 +1,170 @@
+// --- DATA: PROJECTS ---
+const projects = [
+    {
+        title: "Far.IA Agent",
+        category: "Generative AI & LLM Agents",
+        description: "Agente autônomo para extração contábil complexa, superando limitações de contexto de LLMs via arquitetura RAG.",
+        tech: ["Python", "LangChain", "OpenAI API", "Vector DB"],
+        type: "dev",
+        image: "https://placehold.co/600x400/1e293b/ff6b00?text=Far.IA+Architecture" 
+    },
+    {
+        title: "Ciência da Computação - UDESC",
+        category: "Scientific Repository",
+        description: "Acervo completo da graduação em Ciência da Computação (UDESC), reunindo códigos, projetos e materiais essenciais.",
+        tech: ["Python", "C", "Java", "Haskell"],
+        type: "research",
+        link: "https://github.com/hertonnn/UDESC-Computacao",
+        image: "https://placehold.co/600x400/1e293b/ff6b00?text=Research+Paper"
+    },
+    {
+        title: "Iris Flower Dataset, grafos e métricas de Machine Learning",
+        category: "Data Science & Algorithms",
+        description: "Implementação de clustering baseado em grafos (em C) aplicada ao dataset Iris, com análise crítica de métricas.",
+        tech: ["Python", "C", "Matplotlib", "TEC"],
+        type: "research",
+        link: "https://github.com/hertonnn/UDESC-Computacao/tree/48f44e99bb4f739ff70fa2e769810e3a33ac10da/TEG%20-%20Teoria%20dos%20Grafos/Trabalhos/Grafo%20%C3%8Dris",
+        image: "https://placehold.co/600x400/1e293b/ff6b00?text=Research+Paper"
+    },
+    {
+        title: "Descomplicando um Compilador!",
+        category: "Compiler Design & Engineering",
+        description: "Desenvolvimento de um compilador em Haskell para geração de bytecodes JVM. Engenharia de linguagens na prática.",
+        tech: ["Haskell", "Java", "Shell", "Jasmim", "COM"],
+        type: "research",
+        link: "https://github.com/hertonnn/Compilador-Java",
+        image: "https://placehold.co/600x400/1e293b/ff6b00?text=Research+Paper"
+    },
+    {
+        title: "API Finance",
+        category: "Software Architecture",
+        description: "Aplicação desktop robusta para gestão financeira, aplicando rigorosos padrões de POO e persistência PostgreSQL.",
+        tech: ["Java", "PostgreSQL", "POO"],
+        type: "dev",
+        link: "https://github.com/hertonnn/API-Financas",
+        image: "https://placehold.co/600x400/1e293b/ff6b00?text=Aplication"
+    },
+    {
+        title: "Modelagem de sistema de trânsito utilizando autômatos",
+        category: "Simulation & Modeling",
+        description: "Simulação de tráfego complexo via Autômatos Finitos e com Pilha, modelando fluxos e estados de cruzamentos.",
+        tech: ["Python", "POO", "LFA"],
+        type: "research",
+        link: "https://github.com/hertonnn/UDESC-Computacao/tree/f69d092a873219270d94ab1de8f510da709bd37c/LFA%20-%20Linguagens%20Formais%20de%20Aut%C3%B4matos/Trabalho%20final/Simula%C3%A7%C3%A3o-Tr%C3%A2nsito-2024",
+        image: "https://placehold.co/600x400/1e293b/ff6b00?text=Research+Paper"
+    },
+    {
+        title: "Sistema Jurídico",
+        category: "Backend & Database Architecture",
+        description: "Sistema centralizado para gestão de dados jurídicos, otimizando o fluxo documental com backend Java e SQL.",
+        tech: ["Java", "PostgreSQL", "BAN1"],
+        type: "dev",
+        link: "https://github.com/hertonnn/Sistema-Juridico-BD",
+        image: "https://placehold.co/600x400/1e293b/ff6b00?text=Research+Paper"
+    },
+    {
+        title: "Complexidade algorítmica de operações em árvores",
+        category: "Advanced Data Structures & Analysis",
+        description: "Análise comparativa de performance e Big-O entre árvores AVL, Rubro-Negra e B em operações de manipulação.",
+        tech: ["Python", "Matplotlib", "EDA2"],
+        type: "research",
+        link: "https://github.com/hertonnn/UDESC-Computacao/tree/285d32a6088c53ad5143f2d941b4fedf65ad44f7/EDA%20II%20-%20Estrutura%20de%20Dados%202/Trabalho%20Final",
+        image: "https://placehold.co/600x400/1e293b/ff6b00?text=Research+Paper"
+    }
+];
+
+// --- DOM ELEMENTS ---
+const navbar = document.getElementById('navbar');
+const projectsGrid = document.getElementById('projects-grid');
+const filterBtns = document.querySelectorAll('.filter-btn');
+
+// --- NAVBAR SCROLL EFFECT ---
+window.addEventListener('scroll', () => {
+    if (window.scrollY > 50) {
+        navbar.classList.add('bg-slate-950/90', 'backdrop-blur-md', 'shadow-lg', 'border-b', 'border-slate-800', 'py-4');
+        navbar.classList.remove('bg-transparent', 'py-6');
+    } else {
+        navbar.classList.remove('bg-slate-950/90', 'backdrop-blur-md', 'shadow-lg', 'border-b', 'border-slate-800', 'py-4');
+        navbar.classList.add('bg-transparent', 'py-6');
+    }
+});
+
+// --- RENDER PROJECTS FUNCTION ---
+function renderProjects(filterType) {
+    projectsGrid.innerHTML = ''; // Clear existing content
+
+    const filtered = projects.filter(p => filterType === 'all' || p.type === filterType);
+
+    filtered.forEach(project => {
+        // Create Card Element
+        const card = document.createElement('div');
+        card.className = "group relative bg-slate-800 rounded-xl overflow-hidden border border-slate-700 hover:border-orange-500/50 transition-all hover:shadow-2xl hover:shadow-orange-900/20";
+
+        // Badge Icon Logic
+        const badgeIcon = project.type === 'research' ? 'book-open' : 'cpu';
+        const badgeText = project.type === 'research' ? 'Pesquisa' : 'Dev';
+        const badgeColor = project.type === 'research' ? 'bg-blue-600/90' : 'bg-orange-600/90';
+
+        // Tech Stack HTML
+        const techStackHtml = project.tech.map(t => 
+            `<span class="text-xs bg-slate-900 text-slate-300 px-2 py-1 rounded border border-slate-700">${t}</span>`
+        ).join('');
+
+        card.innerHTML = `
+            <div class="h-48 overflow-hidden relative">
+                <div class="absolute inset-0 bg-slate-900/20 group-hover:bg-transparent transition-all z-10"></div>
+                <img src="${project.image}" alt="${project.title}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+                
+                <div class="absolute top-4 right-4 z-20">
+                    <span class="${badgeColor} text-white text-xs px-2 py-1 rounded backdrop-blur flex items-center gap-1">
+                        <i data-lucide="${badgeIcon}" class="w-3 h-3"></i> ${badgeText}
+                    </span>
+                </div>
+            </div>
+
+            <div class="p-6">
+                <div class="text-xs font-semibold text-orange-500 uppercase tracking-wider mb-2">${project.category}</div>
+                <h3 class="text-xl font-bold text-white mb-3 group-hover:text-orange-400 transition-colors">${project.title}</h3>
+                <p class="text-slate-400 text-sm mb-6 line-clamp-3">
+                    ${project.description}
+                </p>
+                
+                <div class="flex flex-wrap gap-2 mb-6">
+                    ${techStackHtml}
+                </div>
+
+                <a href="${project.link || '#'}" target="_blank" class="inline-flex items-center text-sm font-bold text-white hover:text-orange-500 transition-colors">
+                    Ver Detalhes <i data-lucide="external-link" class="w-3 h-3 ml-2"></i>
+                </a>
+            </div>
+        `;
+        projectsGrid.appendChild(card);
+    });
+
+    // Re-initialize icons for newly added elements
+    lucide.createIcons();
+}
+
+// --- FILTER BUTTON LOGIC ---
+filterBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+        // Remove active classes from all buttons
+        filterBtns.forEach(b => {
+            b.classList.remove('bg-orange-600', 'text-white', 'shadow-lg');
+            b.classList.add('text-slate-400', 'hover:text-white');
+        });
+
+        // Add active class to clicked button
+        btn.classList.remove('text-slate-400', 'hover:text-white');
+        btn.classList.add('bg-orange-600', 'text-white', 'shadow-lg');
+
+        // Render projects
+        renderProjects(btn.dataset.filter);
+    });
+});
+
+// --- INITIAL RENDER ---
+document.addEventListener('DOMContentLoaded', () => {
+    renderProjects('dev'); // Default filter
+    lucide.createIcons(); // Init icons
+});
