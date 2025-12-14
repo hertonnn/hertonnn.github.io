@@ -12,11 +12,12 @@ const projects = [
     {
         title: "Ciência da Computação - UDESC",
         category: "Scientific Repository",
-        description: "Acervo completo da graduação em Ciência da Computação (UDESC), reunindo códigos, projetos e materiais essenciais.",
-        tech: ["Python", "C", "Java", "Haskell"],
+        description: "Sempre digo que esse repositório representa o quanto levo a sério a área da computação. Acervo completo da graduação em Ciência da Computação (UDESC), reunindo códigos, projetos e materiais essenciais.",
+        tech: [],
         type: "research",
         link: "https://github.com/hertonnn/UDESC-Computacao",
-        image: "img/Fundo_Branco_Colorido__RGB.png"
+        image: "img/Fundo_Branco_Colorido__RGB.png",
+        status: "pin"
     },
     {
         title: "Iris Flower Dataset, grafos e métricas de Machine Learning",
@@ -73,12 +74,21 @@ const projects = [
         image: "img/Gemini_Generated_Image_7gwhuc7gwhuc7gwh.png"
     },
     {
+        title: "Programação de Redes Neurais aplicada a jogos",
+        category: "Basic Learning IA",
+        description: "Meu primeiro projeto envolvendo Redes Neurais Artificiais. Escrevi do zero, treinei e apliquei no jogo Pong.",
+        tech: ["Python", "Matplotlib", "Numpy", "Pygame"],
+        type: "dev",
+        link: "rede_neural.html",
+        image: "imag/Thunb_Projeto1.png"
+    },
+    {
         title: "Sistema Login",
         category: "Basic Learning",
-        description: "Meu primeiro projeto ; ). Sistema Login em Python, com uma interface gráfica e conexão ao banco de dados MySQL.",
+        description: "Meu primeiro projeto 🥺. Sistema Login em Python, com uma interface gráfica e conexão ao banco de dados MySQL.",
         tech: ["Python", "MySQL", "Tkinter"],
         type: "dev",
-        link: "https://hertonnn.github.io/sistema_login.html",
+        link: "sistema_login.html",
         image: "imagens_projeto1/Interface.png"
     }
 ];
@@ -114,6 +124,14 @@ function renderProjects(filterType) {
         const badgeIcon = project.type === 'research' ? 'book-open' : 'cpu';
         const badgeText = project.type === 'research' ? 'Pesquisa' : 'Dev';
         const badgeColor = project.type === 'research' ? 'bg-blue-600/90' : 'bg-orange-600/90';
+        
+        // --- NOVA LÓGICA DO PIN ---
+        // Cria o HTML do pin se o status for 'pin', caso contrário deixa vazio
+        const pinHtml = project.status === 'pin' 
+            ? `<span class="bg-orange-400 text-white text-xs px-2 py-1 rounded backdrop-blur flex items-center gap-1 shadow-sm">
+                 <i data-lucide="pin" class="w-3 h-3 fill-white"></i>
+               </span>` 
+            : '';
 
         // Tech Stack HTML
         const techStackHtml = project.tech.map(t => 
@@ -125,8 +143,8 @@ function renderProjects(filterType) {
                 <div class="absolute inset-0 bg-slate-900/20 group-hover:bg-transparent transition-all z-10"></div>
                 <img src="${project.image}" alt="${project.title}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
                 
-                <div class="absolute top-4 right-4 z-20">
-                    <span class="${badgeColor} text-white text-xs px-2 py-1 rounded backdrop-blur flex items-center gap-1">
+                <div class="absolute top-4 right-4 z-20 flex gap-2">
+                    ${pinHtml} <span class="${badgeColor} text-white text-xs px-2 py-1 rounded backdrop-blur flex items-center gap-1">
                         <i data-lucide="${badgeIcon}" class="w-3 h-3"></i> ${badgeText}
                     </span>
                 </div>
@@ -135,7 +153,7 @@ function renderProjects(filterType) {
             <div class="p-6">
                 <div class="text-xs font-semibold text-orange-500 uppercase tracking-wider mb-2">${project.category}</div>
                 <h3 class="text-xl font-bold text-white mb-3 group-hover:text-orange-400 transition-colors">${project.title}</h3>
-                <p class="text-slate-400 text-sm mb-6 line-clamp-3">
+                <p class="text-slate-400 text-sm mb-6 line-clamp-6">
                     ${project.description}
                 </p>
                 
