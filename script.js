@@ -43,7 +43,7 @@ const projects = [
         description: "Aplicação desktop robusta para gestão financeira, aplicando rigorosos padrões de POO e persistência PostgreSQL.",
         tech: ["Java", "PostgreSQL", "POO"],
         type: "dev",
-        link: "https://github.com/hertonnn/API-Financas",
+        link: "https://www.youtube.com/watch?v=W3SZnzQo-sg&t=79s",
         image: "imag/Thunb_projeto3.png"
     },
     {
