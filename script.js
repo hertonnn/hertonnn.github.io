@@ -1,3 +1,14 @@
+// --- CONFIG: TECH LINKS ---
+const repoLinks = {
+    "POO": "https://github.com/hertonnn/UDESC-Computacao/tree/master/POO%20-%20Programa%C3%A7%C3%A3o%20Orientada%20a%20Objetos", 
+    "BAN1": "https://github.com/hertonnn/UDESC-Computacao/tree/master/BAN1%20-%20Banco%20de%20Dados%20I",
+    "LFA": "https://github.com/hertonnn/UDESC-Computacao/tree/master/LFA%20-%20Linguagens%20Formais%20de%20Aut%C3%B4matos",
+    "EDA2": "https://github.com/hertonnn/UDESC-Computacao/tree/master/EDA%20II%20-%20Estrutura%20de%20Dados%202",
+    "TEC": "https://github.com/hertonnn/UDESC-Computacao/tree/master/TEC%20-%20Teoria%20da%20Computa%C3%A7%C3%A3o",
+    "COM": "https://github.com/hertonnn/UDESC-Computacao/tree/master/COM%20-%20Compiladores"
+};
+
+
 // --- DATA: PROJECTS ---
 const projects = [
     {
@@ -133,10 +144,22 @@ function renderProjects(filterType) {
                </span>` 
             : '';
 
-        // Tech Stack HTML
-        const techStackHtml = project.tech.map(t => 
-            `<span class="text-xs bg-slate-900 text-slate-300 px-2 py-1 rounded border border-slate-700">${t}</span>`
-        ).join('');
+        // Tech Stack HTML (Lógica Atualizada)
+        const techStackHtml = project.tech.map(t => {
+            // Verifica se existe um link definido para essa tecnologia
+            const link = repoLinks[t]; 
+            
+            // Classes originais mantidas
+            const baseClass = "text-xs bg-slate-900 text-slate-300 px-2 py-1 rounded border border-slate-700";
+            
+            if (link) {
+                // Se tiver link: Renderiza <a> com as mesmas classes visuais + hover effect
+                return `<a href="${link}" target="_blank" class="${baseClass} hover:border-orange-500 hover:text-white transition-colors cursor-pointer decoration-0">${t}</a>`;
+            } else {
+                // Se não tiver link: Mantém o <span> original exato
+                return `<span class="${baseClass}">${t}</span>`;
+            }
+        }).join('');
 
         card.innerHTML = `
             <div class="h-48 overflow-hidden relative">
