@@ -17,7 +17,7 @@ const projects = [
         description: "Estágio Ottimizza - Agente autônomo para extração contábil complexa.",
         tech: ["Python", "LangChain", "OpenAI API", "Vector DB"],
         type: "dev",
-        link: "https://www.youtube.com/watch?v=xZfNax5ZrGw",
+        link: "https://www.linkedin.com/in/herton-silveira-70509a243/edit/forms/position/2751402491/",
         image: "img/WhatsApp Image 2025-11-13 at 10.12.05.jpeg" 
     },
     {
