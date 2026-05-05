@@ -324,10 +324,18 @@ function showSuccessAndReRender(msg) {
   const btns = document.querySelectorAll('#modal-btns button');
   btns.forEach(b => { b.disabled = true; b.style.pointerEvents = 'none'; });
 
+  const msgDiv = document.getElementById('modal-message');
+  msgDiv.innerHTML += `
+    <div class="loader-container">
+      <div class="spinner"></div>
+      <span class="loader-text">Aguarde...</span>
+    </div>
+  `;
+
   setTimeout(() => {
     closeModal();
     transitionToState();
-  }, 2000);
+  }, 5000);
 }
 
 function closeModal() {

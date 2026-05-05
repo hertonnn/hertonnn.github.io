@@ -476,3 +476,34 @@
         transform: scale(1.15);
       }
     }
+
+    /* Spinner Loader */
+    .loader-container {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      margin-top: 16px;
+      animation: fade-in 0.3s ease;
+    }
+
+    .spinner {
+      width: 20px;
+      height: 20px;
+      border: 3px solid var(--slate-100);
+      border-top-color: var(--verde-udesc);
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+    }
+
+    .loader-text {
+      font-size: 14px;
+      color: var(--slate-500);
+      font-weight: 500;
+    }
+
+    @keyframes spin {
+      to {
+        transform: rotate(360deg);
+      }
+    }
