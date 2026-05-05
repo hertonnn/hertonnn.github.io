@@ -269,11 +269,10 @@ function handleDefect(problemType, node) {
       actionsLog.push("Avaliação: Usuário identificou que não havia sistema.");
       actionsLog.push("Implementação: A equipe de desenvolvimento criou o sistema inicial do questionário para avaliação.");
       flags.hasForm = true;
-      showSuccessAndReRender('Excelente! Um questionário básico foi implementado.');
+      showSuccessAndReRender('Um questionário básico foi implementado. Mas saiba que um protótipo não foi validado, talvez seja necessário voltar a prototipação.', 'warning');
     } else if (node === 'Prototipação') {
       actionsLog.push("Avaliação: Usuário identificou que não havia sistema.");
       actionsLog.push("Prototipação: O designer criou o protótipo inicial da tela (nota: prototipar antes de codificar é uma ótima prática de IHC!).");
-      actionsLog.push("Implementação: A equipe de desenvolvimento implementou o protótipo em seguida.");
       flags.hasForm = true;
       showSuccessAndReRender('Excelente escolha! Prototipar antes de implementar é uma ótima prática de IHC. O layout foi desenhado e logo implementado de forma básica.');
     } else if (node === 'Projeto Conceitual') {
@@ -323,8 +322,9 @@ function handleDefect(problemType, node) {
   }
 }
 
-function showSuccessAndReRender(msg) {
-  showModalMessage('success', msg);
+
+function showSuccessAndReRender(msg, type = 'success') {
+  showModalMessage(type, msg);
   const btns = document.querySelectorAll('#modal-btns button');
   btns.forEach(b => { b.disabled = true; b.style.pointerEvents = 'none'; });
 
@@ -373,7 +373,7 @@ function showFinalSuccess() {
   if (flags.dateIsSlider || flags.hasCreep) {
     actionsLog.push("Conclusão: O usuário forçou o envio de um questionário com problemas de usabilidade.");
   } else {
-    actionsLog.push("Conclusão: Questionário final perfeitamente usável foi preenchido e enviado.");
+    actionsLog.push("Conclusão: Questionário final perfeitamente usável foi preenchido e enviado. A implementação final pode ser desenvolvida.");
   }
 
   const userNameEl = document.getElementById('userName');
@@ -434,7 +434,35 @@ function showFinalSuccess() {
   if (q4Val === correctQ4) hits++;
   const hitRate = (hits / 4) * 100;
 
-  let logHTML = actionsLog.map(action => `<li style="margin-bottom: 6px;">${action}</li>`).join('');
+  let logHTML = '<div class="flowchart">';
+  actionsLog.forEach((action, index) => {
+    const parts = action.split(': ');
+    let title = parts[0];
+    let desc = parts.slice(1).join(': ');
+    if (!desc) {
+      desc = title;
+      title = 'Ação';
+    }
+
+    logHTML += `
+      <div class="flowchart-box">
+        <div class="flowchart-title">${title}</div>
+        <div class="flowchart-desc">${desc}</div>
+      </div>
+    `;
+
+    if (index < actionsLog.length - 1) {
+      logHTML += `
+        <div class="flowchart-arrow">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="12" y1="5" x2="12" y2="19"></line>
+            <polyline points="19 12 12 19 5 12"></polyline>
+          </svg>
+        </div>
+      `;
+    }
+  });
+  logHTML += '</div>';
 
   card.classList.remove('card-fade-in');
   card.classList.add('card-fade-out');
@@ -451,9 +479,9 @@ function showFinalSuccess() {
             
             <div style="margin-top: 24px; padding: 16px; background: var(--slate-100); border-radius: 8px;">
               <h3 style="font-size: 16px; margin-bottom: 12px; color: var(--slate-800);">Resumo de Ações (Fluxo Percorrido)</h3>
-              <ul style="font-size: 14px; color: var(--slate-700); padding-left: 20px; margin-bottom: 24px;">
+              <div style="margin-bottom: 24px;">
                 ${logHTML}
-              </ul>
+              </div>
 
               <h3 style="font-size: 16px; margin-bottom: 12px; color: var(--slate-800);">Dados Pessoais Preenchidos</h3>
               <div style="margin-bottom: 24px; padding: 12px; background: var(--branco); border-radius: 6px; border: 1px solid var(--slate-400);">
