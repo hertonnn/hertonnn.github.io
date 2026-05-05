@@ -276,10 +276,14 @@ function handleDefect(problemType, node) {
       actionsLog.push("Implementação: A equipe de desenvolvimento implementou o protótipo em seguida.");
       flags.hasForm = true;
       showSuccessAndReRender('Excelente escolha! Prototipar antes de implementar é uma ótima prática de IHC. O layout foi desenhado e logo implementado de forma básica.');
+    } else if (node === 'Projeto Conceitual') {
+      showModalMessage('warning', 'Imagine que um modelo conceitual inicial já tenha sido pensado.');
+    } else if (node === 'Especificação de Requisitos' || node === 'Análise de Tarefas') {
+      showModalMessage('warning', 'Imagine que os requisitos iniciais já tenham sido definidos. Assim como a análise de tarefas.');
     } else if (node === 'Avaliação') {
-      showModalMessage('warning', 'Acho que estamos andando em círculos! Você já está Avaliando. Que tal começarmos construindo algo? (Dica: Implementação ou Prototipação)');
+      showModalMessage('warning', 'Acho que estamos andando em círculos! Você já está Avaliando. Que tal começarmos construindo algo?');
     } else {
-      showModalMessage('error', 'Oops! Precisamos de um rascunho visual ou de código rodando primeiro. (Dica: Implementação ou Prototipação)');
+      showModalMessage('error', 'Oops! Precisamos de um rascunho visual ou de código rodando primeiro.');
     }
   }
 
@@ -290,7 +294,7 @@ function handleDefect(problemType, node) {
       flags.hasButton = true;
       showSuccessAndReRender('Muito bem! O layout do botão foi desenhado e o protótipo ajustado.');
     } else {
-      showModalMessage('error', 'Hum, quase! Lembre-se que desenhar elementos visuais e testar o layout de um botão novo faz parte da criação de protótipos. (Dica: Prototipação)');
+      showModalMessage('error', 'Hum, quase! Lembre-se que desenhar elementos visuais e testar o layout de um botão novo faz parte da criação de protótipos.');
     }
   }
 
@@ -301,9 +305,9 @@ function handleDefect(problemType, node) {
       flags.dateIsSlider = false;
       showSuccessAndReRender('Genial! O modelo mental agora é condizente com a tarefa.');
     } else if (node === 'Implementação') {
-      showModalMessage('warning', 'Calma lá! Não adianta codificar algo que tem um modelo mental ruim desde a base. Precisamos reprojetar a ideia primeiro. (Dica: Projeto Conceitual)');
+      showModalMessage('warning', 'Calma lá! Não adianta codificar algo que tem um modelo mental ruim desde a base. Precisamos reprojetar a ideia primeiro.');
     } else {
-      showModalMessage('error', 'Para alterar a forma como o usuário compreende e interage com o dado (o modelo mental), precisamos focar nos conceitos base. (Dica: Projeto Conceitual)');
+      showModalMessage('error', 'Para alterar a forma como o usuário compreende e interage com o dado (o modelo mental), precisamos focar nos conceitos base.');
     }
   }
 
@@ -314,7 +318,7 @@ function handleDefect(problemType, node) {
       flags.hasCreep = false;
       showSuccessAndReRender('Requisitos revisados: Menos é mais! A carga cognitiva foi aliviada.');
     } else {
-      showModalMessage('error', 'Não é bem aí! Onde nós definimos (ou cortamos) o escopo e as funções que o sistema deve ou não ter? (Dica: Especificação de Requisitos)');
+      showModalMessage('error', 'Não é bem aí! Onde nós definimos (ou cortamos) o escopo e as funções que o sistema deve ou não ter?');
     }
   }
 }
