@@ -20,16 +20,7 @@ const projects = [
         link: "https://www.linkedin.com/in/herton-silveira-70509a243",
         image: "img/WhatsApp Image 2025-11-13 at 10.12.05.jpeg" 
     },
-    {
-        title: "Ciência da Computação - UDESC",
-        category: "Scientific Repository",
-        description: "Sempre digo que esse repositório representa o quanto levo a sério a área da computação. Acervo completo da graduação em Ciência da Computação (UDESC), reunindo códigos, projetos e materiais essenciais.",
-        tech: [],
-        type: "research",
-        link: "https://github.com/hertonnn/UDESC-Computacao",
-        image: "img/Fundo_Branco_Colorido__RGB.png",
-        status: "pin"
-    },
+
     {
         title: "Iris Flower Dataset, grafos e métricas de Machine Learning",
         category: "Data Science & Algorithms",
@@ -189,6 +180,15 @@ function renderProjects(filterType) {
                 </a>
             </div>
         `;
+
+        // Torna o card inteiro clicável, ignorando links aninhados
+        card.classList.add('cursor-pointer');
+        card.addEventListener('click', (e) => {
+            if (!e.target.closest('a') && project.link && project.link !== '#') {
+                window.open(project.link, '_blank');
+            }
+        });
+
         projectsGrid.appendChild(card);
     });
 
