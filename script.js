@@ -12,16 +12,6 @@ const repoLinks = {
 // --- DATA: PROJECTS ---
 const projects = [
     {
-        title: "Ciência da Computação - UDESC",
-        category: "Scientific Repository",
-        description: "Sempre digo que esse repositório representa o quanto levo a sério a área da computação. Acervo da graduação em Ciência da Computação (UDESC), reunindo códigos, projetos e materiais essenciais.",
-        tech: [],
-        type: "research",
-        link: "https://github.com/hertonnn/UDESC-Computacao",
-        image: "img/Fundo_Branco_Colorido__RGB.png",
-        status: "acervo"
-    },
-    {
         title: "Far.IA Agent",
         category: "Generative AI & LLM Agents",
         description: "Estágio Ottimizza - Agente autônomo para extração contábil complexa.",
@@ -137,20 +127,12 @@ function renderProjects(filterType) {
         const badgeText = project.type === 'research' ? 'Pesquisa' : 'Dev';
         const badgeColor = project.type === 'research' ? 'bg-blue-600/90' : 'bg-orange-600/90';
         
-        // --- NOVA LÓGICA DO PIN E ACERVO ---
+        // --- NOVA LÓGICA DO PIN ---
         // Cria o HTML do pin se o status for 'pin', caso contrário deixa vazio
         const pinHtml = project.status === 'pin' 
             ? `<span class="bg-orange-400 text-white text-xs px-2 py-1 rounded backdrop-blur flex items-center gap-1 shadow-sm">
                  <i data-lucide="pin" class="w-3 h-3 fill-white"></i>
                </span>` 
-            : '';
-
-        const acervoHtml = project.status === 'acervo'
-            ? `<div class="absolute top-4 left-0 z-30">
-                 <span class="bg-orange-600 text-white text-[10px] font-bold px-3 py-1.5 rounded-r-md shadow-lg shadow-orange-900/50 uppercase tracking-wider border-l-4 border-orange-800">
-                     Acervo Principal
-                 </span>
-               </div>`
             : '';
 
         // Tech Stack HTML (Lógica Atualizada)
@@ -170,19 +152,10 @@ function renderProjects(filterType) {
             }
         }).join('');
 
-        const imageClass = project.status === 'acervo' 
-            ? 'w-full h-full object-contain p-4 group-hover:scale-105 transition-transform duration-500 mix-blend-multiply'
-            : 'w-full h-full object-cover group-hover:scale-105 transition-transform duration-500';
-            
-        const imageContainerClass = project.status === 'acervo'
-            ? 'h-48 overflow-hidden relative bg-[#eef2f6]'
-            : 'h-48 overflow-hidden relative';
-
         card.innerHTML = `
-            <div class="${imageContainerClass}">
+            <div class="h-48 overflow-hidden relative">
                 <div class="absolute inset-0 bg-slate-900/20 group-hover:bg-transparent transition-all z-10"></div>
-                ${acervoHtml}
-                <img src="${project.image}" alt="${project.title}" class="${imageClass}" />
+                <img src="${project.image}" alt="${project.title}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
                 
                 <div class="absolute top-4 right-4 z-20 flex gap-2">
                     ${pinHtml} <span class="${badgeColor} text-white text-xs px-2 py-1 rounded backdrop-blur flex items-center gap-1">
