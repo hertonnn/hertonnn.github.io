@@ -1,6 +1,6 @@
 // --- CONFIG: TECH LINKS ---
 const repoLinks = {
-    "POO": "https://github.com/hertonnn/UDESC-Computacao/tree/master/POO%20-%20Programa%C3%A7%C3%A3o%20Orientada%20a%20Objetos", 
+    "POO": "https://github.com/hertonnn/UDESC-Computacao/tree/master/POO%20-%20Programa%C3%A7%C3%A3o%20Orientada%20a%20Objetos",
     "BAN1": "https://github.com/hertonnn/UDESC-Computacao/tree/master/BAN1%20-%20Banco%20de%20Dados%20I",
     "LFA": "https://github.com/hertonnn/UDESC-Computacao/tree/master/LFA%20-%20Linguagens%20Formais%20de%20Aut%C3%B4matos",
     "EDA2": "https://github.com/hertonnn/UDESC-Computacao/tree/master/EDA%20II%20-%20Estrutura%20de%20Dados%202",
@@ -18,7 +18,7 @@ const projectsPt = [
         tech: ["Python", "LangChain", "OpenAI API", "Vector DB"],
         type: "dev",
         link: "https://www.linkedin.com/in/herton-silveira-70509a243",
-        image: "img/WhatsApp Image 2025-11-13 at 10.12.05.jpeg" 
+        image: "img/WhatsApp Image 2025-11-13 at 10.12.05.jpeg"
     },
 
     {
@@ -38,6 +38,15 @@ const projectsPt = [
         type: "research",
         link: "https://github.com/hertonnn/Compilador-Java",
         image: "https://optim.tildacdn.net/tild6638-3234-4266-b630-646530643738/-/resize/760x/-/format/webp/compiler.jpg.webp"
+    },
+    {
+        title: "Ciclo de Vida em Estrela",
+        category: "Human-Computer Interaction",
+        description: "Trabalho da disciplina IHC - Interação Humano Computador sobre o Ciclo de Vida em Estrela, validada com o professor e colegas de turma.",
+        tech: ["HTML", "CSS", "JavaScript", "IHC"],
+        type: "research",
+        link: "https://hertonnn.github.io/IHC",
+        image: "img/ihc_estrela.png"
     },
     {
         title: "API Finance",
@@ -103,7 +112,16 @@ const projectsEn = [
         tech: ["Python", "LangChain", "OpenAI API", "Vector DB"],
         type: "dev",
         link: "https://www.linkedin.com/in/herton-silveira-70509a243",
-        image: "img/WhatsApp Image 2025-11-13 at 10.12.05.jpeg" 
+        image: "img/WhatsApp Image 2025-11-13 at 10.12.05.jpeg"
+    },
+    {
+        title: "Star Lifecycle",
+        category: "Human-Computer Interaction",
+        description: "Work for the HCI - Human-Computer Interaction course about the Star Lifecycle, validated with the professor and classmates.",
+        tech: ["HTML", "CSS", "JavaScript", "IHC"],
+        type: "research",
+        link: "https://hertonnn.github.io/IHC",
+        image: "img/ihc_estrela.png"
     },
     {
         title: "Iris Flower Dataset, graphs and ML metrics",
@@ -213,23 +231,23 @@ function renderProjects(filterType) {
         const badgeIcon = project.type === 'research' ? 'book-open' : 'cpu';
         const badgeText = project.type === 'research' ? (isEnglish ? 'Research' : 'Pesquisa') : 'Dev';
         const badgeColor = project.type === 'research' ? 'bg-blue-600/90' : 'bg-orange-600/90';
-        
+
         // --- NOVA LÓGICA DO PIN ---
         // Cria o HTML do pin se o status for 'pin', caso contrário deixa vazio
-        const pinHtml = project.status === 'pin' 
+        const pinHtml = project.status === 'pin'
             ? `<span class="bg-orange-400 text-white text-xs px-2 py-1 rounded backdrop-blur flex items-center gap-1 shadow-sm">
                  <i data-lucide="pin" class="w-3 h-3 fill-white"></i>
-               </span>` 
+               </span>`
             : '';
 
         // Tech Stack HTML (Lógica Atualizada)
         const techStackHtml = project.tech.map(t => {
             // Verifica se existe um link definido para essa tecnologia
-            const link = repoLinks[t]; 
-            
+            const link = repoLinks[t];
+
             // Classes originais mantidas
             const baseClass = "text-xs bg-slate-900 text-slate-300 px-2 py-1 rounded border border-slate-700";
-            
+
             if (link) {
                 // Se tiver link: Renderiza <a> com as mesmas classes visuais + hover effect
                 return `<a href="${link}" target="_blank" class="${baseClass} hover:border-orange-500 hover:text-white transition-colors cursor-pointer decoration-0">${t}</a>`;
