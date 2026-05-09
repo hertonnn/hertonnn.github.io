@@ -10,7 +10,7 @@ const repoLinks = {
 
 
 // --- DATA: PROJECTS ---
-const projects = [
+const projectsPt = [
     {
         title: "Far.IA Agent",
         category: "Generative AI & LLM Agents",
@@ -95,6 +95,93 @@ const projects = [
     }
 ];
 
+const projectsEn = [
+    {
+        title: "Far.IA Agent",
+        category: "Generative AI & LLM Agents",
+        description: "Ottimizza Internship - Autonomous agent for complex accounting extraction.",
+        tech: ["Python", "LangChain", "OpenAI API", "Vector DB"],
+        type: "dev",
+        link: "https://www.linkedin.com/in/herton-silveira-70509a243",
+        image: "img/WhatsApp Image 2025-11-13 at 10.12.05.jpeg" 
+    },
+    {
+        title: "Iris Flower Dataset, graphs and ML metrics",
+        category: "Data Science & Algorithms",
+        description: "Implementation of graph-based clustering (in C) applied to the Iris dataset, with critical analysis of metrics.",
+        tech: ["Python", "C", "Matplotlib", "TEC"],
+        type: "research",
+        link: "https://github.com/hertonnn/UDESC-Computacao/tree/48f44e99bb4f739ff70fa2e769810e3a33ac10da/TEG%20-%20Teoria%20dos%20Grafos/Trabalhos/Grafo%20%C3%8Dris",
+        image: "img/Gemini_Generated_Image_5tgyd65tgyd65tgy.png"
+    },
+    {
+        title: "Uncomplicating a Compiler!",
+        category: "Compiler Design & Engineering",
+        description: "Development of a compiler in Haskell for generating JVM bytecodes. Language engineering in practice.",
+        tech: ["Haskell", "Java", "Shell", "Jasmim", "COM"],
+        type: "research",
+        link: "https://github.com/hertonnn/Compilador-Java",
+        image: "https://optim.tildacdn.net/tild6638-3234-4266-b630-646530643738/-/resize/760x/-/format/webp/compiler.jpg.webp"
+    },
+    {
+        title: "Finance API",
+        category: "Software Architecture",
+        description: "Robust desktop application for financial management, applying strict OOP patterns and PostgreSQL persistence.",
+        tech: ["Java", "PostgreSQL", "POO"],
+        type: "dev",
+        link: "https://www.youtube.com/watch?v=W3SZnzQo-sg&t=79s",
+        image: "imag/Thunb_projeto3.png"
+    },
+    {
+        title: "Traffic system modeling using automata",
+        category: "Simulation & Modeling",
+        description: "Simulation of complex traffic via Finite and Pushdown Automata, modeling flows and intersection states.",
+        tech: ["Python", "POO", "LFA"],
+        type: "research",
+        link: "https://github.com/hertonnn/UDESC-Computacao/tree/f69d092a873219270d94ab1de8f510da709bd37c/LFA%20-%20Linguagens%20Formais%20de%20Aut%C3%B4matos/Trabalho%20final/Simula%C3%A7%C3%A3o-Tr%C3%A2nsito-2024",
+        image: "img/Gemini_Generated_Image_b275s1b275s1b275.png"
+    },
+    {
+        title: "Legal System",
+        category: "Backend & Database Architecture",
+        description: "Centralized system for legal data management, optimizing the document flow with a Java and SQL backend.",
+        tech: ["Java", "PostgreSQL", "BAN1"],
+        type: "dev",
+        link: "https://github.com/hertonnn/Sistema-Juridico-BD",
+        image: "img/Gemini_Generated_Image_lnj79ilnj79ilnj7.png"
+    },
+    {
+        title: "Algorithmic complexity of tree operations",
+        category: "Advanced Data Structures & Analysis",
+        description: "Comparative performance and Big-O analysis between AVL, Red-Black and B trees in manipulation operations.",
+        tech: ["Python", "Matplotlib", "EDA2"],
+        type: "research",
+        link: "https://github.com/hertonnn/UDESC-Computacao/tree/285d32a6088c53ad5143f2d941b4fedf65ad44f7/EDA%20II%20-%20Estrutura%20de%20Dados%202/Trabalho%20Final",
+        image: "img/Gemini_Generated_Image_7gwhuc7gwhuc7gwh.png"
+    },
+    {
+        title: "Neural Network Programming applied to games",
+        category: "Basic Learning IA",
+        description: "My first project involving Artificial Neural Networks. I wrote it from scratch, trained it and applied it to the game Pong.",
+        tech: ["Python", "Matplotlib", "Numpy", "Pygame"],
+        type: "dev",
+        link: "rede_neural.html",
+        image: "imag/Thunb_Projeto1.png"
+    },
+    {
+        title: "Login System",
+        category: "Basic Learning",
+        description: "My first project 🥺. Login System in Python, with a graphical interface and MySQL database connection.",
+        tech: ["Python", "MySQL", "Tkinter"],
+        type: "dev",
+        link: "sistema_login.html",
+        image: "imagens_projeto1/Interface.png"
+    }
+];
+
+const isEnglish = document.documentElement.lang === 'en';
+const projects = isEnglish ? projectsEn : projectsPt;
+
 // --- DOM ELEMENTS ---
 const navbar = document.getElementById('navbar');
 const projectsGrid = document.getElementById('projects-grid');
@@ -124,7 +211,7 @@ function renderProjects(filterType) {
 
         // Badge Icon Logic
         const badgeIcon = project.type === 'research' ? 'book-open' : 'cpu';
-        const badgeText = project.type === 'research' ? 'Pesquisa' : 'Dev';
+        const badgeText = project.type === 'research' ? (isEnglish ? 'Research' : 'Pesquisa') : 'Dev';
         const badgeColor = project.type === 'research' ? 'bg-blue-600/90' : 'bg-orange-600/90';
         
         // --- NOVA LÓGICA DO PIN ---
@@ -176,7 +263,7 @@ function renderProjects(filterType) {
                 </div>
 
                 <a href="${project.link || '#'}" target="_blank" class="inline-flex items-center text-sm font-bold text-white hover:text-orange-500 transition-colors">
-                    Ver Detalhes <i data-lucide="external-link" class="w-3 h-3 ml-2"></i>
+                    ${isEnglish ? 'View Details' : 'Ver Detalhes'} <i data-lucide="external-link" class="w-3 h-3 ml-2"></i>
                 </a>
             </div>
         `;
