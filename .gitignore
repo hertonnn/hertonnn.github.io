@@ -1,7 +1,6 @@
-# Ignora resources
+.git
+
+# Ignora resources gerais
 resources/**
 
-# Ignora o arquivo index2.html
-index2.html
-.gitignore
-.git
+# Arquivos do Jekyll

@@ -3,4 +3,4 @@ description: Desenvolvedor & Pesquisador Científico
 baseurl: "" # mude se hospedar em subdiretório, como /blog
 url: "https://hertonnn.github.io/"
 markdown: kramdown
-permalink: /blog/:year/:month/:day/:title/
+permalink: /blog/:title/
