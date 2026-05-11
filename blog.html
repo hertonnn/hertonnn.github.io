@@ -1,0 +1,55 @@
+---
+layout: default
+title: Herton Blog
+---
+
+<div class="max-w-2xl mx-auto">
+
+    <div class="text-center not-prose mb-16">
+        <h1 class="text-4xl md:text-5xl font-bold tracking-tighter text-white mb-4">Herton Blog</h1>
+    </div>
+
+    {% assign previous_group = "" %}
+
+    {% for post in site.posts %}
+    {% capture month %}{{ post.date | date: "%m" }}{% endcapture %}
+    {% capture year %}{{ post.date | date: "%Y" }}{% endcapture %}
+
+    {% case month %}
+    {% when '01' %}{% assign month_name = 'Janeiro' %}
+    {% when '02' %}{% assign month_name = 'Fevereiro' %}
+    {% when '03' %}{% assign month_name = 'Março' %}
+    {% when '04' %}{% assign month_name = 'Abril' %}
+    {% when '05' %}{% assign month_name = 'Maio' %}
+    {% when '06' %}{% assign month_name = 'Junho' %}
+    {% when '07' %}{% assign month_name = 'Julho' %}
+    {% when '08' %}{% assign month_name = 'Agosto' %}
+    {% when '09' %}{% assign month_name = 'Setembro' %}
+    {% when '10' %}{% assign month_name = 'Outubro' %}
+    {% when '11' %}{% assign month_name = 'Novembro' %}
+    {% when '12' %}{% assign month_name = 'Dezembro' %}
+    {% endcase %}
+
+    {% capture current_group %}{{ year }} - {{ month_name }}{% endcapture %}
+
+    {% if current_group != previous_group %}
+    {% unless forloop.first %}</ul>{% endunless %}
+
+    <h2 id="{{ year }}-{{ month_name | downcase }}">
+        {{ current_group }}
+        <a href="#{{ year }}-{{ month_name | downcase }}"
+            class="no-underline text-slate-700 hover:text-orange-500 ml-2 font-normal">#</a>
+    </h2>
+    <ul>
+        {% assign previous_group = current_group %}
+        {% endif %}
+
+        <li>
+            <a href="{{ site.baseurl }}{{ post.url }}">{{ post.title }}</a>
+        </li>
+
+        {% if forloop.last %}
+    </ul>{% endif %}
+    {% endfor %}
+
+</div>

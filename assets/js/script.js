@@ -218,6 +218,7 @@ window.addEventListener('scroll', () => {
 
 // --- RENDER PROJECTS FUNCTION ---
 function renderProjects(filterType) {
+    if (!projectsGrid) return;
     projectsGrid.innerHTML = ''; // Clear existing content
 
     const filtered = projects.filter(p => filterType === 'all' || p.type === filterType);
@@ -321,6 +322,82 @@ filterBtns.forEach(btn => {
 
 // --- INITIAL RENDER ---
 document.addEventListener('DOMContentLoaded', () => {
+    if (typeof projectsGrid !== 'undefined' && projectsGrid) {
+        renderProjects('all'); // Default filter
+    }
     renderProjects('all'); // Default filter
     lucide.createIcons(); // Init icons
+});
+
+
+document.addEventListener('DOMContentLoaded', () => {
+    const content = document.getElementById('main-content');
+    const tocList = document.getElementById('toc-list');
+
+    // Se não houver conteúdo ou container do ToC, não faz nada
+    if (!content || !tocList) return;
+
+    // 1. Encontra todos os títulos H2 e H3 dentro do conteúdo do post
+    const headings = content.querySelectorAll('h2, h3');
+
+    if (headings.length === 0) {
+        document.getElementById('toc-container').style.display = 'none';
+        return; // Esconde o menu se não houver títulos
+    }
+
+    // 2. Constrói a lista do menu lateral
+    headings.forEach(heading => {
+        // O Jekyll (Kramdown) costuma gerar IDs automaticamente, mas garantimos um aqui caso não tenha
+        if (!heading.id) {
+            heading.id = heading.innerText.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/[^a-z0-9]+/g, '-');
+        }
+
+        const li = document.createElement('li');
+
+        // Se for um subtítulo (H3), empurra um pouco para a direita (como na sua imagem)
+        if (heading.tagName.toLowerCase() === 'h3') {
+            li.classList.add('ml-4');
+        }
+
+        const a = document.createElement('a');
+        a.href = `#${heading.id}`;
+        a.textContent = heading.innerText.replace('#', '').trim();
+        // Estilo padrão: cor opaca. Transição suave ao passar o mouse.
+        a.className = 'toc-link block hover:text-orange-500 transition-colors duration-300';
+        a.dataset.target = heading.id; // Salva a referência para o ScrollSpy
+
+        li.appendChild(a);
+        tocList.appendChild(li);
+    });
+
+    // 3. Lógica do ScrollSpy (Acender o item ativo)
+    const observerOptions = {
+        root: null,
+        // Configuração crucial: A margem superior negativa faz com que o título 
+        // só seja considerado "ativo" quando passar da metade superior da tela.
+        rootMargin: '0px 0px -70% 0px',
+        threshold: 0
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                // Tira o destaque de todos os links
+                document.querySelectorAll('.toc-link').forEach(link => {
+                    link.classList.remove('text-orange-500', 'font-bold');
+                    link.classList.add('text-slate-400');
+                });
+
+                // Dá destaque ao link correspondente ao título que está na tela
+                const activeLink = document.querySelector(`.toc-link[data-target="${entry.target.id}"]`);
+                if (activeLink) {
+                    activeLink.classList.remove('text-slate-400');
+                    activeLink.classList.add('text-orange-500', 'font-bold');
+                }
+            }
+        });
+    }, observerOptions);
+
+    // Coloca o "olheiro" em todos os títulos
+    headings.forEach(h => observer.observe(h));
 });
