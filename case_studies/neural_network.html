@@ -6,15 +6,15 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="shortcut icon" href="./imag/pngwing.com.ico" type="image/x-icon">
+    <link rel="shortcut icon" href="../assets/images/global/pngwing.com.ico" type="image/x-icon">
     <title>
         Projetos | Herton Silveira
     </title>
-    <link href="projetos.css" rel = "stylesheet" />
-    <link href="style_antigo.css" rel = "stylesheet" />
-    <link href="variaiveis.css" rel = "stylesheet" />  
-    <link rel="stylesheet" media = "screen  and (max-width: 900px)" href="tablet.css">
-    <link rel="stylesheet" media = "screen  and (max-width: 450px)" href="celular.css">
+    <link href="../assets/css/projetos.css" rel = "stylesheet" />
+    <link href="../assets/css/style_antigo.css" rel = "stylesheet" />
+    <link href="../assets/css/variaiveis.css" rel = "stylesheet" />  
+    <link rel="stylesheet" media = "screen  and (max-width: 900px)" href="../assets/css/tablet.css">
+    <link rel="stylesheet" media = "screen  and (max-width: 450px)" href="../assets/css/celular.css">
 
 </head>
 <body>
@@ -25,9 +25,9 @@
             <div class = "line3"></div>
         </div>
         <div class ="navbar-itens">
-            <li><a href= "index.html"> Início</a> </li>
-            <li><a href = "index.html"> Sobre </a></li>
-            <li><a href = "index.html"> Projetos </a></li>
+            <li><a href= "../index.html"> Início</a> </li>
+            <li><a href = "../index.html"> Sobre </a></li>
+            <li><a href = "../index.html"> Projetos </a></li>
         </div>
     </nav>
     
@@ -74,8 +74,8 @@
             <br>
             <h1> FeedForward</h1>
             <br>
-            <img class = "imagens" src = "./imagens_projeto2/IMAGEM1.jpeg" >
-            <img class = "imagens" src = "./imagens_projeto2/IMAGEM1.1.png" >
+            <img class = "imagens" src="../assets/images/projects/projeto2/IMAGEM1.jpeg" >
+            <img class = "imagens" src="../assets/images/projects/projeto2/IMAGEM1.1.png" >
             <br>
             <br>
             <p>De forma resumida é nesse processo em que as entradas, com entradas quero dizer os números iniciais que a Rede Neural terá contato para a aprendizagem, são multiplicadas pelos <b class = "text_cor">pesos</b>, (inicialmente valores randômicos entre 0 e 1). Resumidamente, esses pesos dão relevância aos valores de entrada, isto é, um peso de 30% implica em menos relevância em compararação a uma entrada que possui um peso de 50%, por exemplo. 
@@ -84,15 +84,15 @@
             <br>
             <h1> Função de Ativação </h1>
             <br>
-            <img src = "./imagens_projeto2/IMAGEM2.jpeg"class = "imagens">
-            <img src = "./imagens_projeto2/IMAGEM2.2.png" class = "imagens">
+            <img src="../assets/images/projects/projeto2/IMAGEM2.jpeg"class = "imagens">
+            <img src="../assets/images/projects/projeto2/IMAGEM2.2.png" class = "imagens">
             <br>
             <br>
             A função usada nesse projeto é a <b class = "text_cor">Sigmoid</b>, como visto acima em um desenho de aparência duvidosa feito por min. As <b class = "text_cor">Funções de Ativação</b> conferem um caráter não-linear, uma vez que esses cálculos iniciais de soma e produto estabelecem uma relação linear. E por fim aplica-se todos esses cálculos:
             <br>
             <br>
-            <img src = "./imagens_projeto2/IMAGEM3.jpeg"class = "imagens">
-            <img src = "./imagens_projeto2/IMAGEM3.3.png" class = "imagens">
+            <img src="../assets/images/projects/projeto2/IMAGEM3.jpeg"class = "imagens">
+            <img src="../assets/images/projects/projeto2/IMAGEM3.3.png" class = "imagens">
             <br>
             <br>
             <h1> Backpropagation </h1>
@@ -101,8 +101,8 @@
             Pode-se dizer que essa parte é a mais importante da Rede Neural, uma vez que é aqui em que o cálculo dos novos <b class = "text_cor">Pesos</b> e novos <b class = "text_cor">Bias</b> serão feitos, ou seja, é aqui que ocorrerá uma adaptação visando alcançar a proximidade do valor de saída desejado.
             <br>
             <br>
-            <img src = "./imagens_projeto2/IMAGEM4.jpeg"class = "imagens">
-            <img src = "./imagens_projeto2/IMAGEM4.4.png" class = "imagens">
+            <img src="../assets/images/projects/projeto2/IMAGEM4.jpeg"class = "imagens">
+            <img src="../assets/images/projects/projeto2/IMAGEM4.4.png" class = "imagens">
             <br>
             <br>
             <h1> Implementando </h1>
@@ -116,8 +116,8 @@
  
             <br>
             <br>
-            <img src = "./imagens_projeto2/IMAGEM5.png"class = "imagens">
-            <img src = "./imagens_projeto2/IMAGEM5.1.png" class = "imagens">
+            <img src="../assets/images/projects/projeto2/IMAGEM5.png"class = "imagens">
+            <img src="../assets/images/projects/projeto2/IMAGEM5.1.png" class = "imagens">
             <br>
             <br>
             <h1> Jogo para implementação </h1>
@@ -126,13 +126,13 @@
             Por ser o meu primeiro projeto com Redes Neurais decidi usar como teste um jogo simples, sendo esse o Pong. Não vou entrar em detalhes da criação dele, pois o objetivo não é a criação de jogos aqui. O processo vai funcionar da seguinte forma, as entradas serão as posições em um plano cartesiano, com os valores das abscissas e ordenadas da bola, bem como da raquete. A "tarefa" da IA é a partir dessas entradas tentar ao máximo evitar o erro, que é a diferença entre as coordenadas da bola e da raquete. Ora, se o objetivo do Pong é defender a bolinha com a raquete, está claro que suas coordenadas precisam ser similares, ao menos no eixo das ordenadas. A saída será um valor maior do que 0.5 (raquete vai pra cima) ou menor que 0.5 (raquete vai pra baixo), tentando assim diminuir o erro.
             <br>
             <br>
-            <img src = "./imagens_projeto2/IMAGEM6.jpeg" class = "imagens">
+            <img src="../assets/images/projects/projeto2/IMAGEM6.jpeg" class = "imagens">
             <br>
             <br>
             Com o jogo criado, a tarefa agora é treinar a Rede Neural. Para isso é importante estar a par do comportamento dos dados, por isso implementei o modo gráfico. A cada 30 frames o jogo atualiza um gráfico que mostra a variação do erro, perceba que esse erro precisa ser o mais próximo de zero.
             <br>
             <br>
-            <video src = "imagens_projeto2/VIDEO1.webm" class = "video" controls autoplay loop muted preload poster="./imagens_projeto2/IMAGEM7.png" ></video>
+            <video src = "../assets/images/projects/projeto2/VIDEO1.webm" class = "video" controls autoplay loop muted preload poster="./imagens_projeto2/IMAGEM7.png" ></video>
             <br>
             <br>
             Inicialmente o erro tem uma variação grande, pois a IA está aprendendo, isto é, os pesos e bias estão constantemente sendo atualizados(a cada frame) para valores que impliquem em um resultado mais próximo do desejado. Perceba que caso o erro seja zero o valor dos pesos se conservam, como visto na fórmula para o cálculo de novos pesos.
@@ -140,13 +140,13 @@
             Ao notar que a IA não vai mais perder, basta parar o programa e gravar os pesos atuais em um arquivo. Agora com esses valores ela é capaz de responder com o movimento correto qualquer posição em que a bola esteja, a tornando uma adversária *invencível. Mas é claro que vou testar isso...
             <br>
             <br>
-            <img src = "./imagens_projeto2/IMAGEM7.png" class = "imagens">
+            <img src="../assets/images/projects/projeto2/IMAGEM7.png" class = "imagens">
             <br>
             <br>
             <h1> Desligo o modo gráfico, o treinamento da IA e ligo o modo <b class = "text_cor">Contra a IA!!</b> </h1>
             <br>
             <br>
-            <img src = "./imagens_projeto2/IMAGEM8.png" class = "imagens">
+            <img src="../assets/images/projects/projeto2/IMAGEM8.png" class = "imagens">
             <br>
             <br>
             E como já era esperado eu levei uma surra da minha própria criação...
@@ -175,7 +175,7 @@
 src="https://code.jquery.com/jquery-3.6.1.min.js"
 integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ="
 crossorigin="anonymous"></script>
-<script src="main.js"></script>
+<script src="../assets/js/main.js"></script>
 </body>
 
 </html>

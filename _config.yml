@@ -1,0 +1,6 @@
+title: Herton Silveira | Blog
+description: "Meu espaço para escrever sobre carreira e projetos de computação."
+baseurl: ""
+url: "https://hertonnn.github.io"
+markdown: kramdown
+theme: minima

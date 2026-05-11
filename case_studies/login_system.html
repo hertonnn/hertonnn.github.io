@@ -6,15 +6,15 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="shortcut icon" href="./imag/pngwing.com.ico" type="image/x-icon">
+    <link rel="shortcut icon" href="../assets/images/global/pngwing.com.ico" type="image/x-icon">
     <title>
         Projetos | Herton Silveira
     </title>
-    <link href="projetos.css" rel = "stylesheet" />
-    <link href="style_antigo.css" rel = "stylesheet" />
-    <link href="variaiveis.css" rel = "stylesheet" />  
-    <link rel="stylesheet" media = "screen  and (max-width: 900px)" href="tablet.css">
-    <link rel="stylesheet" media = "screen  and (max-width: 450px)" href="celular.css">
+    <link href="../assets/css/projetos.css" rel = "stylesheet" />
+    <link href="../assets/css/style_antigo.css" rel = "stylesheet" />
+    <link href="../assets/css/variaiveis.css" rel = "stylesheet" />  
+    <link rel="stylesheet" media = "screen  and (max-width: 900px)" href="../assets/css/tablet.css">
+    <link rel="stylesheet" media = "screen  and (max-width: 450px)" href="../assets/css/celular.css">
 </head>
 
 
@@ -27,9 +27,9 @@
             <div class = "line3"></div>
         </div>
         <div class ="navbar-itens">
-            <li><a href= "index.html"> Início</a> </li>
-            <li><a href = "index.html"> Sobre </a></li>
-            <li><a href = "index.html"> Projetos </a></li>
+            <li><a href= "../index.html"> Início</a> </li>
+            <li><a href = "../index.html"> Sobre </a></li>
+            <li><a href = "../index.html"> Projetos </a></li>
         </div>
     </nav>
     
@@ -52,7 +52,7 @@
             <br>
             <p>O desafio inicial era colocar os dados do input (entrada de informações), como senha e nome em um lugar mais apropriado, pois em C eu havia utilizado um arquivo em formato binário (como os arquivos em texto, porém com uma linguagem mais apropriada para a máquina ler), o que é menos utilizado em comparação aos grandes bancos de dados. E é aí que entra o MySQL.</p>
             
-            <img class = "imagens" src = "./imagens_projeto1/Entrando Mysql.png" width="550">
+            <img class = "imagens" src="../assets/images/projects/projeto1/Entrando Mysql.png" width="550">
             <br>
             <br>
             <h1> Criando o banco de dados</h1>
@@ -61,7 +61,7 @@
             <p>Com o MySQL instalado optei por utilizar o próprio terminal para fazer as modificações, como criar um usuário, um root, uma senha, um database e por fim uma tabela, é nessas tabelas que as informações do input podem ser armazenadas do input com os comandos de CREATE.</p>
             
             <br>
-            <img  class = "imagens" src = "./imagens_projeto1/acessando banco.png" width="550">
+            <img  class = "imagens" src="../assets/images/projects/projeto1/acessando banco.png" width="550">
             <br>
             <br>
             <h1> Lógica do login e interface gráfica </h1>
@@ -69,18 +69,18 @@
 
             <p>Basicamente o Login funciona com uma autenticação por meio do nome do user e uma senha de no mínimo 5 dígitos. Ao ler as informações na tela a máquina se conecta com o database e informa os comandos da linguagem SQL que devem ser executados por meio da linguagem Python (mesma usada na criação do código fonte do login e cadastro), como por exemplo o comando SELECT que talvez seja um dos mais importantes dessa linguagem. O SELECT e seus derivados realizam consultas (chamadas de query) de dados na base de dados.</p>
 
-            <img  class = "imagens" src = "imagens_projeto1/Interface.png" width="300">
+            <img  class = "imagens" src = "../assets/images/projects/projeto1/Interface.png" width="300">
             
 
             <p>Como o foco era pôr em prática o aprendizado em bancos de dados optei por uma interface simples e intuitiva, usando a biblioteca do Python Tkinter para criá-la. Além do mais, aqui não uso nenhum algoritmo de criptografia para guardar, futuramente pretendo estudar mais segurança de dados e etc, e assim modificar esse código.</p>
             
             <div class = "carrossel">
                 <div class = "container" id = "img">
-                    <img class = "imagens" src = "imagens_projeto1/login invalido (1).png">
-                    <img class = "imagens" src = "imagens_projeto1/cadastrado (1).png">
-                    <img class = "imagens" src = "imagens_projeto1/tentando de novo (1).png">
-                    <img class = "imagens" src = "imagens_projeto1/logada.png">
-                    <img class = "imagens" src = "imagens_projeto1/banco pós cadastro.png">
+                    <img class = "imagens" src = "../assets/images/projects/projeto1/login invalido (1).png">
+                    <img class = "imagens" src = "../assets/images/projects/projeto1/cadastrado (1).png">
+                    <img class = "imagens" src = "../assets/images/projects/projeto1/tentando de novo (1).png">
+                    <img class = "imagens" src = "../assets/images/projects/projeto1/logada.png">
+                    <img class = "imagens" src = "../assets/images/projects/projeto1/banco pós cadastro.png">
                 </div>
             </div>
 
@@ -91,7 +91,7 @@
             <a href = "https://github.com/hertonnn/Login_Cadastro_Python-Mysql"> Documentos no GitHub aqui! </a> 
             <br>
             <br>
-            <img class = "imagens" src = "imagens_projeto1/final.png"width="300">
+            <img class = "imagens" src = "../assets/images/projects/projeto1/final.png"width="300">
             <br>
             <br>
         </div>
@@ -104,7 +104,7 @@
 src="https://code.jquery.com/jquery-3.6.1.min.js"
 integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ="
 crossorigin="anonymous"></script>
-<script src="main.js"></script>
+<script src="../assets/js/main.js"></script>
 </body>
 
 </html>
