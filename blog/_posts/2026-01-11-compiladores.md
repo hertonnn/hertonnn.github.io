@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "[TESTE BLOG] Compiladores"
-date: 2026-05-11 10:00:00 -0300
+date: 2026-01-11 10:00:00 -0300
 ---
 
 # 📘 Compiladores
