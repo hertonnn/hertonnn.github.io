@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="scroll-smooth">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ page.title | default: site.title }}</title>
+    <link rel="icon" type="image/x-icon" href="/assets/images/global/svgviewer-output.ico">
+
+    <script src="https://cdn.tailwindcss.com?plugins=typography"></script>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    typography: (theme) => ({
+                        DEFAULT: {
+                            css: {
+                                color: theme('colors.slate.300'),
+                                a: { color: theme('colors.orange.500'), '&:hover': { color: theme('colors.orange.400') } },
+                                h1: { color: theme('colors.white') },
+                                h2: { color: theme('colors.white') },
+                                h3: { color: theme('colors.white') },
+                                strong: { color: theme('colors.white') },
+                                code: { color: theme('colors.orange.400') },
+                                blockquote: {
+                                    borderLeftColor: theme('colors.orange.500'),
+                                    color: theme('colors.slate.400')
+                                },
+                            },
+                        },
+                    }),
+                }
+            }
+        }
+    </script>
+
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link rel="stylesheet" href="/assets/css/style.css">
+</head>
+
+<body class="min-h-screen bg-slate-950 text-slate-200 font-sans flex flex-col">
+
+    <nav
+        class="w-full z-50 transition-all duration-300 py-4 bg-slate-950/90 backdrop-blur-md border-b border-slate-900 sticky top-0">
+        <div class="container mx-auto px-6 flex justify-between items-center">
+            <a href="/" class="text-2xl font-bold tracking-tighter text-white">
+                HERTON<span class="text-orange-500">.</span>
+            </a>
+
+            <div class="flex items-center gap-6">
+                <div class="hidden md:flex space-x-8 text-sm font-semibold tracking-wide items-center">
+                    <a href="/" class="hover:text-orange-500 transition-colors">INÍCIO</a>
+                    <a href="/#portfolio" class="hover:text-orange-500 transition-colors">PORTFÓLIO</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <main class="flex-grow pt-16 pb-24">
+        {{ content }}
+    </main>
+
+    <footer class="bg-slate-950 pt-16 pb-10 border-t border-slate-900 mt-auto">
+        <div class="container mx-auto px-6">
+            <div class="flex flex-col md:flex-row justify-between items-center mb-8">
+                <div class="text-center md:text-left mb-8 md:mb-0">
+                    <h2 class="text-2xl font-bold text-white mb-2">Vamos conversar?</h2>
+                    <p class="text-slate-400">Aberto a colaborações em Pesquisa e Desenvolvimento de IA.</p>
+                </div>
+                <div class="flex gap-4">
+                    <a href="#"
+                        class="w-10 h-10 rounded-full bg-slate-900 border border-slate-800 flex items-center justify-center text-slate-400 hover:text-white hover:bg-orange-600 transition-all">
+                        <i data-lucide="linkedin" class="w-4 h-4"></i>
+                    </a>
+                    <a href="#"
+                        class="w-10 h-10 rounded-full bg-slate-900 border border-slate-800 flex items-center justify-center text-slate-400 hover:text-white hover:bg-orange-600 transition-all">
+                        <i data-lucide="github" class="w-4 h-4"></i>
+                    </a>
+                </div>
+            </div>
+            <div
+                class="border-t border-slate-900 pt-8 flex flex-col md:flex-row justify-between items-center text-slate-500 text-sm">
+                <p>&copy; 2024 Herton Silveira. Todos os direitos reservados.</p>
+                <p class="flex items-center gap-2 mt-2 md:mt-0 text-slate-400">
+                    From Brazil <i data-lucide="heart" class="w-4 h-4 text-orange-400 fill-orange-400"></i> to the world
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        lucide.createIcons();
+    </script>
+</body>
+
+</html>

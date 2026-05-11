@@ -1,6 +1,6 @@
 title: Herton Silveira | Blog
-description: "Meu espaço para escrever sobre carreira e projetos de computação."
-baseurl: ""
-url: "https://hertonnn.github.io"
+description: Desenvolvedor & Pesquisador Científico
+baseurl: "" # mude se hospedar em subdiretório, como /blog
+url: "https://hertonnn.github.io/"
 markdown: kramdown
-theme: minima
+permalink: /blog/:year/:month/:day/:title/

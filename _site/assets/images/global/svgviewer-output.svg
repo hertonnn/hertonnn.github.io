@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <!-- Fundo: Retângulo com bordas arredondadas (Navy Blue - Slate 950) -->
+  <rect x="0" y="0" width="512" height="512" rx="100" ry="100" fill="#0f172a"/>
+  
+  <!-- Letra H (Branco) - Desenhada geometricamente para alinhamento perfeito -->
+  <path d="M110 120 L190 120 L190 220 L320 220 L320 120 L400 120 L400 392 L320 392 L320 290 L190 290 L190 392 L110 392 Z" fill="#f8fafc"/>
+  
+  <!-- Ponto (Laranja - Orange 600) -->
+  <circle cx="395" cy="380" r="45" fill="#ea580c"/>
+</svg>

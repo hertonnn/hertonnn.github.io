@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Herton Silveira | Portfolio</title>
+    <link rel="icon" type="assets/images/global/svgviewer-output.ico" href="assets/images/global/svgviewer-output.ico">
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <!-- Arquivo CSS Personalizado -->
+    <link rel="stylesheet" href="assets/css/style.css">
+</head>
+
+<body class="min-h-screen bg-slate-950 text-slate-200 font-sans">
+
+    <!-- NAVBAR -->
+    <nav id="navbar" class="fixed top-0 w-full z-50 transition-all duration-300 py-6 bg-transparent">
+        <div class="container mx-auto px-6 flex justify-between items-center">
+            <div class="text-2xl font-bold tracking-tighter text-white">
+                HERTON<span class="text-orange-500">.</span>
+            </div>
+            
+            <div class="flex items-center gap-6">
+                <div class="hidden md:flex space-x-8 text-sm font-semibold tracking-wide items-center">
+                    <a href="#home" class="hover:text-orange-500 transition-colors">HOME</a>
+                    <a href="#about" class="hover:text-orange-500 transition-colors">ABOUT</a>
+                    <a href="#expertise" class="hover:text-orange-500 transition-colors">EXPERTISE</a>
+                    <a href="#portfolio" class="hover:text-orange-500 transition-colors">PORTFOLIO</a>
+                    <a href="#contact"
+                        class="px-5 py-2 border border-orange-500 text-orange-500 rounded hover:bg-orange-500 hover:text-white transition-all">CONTACT</a>
+                </div>
+                
+                <!-- Language Switcher -->
+                <div class="relative group">
+                    <button class="flex items-center gap-1 text-slate-300 hover:text-white transition-colors">
+                        <i data-lucide="globe" class="w-5 h-5"></i>
+                        <i data-lucide="chevron-down" class="w-3 h-3"></i>
+                    </button>
+                    <!-- Dropdown -->
+                    <div class="absolute right-0 mt-4 w-40 bg-slate-800 rounded-md shadow-xl border border-slate-700 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 transform origin-top-right">
+                        <a href="index.html" class="block px-4 py-2 text-sm text-slate-300 hover:bg-slate-700 hover:text-white rounded-t-md">Português (BR)</a>
+                        <a href="en.html" class="block px-4 py-2 text-sm text-orange-500 font-bold hover:bg-slate-700 rounded-b-md">English (US)</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- HERO SECTION -->
+    <section id="home" class="relative h-screen flex items-end pb-20 md:pb-0 md:items-center justify-center overflow-hidden">
+
+        <!-- Background Image Container -->
+        <div class="absolute inset-0 z-0">
+            <img src="assets/images/global/Gemini_Generated_Image_nfukdlnfukdlnfuk.png" alt="Herton Palestrando" class="w-full h-full object-cover opacity-90 transition-all duration-700
+                   -scale-x-100 object-[25%_40%] md:object-[50%_30%]" />
+            <!-- Overlays -->
+            <div class="absolute inset-0 bg-slate-950/20"></div>
+            <div class="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/40 to-transparent"></div>
+            <div class="absolute inset-0 bg-gradient-to-r from-slate-950 via-slate-950/30 to-transparent"></div>
+        </div>
+
+        <div class="container mx-auto px-6 relative z-10 pt-0 md:pt-20">
+            <div class="max-w-3xl">
+                <!-- Tagline -->
+                <div class="flex items-center gap-3 mb-4 md:mb-6 animate-fade-in-up">
+                    <span
+                        class="bg-orange-600 text-white px-3 py-1 text-[10px] md:text-xs font-bold uppercase tracking-wider rounded-sm shadow-lg shadow-orange-900/50">Computer
+                        Scientist</span>
+                    <span class="h-px w-8 md:w-12 bg-orange-500/50"></span>
+                </div>
+
+                <!-- Title -->
+                <h1
+                    class="text-2xl sm:text-4xl md:text-6xl font-extrabold text-white leading-tight mb-4 md:mb-6 animate-fade-in-up delay-100 drop-shadow-lg">
+                    From academic theory to <br />
+                    <span class="text-transparent bg-clip-text bg-gradient-to-r from-orange-500 to-amber-500">Market Application</span>
+                </h1>
+
+                <!-- Subtitle -->
+                <p
+                    class="text-sm md:text-2xl text-slate-200 mb-6 md:mb-8 max-w-2xl font-light border-l-4 border-orange-500 pl-4 md:pl-6 animate-fade-in-up delay-200 drop-shadow-md bg-slate-950/30 backdrop-blur-sm py-2 pr-4 rounded-r-lg">
+                    I develop intelligent agents and robust architectures to solve complex automation problems. <br />
+                    <span class="text-xs md:text-base text-slate-400 mt-2 block">Developer & Scientific Researcher.</span>
+                </p>
+
+                <!-- Buttons -->
+                <div class="flex flex-col sm:flex-row gap-3 md:gap-4 animate-fade-in-up delay-300">
+                    <a href="#portfolio"
+                        class="bg-orange-600 text-white px-6 py-3 md:px-8 md:py-4 text-sm md:text-base rounded font-bold hover:bg-orange-700 transition-all flex items-center justify-center gap-2 group shadow-lg shadow-orange-900/50">
+                        <i data-lucide="code" class="w-4 h-4 md:w-5 md:h-5"></i>
+                        View Projects
+                        <i data-lucide="chevron-down"
+                            class="w-3 h-3 md:w-4 md:h-4 group-hover:translate-y-1 transition-transform"></i>
+                    </a>
+                    <a href="#about"
+                        class="border border-slate-500 text-slate-200 px-6 py-3 md:px-8 md:py-4 text-sm md:text-base rounded font-bold hover:border-white hover:text-white hover:bg-white/5 transition-all flex items-center justify-center gap-2 backdrop-blur-sm">
+                        About me
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Scroll Indicator -->
+        <div class="absolute bottom-10 left-1/2 -translate-x-1/2 animate-bounce text-orange-500">
+            <i data-lucide="chevron-down" class="w-8 h-8"></i>
+        </div>
+    </section>
+
+    <!-- ABOUT SECTION -->
+    <section id="about" class="py-24 bg-slate-900 relative">
+        <div class="container mx-auto px-6">
+            <div class="grid md:grid-cols-2 gap-12 items-center">
+
+                <!-- Image Side -->
+                <div class="relative group">
+                    <div
+                        class="absolute -inset-4 bg-gradient-to-r from-orange-600 to-amber-600 rounded-lg blur opacity-25 group-hover:opacity-50 transition duration-500">
+                    </div>
+                    <div class="relative rounded-lg overflow-hidden border border-slate-700 shadow-2xl">
+                        <img src="assets/images/global/Captura de tela 2025-12-13 105731.png" alt="Herton Close Up"
+                            class="w-full h-auto object-cover grayscale group-hover:grayscale-0 transition duration-500" />
+                    </div>
+                </div>
+
+                <!-- Content Side -->
+                <div>
+                    <div
+                        class="relative bg-gradient-to-br from-orange-600 to-red-600 p-10 rounded-2xl shadow-2xl transform md:-translate-x-12 md:translate-y-8 hover:-translate-y-1 transition-transform duration-300">
+                        <div class="absolute -top-6 -left-6 text-9xl text-white opacity-10 font-serif">"</div>
+
+                        <h2 class="text-4xl md:text-5xl font-bold text-white mb-6">
+                            <a href="https://www.youtube.com/watch?v=TRPBY_lxJfE">
+                                "Do you have grit?"
+                            </a>
+                        </h2>
+                        <h3 class="text-2xl font-bold text-white/90 mb-4">
+                            Yes! And this is just the beginning.
+                        </h3>
+
+                        <div class="space-y-4 text-white/80 text-lg leading-relaxed">
+                            <p>
+                                I believe the best code is born at the intersection of in-depth research and pragmatic engineering.
+                            </p>
+                            <p>
+                                My journey began in Northern Brazil and brought me to the technological hub of Santa
+                                Catarina, driven by a single mission: to master complexity. Today, I work investigating the
+                                state-of-the-art in Artificial Intelligence to create automations that save human hours.
+                            </p>
+                        </div>
+
+                        <div class="mt-8 flex items-center gap-4">
+                            <div class="h-px flex-1 bg-white/30"></div>
+                            <span class="text-white font-mono text-sm uppercase tracking-widest">Herton Silveira</span>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- EXPERTISE SECTION -->
+    <section id="expertise" class="py-24 bg-slate-950">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold text-white mb-4">The Scientist & The Engineer</h2>
+                <div class="w-24 h-1 bg-orange-500 mx-auto rounded-full"></div>
+                <p class="mt-4 text-slate-400 max-w-2xl mx-auto">
+                    The intersection where rigorous academic research meets practical market application.
+                </p>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-8">
+                <!-- Card 1 -->
+                <div
+                    class="bg-slate-900/50 p-8 rounded-xl border border-slate-800 hover:border-orange-500/50 transition-colors group">
+                    <div
+                        class="w-14 h-14 bg-slate-800 rounded-lg flex items-center justify-center text-orange-500 mb-6 group-hover:scale-110 transition-transform">
+                        <i data-lucide="terminal" class="w-8 h-8"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-white mb-3">Full Stack Developer</h3>
+                    <p class="text-slate-400 mb-4">
+                        Robust software architecture, creation of autonomous agents and scalable systems.
+                    </p>
+                    <ul class="text-sm text-slate-500 space-y-2">
+                        <li class="flex items-center gap-2">
+                            <div class="w-1.5 h-1.5 bg-orange-500 rounded-full"></div>HTML, CSS
+                        </li>
+                        <li class="flex items-center gap-2">
+                            <div class="w-1.5 h-1.5 bg-orange-500 rounded-full"></div>JavaScript
+                        </li>
+                        <li class="flex items-center gap-2">
+                            <div class="w-1.5 h-1.5 bg-orange-500 rounded-full"></div>Python
+                        </li>
+                        <li class="flex items-center gap-2">
+                            <div class="w-1.5 h-1.5 bg-orange-500 rounded-full"></div>SQL & NoSQL
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Card 2 -->
+                <div
+                    class="bg-slate-900/50 p-8 rounded-xl border border-slate-800 hover:border-orange-500/50 transition-colors group">
+                    <div
+                        class="w-14 h-14 bg-slate-800 rounded-lg flex items-center justify-center text-orange-500 mb-6 group-hover:scale-110 transition-transform">
+                        <i data-lucide="brain" class="w-8 h-8"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-white mb-3">Scientific Researcher</h3>
+                    <p class="text-slate-400 mb-4">
+                        Academic investigation focused on Artificial Intelligence, Evolutionary Algorithms, and Optimization.
+                    </p>
+                    <ul class="text-sm text-slate-500 space-y-2">
+                        <li class="flex items-center gap-2">
+                            <div class="w-1.5 h-1.5 bg-orange-500 rounded-full"></div>Machine Learning
+                        </li>
+                        <li class="flex items-center gap-2">
+                            <div class="w-1.5 h-1.5 bg-orange-500 rounded-full"></div>Data Science
+                        </li>
+                        <li class="flex items-center gap-2">
+                            <div class="w-1.5 h-1.5 bg-orange-500 rounded-full"></div>Academic Papers
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Card 3 -->
+                <div
+                    class="bg-slate-900/50 p-8 rounded-xl border border-slate-800 hover:border-orange-500/50 transition-colors group">
+                    <div
+                        class="w-14 h-14 bg-slate-800 rounded-lg flex items-center justify-center text-orange-500 mb-6 group-hover:scale-110 transition-transform">
+                        <i data-lucide="mic" class="w-8 h-8"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-white mb-3">Leadership & Communication</h3>
+                    <p class="text-slate-400 mb-4">
+                        Ability to translate "tech-speak" into business language. Guardian at
+                        <a href="https://agoratechpark.com.br/programa/liga-agora/" target="_blank"
+                            rel="noopener noreferrer"
+                            class="text-orange-500 hover:text-orange-400 hover:underline transition-colors font-medium">
+                            Liga Ágora
+                        </a>.
+                    </p>
+                    <ul class="text-sm text-slate-500 space-y-2">
+                        <li class="flex items-center gap-2">
+                            <div class="w-1.5 h-1.5 bg-orange-500 rounded-full"></div>Public Speaking
+                        </li>
+                        <li class="flex items-center gap-2">
+                            <div class="w-1.5 h-1.5 bg-orange-500 rounded-full"></div>Team Management
+                        </li>
+                        <li class="flex items-center gap-2">
+                            <div class="w-1.5 h-1.5 bg-orange-500 rounded-full"></div>Open Innovation
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- PORTFOLIO SECTION -->
+    <section id="portfolio" class="py-24 bg-slate-900">
+        <div class="container mx-auto px-6">
+            <div class="mb-12">
+                <div>
+                    <h2 class="text-3xl md:text-4xl font-bold text-white">Creation Lab</h2>
+                    <p class="text-slate-400 mt-2">Selected development and research projects.</p>
+                </div>
+            </div>
+
+            <!-- Destaque UDESC -->
+            <div class="mb-12 relative group mt-6 md:mt-0">
+                <div class="absolute -top-3 left-1/2 -translate-x-1/2 z-10">
+                    <span
+                        class="bg-orange-600 text-white text-[10px] sm:text-xs font-bold px-3 py-1 rounded shadow-lg uppercase tracking-wider whitespace-nowrap">
+                        Academic Collection
+                    </span>
+                </div>
+                
+                <!-- Pin Icon -->
+                <div class="absolute top-4 right-4 z-20 pointer-events-none">
+                    <span class="bg-orange-400 text-white text-xs px-2 py-1 rounded flex items-center gap-1 shadow-sm">
+                        <i data-lucide="pin" class="w-3 h-3 fill-white"></i>
+                    </span>
+                </div>
+
+                <a href="https://github.com/hertonnn/UDESC-Computacao" target="_blank"
+                    class="block bg-slate-800 rounded-xl overflow-hidden border border-orange-500/50 hover:border-orange-500 transition-all shadow-lg hover:shadow-orange-900/30">
+                    <div class="flex flex-col md:flex-row h-full">
+                        <!-- Logo Side -->
+                        <div
+                            class="bg-[#eef2f6] md:w-[30%] lg:w-1/4 flex items-center justify-center p-4 md:p-4 overflow-hidden shrink-0">
+                            <img src="assets/images/global/Fundo_Branco_Colorido__RGB.png" alt="UDESC Logo"
+                                class="w-full max-w-[200px] md:max-w-[220px] object-contain mix-blend-multiply scale-100 mt-8 md:mt-0" />
+                        </div>
+                        <!-- Content Side -->
+                        <div class="p-4 md:py-4 md:px-6 flex-1 flex flex-col justify-center">
+                            <h3
+                                class="text-xl md:text-2xl font-bold text-white mb-1 group-hover:text-orange-400 transition-colors">
+                                Computer Science - UDESC</h3>
+                            <p class="text-slate-300 text-sm leading-relaxed">
+                                I always say this repository represents how seriously I take the computer science field.
+                                A complete collection of my Computer Science degree (UDESC), gathering essential codes, projects, and materials.
+                            </p>
+                        </div>
+                    </div>
+                </a>
+            </div>
+
+            <!-- Toggle Buttons -->
+            <div class="flex justify-center mb-12">
+                <div class="bg-slate-800 p-1 rounded-lg inline-flex" id="portfolio-filters">
+                    <button data-filter="all"
+                        class="px-4 py-2 rounded-md text-sm font-medium transition-all bg-orange-600 text-white shadow-lg filter-btn">
+                        All
+                    </button>
+                    <button data-filter="dev"
+                        class="px-4 py-2 rounded-md text-sm font-medium transition-all text-slate-400 hover:text-white filter-btn">
+                        Development
+                    </button>
+                    <button data-filter="research"
+                        class="px-4 py-2 rounded-md text-sm font-medium transition-all text-slate-400 hover:text-white filter-btn">
+                        Research
+                    </button>
+                </div>
+            </div>
+
+            <!-- Projects Grid -->
+            <div id="projects-grid" class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Javascript irá preencher isso -->
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer id="contact" class="bg-slate-950 pt-20 pb-10 border-t border-slate-900">
+        <div class="container mx-auto px-6">
+            <div class="flex flex-col md:flex-row justify-between items-center mb-12">
+                <div class="text-center md:text-left mb-8 md:mb-0">
+                    <h2 class="text-3xl font-bold text-white mb-2">Let's talk?</h2>
+                    <p class="text-slate-400">Open to collaborations in AI Research and Development.</p>
+                </div>
+
+                <div class="flex gap-4">
+                    <a href="https://www.linkedin.com/in/herton-silveira-70509a243/"
+                        class="w-12 h-12 rounded-full bg-slate-900 border border-slate-800 flex items-center justify-center text-slate-400 hover:text-white hover:bg-orange-600 hover:border-orange-600 transition-all">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                            class="lucide lucide-linkedin w-5 h-5">
+                            <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z">
+                            </path>
+                            <rect width="4" height="12" x="2" y="9"></rect>
+                            <circle cx="4" cy="4" r="2"></circle>
+                        </svg>
+                    </a>
+
+                    <a href="https://github.com/hertonnn"
+                        class="w-12 h-12 rounded-full bg-slate-900 border border-slate-800 flex items-center justify-center text-slate-400 hover:text-white hover:bg-orange-600 hover:border-orange-600 transition-all">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                            fill="currentColor" class="w-5 h-5">
+                            <path
+                                d="M12 2A10 10 0 0 0 2 12c0 4.42 2.87 8.17 6.84 9.5.5.08.66-.23.66-.5v-1.69c-2.77.6-3.36-1.34-3.36-1.34-.45-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.6.07-.6 1 .08 1.53 1.04 1.53 1.04.87 1.52 2.34 1.07 2.91.83.09-.65.35-1.09.63-1.34-2.22-.25-4.55-1.11-4.55-4.92 0-1.11.38-2 1.03-2.71-.1-.25-.45-1.29.1-2.64 0 0 .84-.27 2.75 1.02.79-.22 1.65-.33 2.5-.33.85 0 1.71.11 2.5.33 1.91-1.29 2.75-1.02 2.75-1.02.55 1.35.2 2.39.1 2.64.65.71 1.03 1.6 1.03 2.71 0 3.82-2.34 4.66-4.57 4.91.36.31.69.92.69 1.85V21c0 .27.16.59.67.5C19.14 20.16 22 16.42 22 12A10 10 0 0 0 12 2z">
+                            </path>
+                        </svg>
+                    </a>
+
+                    <a href="https://wa.me/5562981332807" target="_blank"
+                        class="w-12 h-12 rounded-full bg-slate-900 border border-slate-800 flex items-center justify-center text-slate-400 hover:text-white hover:bg-orange-600 hover:border-orange-600 transition-all">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                            class="lucide lucide-phone w-5 h-5">
+                            <path
+                                d="M13.832 16.568a1 1 0 0 0 1.213-.303l.355-.465A2 2 0 0 1 17 15h3a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2A18 18 0 0 1 2 4a2 2 0 0 1 2-2h3a2 2 0 0 1 2 2v3a2 2 0 0 1-.8 1.6l-.468.351a1 1 0 0 0-.292 1.233 14 14 0 0 0 6.392 6.384">
+                            </path>
+                        </svg>
+                    </a>
+
+                    <a href="mailto:hertonsilva44@email.com"
+                        class="w-12 h-12 rounded-full bg-slate-900 border border-slate-800 flex items-center justify-center text-slate-400 hover:text-white hover:bg-orange-600 hover:border-orange-600 transition-all">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                            class="lucide lucide-mail w-5 h-5">
+                            <path d="m22 7-8.991 5.727a2 2 0 0 1-2.009 0L2 7"></path>
+                            <rect x="2" y="4" width="20" height="16" rx="2"></rect>
+                        </svg>
+                    </a>
+                </div>
+            </div>
+
+            <div
+                class="border-t border-slate-900 pt-8 flex flex-col md:flex-row justify-between items-center text-slate-500 text-sm">
+                <p>&copy; 2024 Herton Silveira. All rights reserved.</p>
+                <p class="flex items-center gap-2 mt-2 md:mt-0 text-slate-400">
+                    From Brazil
+                    <i data-lucide="heart" class="w-5 h-5 text-orange-400 fill-orange-400"></i>
+                    to the world
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JAVASCRIPT LOGIC -->
+    <script src="assets/js/script.js"></script>
+</body>
+
+</html>
