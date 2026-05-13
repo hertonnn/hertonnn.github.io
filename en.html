@@ -19,44 +19,106 @@
 <body class="min-h-screen bg-slate-950 text-slate-200 font-sans">
 
     <!-- NAVBAR -->
+
     <nav id="navbar" class="fixed top-0 w-full z-50 transition-all duration-300 py-6 bg-transparent">
         <div class="container mx-auto px-6 flex justify-between items-center">
             <div class="text-2xl font-bold tracking-tighter text-white">
                 HERTON<span class="text-orange-500">.</span>
             </div>
 
-            <div class="flex items-center gap-6">
+            <div class="flex items-center gap-4 md:gap-6">
                 <div class="hidden md:flex space-x-8 text-sm font-semibold tracking-wide items-center">
-                    <a href="#home" class="hover:text-orange-500 transition-colors">HOME</a>
-                    <a href="#about" class="hover:text-orange-500 transition-colors">ABOUT</a>
-                    <a href="#expertise" class="hover:text-orange-500 transition-colors">EXPERTISE</a>
-                    <a href="#portfolio" class="hover:text-orange-500 transition-colors">PORTFOLIO</a>
+                    <a href="/#home" class="hover:text-orange-500 transition-colors">INÍCIO</a>
+                    <a href="/#about" class="hover:text-orange-500 transition-colors">SOBRE</a>
+                    <a href="/#expertise" class="hover:text-orange-500 transition-colors">EXPERTISE</a>
+                    <a href="/#portfolio" class="hover:text-orange-500 transition-colors">PORTFÓLIO</a>
                     <a href="/blog" class="hover:text-orange-500 transition-colors">BLOG</a>
-                    <a href="#contact"
-                        class="px-5 py-2 border border-orange-500 text-orange-500 rounded hover:bg-orange-500 hover:text-white transition-all">CONTACT</a>
+                    <a href="/#contact"
+                        class="px-5 py-2 border border-orange-500 text-orange-500 rounded hover:bg-orange-500 hover:text-white transition-all">CONTATO</a>
                 </div>
 
-                <!-- Language Switcher -->
-                <div class="relative group">
+                <div class="relative group hidden md:block">
                     <button class="flex items-center gap-1 text-slate-300 hover:text-white transition-colors">
                         <i data-lucide="globe" class="w-5 h-5"></i>
                         <i data-lucide="chevron-down" class="w-3 h-3"></i>
                     </button>
-                    <!-- Dropdown -->
                     <div
                         class="absolute right-0 mt-4 w-40 bg-slate-800 rounded-md shadow-xl border border-slate-700 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 transform origin-top-right">
                         <a href="index.html"
-                            class="block px-4 py-2 text-sm text-slate-300 hover:bg-slate-700 hover:text-white rounded-t-md">Português
+                            class="block px-4 py-2 text-sm text-orange-500 font-bold hover:bg-slate-700 rounded-t-md">Português
                             (BR)</a>
-                        <a href="en.html"
-                            class="block px-4 py-2 text-sm text-orange-500 font-bold hover:bg-slate-700 rounded-b-md">English
+                        <a href="/en.html"
+                            class="block px-4 py-2 text-sm text-slate-300 hover:bg-slate-700 hover:text-white rounded-b-md">English
                             (US)</a>
                     </div>
                 </div>
+
+                <button id="mobile-menu-btn"
+                    class="md:hidden flex flex-col justify-center items-center gap-[6px] w-8 h-8 z-50 relative cursor-pointer border-none bg-transparent">
+                    <span id="line1"
+                        class="w-6 h-[2px] bg-slate-300 transition-all duration-300 transform origin-center"></span>
+                    <span id="line2"
+                        class="w-6 h-[2px] bg-slate-300 transition-all duration-300 transform origin-center"></span>
+                </button>
             </div>
         </div>
     </nav>
 
+    <div id="mobile-menu"
+        class="md:hidden fixed inset-0 bg-slate-950/95 backdrop-blur-md z-40 transform translate-x-full transition-transform duration-300 flex flex-col pt-28 pb-8 px-8 overflow-y-auto">
+
+        <div class="flex flex-col space-y-6 text-xl font-semibold tracking-wide text-slate-300 flex-grow">
+            <a href="/#home" class="mobile-link hover:text-orange-500 transition-colors">HOME</a>
+            <a href="/#about" class="mobile-link hover:text-orange-500 transition-colors">ABOUT</a>
+            <a href="/#expertise" class="mobile-link hover:text-orange-500 transition-colors">EXPERTISE</a>
+            <a href="/#portfolio" class="mobile-link hover:text-orange-500 transition-colors">PORTFOLIO</a>
+            <a href="/blog" class="mobile-link hover:text-orange-500 transition-colors">BLOG</a>
+            <a href="/#contact" class="mobile-link text-orange-500 mt-2">CONTACT</a>
+        </div>
+
+        <div class="mt-8 border-t border-slate-800 pt-8 mb-4">
+            <div class="flex items-center gap-2 text-slate-400 mb-5 font-medium">
+                <i data-lucide="globe" class="w-5 h-5"></i>
+                <span>Idioma</span>
+            </div>
+            <div class="flex flex-col space-y-4 pl-7">
+                <a href="index.html" class="text-orange-500 font-bold flex items-center gap-2">
+                    Português (BR)
+                </a>
+                <a href="/en.html" class="text-slate-300 hover:text-white transition-colors">
+                    English (US)
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <div id="mobile-menu"
+        class="md:hidden fixed inset-0 bg-slate-950/95 backdrop-blur-md z-40 transform translate-x-full transition-transform duration-300 flex flex-col pt-28 pb-8 px-8 overflow-y-auto">
+
+        <div class="flex flex-col space-y-6 text-xl font-semibold tracking-wide text-slate-300 flex-grow">
+            <a href="/#home" class="mobile-link hover:text-orange-500 transition-colors">HOME</a>
+            <a href="/#about" class="mobile-link hover:text-orange-500 transition-colors">ABOUT</a>
+            <a href="/#expertise" class="mobile-link hover:text-orange-500 transition-colors">EXPERTISE</a>
+            <a href="/#portfolio" class="mobile-link hover:text-orange-500 transition-colors">PORTFOLIO</a>
+            <a href="/blog" class="mobile-link hover:text-orange-500 transition-colors">BLOG</a>
+            <a href="/#contact" class="mobile-link text-orange-500 mt-2">CONTACT</a>
+        </div>
+
+        <div class="mt-8 border-t border-slate-800 pt-8 mb-4">
+            <div class="flex items-center gap-2 text-slate-400 mb-5 font-medium">
+                <i data-lucide="globe" class="w-5 h-5"></i>
+                <span>Idioma</span>
+            </div>
+            <div class="flex flex-col space-y-4 pl-7">
+                <a href="index.html" class="text-orange-500 font-bold flex items-center gap-2">
+                    Português (BR)
+                </a>
+                <a href="/en.html" class="text-slate-300 hover:text-white transition-colors">
+                    English (US)
+                </a>
+            </div>
+        </div>
+    </div>
     <!-- HERO SECTION -->
     <section id="home"
         class="relative h-screen flex items-end pb-20 md:pb-0 md:items-center justify-center overflow-hidden">
@@ -415,6 +477,52 @@
 
     <!-- JAVASCRIPT LOGIC -->
     <script src="assets/js/script.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const btn = document.getElementById('mobile-menu-btn');
+            const menu = document.getElementById('mobile-menu');
+            const line1 = document.getElementById('line1');
+            const line2 = document.getElementById('line2');
+            const links = document.querySelectorAll('.mobile-link');
+            let isMenuOpen = false;
+
+            function toggleMenu() {
+                isMenuOpen = !isMenuOpen;
+                if (isMenuOpen) {
+                    // Mostrar menu
+                    menu.classList.remove('translate-x-full');
+                    menu.classList.add('translate-x-0');
+
+                    // Animação das 2 linhas formando o "X"
+                    line1.classList.add('translate-y-[4px]', 'rotate-45');
+                    line2.classList.add('-translate-y-[4px]', '-rotate-45');
+
+                    // Travar o scroll da página enquanto aberto
+                    document.body.style.overflow = 'hidden';
+                } else {
+                    // Esconder menu
+                    menu.classList.add('translate-x-full');
+                    menu.classList.remove('translate-x-0');
+
+                    // Voltar linhas ao normal
+                    line1.classList.remove('translate-y-[4px]', 'rotate-45');
+                    line2.classList.remove('-translate-y-[4px]', '-rotate-45');
+
+                    // Liberar o scroll
+                    document.body.style.overflow = '';
+                }
+            }
+
+            btn.addEventListener('click', toggleMenu);
+
+            // Fechar o menu automaticamente ao clicar em qualquer link (útil para links na mesma página)
+            links.forEach(link => {
+                link.addEventListener('click', () => {
+                    if (isMenuOpen) toggleMenu();
+                });
+            });
+        });
+    </script>
 </body>
 
 </html>
