@@ -45,7 +45,7 @@ const projectsPt = [
         description: "Trabalho da disciplina IHC - Interação Humano Computador sobre o Ciclo de Vida em Estrela, validada com o professor e colegas de turma.",
         tech: ["HTML", "CSS", "JavaScript", "IHC"],
         type: "research",
-        link: "https://hertonnn.github.io/IHC",
+        link: "https://hertonnn.github.io/case_studies/hci_lifecycle",
         image: "assets/images/global/ihc_estrela.png"
     },
     {
