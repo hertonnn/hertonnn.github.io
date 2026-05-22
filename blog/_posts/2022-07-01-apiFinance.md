@@ -1,7 +1,7 @@
 ---
 layout: post
-title: "[TESTE BLOG] Desenvolvendo uma aplicação desktop de controle de Finanças Pessoais em Java, com Java Swing e PostgreSQL."
-date: 2026-05-11 10:00:00 -0300
+title: "Desenvolvendo uma aplicação desktop de controle de Finanças Pessoais em Java, com Java Swing e PostgreSQL."
+date: 2022-07-01 10:00:00 -0300
 ---
 [![Demonstração do Projeto](https://img.youtube.com/vi/W3SZnzQo-sg/maxresdefault.jpg)](https://www.youtube.com/watch?v=W3SZnzQo-sg)
 
