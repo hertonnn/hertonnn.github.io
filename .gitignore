@@ -2,6 +2,7 @@
 
 # Ignora resources gerais
 resources/**
+projects/surprise/resources/**
 
 # Arquivos do Jekyll
 _site
