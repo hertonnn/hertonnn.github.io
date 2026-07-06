@@ -27,7 +27,7 @@ const projectsPt = [
         description: "Implementação de clustering baseado em grafos (em C) aplicada ao dataset Iris, com análise crítica de métricas.",
         tech: ["Python", "C", "Matplotlib", "TEC"],
         type: "research",
-        link: "https://github.com/hertonnn/UDESC-Computacao/tree/48f44e99bb4f739ff70fa2e769810e3a33ac10da/TEG%20-%20Teoria%20dos%20Grafos/Trabalhos/Grafo%20%C3%8Dris",
+        link: "https://github.com/hertonnn/UDESC-Computacao/tree/main/TEG%20-%20Teoria%20dos%20Grafos/Trabalhos/Grafo%20%C3%8Dris",
         image: "assets/images/global/Gemini_Generated_Image_5tgyd65tgyd65tgy.png"
     },
     {
@@ -63,7 +63,7 @@ const projectsPt = [
         description: "Simulação de tráfego complexo via Autômatos Finitos e com Pilha, modelando fluxos e estados de cruzamentos.",
         tech: ["Python", "POO", "LFA"],
         type: "research",
-        link: "https://github.com/hertonnn/UDESC-Computacao/tree/f69d092a873219270d94ab1de8f510da709bd37c/LFA%20-%20Linguagens%20Formais%20de%20Aut%C3%B4matos/Trabalho%20final/Simula%C3%A7%C3%A3o-Tr%C3%A2nsito-2024",
+        link: "https://github.com/hertonnn/UDESC-Computacao/tree/main/LFA%20-%20Linguagens%20Formais%20de%20Aut%C3%B4matos/Trabalho%20final/Simula%C3%A7%C3%A3o-Tr%C3%A2nsito-2024",
         image: "assets/images/global/Gemini_Generated_Image_b275s1b275s1b275.png"
     },
     {
@@ -81,7 +81,7 @@ const projectsPt = [
         description: "Análise comparativa de performance e Big-O entre árvores AVL, Rubro-Negra e B em operações de manipulação.",
         tech: ["Python", "Matplotlib", "EDA2"],
         type: "research",
-        link: "https://github.com/hertonnn/UDESC-Computacao/tree/285d32a6088c53ad5143f2d941b4fedf65ad44f7/EDA%20II%20-%20Estrutura%20de%20Dados%202/Trabalho%20Final",
+        link: "https://github.com/hertonnn/UDESC-Computacao/tree/main/EDA%20II%20-%20Estrutura%20de%20Dados%202/Trabalho%20Final",
         image: "assets/images/global/Gemini_Generated_Image_7gwhuc7gwhuc7gwh.png"
     },
     {
