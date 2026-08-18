@@ -6,7 +6,7 @@ categories: [projeto]
 tags: [Java, HTML, CSS, JavaScript, FastAPI, LLM, Ollama, IA, PostgreSQL]
 ---
 
-Há um tempo atrás, [escrevi no meu blog](./2025-06-01-SistemaJuridico.md) a respeito de um projeto que nasceu de uma disciplina de Banco de Dados na UDESC. Naquele post, eu cobri a parte que talvez seja a menos glamourosa, mas sem dúvida a mais importante de qualquer sistema: a **modelagem relacional**. Tabelas, chaves, cardinalidades, gatilhos. O alicerce invisível que segura tudo de pé.
+Há um tempo atrás, [escrevi no meu blog](https://hertonnn.github.io/blog/SistemaJuridico/) a respeito de um projeto que nasceu de uma disciplina de Banco de Dados na UDESC. Naquele post, eu cobri a parte que talvez seja a menos glamourosa, mas sem dúvida a mais importante de qualquer sistema: a **modelagem relacional**. Tabelas, chaves, cardinalidades, gatilhos. O alicerce invisível que segura tudo de pé.
 
 Agora é hora de contar o que veio depois.
 
@@ -27,9 +27,9 @@ Vamos por partes.
 
 O projeto original tinha uma interface de linha de comando (CLI) com menu numerado — aquele estilo clássico de projeto acadêmico. Funcionava, mas era o tipo de coisa que só quem desenvolveu consegue usar sem perder a paciência.
 
-A alternativa óbvia seria um frontend web, e foi exatamente o que eu fiz. Mas com uma restrição que tornou as coisas interessantes: **sem frameworks JavaScript, sem React, sem Vue, sem bundlers**. HTML puro, CSS puro, JavaScript vanilla. O servidor? O próprio `com.sun.net.httpserver.HttpServer` que já vem embutido no Java.
+A alternativa óbvia seria um frontend web, e foi exatamente o que fizemos. **HTML puro, CSS puro, JavaScript vanilla.** O servidor? O próprio `com.sun.net.httpserver.HttpServer` que já vem embutido no Java.
 
-> Isso não foi decisão ideológica. Foi pragmatismo. O projeto já tinha toda a lógica de acesso a dados em Java. Criar um servidor HTTP embutido que servisse páginas estáticas e expusesse endpoints REST JSON foi a forma mais direta de transformar a CLI em algo visual — sem adicionar dependências, sem trocar de linguagem, sem complicar o deploy.
+> Isso não foi decisão ideológica. Foi pragmatismo. O projeto já tinha toda a lógica de acesso a dados em Java. Criar um servidor HTTP embutido que servisse páginas estáticas e expusesse endpoints REST JSON foi a forma mais direta de transformar a CLI em algo visual — sem adicionar dependências, sem trocar de linguagem, sem complicar um projeto simples.
 
 O resultado é que quando você roda `java -jar Run.jar` e digita `20` no menu, o servidor sobe na porta 8081 e você acessa `http://localhost:8081/` no navegador. Sem instalação de nada além do Java.
 
@@ -60,6 +60,8 @@ src/view/
 É muito código? Não. Cada arquivo tem entre 70 e 200 linhas. Sem build step, sem transpilação. Você abre no bloco de notas e entende.
 
 ### Design: o que guiou as decisões visuais
+
+Nos inspiramos bastante no [JusBrasil](https://www.jusbrasil.com.br/) — tanto na organização da informação quanto na experiência de uso. A ideia era criar algo que um profissional da área jurídica já se sentisse familiarizado ao abrir.
 
 A fonte é a **Inter** (Google Fonts), que é basicamente a fonte padrão de qualquer interface que quer parecer profissional sem chamar atenção pra si mesma. As cores seguem uma paleta sóbria: azul institucional (`#1a56db`) como cor primária, cinzas para texto e fundo, e badges de status com semântica visual — verde para concluído, azul para em andamento, amarelo para suspenso.
 
@@ -226,11 +228,9 @@ A terceira camada é independente das duas primeiras. Ela recebe dados brutos de
 
 Essa é a camada que o front-end do JusDigital consome quando o usuário clica em "Gerar Resumo" na tela de detalhe do processo. O JavaScript coleta todas as informações visíveis na página, formata em texto, e faz um `POST` para `http://localhost:8000/summary`.
 
-### Segurança: o que impede o modelo de deletar seu banco
+### Uma validação básica contra SQL destrutivo
 
-Esse é um ponto que merece destaque. Quando você deixa um LLM gerar SQL, a primeira pergunta que qualquer pessoa sensata faz é: *"e se ele gerar um DROP TABLE?"*
-
-A resposta está em `llm_service.py`, na função `validate_sql_safety()`:
+Quando um LLM gera SQL, a pergunta natural é: *"e se ele gerar um DROP TABLE?"*. Implementamos uma validação simples com regex em `llm_service.py`, na função `validate_sql_safety()`:
 
 ```python
 _DANGEROUS_PATTERN = re.compile(
@@ -246,11 +246,11 @@ def validate_sql_safety(sql: str) -> None:
         raise HTTPException(status_code=422, detail=f"Palavra proibida: {match.group()}")
 ```
 
-Duas validações:
+Duas checagens básicas:
 1. A query **deve** começar com `SELECT`.
 2. A query **não pode** conter nenhuma das 11 palavras destrutivas.
 
-Se qualquer uma falhar, a API retorna HTTP 422 e a query nunca chega ao banco. É uma defesa simples? Sim. Mas em combinação com o prompt que instrui o modelo a gerar apenas `SELECT`, é uma camada dupla que funciona bem na prática.
+Se qualquer uma falhar, a API retorna HTTP 422 e a query nunca chega ao banco. Não é uma solução robusta de segurança — é uma checagem mínima com regex que, combinada com o prompt que instrui o modelo a gerar apenas `SELECT`, já evita os cenários mais óbvios para o contexto desse projeto.
 
 ### Os endpoints
 
@@ -424,7 +424,7 @@ O código completo está disponível no [repositório do GitHub](https://github.
 
 **Disciplina:** Banco de Dados II  
 **Instituição:** Universidade do Estado de Santa Catarina (UDESC) - CCT  
-**Autor:** Herton Silveira  
+**Autores:** Herton Silveira, Arthur Bertoli Silva  
 **Ano:** 2025/2026  
 
 <div class="mb-5">
