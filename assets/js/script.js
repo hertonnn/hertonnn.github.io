@@ -27,7 +27,7 @@ const projectsPt = [
         tech: ["HTML", "CSS", "JavaScript", "FastAPI", "Ollama"],
         type: "dev",
         link: "blog/SistemaJuridico-FrontEnd-IA/",
-        image: "assets/images/projects/projeto4/index_img.png"
+        image: "assets/images/projects/projeto4/index_arte.jpg"
     },
     {
         title: "Iris Flower Dataset, grafos e métricas de Machine Learning",
@@ -80,7 +80,7 @@ const projectsPt = [
         description: "Sistema centralizado para gestão de dados jurídicos, otimizando o fluxo documental com backend Java e SQL.",
         tech: ["Java", "PostgreSQL", "BAN1"],
         type: "dev",
-        link: "https://github.com/hertonnn/Sistema-Juridico-BD",
+        link: "https://hertonnn.github.io/blog/SistemaJuridico/",
         image: "assets/images/global/Gemini_Generated_Image_lnj79ilnj79ilnj7.png"
     },
     {
