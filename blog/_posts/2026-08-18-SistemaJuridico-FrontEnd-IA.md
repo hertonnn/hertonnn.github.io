@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Um Front-End Jurídico e uma IA que Fala SQL — A Continuação"
+title: "JusDigital: Da Modelagem ao Produto — Interface Web e IA com Linguagem Natural"
 date: 2026-08-18 11:00:00 -0300
 categories: [projeto]
 tags: [Java, HTML, CSS, JavaScript, FastAPI, LLM, Ollama, IA, PostgreSQL]
@@ -28,8 +28,6 @@ Vamos por partes.
 O projeto original tinha uma interface de linha de comando (CLI) com menu numerado — aquele estilo clássico de projeto acadêmico. Funcionava, mas era o tipo de coisa que só quem desenvolveu consegue usar sem perder a paciência.
 
 A alternativa óbvia seria um frontend web, e foi exatamente o que fizemos. **HTML puro, CSS puro, JavaScript vanilla.** O servidor? O próprio `com.sun.net.httpserver.HttpServer` que já vem embutido no Java.
-
-> Isso não foi decisão ideológica. Foi pragmatismo. O projeto já tinha toda a lógica de acesso a dados em Java. Criar um servidor HTTP embutido que servisse páginas estáticas e expusesse endpoints REST JSON foi a forma mais direta de transformar a CLI em algo visual — sem adicionar dependências, sem trocar de linguagem, sem complicar um projeto simples.
 
 O resultado é que quando você roda `java -jar Run.jar` e digita `20` no menu, o servidor sobe na porta 8081 e você acessa `http://localhost:8081/` no navegador. Sem instalação de nada além do Java.
 
@@ -76,46 +74,47 @@ O CSS usa variáveis `:root` como design system. Nenhuma cor, tamanho de fonte o
 }
 ```
 
-<!-- 📸 SCREENSHOT: Página inicial do JusDigital (index.html) mostrando o hero com busca e os cards de acesso rápido -->
 
 ### As telas que importam
 
 **Página inicial** — Uma busca global no topo e três cards de acesso rápido: Processos, Diários Oficiais, e Modelos de Documentos. Sem menu hamburguer, sem sidebar, sem tutorial de onboarding. Você abre e sabe o que fazer.
 
-<!-- 📸 SCREENSHOT: Página de login (login.html) -->
+![Página inicial do JusDigital — hero com busca e cards de acesso rápido](/assets/images/projects/projeto4/index_img.png)
 
 **Autenticação** — Login e cadastro com formulários simples. O back-end Java valida contra uma tabela `Usuario` no banco. A sessão é gerenciada com `localStorage` — quando logado, o botão "Entrar" do header vira "Olá, {nome}" com opção de sair. O `auth.js` roda em todas as páginas no `DOMContentLoaded`.
 
-<!-- 📸 SCREENSHOT: Lista de processos (processos.html) mostrando a tabela com badges de status -->
+![Página de login](/assets/images/projects/projeto4/login_img.png)
 
 **Lista de processos** — Uma tabela que consome `/api/processos` e renderiza número, tipo, assunto e status com badges coloridas. Cada linha tem um botão "Visualizar" que leva ao detalhe.
-
-<!-- 📸 SCREENSHOT: Detalhe do processo (visualizar_processo.html) mostrando partes, histórico de trâmites, e a seção de resumo inteligente -->
+![Lista de processos com badges de status](/assets/images/projects/projeto4/processos_img.png)
 
 **Detalhe do processo** — Essa é a tela mais rica. Mostra o número do processo, a vara, as partes envolvidas (autor, réu), e uma **linha do tempo** com todo o histórico de trâmites. Mas o destaque é a seção "Resumo Inteligente", que conecta o front com a API de IA. Mais sobre isso adiante.
+![Detalhe do processo — partes e histórico de trâmites](/assets/images/projects/projeto4/processo1_detalhes.png)
+![Gerando resumo inteligente do processo](/assets/images/projects/projeto4/processo1_detalhes_gerando_resumo.png)
+![Resumo inteligente gerado pela IA](/assets/images/projects/projeto4/processo1_detalhes_resumo_gerado.png)
 
-<!-- 📸 SCREENSHOT: Página de busca unificada (busca.html) com resultados de processos, advogados e leis -->
 
 **Busca unificada** — A busca da página inicial redireciona para `busca.html?query=...`, que dispara `Promise.all` contra três endpoints (`/api/processos`, `/api/advogados`, `/api/leis`) e filtra os resultados no cliente. É uma busca fulltext bruta — sem Elasticsearch, sem índices especiais. Funciona porque o volume de dados é pequeno, e a simplicidade compensa.
 
-<!-- 📸 SCREENSHOT: Catálogo de advogados (advogados.html) em grid -->
+![Busca unificada com resultados de processos, advogados e leis](/assets/images/projects/projeto4/busca_resultados.png)
 
 **Advogados** — Um grid responsivo com cards mostrando nome, OAB e área de atuação. Clicar em "Ver Perfil" leva a uma página com sidebar contendo os dados pessoais e a lista de processos em que o advogado atua.
 
-<!-- 📸 SCREENSHOT: Perfil do advogado (perfil_advogado.html) -->
+![Catálogo de advogados em grid](/assets/images/projects/projeto4/advogados_img.png)
 
-<!-- 📸 SCREENSHOT: Jurisprudência (jurisprudencia.html) -->
+
 
 **Jurisprudência e Acórdãos** — A página de jurisprudência lista as leis cadastradas. Clicar em uma lei abre a tela de acórdão, que além de mostrar o texto da lei, lista automaticamente todos os processos que a citam — com link direto para cada um.
 
-<!-- 📸 SCREENSHOT: Tela de acórdão (acordao.html) mostrando lei e processos vinculados -->
+![Jurisprudência](/assets/images/projects/projeto4/jurisprudencia_img.png)
 
-<!-- 📸 SCREENSHOT: Modelos de documentos (modelos.html) -->
+
 
 **Modelos de documentos** — Petições e contratos prontos com um botão "Copiar Texto" que usa a Clipboard API. Copiou? O botão vira "Copiado! ✓" por dois segundos e volta ao normal. Micro-interação simples que faz diferença.
 
-<!-- 📸 SCREENSHOT: Diários oficiais (diarios.html) -->
+![Modelos de peças judiciais](/assets/images/projects/projeto4/modelos_pecas_judiciais.png)
 
+![Diários eletrônicos](/assets/images/projects/projeto4/diarios_eletronicos.png)
 ### O servidor por trás: Java puro, sem Spring
 
 O `ServidorWeb.java` é provavelmente a parte mais incomum da stack. Em vez de usar Spring Boot ou Javalin, o servidor HTTP é o `com.sun.net.httpserver.HttpServer` — uma classe que existe no JDK desde o Java 6 e que quase ninguém usa em produção, mas que é perfeita para projetos acadêmicos e protótipos.
@@ -322,7 +321,7 @@ java -jar Run.jar
 
 No menu, digite `20` para iniciar o servidor web. Acesse `http://localhost:8081/`.
 
-<!-- 📸 SCREENSHOT: Terminal mostrando o menu principal com a opção 20 selecionada e a mensagem "Servidor Web rodando em http://localhost:8081/" -->
+![Terminal com a opção 20 — servidor web rodando](/assets/images/projects/projeto4/servidor_api_opcao_20.png)
 
 ### 3. API com IA
 
@@ -349,7 +348,7 @@ uvicorn main:app --reload
 
 A API estará disponível em `http://localhost:8000/`. Documentação Swagger em `http://localhost:8000/docs`.
 
-<!-- 📸 SCREENSHOT: Swagger UI da API com IA (http://localhost:8000/docs) -->
+![Swagger UI da API com IA](/assets/images/projects/projeto4/Swagger_api_local.png)
 
 ### 4. Testando a integração Front + IA
 
@@ -360,7 +359,11 @@ Com os dois servidores rodando (Java na 8081 e Python na 8000):
 3. Clique em "Gerar Resumo"
 4. O front faz o request para a API de IA e exibe o resumo processual
 
-<!-- 📸 SCREENSHOT: Tela do processo com o resumo gerado pela IA visível -->
+![Detalhe do processo (exemplo 2)](/assets/images/projects/projeto4/processo2_detalhes.png)
+
+![Gerando resumo pela IA (exemplo 2)](/assets/images/projects/projeto4/processo2_detalhes_gerando_resumo.png)
+
+![Resumo gerado pela IA (exemplo 2)](/assets/images/projects/projeto4/processo2_detalhes_resumo_gerado.png)
 
 Para testar a API de IA isoladamente:
 
@@ -369,7 +372,11 @@ cd LLM-Juridica
 python test_client.py
 ```
 
-<!-- 📸 SCREENSHOT: Saída do test_client.py no terminal mostrando entidades extraídas, SQL gerado e resumo -->
+![Retorno da API — teste 1 (entidades extraídas)](/assets/images/projects/projeto4/retorno_api_teste1.png)
+
+![Retorno da API — teste 2 (SQL gerado)](/assets/images/projects/projeto4/retorno_api_teste2.png)
+
+![Retorno da API — teste 3 (resumo)](/assets/images/projects/projeto4/retorno_api_teste3.png)
 
 ---
 
@@ -377,10 +384,10 @@ python test_client.py
 
 ```
 ┌─────────────────────────────────────────────────────────┐
-│                    USUÁRIO (Navegador)                   │
-│                  http://localhost:8081                    │
+│                    USUÁRIO (Navegador)                  │
+│                  http://localhost:8081                  │
 └────────────┬──────────────────────────┬─────────────────┘
-             │ fetch("/api/...")         │ fetch("localhost:8000/summary")
+             │ fetch("/api/...")        │ fetch("localhost:8000/summary")
              ▼                          ▼
 ┌────────────────────────┐  ┌──────────────────────────────┐
 │   ServidorWeb.java     │  │     FastAPI (LLM-Juridica)   │
@@ -398,7 +405,7 @@ python test_client.py
              ▼                             ▼
 ┌────────────────────────┐  ┌──────────────────────────────┐
 │      PostgreSQL        │  │     Ollama (Qwen 2.5 3B)     │
-│   sistema_juridico     │  │     http://localhost:11434    │
+│   sistema_juridico     │  │     http://localhost:11434   │
 └────────────────────────┘  └──────────────────────────────┘
 ```
 
@@ -407,10 +414,6 @@ python test_client.py
 ## O Que Eu Aprendi
 
 Esse projeto começou como uma tarefa de faculdade sobre modelagem relacional e foi crescendo. Cada etapa adicionou uma camada de complexidade, mas também de utilidade real. Algumas reflexões:
-
-**Sobre o front-end**: JavaScript vanilla é subestimado. Para interfaces que consomem APIs REST e renderizam dados, `fetch()` + manipulação de DOM é tudo que você precisa. Não estou dizendo que React é inútil — estou dizendo que para o escopo certo, a web platform basta.
-
-**Sobre o servidor Java embutido**: `com.sun.net.httpserver` é uma pérola escondida do JDK. Para protótipos e projetos acadêmicos, ele elimina a necessidade de adicionar qualquer dependência de framework web. O trade-off é que a serialização JSON fica manual e verbosa, mas para um número fixo de endpoints, é perfeitamente gerenciável.
 
 **Sobre LLMs para SQL**: O pipeline de dois estágios (NER → SQL) é significativamente mais confiável do que jogar a pergunta direto para o modelo e pedir SQL. A extração de entidades primeiro cria uma representação intermediária estruturada que o segundo estágio usa como input bem definido. É o mesmo princípio de compiladores: tokenizar primeiro, parsear depois.
 
