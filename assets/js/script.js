@@ -20,7 +20,15 @@ const projectsPt = [
         link: "https://www.linkedin.com/in/herton-silveira-70509a243",
         image: "assets/images/global/WhatsApp Image 2025-11-13 at 10.12.05.jpeg"
     },
-
+    {
+        title: "JusDigital — Front-End & IA",
+        category: "Full-Stack & Generative AI",
+        description: "Interface web completa para o Sistema Jurídico + API com IA que traduz linguagem natural em SQL e gera resumos processuais usando LLM local (Ollama).",
+        tech: ["HTML", "CSS", "JavaScript", "FastAPI", "Ollama"],
+        type: "dev",
+        link: "blog/SistemaJuridico-FrontEnd-IA/",
+        image: "assets/images/projects/projeto4/index_img.png"
+    },
     {
         title: "Iris Flower Dataset, grafos e métricas de Machine Learning",
         category: "Data Science & Algorithms",
@@ -113,6 +121,15 @@ const projectsEn = [
         type: "dev",
         link: "https://www.linkedin.com/in/herton-silveira-70509a243",
         image: "assets/images/global/WhatsApp Image 2025-11-13 at 10.12.05.jpeg"
+    },
+    {
+        title: "JusDigital — Front-End & AI",
+        category: "Full-Stack & Generative AI",
+        description: "Full web interface for the Legal System + AI-powered API that translates natural language into SQL and generates case summaries using a local LLM (Ollama).",
+        tech: ["HTML", "CSS", "JavaScript", "FastAPI", "Ollama"],
+        type: "dev",
+        link: "blog/SistemaJuridico-FrontEnd-IA/",
+        image: "assets/images/projects/projeto4/index_img.png"
     },
     {
         title: "Star Lifecycle",
