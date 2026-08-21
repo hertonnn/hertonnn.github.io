@@ -26,6 +26,9 @@
     <meta name="twitter:title" content="{{ page.title | default: site.title }}">
     <meta name="twitter:description" content="{% if page.description %}{{ page.description }}{% else %}{{ site.description }}{% endif %}">
 
+    <!-- RSS Feed -->
+    {% feed_meta %}
+
     <!-- Removido o CDN do Tailwind em favor da build local do CSS (via assets/css/style.css) -->
 
     <!-- Lucide Icons -->

@@ -72,14 +72,18 @@ O [index.html](file:///C:/Users/UserOtt/Documents/FACULDADE/hertonnn.github.io/i
 **O que fazer:**
 - Configurar build de Tailwind local com purge para gerar CSS mínimo (~5-10KB)
 
-#### 3.3. Scripts Duplicados
-No [default.html](file:///C:/Users/UserOtt/Documents/FACULDADE/hertonnn.github.io/_layouts/default.html#L10-L43), o Tailwind é carregado 2x (linhas 10 e 40) e o Lucide também 2x (linhas 38 e 43). Isso é peso desnecessário e pode causar conflitos.
+#### 3.3. Scripts Duplicados ✅ Resolvido
+~~No [default.html](file:///C:/Users/UserOtt/Documents/FACULDADE/hertonnn.github.io/_layouts/default.html#L10-L43), o Tailwind é carregado 2x (linhas 10 e 40) e o Lucide também 2x (linhas 38 e 43). Isso é peso desnecessário e pode causar conflitos.~~
+Resolvido junto com o 3.2: o CDN do Tailwind foi removido e o Lucide agora carrega uma única vez por layout.
 
-#### 3.4. RSS Feed
+#### 3.4. RSS Feed ✅ Resolvido
 O Akita oferece RSS para que leitores assinem o blog. É trivial de implementar no Jekyll e um diferencial importante.
 
-**O que fazer:**
-- Adicionar `jekyll-feed` ao Gemfile e `_config.yml`
+**O que foi feito:**
+- Adicionado `jekyll-feed` ao `Gemfile` e `plugins:` no `_config.yml`
+- `{% feed_meta %}` nos layouts `default.html` e `blog-layout.html` (auto-discovery do feed)
+- Link estático `<link rel="alternate" type="application/atom+xml">` no `index.html` (não passa pelo Jekyll, então não usa Liquid)
+- Feed gerado em `/feed.xml` com os 5 posts, validado via `bundle exec jekyll build`
 
 ---
 
@@ -145,6 +149,12 @@ Seu portfólio tem versão PT/EN, mas o blog (`blog.html`) é apenas em portugu�
 
 #### 3.16. Comentários
 O Akita usa Disqus. Alternativas modernas: **giscus** (baseado em GitHub Discussions, gratuito e sem tracking) seria perfeito para um blog de desenvolvedor.
+
+#### 3.17. Cache-busting no CSS local
+Desde a migração do 3.2 (Tailwind via CDN → build local em `assets/css/style.css`), o `<link rel="stylesheet">` nos layouts referencia o arquivo sem nenhum parâmetro de versão. Toda vez que o CSS é reconstruído (`npm run build:css`) enquanto a aba já está aberta, o navegador serve a versão antiga do cache — em modo anônimo funciona normal, no perfil normal parece "bugado" até um hard refresh (Ctrl+Shift+R).
+
+**O que fazer:**
+- Adicionar `?v={{ site.time | date: '%s' }}` (ou hash do conteúdo) no link do `style.css` em `_layouts/default.html` e `_layouts/blog-layout.html`
 
 ---
 
