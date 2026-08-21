@@ -1,6 +1,6 @@
 title: Herton Silveira | Blog
 description: Desenvolvedor & Pesquisador Científico
 baseurl: "" # mude se hospedar em subdiretório, como /blog
-url: "https://hertonnn.github.io/"
+url: "https://hertonnn.github.io"
 markdown: kramdown
 permalink: /blog/:title/

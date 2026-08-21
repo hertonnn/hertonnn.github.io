@@ -4,6 +4,7 @@ title: "Modelagem e Implementação de um Banco de Dados para Sistema Jurídico"
 date: 2025-06-01 09:20:00 -0300
 categories: [Banco de Dados, Java, Arquitetura]
 tags: [SQL, Modelagem Relacional, MVC, UDESC, API]
+image: https://www.bcompany.com.br/wp-content/uploads/2020/03/martelo-juiz-laptop-sistema-juridico-1024x683.jpg.webp
 ---
 
 ![img_inicio](https://www.bcompany.com.br/wp-content/uploads/2020/03/martelo-juiz-laptop-sistema-juridico-1024x683.jpg.webp)

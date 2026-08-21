@@ -2,6 +2,9 @@
 layout: post
 title: "Desenvolvendo uma aplicação desktop de controle de Finanças Pessoais em Java, com Java Swing e PostgreSQL."
 date: 2022-07-01 10:00:00 -0300
+categories: [projeto]
+tags: [Java, Java Swing, PostgreSQL, POO, UML, MVC, UDESC]
+image: https://img.youtube.com/vi/W3SZnzQo-sg/maxresdefault.jpg
 ---
 [![Demonstração do Projeto](https://img.youtube.com/vi/W3SZnzQo-sg/maxresdefault.jpg)](https://www.youtube.com/watch?v=W3SZnzQo-sg)
 

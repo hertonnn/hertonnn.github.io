@@ -1,0 +1,31 @@
+{
+  "name": "hertonnn.github.io",
+  "version": "1.0.0",
+  "description": "Portfólio pessoal e blog de Herton Silveira — Desenvolvedor & Pesquisador Científico.",
+  "main": "index.js",
+  "directories": {
+    "doc": "docs"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build:css": "tailwindcss -i ./assets/css/input.css -o ./assets/css/style.css --minify",
+    "watch:css": "tailwindcss -i ./assets/css/input.css -o ./assets/css/style.css --watch"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hertonnn/hertonnn.github.io.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/hertonnn/hertonnn.github.io/issues"
+  },
+  "homepage": "https://github.com/hertonnn/hertonnn.github.io#readme",
+  "devDependencies": {
+    "@tailwindcss/cli": "^4.3.3",
+    "@tailwindcss/typography": "^0.5.20",
+    "tailwindcss": "^4.3.3"
+  }
+}

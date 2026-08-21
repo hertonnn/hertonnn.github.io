@@ -7,3 +7,6 @@ projects/surprise/resources/**
 # Arquivos do Jekyll
 _site
 .jekyll-cache
+
+# Node / Tailwind build
+node_modules

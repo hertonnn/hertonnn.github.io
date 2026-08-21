@@ -7,42 +7,43 @@
     <title>{{ page.title | default: site.title }}</title>
     <link rel="icon" type="image/x-icon" href="/assets/images/global/svgviewer-output.ico">
 
-    <script src="https://cdn.tailwindcss.com?plugins=typography"></script>
+    <!-- SEO: Meta Description -->
+    {% if page.description %}
+    <meta name="description" content="{{ page.description }}">
+    {% elsif page.excerpt %}
+    <meta name="description" content="{{ page.excerpt | strip_html | truncate: 160 }}">
+    {% else %}
+    <meta name="description" content="{{ site.description }}">
+    {% endif %}
 
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    typography: (theme) => ({
-                        DEFAULT: {
-                            css: {
-                                color: theme('colors.slate.300'),
-                                a: { color: theme('colors.orange.500'), '&:hover': { color: theme('colors.orange.400') } },
-                                h1: { color: theme('colors.white') },
-                                h2: { color: theme('colors.white') },
-                                h3: { color: theme('colors.white') },
-                                strong: { color: theme('colors.white') },
-                                code: { color: theme('colors.orange.400') },
-                                blockquote: {
-                                    borderLeftColor: theme('colors.orange.500'),
-                                    color: theme('colors.slate.400')
-                                },
-                            },
-                        },
-                    }),
-                }
-            }
-        }
-    </script>
+    <!-- SEO: Canonical URL -->
+    <link rel="canonical" href="{{ page.url | absolute_url }}">
 
-    <script src="https://unpkg.com/lucide@latest"></script>
-    <!-- Tailwind CSS -->
-    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- SEO: Open Graph -->
+    <meta property="og:title" content="{{ page.title | default: site.title }}">
+    <meta property="og:description" content="{% if page.description %}{{ page.description }}{% elsif page.excerpt %}{{ page.excerpt | strip_html | truncate: 200 }}{% else %}{{ site.description }}{% endif %}">
+    <meta property="og:type" content="{% if page.layout == 'post' %}article{% else %}website{% endif %}">
+    <meta property="og:url" content="{{ page.url | absolute_url }}">
+    {% if page.image %}
+    <meta property="og:image" content="{{ page.image | absolute_url }}">
+    {% endif %}
+    <meta property="og:site_name" content="{{ site.title }}">
+    <meta property="og:locale" content="pt_BR">
+
+    <!-- SEO: Twitter Cards -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="{{ page.title | default: site.title }}">
+    <meta name="twitter:description" content="{% if page.description %}{{ page.description }}{% elsif page.excerpt %}{{ page.excerpt | strip_html | truncate: 200 }}{% else %}{{ site.description }}{% endif %}">
+    {% if page.image %}
+    <meta name="twitter:image" content="{{ page.image | absolute_url }}">
+    {% endif %}
+
+    <!-- Removido o CDN do Tailwind em favor da build local do CSS (via assets/css/style.css) -->
 
     <!-- Lucide Icons -->
     <script src="https://unpkg.com/lucide@latest"></script>
 
-    <!-- Arquivo CSS Personalizado -->
+    <!-- CSS Personalizado -->
     <link rel="stylesheet" href="/assets/css/style.css">
 </head>
 
@@ -120,14 +121,21 @@
         </div>
     </div>
 
-    <main class="flex-grow pt-32 pb-24 container mx-auto px-6 flex relative items-start">
-        <div class="w-full lg:w-3/4 pr-0 lg:pr-16 prose prose-invert prose-orange max-w-none" id="main-content">
+    <main class="flex-grow pt-32 pb-24 relative">
+        <!-- Conteúdo centralizado como no Akita (max-width estreito + margin auto) -->
+        <div class="max-w-3xl mx-auto px-6 prose prose-invert prose-orange" id="main-content">
             {{ content }}
         </div>
 
-        <aside class="hidden lg:block w-1/4 sticky top-32">
+        <!-- ToC flutua à direita sem empurrar o conteúdo -->
+        <aside class="hidden xl:block fixed top-32 right-[max(1.5rem,calc((100vw-48rem)/2-18rem))] w-56 max-h-[calc(100vh-10rem)] overflow-y-auto pr-2
+                      [&::-webkit-scrollbar]:w-[4px]
+                      [&::-webkit-scrollbar-track]:bg-transparent
+                      [&::-webkit-scrollbar-thumb]:bg-orange-500/20
+                      [&::-webkit-scrollbar-thumb]:rounded-full
+                      [&::-webkit-scrollbar-thumb:hover]:bg-orange-500/40">
             <div class="border-l-2 border-slate-800 pl-5 py-2" id="toc-container">
-                <p class="text-sm font-bold text-slate-200 mb-5  tracking-wider">Nesta página</p>
+                <p class="text-sm font-bold text-slate-200 mb-5 tracking-wider">Nesta página</p>
                 <nav>
                     <ul id="toc-list" class="space-y-3 text-sm text-slate-400">
                     </ul>

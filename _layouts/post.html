@@ -5,12 +5,17 @@ layout: default
 <article class="container mx-auto px-6 max-w-3xl animate-fade-in-up">
 
     <header class="mb-12 text-center border-b border-slate-900 pb-10">
+        <!-- Categoria dinâmica -->
+        {% if page.categories and page.categories.size > 0 %}
         <div class="flex items-center justify-center gap-2 mb-4">
+            {% for cat in page.categories %}
             <span
                 class="bg-orange-600/20 text-orange-500 border border-orange-500/30 px-3 py-1 text-xs font-bold uppercase tracking-wider rounded-full">
-                Post Teste
+                {{ cat }}
             </span>
+            {% endfor %}
         </div>
+        {% endif %}
 
         <h1 class="text-3xl md:text-5xl font-extrabold text-white leading-tight mb-6">
             {{ page.title }}
@@ -21,18 +26,38 @@ layout: default
                 <i data-lucide="calendar" class="w-4 h-4"></i>
                 {{ page.date | date: "%d/%m/%Y" }}
             </span>
+            <!-- Tempo de leitura estimado -->
+            {% assign words = content | number_of_words %}
+            {% assign minutes = words | divided_by: 200 %}
+            {% if minutes < 1 %}{% assign minutes = 1 %}{% endif %}
+            <span class="text-slate-600">•</span>
+            <span class="flex items-center gap-1.5">
+                <i data-lucide="clock" class="w-4 h-4"></i>
+                {{ minutes }} min de leitura
+            </span>
         </div>
+
+        <!-- Tags -->
+        {% if page.tags and page.tags.size > 0 %}
+        <div class="flex flex-wrap items-center justify-center gap-2 mt-6">
+            {% for tag in page.tags %}
+            <span class="text-[11px] font-semibold uppercase tracking-wider text-orange-500/70 bg-orange-500/10 border border-orange-500/20 px-2.5 py-1 rounded-full">
+                {{ tag }}
+            </span>
+            {% endfor %}
+        </div>
+        {% endif %}
     </header>
 
-    <div class="prose prose-invert prose-orange max-w-none text-lg leading-relaxed text-slate-300">
+    <div class="prose prose-invert prose-orange max-w-none text-slate-300" style="font-size:19px; line-height:1.7;">
         {{ content }}
     </div>
 
     <div class="mt-16 pt-8 border-t border-slate-900 text-center">
-        <a href="/"
+        <a href="/blog"
             class="inline-flex items-center gap-2 text-slate-400 hover:text-orange-500 transition-colors font-medium">
             <i data-lucide="arrow-left" class="w-4 h-4"></i>
-            Voltar para a página inicial
+            Voltar para o blog
         </a>
     </div>
 

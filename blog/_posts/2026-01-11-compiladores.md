@@ -1,19 +1,11 @@
 ---
 layout: post
-title: "[TESTE BLOG] Compiladores"
+title: "Compiladores"
 date: 2026-01-11 10:00:00 -0300
+categories: [estudo]
+tags: [Compiladores, Haskell, JVM, Análise Léxica, Análise Sintática, UDESC]
 ---
-
-# 📘 Compiladores
-
-![img_com](https://github.com/hertonnn/UDESC-Computacao/blob/master/utils/img/img_com.jpg?raw=true)
-
-> Disciplina de **Compiladores** – UDESC  
-> Estudo dos princípios, técnicas e ferramentas para análise léxica, sintática e semântica, além da geração de código.
-
----
-
-## 🚀 O que é um Compilador?
+Estudo dos princípios, técnicas e ferramentas para análise léxica, sintática e semântica, além da geração de código.
 
 Um **compilador** é um programa (ou conjunto de programas) que, a partir de um **código fonte** escrito em uma linguagem compilada, gera um **código objeto** semanticamente equivalente.  
 
