@@ -19,14 +19,15 @@
     <!-- SEO: Canonical URL -->
     <link rel="canonical" href="{{ page.url | absolute_url }}">
 
+    <!-- Assign cover image -->
+    {% assign cover_image = page.image | default: "assets/images/global/Gemini_Generated_Image_nfukdlnfukdlnfuk.png" %}
+
     <!-- SEO: Open Graph -->
     <meta property="og:title" content="{{ page.title | default: site.title }}">
     <meta property="og:description" content="{% if page.description %}{{ page.description }}{% elsif page.excerpt %}{{ page.excerpt | strip_html | truncate: 200 }}{% else %}{{ site.description }}{% endif %}">
     <meta property="og:type" content="{% if page.layout == 'post' %}article{% else %}website{% endif %}">
     <meta property="og:url" content="{{ page.url | absolute_url }}">
-    {% if page.image %}
-    <meta property="og:image" content="{{ page.image | absolute_url }}">
-    {% endif %}
+    <meta property="og:image" content="{{ cover_image | absolute_url }}">
     <meta property="og:site_name" content="{{ site.title }}">
     <meta property="og:locale" content="pt_BR">
 
@@ -34,9 +35,7 @@
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="{{ page.title | default: site.title }}">
     <meta name="twitter:description" content="{% if page.description %}{{ page.description }}{% elsif page.excerpt %}{{ page.excerpt | strip_html | truncate: 200 }}{% else %}{{ site.description }}{% endif %}">
-    {% if page.image %}
-    <meta name="twitter:image" content="{{ page.image | absolute_url }}">
-    {% endif %}
+    <meta name="twitter:image" content="{{ cover_image | absolute_url }}">
 
     <!-- RSS Feed -->
     {% feed_meta %}
@@ -203,7 +202,7 @@
 
             <div
                 class="border-t border-slate-900 pt-8 flex flex-col md:flex-row justify-between items-center text-slate-500 text-sm">
-                <p>&copy; 2024 Herton Silveira. Todos os direitos reservados.</p>
+                <p>&copy; {{ "now" | date: "%Y" }} Herton Silveira. Todos os direitos reservados.</p>
                 <p class="flex items-center gap-2 mt-2 md:mt-0 text-slate-400">
                     From Brazil
                     <i data-lucide="heart" class="w-5 h-5 text-orange-400 fill-orange-400"></i>

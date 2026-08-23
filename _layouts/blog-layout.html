@@ -13,18 +13,23 @@
     <!-- SEO: Canonical URL -->
     <link rel="canonical" href="{{ page.url | absolute_url }}">
 
+    <!-- Assign cover image -->
+    {% assign cover_image = page.image | default: "assets/images/global/Gemini_Generated_Image_nfukdlnfukdlnfuk.png" %}
+
     <!-- SEO: Open Graph -->
     <meta property="og:title" content="{{ page.title | default: site.title }}">
     <meta property="og:description" content="{% if page.description %}{{ page.description }}{% else %}{{ site.description }}{% endif %}">
     <meta property="og:type" content="website">
     <meta property="og:url" content="{{ page.url | absolute_url }}">
+    <meta property="og:image" content="{{ cover_image | absolute_url }}">
     <meta property="og:site_name" content="{{ site.title }}">
     <meta property="og:locale" content="pt_BR">
 
     <!-- SEO: Twitter Cards -->
-    <meta name="twitter:card" content="summary">
+    <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="{{ page.title | default: site.title }}">
     <meta name="twitter:description" content="{% if page.description %}{{ page.description }}{% else %}{{ site.description }}{% endif %}">
+    <meta name="twitter:image" content="{{ cover_image | absolute_url }}">
 
     <!-- RSS Feed -->
     {% feed_meta %}

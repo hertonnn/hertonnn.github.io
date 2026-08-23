@@ -19,6 +19,8 @@ Aqui está o controle de todas as evoluções técnicas, de usabilidade e infrae
 - **Tempo de Leitura Estimado:** Lógica adicionada para calcular e exibir dinamicamente o tempo de leitura com base no número de palavras do artigo.
 - **Correção do Type do Favicon:** O atributo `type` da tag `<link rel="icon">` foi ajustado de forma semântica correta (`image/x-icon`).
 - **Sistema de Comentários Integrado:** O blog agora possui o *Giscus* (baseado no GitHub Discussions) ativo no rodapé dos posts, permitindo comentários nativos, sem anúncios e com login via GitHub.
+- **Copyright Automático:** Substituído o ano hardcoded no footer ("2024") pela variável dinâmica do Jekyll (`{{ "now" | date: "%Y" }}`), mantendo o rodapé sempre atualizado.
+- **Imagens de Capa (`og:image`):** Adicionada uma imagem de fallback global (do início do portfólio) para todas as páginas (index, blog, en e posts). Agora qualquer link compartilhado no WhatsApp/LinkedIn terá um preview visual atraente, mesmo que o post não tenha imagem própria.
 
 ---
 
@@ -27,8 +29,6 @@ Aqui está o controle de todas as evoluções técnicas, de usabilidade e infrae
 - **Busca:** Implementar um sistema de busca client-side (via JSON index ou bibliotecas como `lunr.js` / `pagefind`), essencial conforme o número de artigos crescer.
 - **Dark/Light Mode:** O blog é exclusivamente escuro no momento. Adicionar um toggle claro/escuro respeitando o `prefers-color-scheme` e com persistência via `localStorage`.
 - **Navegação Entre Posts:** Adicionar links de "Post Anterior" e "Próximo Post" no rodapé dos artigos para reter e engajar o leitor.
-- **Imagens de Capa (`og:image`):** Exibir e configurar globalmente imagens de capa nos metadados para garantir previews visuais atraentes no LinkedIn/Twitter/WhatsApp.
 - **Internacionalização (i18n):** O portfólio já suporta inglês e português, mas o blog ainda é mono-idioma. Expandir o suporte para artigos internacionais com detecção de idioma.
 - **Cache-Busting no CSS Local:** Adicionar um versionamento dinâmico (ex: `?v={{ site.time | date: '%s' }}`) no link do `style.css` para evitar que leitores recorrentes recebam uma versão antiga cacheada do estilo após alguma atualização de design.
-- **Copyright Automático:** Substituir o ano hardcoded no footer ("2024") por uma variável dinâmica do Jekyll (`{{ "now" | date: "%Y" }}`) para manter o rodapé sempre atualizado.
 - **Páginas Específicas por Tag:** Embora as tags já sejam visíveis na interface, seria interessante torná-las clicáveis, direcionando para uma página de filtro onde são listados todos os artigos daquela tag específica.
