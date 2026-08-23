@@ -2,6 +2,10 @@
 
 Aqui está o controle de todas as evoluções técnicas, de usabilidade e infraestrutura planejadas para o blog.
 
+## Post
+
+- Um post só sobre as experiências em CGR.
+
 ---
 
 ## ✅ Feitas (Concluídas)
@@ -26,9 +30,20 @@ Aqui está o controle de todas as evoluções técnicas, de usabilidade e infrae
 
 ## ⏳ Pendentes (Não Feitas)
 
+- **Internacionalização (i18n):** O portfólio já suporta inglês e português, mas possui alguns ajustes pendentes:
+  - O blog ainda é mono-idioma. Expandir o suporte para artigos internacionais com detecção de idioma.
+  - Corrigir o highlight do dropdown de idiomas no arquivo `en.html` (atualmente destaca o português em vez do inglês).
+  - Traduzir a label "Idioma" para "Language" no menu mobile do `en.html`.
+  - Corrigir os links quebrados da navbar no `en.html` (atualmente `/#home` redireciona para a versão em português, deveria usar a âncora local `#home`).
+  - Ajustar o link do dropdown de português para usar a raiz (`/`) em vez de `index.html`, melhorando as URLs para SEO.
+- **Refinamentos de UI/UX e Design:**
+  - **Call-to-Action Fantasma:** Na seção "Sobre", o título "Você tem Brio?" contém um link para o YouTube, mas visualmente não parece clicável. Adicionar um ícone de 'play' e efeito de hover para aumentar os cliques.
+- **Limpeza de Repositório e Performance:**
+  - **Resto de Tailwind CDN:** O arquivo `en.html` ainda importa o Tailwind via CDN, enquanto o resto do site já usa o CSS local otimizado. Remover para evitar FOUC e lentidão.
+  - **Nomes de Imagens:** Renomear arquivos não padronizados (`Captura de tela 2025-12-13 105731.png` e `Fundo_Branco_Colorido__RGB.png`) para manter o repositório organizado (ex: `herton-closeup.png`, `udesc-logo.png`).
 - **Busca:** Implementar um sistema de busca client-side (via JSON index ou bibliotecas como `lunr.js` / `pagefind`), essencial conforme o número de artigos crescer.
 - **Dark/Light Mode:** O blog é exclusivamente escuro no momento. Adicionar um toggle claro/escuro respeitando o `prefers-color-scheme` e com persistência via `localStorage`.
+- Tons #f8f0d9 (principal e navbar), #eddec2 (tags)
 - **Navegação Entre Posts:** Adicionar links de "Post Anterior" e "Próximo Post" no rodapé dos artigos para reter e engajar o leitor.
-- **Internacionalização (i18n):** O portfólio já suporta inglês e português, mas o blog ainda é mono-idioma. Expandir o suporte para artigos internacionais com detecção de idioma.
 - **Cache-Busting no CSS Local:** Adicionar um versionamento dinâmico (ex: `?v={{ site.time | date: '%s' }}`) no link do `style.css` para evitar que leitores recorrentes recebam uma versão antiga cacheada do estilo após alguma atualização de design.
 - **Páginas Específicas por Tag:** Embora as tags já sejam visíveis na interface, seria interessante torná-las clicáveis, direcionando para uma página de filtro onde são listados todos os artigos daquela tag específica.
