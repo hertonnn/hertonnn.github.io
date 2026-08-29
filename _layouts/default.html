@@ -168,8 +168,13 @@
         <div class="container mx-auto px-6">
             <div class="flex flex-col md:flex-row justify-between items-center mb-12">
                 <div class="text-center md:text-left mb-8 md:mb-0">
+                    {% if page.lang == 'en' %}
+                    <h2 class="text-3xl font-bold text-white mb-2">Let's talk?</h2>
+                    <p class="text-slate-400">Open to collaborations in AI Research and Development.</p>
+                    {% else %}
                     <h2 class="text-3xl font-bold text-white mb-2">Vamos conversar?</h2>
                     <p class="text-slate-400">Aberto a colaborações em Pesquisa e Desenvolvimento de IA.</p>
+                    {% endif %}
                 </div>
 
                 <div class="flex gap-4">
@@ -220,7 +225,7 @@
 
             <div
                 class="border-t border-slate-900 pt-8 flex flex-col md:flex-row justify-between items-center text-slate-500 text-sm">
-                <p>&copy; {{ "now" | date: "%Y" }} Herton Silveira. Todos os direitos reservados.</p>
+                <p>&copy; {{ "now" | date: "%Y" }} Herton Silveira. {% if page.lang == 'en' %}All rights reserved.{% else %}Todos os direitos reservados.{% endif %}</p>
                 <p class="flex items-center gap-2 mt-2 md:mt-0 text-slate-400">
                     From Brazil
                     <i data-lucide="heart" class="w-5 h-5 text-orange-400 fill-orange-400"></i>
