@@ -128,7 +128,7 @@ const projectsEn = [
         description: "Full web interface for the Legal System + AI-powered API that translates natural language into SQL and generates case summaries using a local LLM (Ollama).",
         tech: ["HTML", "CSS", "JavaScript", "FastAPI", "Ollama"],
         type: "dev",
-        link: "blog/SistemaJuridico-FrontEnd-IA/",
+        link: "/en/blog/SistemaJuridico-FrontEnd-IA/",
         image: "assets/images/projects/projeto4/index_arte.jpg"
     },
     {
@@ -182,7 +182,7 @@ const projectsEn = [
         description: "Centralized system for legal data management, optimizing the document flow with a Java and SQL backend.",
         tech: ["Java", "PostgreSQL", "BAN1"],
         type: "dev",
-        link: "https://hertonnn.github.io/blog/SistemaJuridico/",
+        link: "https://hertonnn.github.io/en/blog/SistemaJuridico/",
         image: "assets/images/global/project-cover-3.png"
     },
     {

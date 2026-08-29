@@ -1,15 +1,15 @@
 ---
 layout: blog-layout
 title: Herton Blog
-permalink: /blog/
-lang: pt
+permalink: /en/blog/
+lang: en
 ---
 
 <!-- Cabeçalho do Blog -->
 <div class="text-center mb-16">
     <div class="flex items-center justify-center gap-3 mb-6">
         <span class="h-px w-10 bg-orange-500/40"></span>
-        <span class="text-orange-500 text-xs font-bold uppercase tracking-[0.2em]">Artigos & Projetos</span>
+        <span class="text-orange-500 text-xs font-bold uppercase tracking-[0.2em]">Articles & Projects</span>
         <span class="h-px w-10 bg-orange-500/40"></span>
     </div>
 
@@ -17,36 +17,36 @@ lang: pt
         Herton<span class="text-orange-500">Blog</span>
     </h1>
     <p class="text-slate-400 text-lg max-w-xl mx-auto">
-        Documentando a jornada entre Ciência da Computação, IA e Engenharia de Software.
+        Documenting the journey between Computer Science, AI, and Software Engineering.
     </p>
 </div>
 
 <!-- Contador de posts -->
 <div class="flex items-center justify-center gap-3 mb-12 text-sm text-slate-500">
     <i data-lucide="file-text" class="w-4 h-4"></i>
-    <span>{{ site.posts | size }} blog posts publicados</span>
+    <span>{{ site.posts_en | size }} blog posts published</span>
 </div>
 
 <!-- Lista de posts agrupados por mês -->
 {% assign previous_group = "" %}
 
-{% for post in site.posts %}
+{% for post in site.posts_en %}
 {% capture month %}{{ post.date | date: "%m" }}{% endcapture %}
 {% capture year %}{{ post.date | date: "%Y" }}{% endcapture %}
 
 {% case month %}
-{% when '01' %}{% assign month_name = 'Janeiro' %}
-{% when '02' %}{% assign month_name = 'Fevereiro' %}
-{% when '03' %}{% assign month_name = 'Março' %}
-{% when '04' %}{% assign month_name = 'Abril' %}
-{% when '05' %}{% assign month_name = 'Maio' %}
-{% when '06' %}{% assign month_name = 'Junho' %}
-{% when '07' %}{% assign month_name = 'Julho' %}
-{% when '08' %}{% assign month_name = 'Agosto' %}
-{% when '09' %}{% assign month_name = 'Setembro' %}
-{% when '10' %}{% assign month_name = 'Outubro' %}
-{% when '11' %}{% assign month_name = 'Novembro' %}
-{% when '12' %}{% assign month_name = 'Dezembro' %}
+{% when '01' %}{% assign month_name = 'January' %}
+{% when '02' %}{% assign month_name = 'February' %}
+{% when '03' %}{% assign month_name = 'March' %}
+{% when '04' %}{% assign month_name = 'April' %}
+{% when '05' %}{% assign month_name = 'May' %}
+{% when '06' %}{% assign month_name = 'June' %}
+{% when '07' %}{% assign month_name = 'July' %}
+{% when '08' %}{% assign month_name = 'August' %}
+{% when '09' %}{% assign month_name = 'September' %}
+{% when '10' %}{% assign month_name = 'October' %}
+{% when '11' %}{% assign month_name = 'November' %}
+{% when '12' %}{% assign month_name = 'December' %}
 {% endcase %}
 
 {% capture current_group %}{{ month_name }} {{ year }}{% endcapture %}
@@ -76,7 +76,7 @@ lang: pt
         <div class="flex flex-col sm:flex-row sm:items-center gap-3 sm:gap-5">
             <!-- Data -->
             <div class="shrink-0 text-xs font-mono text-slate-500 tabular-nums sm:w-24 sm:text-right">
-                {{ post.date | date: "%d/%m/%Y" }}
+                {{ post.date | date: "%m/%d/%Y" }}
             </div>
 
             <!-- Separador vertical (apenas desktop) -->
@@ -120,10 +120,10 @@ lang: pt
 {% if forloop.last %}</div>{% endif %}
 {% endfor %}
 
-{% if site.posts.size == 0 %}
+{% if site.posts_en.size == 0 %}
 <div class="text-center py-20">
     <i data-lucide="pen-line" class="w-12 h-12 text-slate-700 mx-auto mb-4"></i>
-    <p class="text-slate-500 text-lg">Nenhum artigo publicado ainda.</p>
-    <p class="text-slate-600 text-sm mt-2">Em breve...</p>
+    <p class="text-slate-500 text-lg">No articles published yet.</p>
+    <p class="text-slate-600 text-sm mt-2">Coming soon...</p>
 </div>
 {% endif %}

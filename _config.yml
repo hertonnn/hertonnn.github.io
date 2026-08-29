@@ -5,5 +5,10 @@ url: "https://hertonnn.github.io"
 markdown: kramdown
 permalink: /blog/:title/
 
+collections:
+  posts_en:
+    output: true
+    permalink: /en/blog/:title/
+
 plugins:
   - jekyll-feed

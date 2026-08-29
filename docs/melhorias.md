@@ -25,21 +25,23 @@ Aqui está o controle de todas as evoluções técnicas, de usabilidade e infrae
 - **Sistema de Comentários Integrado:** O blog agora possui o *Giscus* (baseado no GitHub Discussions) ativo no rodapé dos posts, permitindo comentários nativos, sem anúncios e com login via GitHub.
 - **Copyright Automático:** Substituído o ano hardcoded no footer ("2024") pela variável dinâmica do Jekyll (`{{ "now" | date: "%Y" }}`), mantendo o rodapé sempre atualizado.
 - **Imagens de Capa (`og:image`):** Adicionada uma imagem de fallback global (do início do portfólio) para todas as páginas (index, blog, en e posts). Agora qualquer link compartilhado no WhatsApp/LinkedIn terá um preview visual atraente, mesmo que o post não tenha imagem própria.
+- **Internacionalização (i18n) — Correções Estruturais:**
+  - Corrigido o highlight do dropdown de idiomas no `en.html` (agora destaca "English" corretamente).
+  - Traduzida a label "Idioma" para "Language" no menu mobile do `en.html`.
+  - Corrigidos os links quebrados da navbar no `en.html` (`/#home` → `#home`), evitando redirecionamento para a versão em português.
+  - Ajustado o link do dropdown de português para usar a raiz (`/`) em vez de `index.html` em todos os arquivos (index, en, layouts).
+  - Removido o bloco duplicado de `#mobile-menu` no `en.html`.
+  - Removido o Tailwind CDN residual do `en.html`, unificando o CSS com o build local otimizado.
+- **Tradução dos Posts do Blog:** Todos os 5 posts foram traduzidos para inglês e salvos em `blog/_posts_en/`, mantendo imagens, links e blocos de código intactos.
+- **Blog Bilíngue Integrado:** Posts em inglês agora têm sua própria coleção e listagem em `/en/blog/`. O layout `default.html` do blog foi atualizado para ser sensível ao idioma (usando `page.lang == 'en'`), garantindo que a navegação, labels (HOME, ABOUT) e o botão de troca de idioma mudem para o idioma correspondente do post e os links mantenham o usuário na mesma página ao trocar o idioma.
 
 ---
 
 ## ⏳ Pendentes (Não Feitas)
 
-- **Internacionalização (i18n):** O portfólio já suporta inglês e português, mas possui alguns ajustes pendentes:
-  - O blog ainda é mono-idioma. Expandir o suporte para artigos internacionais com detecção de idioma.
-  - Corrigir o highlight do dropdown de idiomas no arquivo `en.html` (atualmente destaca o português em vez do inglês).
-  - Traduzir a label "Idioma" para "Language" no menu mobile do `en.html`.
-  - Corrigir os links quebrados da navbar no `en.html` (atualmente `/#home` redireciona para a versão em português, deveria usar a âncora local `#home`).
-  - Ajustar o link do dropdown de português para usar a raiz (`/`) em vez de `index.html`, melhorando as URLs para SEO.
 - **Refinamentos de UI/UX e Design:**
   - **Call-to-Action Fantasma:** Na seção "Sobre", o título "Você tem Brio?" contém um link para o YouTube, mas visualmente não parece clicável. Adicionar um ícone de 'play' e efeito de hover para aumentar os cliques.
 - **Limpeza de Repositório e Performance:**
-  - **Resto de Tailwind CDN:** O arquivo `en.html` ainda importa o Tailwind via CDN, enquanto o resto do site já usa o CSS local otimizado. Remover para evitar FOUC e lentidão.
   - **Nomes de Imagens:** Renomear arquivos não padronizados (`Captura de tela 2025-12-13 105731.png` e `Fundo_Branco_Colorido__RGB.png`) para manter o repositório organizado (ex: `herton-closeup.png`, `udesc-logo.png`).
 - **Busca:** Implementar um sistema de busca client-side (via JSON index ou bibliotecas como `lunr.js` / `pagefind`), essencial conforme o número de artigos crescer.
 - **Dark/Light Mode:** O blog é exclusivamente escuro no momento. Adicionar um toggle claro/escuro respeitando o `prefers-color-scheme` e com persistência via `localStorage`.
@@ -47,3 +49,4 @@ Aqui está o controle de todas as evoluções técnicas, de usabilidade e infrae
 - **Navegação Entre Posts:** Adicionar links de "Post Anterior" e "Próximo Post" no rodapé dos artigos para reter e engajar o leitor.
 - **Cache-Busting no CSS Local:** Adicionar um versionamento dinâmico (ex: `?v={{ site.time | date: '%s' }}`) no link do `style.css` para evitar que leitores recorrentes recebam uma versão antiga cacheada do estilo após alguma atualização de design.
 - **Páginas Específicas por Tag:** Embora as tags já sejam visíveis na interface, seria interessante torná-las clicáveis, direcionando para uma página de filtro onde são listados todos os artigos daquela tag específica.
+
