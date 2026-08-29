@@ -80,7 +80,7 @@ O CSS usa variáveis `:root` como design system. Nenhuma cor, tamanho de fonte o
 
 **Página inicial** — Uma busca global no topo e três cards de acesso rápido: Processos, Diários Oficiais, e Modelos de Documentos. Sem menu hamburguer, sem sidebar, sem tutorial de onboarding. Você abre e sabe o que fazer.
 
-![Página inicial do JusDigital — hero com busca e cards de acesso rápido](/assets/images/projects/projeto4/index_img.png)
+![Página inicial do JusDigital - hero com busca e cards de acesso rápido](/assets/images/projects/projeto4/index_img.png)
 
 **Autenticação** — Login e cadastro com formulários simples. O back-end Java valida contra uma tabela `Usuario` no banco. A sessão é gerenciada com `localStorage` — quando logado, o botão "Entrar" do header vira "Olá, {nome}" com opção de sair. O `auth.js` roda em todas as páginas no `DOMContentLoaded`.
 

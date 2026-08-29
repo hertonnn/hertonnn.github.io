@@ -129,16 +129,7 @@ const projectsEn = [
         tech: ["HTML", "CSS", "JavaScript", "FastAPI", "Ollama"],
         type: "dev",
         link: "blog/SistemaJuridico-FrontEnd-IA/",
-        image: "assets/images/projects/projeto4/index_img.png"
-    },
-    {
-        title: "Star Lifecycle",
-        category: "Human-Computer Interaction",
-        description: "Work for the HCI - Human-Computer Interaction course about the Star Lifecycle, validated with the professor and classmates.",
-        tech: ["HTML", "CSS", "JavaScript", "IHC"],
-        type: "research",
-        link: "https://hertonnn.github.io/IHC",
-        image: "assets/images/global/ihc_estrela.png"
+        image: "assets/images/projects/projeto4/index_arte.jpg"
     },
     {
         title: "Iris Flower Dataset, graphs and ML metrics",
@@ -146,7 +137,7 @@ const projectsEn = [
         description: "Implementation of graph-based clustering (in C) applied to the Iris dataset, with critical analysis of metrics.",
         tech: ["Python", "C", "Matplotlib", "TEC"],
         type: "research",
-        link: "https://github.com/hertonnn/UDESC-Computacao/tree/48f44e99bb4f739ff70fa2e769810e3a33ac10da/TEG%20-%20Teoria%20dos%20Grafos/Trabalhos/Grafo%20%C3%8Dris",
+        link: "https://github.com/hertonnn/UDESC-Computacao/tree/main/TEG%20-%20Teoria%20dos%20Grafos/Trabalhos/Grafo%20%C3%8Dris",
         image: "assets/images/global/project-cover-1.png"
     },
     {
@@ -157,6 +148,15 @@ const projectsEn = [
         type: "research",
         link: "https://github.com/hertonnn/Compilador-Java",
         image: "https://optim.tildacdn.net/tild6638-3234-4266-b630-646530643738/-/resize/760x/-/format/webp/compiler.jpg.webp"
+    },
+    {
+        title: "Star Lifecycle",
+        category: "Human-Computer Interaction",
+        description: "Work for the HCI - Human-Computer Interaction course about the Star Lifecycle, validated with the professor and classmates.",
+        tech: ["HTML", "CSS", "JavaScript", "IHC"],
+        type: "research",
+        link: "https://hertonnn.github.io/case_studies/hci_lifecycle",
+        image: "assets/images/global/ihc_estrela.png"
     },
     {
         title: "Finance API",
@@ -173,7 +173,7 @@ const projectsEn = [
         description: "Simulation of complex traffic via Finite and Pushdown Automata, modeling flows and intersection states.",
         tech: ["Python", "POO", "LFA"],
         type: "research",
-        link: "https://github.com/hertonnn/UDESC-Computacao/tree/f69d092a873219270d94ab1de8f510da709bd37c/LFA%20-%20Linguagens%20Formais%20de%20Aut%C3%B4matos/Trabalho%20final/Simula%C3%A7%C3%A3o-Tr%C3%A2nsito-2024",
+        link: "https://github.com/hertonnn/UDESC-Computacao/tree/main/LFA%20-%20Linguagens%20Formais%20de%20Aut%C3%B4matos/Trabalho%20final/Simula%C3%A7%C3%A3o-Tr%C3%A2nsito-2024",
         image: "assets/images/global/project-cover-2.png"
     },
     {
@@ -182,7 +182,7 @@ const projectsEn = [
         description: "Centralized system for legal data management, optimizing the document flow with a Java and SQL backend.",
         tech: ["Java", "PostgreSQL", "BAN1"],
         type: "dev",
-        link: "https://github.com/hertonnn/Sistema-Juridico-BD",
+        link: "https://hertonnn.github.io/blog/SistemaJuridico/",
         image: "assets/images/global/project-cover-3.png"
     },
     {
@@ -191,7 +191,7 @@ const projectsEn = [
         description: "Comparative performance and Big-O analysis between AVL, Red-Black and B trees in manipulation operations.",
         tech: ["Python", "Matplotlib", "EDA2"],
         type: "research",
-        link: "https://github.com/hertonnn/UDESC-Computacao/tree/285d32a6088c53ad5143f2d941b4fedf65ad44f7/EDA%20II%20-%20Estrutura%20de%20Dados%202/Trabalho%20Final",
+        link: "https://github.com/hertonnn/UDESC-Computacao/tree/main/EDA%20II%20-%20Estrutura%20de%20Dados%202/Trabalho%20Final",
         image: "assets/images/global/project-cover-4.png"
     },
     {
