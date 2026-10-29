@@ -4,7 +4,7 @@ title: "JusDigital: Interface Web e IA com Linguagem Natural"
 date: 2026-08-18 11:00:00 -0300
 categories: [projeto]
 tags: [Java, HTML, CSS, JavaScript, FastAPI, LLM, Ollama, IA, PostgreSQL]
-image: /assets/images/projects/projeto4/index_img.png
+image: assets/images/projects/projeto4/index_arte.jpg
 ---
 
 Há um tempo atrás, [escrevi no meu blog](https://hertonnn.github.io/blog/SistemaJuridico/) a respeito de um projeto que nasceu de uma disciplina de Banco de Dados na UDESC. Naquele post, eu cobri a parte que talvez seja a menos glamourosa, mas sem dúvida a mais importante de qualquer sistema: a **modelagem relacional**. Tabelas, chaves, cardinalidades, gatilhos. O alicerce invisível que segura tudo de pé.
@@ -80,7 +80,7 @@ O CSS usa variáveis `:root` como design system. Nenhuma cor, tamanho de fonte o
 
 **Página inicial** — Uma busca global no topo e três cards de acesso rápido: Processos, Diários Oficiais, e Modelos de Documentos. Sem menu hamburguer, sem sidebar, sem tutorial de onboarding. Você abre e sabe o que fazer.
 
-![Página inicial do JusDigital — hero com busca e cards de acesso rápido](/assets/images/projects/projeto4/index_img.png)
+![Página inicial do JusDigital - hero com busca e cards de acesso rápido](/assets/images/projects/projeto4/index_img.png)
 
 **Autenticação** — Login e cadastro com formulários simples. O back-end Java valida contra uma tabela `Usuario` no banco. A sessão é gerenciada com `localStorage` — quando logado, o botão "Entrar" do header vira "Olá, {nome}" com opção de sair. O `auth.js` roda em todas as páginas no `DOMContentLoaded`.
 
