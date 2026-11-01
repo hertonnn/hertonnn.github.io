@@ -4,7 +4,7 @@ title: "Timing Attacks in Practice: From Nanosecond Leaks to Exploiting Real API
 date: 2026-11-01 08:00:00 -0300
 categories: [security]
 tags: [Security, Cryptography, Python, Networks, Vulnerabilities, Side-Channel]
-image: assets/images/projects/timing-attacks/timing-mechanism-en.svg
+image: assets/images/projects/timing-attacks/cover-en.png
 lang: en
 ---
 

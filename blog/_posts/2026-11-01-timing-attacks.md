@@ -4,7 +4,7 @@ title: "Timing Attacks na Prática: Da Teoria dos Nanossegundos à Exploração 
 date: 2026-11-01 08:00:00 -0300
 categories: [seguranca]
 tags: [Segurança, Criptografia, Python, Redes, Vulnerabilidades, Side-Channel]
-image: assets/images/projects/timing-attacks/timing-mechanism.svg
+image: assets/images/projects/timing-attacks/cover.png
 ---
 
 Imagine tentar abrir um cofre de segredo giratório ouvindo o barulho dos pinos internos. A cada disco posicionado no número correto, a mecânica emite um pequeno estalo antes dos demais. Girar o disco devagar e escutar esse retorno permite deduzir o segredo número a número, sem testar todas as combinações possíveis.
