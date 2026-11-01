@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="pt-BR" class="scroll-smooth">
 
 <head>
@@ -50,6 +50,7 @@
 </head>
 
 <body class="min-h-screen bg-slate-950 text-slate-200 font-sans flex flex-col">
+    {% include new-post-notification.html %}
 
     <nav id="navbar" class="fixed top-0 w-full z-50 transition-all duration-300 py-6 bg-transparent">
         <div class="container mx-auto px-6 flex justify-between items-center">
@@ -148,14 +149,14 @@
         </div>
 
         <!-- ToC flutua à direita sem empurrar o conteúdo -->
-        <aside class="hidden xl:block fixed top-32 right-[max(1.5rem,calc((100vw-48rem)/2-18rem))] w-56 max-h-[calc(100vh-10rem)] overflow-y-auto pr-2
+        <aside id="desktop-toc" class="hidden xl:block fixed top-32 right-[max(1.5rem,calc((100vw-48rem)/2-18rem))] w-56 max-h-[calc(100vh-10rem)] overflow-y-auto pr-2 transition-opacity duration-300
                       [&::-webkit-scrollbar]:w-[4px]
                       [&::-webkit-scrollbar-track]:bg-transparent
                       [&::-webkit-scrollbar-thumb]:bg-orange-500/20
                       [&::-webkit-scrollbar-thumb]:rounded-full
                       [&::-webkit-scrollbar-thumb:hover]:bg-orange-500/40">
             <div class="border-l-2 border-slate-800 pl-5 py-2" id="toc-container">
-                <p class="text-sm font-bold text-slate-200 mb-5 tracking-wider">Nesta página</p>
+                <p class="text-sm font-bold text-slate-200 mb-5 tracking-wider">{% if page.lang == 'en' %}On this page{% else %}Nesta página{% endif %}</p>
                 <nav>
                     <ul id="toc-list" class="space-y-3 text-sm text-slate-400">
                     </ul>

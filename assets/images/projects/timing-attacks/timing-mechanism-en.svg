@@ -1,0 +1,171 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 880 460" width="100%" height="100%">
+  <!-- White Paper Background (Academic Paper Style) -->
+  <rect width="880" height="460" fill="#ffffff" rx="8" stroke="#cbd5e1" stroke-width="1.5"/>
+
+  <!-- Figure Title (IEEE/ACM Paper Style) -->
+  <g transform="translate(40, 36)">
+    <text x="0" y="0" font-family="'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="16" font-weight="700" fill="#0f172a">
+      Figure 1: Comparative Timing Analysis — Early-Exit vs. Constant-Time
+    </text>
+    <text x="0" y="20" font-family="'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="12" font-style="italic" fill="#475569">
+      Response latency as a function of matching prefix length (Target: "FLAG", Δt = 1.0 ms)
+    </text>
+  </g>
+
+  <!-- Divider Line -->
+  <line x1="40" y1="72" x2="840" y2="72" stroke="#e2e8f0" stroke-width="1"/>
+
+  <!-- LEFT PLOT: (a) Early-Exit (Insecure) -->
+  <g transform="translate(45, 90)">
+    <!-- Subtitle -->
+    <text x="0" y="20" font-family="'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="14" font-weight="700" fill="#b91c1c">
+      (a) Standard Comparison: Early-Exit (Vulnerable)
+    </text>
+    <text x="0" y="38" font-family="'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="11" fill="#64748b">
+      Linear model: T(k) = T₀ + k · Δt (Positive slope leaks secret)
+    </text>
+
+    <!-- Plot Area Background -->
+    <rect x="50" y="55" width="310" height="180" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1"/>
+
+    <!-- Grid lines (Horizontal) -->
+    <line x1="50" y1="200" x2="360" y2="200" stroke="#e2e8f0" stroke-width="1" stroke-dasharray="3,3"/>
+    <line x1="50" y1="164" x2="360" y2="164" stroke="#e2e8f0" stroke-width="1" stroke-dasharray="3,3"/>
+    <line x1="50" y1="128" x2="360" y2="128" stroke="#e2e8f0" stroke-width="1" stroke-dasharray="3,3"/>
+    <line x1="50" y1="92" x2="360" y2="92" stroke="#e2e8f0" stroke-width="1" stroke-dasharray="3,3"/>
+
+    <!-- Axes -->
+    <line x1="50" y1="235" x2="360" y2="235" stroke="#334155" stroke-width="1.5"/>
+    <line x1="50" y1="235" x2="50" y2="55" stroke="#334155" stroke-width="1.5"/>
+
+    <!-- Y-axis labels -->
+    <text x="42" y="238" font-family="monospace" font-size="10" fill="#475569" text-anchor="end">0.0</text>
+    <text x="42" y="203" font-family="monospace" font-size="10" fill="#475569" text-anchor="end">1.0</text>
+    <text x="42" y="167" font-family="monospace" font-size="10" fill="#475569" text-anchor="end">2.0</text>
+    <text x="42" y="131" font-family="monospace" font-size="10" fill="#475569" text-anchor="end">3.0</text>
+    <text x="42" y="95" font-family="monospace" font-size="10" fill="#475569" text-anchor="end">4.0</text>
+    <text x="18" y="145" font-family="'Helvetica Neue', Arial, sans-serif" font-size="10" font-weight="600" fill="#334155" transform="rotate(-90 18 145)" text-anchor="middle">
+      Latency [ms]
+    </text>
+
+    <!-- X-axis labels -->
+    <text x="80" y="252" font-family="monospace" font-size="10" fill="#475569" text-anchor="middle">k=0</text>
+    <text x="145" y="252" font-family="monospace" font-size="10" fill="#475569" text-anchor="middle">k=1</text>
+    <text x="210" y="252" font-family="monospace" font-size="10" fill="#475569" text-anchor="middle">k=2</text>
+    <text x="275" y="252" font-family="monospace" font-size="10" fill="#475569" text-anchor="middle">k=3</text>
+    <text x="340" y="252" font-family="monospace" font-size="10" fill="#475569" text-anchor="middle">k=4</text>
+    <text x="205" y="272" font-family="'Helvetica Neue', Arial, sans-serif" font-size="10" font-weight="600" fill="#334155" text-anchor="middle">
+      Correct Characters (Prefix)
+    </text>
+
+    <!-- Data Line: Step / Linear Growth -->
+    <polyline points="80,200 145,164 210,128 275,92 340,92" 
+              fill="none" stroke="#dc2626" stroke-width="2.2"/>
+
+    <!-- Data Points -->
+    <circle cx="80" cy="200" r="4" fill="#dc2626"/>
+    <text x="80" y="190" font-family="monospace" font-size="9" font-weight="700" fill="#991b1b" text-anchor="middle">1.0ms</text>
+
+    <circle cx="145" cy="164" r="4" fill="#dc2626"/>
+    <text x="145" y="154" font-family="monospace" font-size="9" font-weight="700" fill="#991b1b" text-anchor="middle">2.0ms</text>
+
+    <circle cx="210" cy="128" r="4" fill="#dc2626"/>
+    <text x="210" y="118" font-family="monospace" font-size="9" font-weight="700" fill="#991b1b" text-anchor="middle">3.0ms</text>
+
+    <circle cx="275" cy="92" r="4" fill="#dc2626"/>
+    <text x="275" y="82" font-family="monospace" font-size="9" font-weight="700" fill="#991b1b" text-anchor="middle">4.0ms</text>
+
+    <circle cx="340" cy="92" r="4.5" fill="#16a34a"/>
+    <text x="340" y="82" font-family="monospace" font-size="9" font-weight="700" fill="#166534" text-anchor="middle">4.0ms</text>
+
+    <!-- Breakdown Note Box below plot -->
+    <rect x="0" y="284" width="375" height="55" fill="#fef2f2" stroke="#fecaca" rx="4"/>
+    <text x="10" y="303" font-family="monospace" font-size="10" fill="#991b1b">
+      • Guess "A___": Mismatch at index 0 → Exits at 1.0 ms
+    </text>
+    <text x="10" y="318" font-family="monospace" font-size="10" fill="#991b1b">
+      • Guess "F___": Match at index 0    → Exits at 2.0 ms (+Δt)
+    </text>
+    <text x="10" y="333" font-family="monospace" font-size="10" fill="#166534">
+      • Guess "FLAG": Full match           → 4.0 ms (200 OK)
+    </text>
+  </g>
+
+  <!-- Vertical Divider -->
+  <line x1="440" y1="95" x2="440" y2="435" stroke="#cbd5e1" stroke-width="1" stroke-dasharray="4,4"/>
+
+  <!-- RIGHT PLOT: (b) Constant-Time (Secure) -->
+  <g transform="translate(465, 90)">
+    <!-- Subtitle -->
+    <text x="0" y="20" font-family="'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="14" font-weight="700" fill="#047857">
+      (b) Constant-Time Comparison (Secure)
+    </text>
+    <text x="0" y="38" font-family="'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="11" fill="#64748b">
+      Invariant model: T(k) = T_const (dT/dk = 0, zero leak)
+    </text>
+
+    <!-- Plot Area Background -->
+    <rect x="50" y="55" width="310" height="180" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1"/>
+
+    <!-- Grid lines (Horizontal) -->
+    <line x1="50" y1="200" x2="360" y2="200" stroke="#e2e8f0" stroke-width="1" stroke-dasharray="3,3"/>
+    <line x1="50" y1="164" x2="360" y2="164" stroke="#e2e8f0" stroke-width="1" stroke-dasharray="3,3"/>
+    <line x1="50" y1="128" x2="360" y2="128" stroke="#e2e8f0" stroke-width="1" stroke-dasharray="3,3"/>
+    <line x1="50" y1="92" x2="360" y2="92" stroke="#e2e8f0" stroke-width="1" stroke-dasharray="3,3"/>
+
+    <!-- Axes -->
+    <line x1="50" y1="235" x2="360" y2="235" stroke="#334155" stroke-width="1.5"/>
+    <line x1="50" y1="235" x2="50" y2="55" stroke="#334155" stroke-width="1.5"/>
+
+    <!-- Y-axis labels -->
+    <text x="42" y="238" font-family="monospace" font-size="10" fill="#475569" text-anchor="end">0.0</text>
+    <text x="42" y="203" font-family="monospace" font-size="10" fill="#475569" text-anchor="end">1.0</text>
+    <text x="42" y="167" font-family="monospace" font-size="10" fill="#475569" text-anchor="end">2.0</text>
+    <text x="42" y="131" font-family="monospace" font-size="10" fill="#475569" text-anchor="end">3.0</text>
+    <text x="42" y="95" font-family="monospace" font-size="10" fill="#475569" text-anchor="end">4.0</text>
+    <text x="18" y="145" font-family="'Helvetica Neue', Arial, sans-serif" font-size="10" font-weight="600" fill="#334155" transform="rotate(-90 18 145)" text-anchor="middle">
+      Latency [ms]
+    </text>
+
+    <!-- X-axis labels -->
+    <text x="80" y="252" font-family="monospace" font-size="10" fill="#475569" text-anchor="middle">k=0</text>
+    <text x="145" y="252" font-family="monospace" font-size="10" fill="#475569" text-anchor="middle">k=1</text>
+    <text x="210" y="252" font-family="monospace" font-size="10" fill="#475569" text-anchor="middle">k=2</text>
+    <text x="275" y="252" font-family="monospace" font-size="10" fill="#475569" text-anchor="middle">k=3</text>
+    <text x="340" y="252" font-family="monospace" font-size="10" fill="#475569" text-anchor="middle">k=4</text>
+    <text x="205" y="272" font-family="'Helvetica Neue', Arial, sans-serif" font-size="10" font-weight="600" fill="#334155" text-anchor="middle">
+      Correct Characters (Prefix)
+    </text>
+
+    <!-- Data Line: Strict Flat Horizontal Line -->
+    <line x1="80" y1="92" x2="340" y2="92" stroke="#047857" stroke-width="2.5"/>
+
+    <!-- Data Points -->
+    <circle cx="80" cy="92" r="4" fill="#047857"/>
+    <text x="80" y="82" font-family="monospace" font-size="9" font-weight="700" fill="#065f46" text-anchor="middle">4.0ms</text>
+
+    <circle cx="145" cy="92" r="4" fill="#047857"/>
+    <text x="145" y="82" font-family="monospace" font-size="9" font-weight="700" fill="#065f46" text-anchor="middle">4.0ms</text>
+
+    <circle cx="210" cy="92" r="4" fill="#047857"/>
+    <text x="210" y="82" font-family="monospace" font-size="9" font-weight="700" fill="#065f46" text-anchor="middle">4.0ms</text>
+
+    <circle cx="275" cy="92" r="4" fill="#047857"/>
+    <text x="275" y="82" font-family="monospace" font-size="9" font-weight="700" fill="#065f46" text-anchor="middle">4.0ms</text>
+
+    <circle cx="340" cy="92" r="4.5" fill="#16a34a"/>
+    <text x="340" y="82" font-family="monospace" font-size="9" font-weight="700" fill="#166534" text-anchor="middle">4.0ms</text>
+
+    <!-- Breakdown Note Box below plot -->
+    <rect x="0" y="284" width="375" height="55" fill="#ecfdf5" stroke="#a7f3d0" rx="4"/>
+    <text x="10" y="303" font-family="monospace" font-size="10" fill="#065f46">
+      • Guess "A___": Complete loop (4 ops) → Fixed at 4.0 ms
+    </text>
+    <text x="10" y="318" font-family="monospace" font-size="10" fill="#065f46">
+      • Guess "F___": Complete loop (4 ops) → Fixed at 4.0 ms
+    </text>
+    <text x="10" y="333" font-family="monospace" font-size="10" fill="#047857">
+      • Guess "FLAG": Complete loop (4 ops) → Fixed at 4.0 ms (200 OK)
+    </text>
+  </g>
+</svg>

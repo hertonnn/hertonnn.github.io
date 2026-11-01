@@ -33,7 +33,11 @@ layout: default
             <span class="text-slate-700">•</span>
             <span class="flex items-center gap-1.5">
                 <i data-lucide="clock" class="w-3.5 h-3.5"></i>
+                {% if page.lang == 'en' %}
+                {{ minutes }} min read
+                {% else %}
                 {{ minutes }} min de leitura
+                {% endif %}
             </span>
         </div>
 
@@ -61,11 +65,19 @@ layout: default
     {% endif %}
 
     <div class="mt-16 pt-8 border-t border-slate-900 text-center">
+        {% if page.lang == 'en' %}
+        <a href="/en/blog/"
+            class="inline-flex items-center gap-2 text-slate-400 hover:text-orange-500 transition-colors font-medium">
+            <i data-lucide="arrow-left" class="w-4 h-4"></i>
+            Back to blog
+        </a>
+        {% else %}
         <a href="/blog"
             class="inline-flex items-center gap-2 text-slate-400 hover:text-orange-500 transition-colors font-medium">
             <i data-lucide="arrow-left" class="w-4 h-4"></i>
             Voltar para o blog
         </a>
+        {% endif %}
     </div>
 
 </article>

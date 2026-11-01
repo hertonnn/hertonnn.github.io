@@ -12,6 +12,16 @@ const repoLinks = {
 // --- DATA: PROJECTS ---
 const projectsPt = [
     {
+        title: "Timing Attacks: O Vazamento Invisível em APIs",
+        category: "Cybersecurity & Side-Channel",
+        description: "Artigo prático & POC: Como falhas em validações de igualdade expõem segredos e tokens em APIs. Desenvolvi um servidor vulnerável, um exploit de extração caractere a caractere e as mitigações em várias linguagens.",
+        tech: ["Python", "Criptografia", "FastAPI", "Redes"],
+        type: "research",
+        status: "pin",
+        link: "blog/timing-attacks/",
+        image: "assets/images/projects/timing-attacks/timing-mechanism.svg"
+    },
+    {
         title: "Far.IA Agent",
         category: "Generative AI & LLM Agents",
         description: "Estágio Ottimizza - Agente autônomo para extração contábil complexa.",
@@ -113,6 +123,16 @@ const projectsPt = [
 ];
 
 const projectsEn = [
+    {
+        title: "Timing Attacks: The Invisible Leak in Web APIs",
+        category: "Cybersecurity & Side-Channel",
+        description: "Hands-on article & POC: How subtle variances in string comparison expose cryptographic tokens in web APIs. I developed a vulnerable server, a character-by-character exploit script, and constant-time mitigations across multiple languages.",
+        tech: ["Python", "Cryptography", "FastAPI", "Networks"],
+        type: "research",
+        status: "pin",
+        link: "/en/blog/timing-attacks/",
+        image: "assets/images/projects/timing-attacks/timing-mechanism-en.svg"
+    },
     {
         title: "Far.IA Agent",
         category: "Generative AI & LLM Agents",
@@ -417,4 +437,24 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Coloca o "olheiro" em todos os títulos
     headings.forEach(h => observer.observe(h));
+
+    // Previne sobreposicao do ToC com o rodape ao rolar ate o final
+    const desktopToc = document.getElementById('desktop-toc');
+    const footer = document.querySelector('footer');
+
+    if (desktopToc && footer) {
+        const checkFooterCollision = () => {
+            const footerRect = footer.getBoundingClientRect();
+            const tocRect = desktopToc.getBoundingClientRect();
+            if (footerRect.top <= tocRect.bottom + 24) {
+                desktopToc.classList.add('opacity-0', 'pointer-events-none');
+            } else {
+                desktopToc.classList.remove('opacity-0', 'pointer-events-none');
+            }
+        };
+
+        window.addEventListener('scroll', checkFooterCollision, { passive: true });
+        window.addEventListener('resize', checkFooterCollision, { passive: true });
+        checkFooterCollision();
+    }
 });

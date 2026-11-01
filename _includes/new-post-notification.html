@@ -1,0 +1,204 @@
+{% if page.lang == 'en' or page.url contains '/en/' or page.url contains 'en.html' %}
+  {% assign sorted_posts = site.posts_en | sort: "date" | reverse %}
+  {% assign latest_post = sorted_posts.first %}
+  {% assign is_en = true %}
+{% else %}
+  {% assign sorted_posts = site.posts | sort: "date" | reverse %}
+  {% assign latest_post = sorted_posts.first %}
+  {% assign is_en = false %}
+{% endif %}
+
+{% if latest_post %}
+<!-- New Post Notification: Frosted Card Toast (Slides in from Right with Nudge) -->
+<style>
+#new-post-toast {
+    opacity: 0.85 !important;
+}
+#new-post-toast:hover {
+    opacity: 1 !important;
+}
+#new-post-toast.toast-hidden {
+    opacity: 0 !important;
+    transform: translate3d(80px, 0, 0) !important;
+    pointer-events: none !important;
+    visibility: hidden !important;
+}
+#new-post-toast.toast-dismissed {
+    opacity: 0 !important;
+    transform: translate3d(120px, 0, 0) !important;
+    pointer-events: none !important;
+    visibility: hidden !important;
+}
+#new-post-toast .new-post-card-box {
+    background-color: rgba(15, 23, 42, 0.32) !important;
+    backdrop-filter: blur(12px) saturate(140%) !important;
+    -webkit-backdrop-filter: blur(12px) saturate(140%) !important;
+    border: 1px solid rgba(255, 255, 255, 0.15) !important;
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.2), inset 0 1px 0 0 rgba(255, 255, 255, 0.12) !important;
+}
+#new-post-toast .new-post-card-box:hover {
+    background-color: rgba(15, 23, 42, 0.55) !important;
+    border-color: rgba(249, 115, 22, 0.5) !important;
+}
+@keyframes notificationSlideRight {
+    0% {
+        opacity: 0;
+        transform: translate3d(100px, 0, 0);
+    }
+    45% {
+        opacity: 0.88;
+        transform: translate3d(-14px, 0, 0);
+    }
+    65% {
+        opacity: 0.85;
+        transform: translate3d(8px, 0, 0);
+    }
+    82% {
+        opacity: 0.85;
+        transform: translate3d(-4px, 0, 0);
+    }
+    100% {
+        opacity: 0.85;
+        transform: translate3d(0, 0, 0);
+    }
+}
+</style>
+<div id="new-post-toast"
+     data-post-url="{{ latest_post.url }}"
+     data-post-date="{{ latest_post.date | date: '%s' }}"
+     class="toast-hidden">
+    <div class="new-post-card-box">
+        <!-- Bell Icon Badge -->
+        <div class="toast-bell-badge">
+            <i data-lucide="bell"></i>
+        </div>
+
+        <!-- Content Body -->
+        <div class="toast-body">
+            <div class="toast-header-row">
+                <span class="toast-tag">
+                    {% if is_en %}New Post{% else %}Novo Post{% endif %}
+                </span>
+                <span class="toast-dot">•</span>
+                <span id="toast-relative-time" class="toast-time">
+                    {% if is_en %}Recently published{% else %}Recém-publicado{% endif %}
+                </span>
+            </div>
+
+            <a href="{{ latest_post.url }}" class="toast-title" title="{{ latest_post.title }}">
+                {{ latest_post.title }}
+            </a>
+
+            <a href="{{ latest_post.url }}" class="toast-cta">
+                <span>{% if is_en %}Read article{% else %}Ler artigo{% endif %}</span>
+                <i data-lucide="arrow-right"></i>
+            </a>
+        </div>
+
+        <!-- Close 'X' Button -->
+        <button id="close-post-toast"
+                type="button"
+                class="toast-btn-close"
+                aria-label="{% if is_en %}Close notification{% else %}Fechar notificação{% endif %}">
+            <i data-lucide="x"></i>
+        </button>
+    </div>
+</div>
+
+<script>
+(function() {
+    const toast = document.getElementById('new-post-toast');
+    if (!toast) return;
+
+    const postUrl = toast.dataset.postUrl;
+    const postDateSec = parseInt(toast.dataset.postDate, 10);
+    if (!postDateSec) return;
+
+    // Do not display if already on the post page itself
+    const currentPath = window.location.pathname.replace(/\/$/, '');
+    const targetPath = postUrl.replace(/\/$/, '');
+    if (currentPath === targetPath || (targetPath && currentPath.endsWith(targetPath))) {
+        return;
+    }
+
+    // Calculate age of the post in days
+    const postTimeMs = postDateSec * 1000;
+    const nowMs = Date.now();
+    const diffMs = nowMs - postTimeMs;
+    const diffDays = diffMs / (1000 * 60 * 60 * 24);
+
+    // Condition: post was published less than 3 days ago (allowing timezone leeway)
+    const MAX_DAYS = 3;
+    if (diffDays < -1 || diffDays > MAX_DAYS) {
+        return;
+    }
+
+    // Check if dismissed previously for this specific post
+    const postSlug = postUrl.replace(/^\/en/, '').replace(/\/$/, '');
+    const storageKey = 'dismissed_post_notification_' + encodeURIComponent(postSlug);
+    if (localStorage.getItem(storageKey) === 'true') {
+        return;
+    }
+
+    // Relative time formatting
+    const timeLabel = document.getElementById('toast-relative-time');
+    if (timeLabel) {
+        const isEn = {{ is_en }};
+        if (diffDays < 1) {
+            timeLabel.textContent = isEn ? 'Recently published' : 'Recém-publicado';
+        } else if (diffDays < 2) {
+            timeLabel.textContent = isEn ? 'Yesterday' : 'Ontem';
+        } else {
+            timeLabel.textContent = isEn ? `${Math.floor(diffDays)}d ago` : `Há ${Math.floor(diffDays)} dias`;
+        }
+    }
+
+    let isDismissed = false;
+
+    // 1. Entrance animation exactly 1 second after entering site (sliding from right with attention-grabbing bounce)
+    setTimeout(() => {
+        if (isDismissed) return;
+        toast.classList.remove('toast-hidden');
+        toast.classList.add('animate-notification-slide');
+
+        toast.addEventListener('animationend', () => {
+            toast.classList.remove('animate-notification-slide');
+        }, { once: true });
+
+        if (window.lucide) {
+            window.lucide.createIcons();
+        }
+    }, 1000);
+
+    // 2. Hide when scrolling down to lower tabs/sections (scrollY > 180)
+    const handleScroll = () => {
+        if (isDismissed) return;
+        const scrollThreshold = 180;
+        if (window.scrollY > scrollThreshold) {
+            toast.classList.add('toast-hidden');
+        } else {
+            toast.classList.remove('toast-hidden');
+        }
+    };
+
+    window.addEventListener('scroll', handleScroll, { passive: true });
+
+    // 3. Close 'X' button logic
+    const closeBtn = document.getElementById('close-post-toast');
+    if (closeBtn) {
+        closeBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            e.stopPropagation();
+
+            isDismissed = true;
+            toast.classList.add('toast-dismissed');
+            localStorage.setItem(storageKey, 'true');
+
+            setTimeout(() => {
+                toast.style.display = 'none';
+            }, 350);
+        });
+    }
+})();
+</script>
+{% endif %}
