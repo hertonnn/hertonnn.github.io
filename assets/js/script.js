@@ -19,7 +19,7 @@ const projectsPt = [
         type: "research",
         status: "pin",
         link: "blog/timing-attacks/",
-        image: "assets/images/projects/timing-attacks/timing-mechanism.svg"
+        image: "assets/images/projects/timing-attacks/timing-mechanism-en.png"
     },
     {
         title: "Far.IA Agent",
@@ -131,7 +131,7 @@ const projectsEn = [
         type: "research",
         status: "pin",
         link: "/en/blog/timing-attacks/",
-        image: "assets/images/projects/timing-attacks/timing-mechanism-en.svg"
+        image: "assets/images/projects/timing-attacks/timing-mechanism-en.png"
     },
     {
         title: "Far.IA Agent",

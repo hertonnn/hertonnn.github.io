@@ -4,7 +4,7 @@ title: "Timing Attacks na Prática: Da Teoria dos Nanossegundos à Exploração 
 date: 2026-11-01 08:00:00 -0300
 categories: [seguranca]
 tags: [Segurança, Criptografia, Python, Redes, Vulnerabilidades, Side-Channel]
-image: assets/images/projects/timing-attacks/cover.png
+image: assets/images/projects/timing-attacks/timing-mechanism-en.png
 ---
 
 Imagine tentar abrir um cofre de segredo giratório ouvindo o barulho dos pinos internos. A cada disco posicionado no número correto, a mecânica emite um pequeno estalo antes dos demais. Girar o disco devagar e escutar esse retorno permite deduzir o segredo número a número, sem testar todas as combinações possíveis.
@@ -100,7 +100,7 @@ Essa relação muda a ordem de grandeza do ataque:
 O diagrama abaixo ilustra o comportamento do tempo de resposta na verificação vulnerável comparado à verificação segura:
 
 <div class="my-6 rounded-xl overflow-hidden border border-slate-700 shadow-xl bg-white p-2">
-    <img src="/assets/images/projects/timing-attacks/timing-mechanism.svg" alt="Figura 1: Comparação temporal entre early exit e tempo constante" class="w-full h-auto block" />
+    <img src="/assets/images/projects/timing-attacks/timing-mechanism-en.png" alt="Figura 1: Comparação temporal entre early exit e tempo constante" class="w-full h-auto block" />
 </div>
 
 Na curva com saída prematura (a), cada acerto adiciona um degrau de tempo (T₀ + k · Δt). Na comparação em tempo constante (b), a rotina percorre todas as posições independentemente de onde ocorra a divergência, mantendo o tempo estável e sem relação com os caracteres da chave.

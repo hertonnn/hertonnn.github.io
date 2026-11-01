@@ -4,7 +4,7 @@ title: "Timing Attacks in Practice: From Nanosecond Leaks to Exploiting Real API
 date: 2026-11-01 08:00:00 -0300
 categories: [security]
 tags: [Security, Cryptography, Python, Networks, Vulnerabilities, Side-Channel]
-image: assets/images/projects/timing-attacks/cover-en.png
+image: assets/images/projects/timing-attacks/timing-mechanism-en.png
 lang: en
 ---
 
@@ -101,7 +101,7 @@ This relationship changes the scale of brute-force testing:
 The diagram below compares response latency between early-exit verification and constant-time verification:
 
 <div class="my-6 rounded-xl overflow-hidden border border-slate-700 shadow-xl bg-white p-2">
-    <img src="/assets/images/projects/timing-attacks/timing-mechanism-en.svg" alt="Figure 1: Comparative timing analysis: early-exit vs constant-time" class="w-full h-auto block" />
+    <img src="/assets/images/projects/timing-attacks/timing-mechanism-en.png" alt="Figure 1: Comparative timing analysis: early-exit vs constant-time" class="w-full h-auto block" />
 </div>
 
 Under the early-exit curve (a), each correct character adds an incremental step in response time (T₀ + k · Δt). Under constant-time verification (b), the loop evaluates the entire buffer regardless of mismatches, keeping execution time flat and independent of the secret content.
