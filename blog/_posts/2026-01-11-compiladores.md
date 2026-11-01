@@ -7,39 +7,29 @@ tags: [Compiladores, Haskell, JVM, Análise Léxica, Análise Sintática, UDESC]
 ---
 Estudo dos princípios, técnicas e ferramentas para análise léxica, sintática e semântica, além da geração de código.
 
-Um **compilador** é um programa (ou conjunto de programas) que, a partir de um **código fonte** escrito em uma linguagem compilada, gera um **código objeto** semanticamente equivalente.  
+Um compilador é um programa que traduz código-fonte escrito em uma linguagem de programação para código-objeto semanticamente equivalente. Classicamente, realiza a tradução de uma linguagem textual de alto nível para linguagem de máquina voltada a uma arquitetura de processador e sistema operacional específicos.
 
-De forma clássica, um compilador traduz um programa de uma **linguagem textual de alto nível** para uma **linguagem de máquina**, específica para determinado processador e sistema operacional.  
+## Materiais da disciplina
 
----
+- [Repositório da disciplina](https://github.com/cdvasconcellos/Compiladores)
+- [Compiler Explorer](https://godbolt.org/)
+- [Documentação do Happy (gerador de parsers)](https://haskell-happy.readthedocs.io/en/latest/)
+- [Documentação do Alex (gerador de analisadores léxicos)](https://haskell-alex.readthedocs.io/en/latest/index.html)
 
-## 📂 Materiais da Disciplina
+## Sobre o professor
 
-- 📦 [Repositório da disciplina](https://github.com/cdvasconcellos/Compiladores)  
-- 🖥️ [Compiler Explorer](https://godbolt.org/)  
-- 📖 [Documentação Happy](https://haskell-happy.readthedocs.io/en/latest/)  
-- 📖 [Documentação Alex](https://haskell-alex.readthedocs.io/en/latest/index.html)  
+Cristiano Damiani Vasconcellos
 
----
+- Graduação em Ciência da Computação (PUCPR, 1993)
+- Mestrado em Engenharia Elétrica e Informática Industrial (UTFPR, 1997)
+- Doutorado em Ciência da Computação (UFMG, 2004)
 
-## 👨‍🏫 Sobre o Professor
+Áreas de interesse: projeto, implementação e uso de linguagens de programação, com foco em linguagens funcionais, sistemas de tipos e verificação formal.
 
-**Cristiano Damiani Vasconcellos**  
+Recursos:
+- [GitHub (materiais de aula)](https://github.com/cdvasconcellos/)
+- [YouTube (videoaulas)](https://www.youtube.com/channel/UCZ0iWiwN2zy5qB4CevpD89Q)
+- E-mail: cristiano.vasconcellos@udesc.br
+- Currículo Lattes: [http://lattes.cnpq.br/7291640788372419](http://lattes.cnpq.br/7291640788372419)
 
-- 🎓 Graduação em Ciência da Computação (PUCPR, 1993)  
-- 🎓 Mestrado em Engenharia Elétrica e Informática Industrial (UTFPR, 1997)  
-- 🎓 Doutorado em Ciência da Computação (UFMG, 2004)  
-
-🔎 Áreas de Interesse: Projeto, implementação e uso de linguagens de programação.  
-Foco em **linguagens funcionais**, **sistemas de tipos** e **verificação formal**.  
-
-📌 Recursos:  
-- [📂 GitHub (Materiais de aula)](https://github.com/cdvasconcellos/)  
-- [▶️ YouTube (Videoaulas)](https://www.youtube.com/channel/UCZ0iWiwN2zy5qB4CevpD89Q)  
-
-📧 **E-mail:** cristiano.vasconcellos@udesc.br  
-📄 **Lattes:** [Clique aqui](http://lattes.cnpq.br/7291640788372419)  
-
----
-_"Construir um compilador é aprender como funciona a alma de uma linguagem de programação."_ 🤓
-
+_"Construir um compilador é aprender como funciona a alma de uma linguagem de programação."_

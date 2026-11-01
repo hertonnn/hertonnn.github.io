@@ -9,54 +9,53 @@ image: https://www.bcompany.com.br/wp-content/uploads/2020/03/martelo-juiz-lapto
 
 ![img_inicio](https://www.bcompany.com.br/wp-content/uploads/2020/03/martelo-juiz-laptop-sistema-juridico-1024x683.jpg.webp)
 
+Este post detalha a arquitetura e a implementação de um banco de dados relacional para o domínio jurídico, desenvolvido em parceria com Adriano Silva como projeto final da disciplina de Banco de Dados I na UDESC. O trabalho abrangeu modelagem conceitual, definição de regras de negócio, implementação física e construção de uma API em Java.
 
-Este post detalha a arquitetura e o desenvolvimento de um banco de dados relacional projetado para o ecossistema jurídico, criado em parceria com Adriano Silva como projeto final da disciplina de Banco de Dados I na UDESC. O trabalho envolveu todas as etapas do ciclo de vida dos dados: desde a modelagem conceitual e regras de negócio até a implementação física e construção de uma API.
+## O problema e o escopo
 
-## O Problema e o Escopo
+Sistemas jurídicos demandam o registro ordenado de processos judiciais, andamentos, documentação e partes envolvidas. A meta do projeto foi construir um esquema centralizado para organizar esse histórico e simplificar consultas operacionais.
 
-A área do Direito lida diariamente com um volume massivo de informações fragmentadas. A proposta deste projeto foi estruturar um repositório centralizado que organize processos, trâmites, documentos e os diversos atores envolvidos, otimizando o acesso às informações para profissionais da área.
+O modelo conceitual foi estruturado em quatro eixos:
 
-Para manter o domínio de informação organizado e escalável, o modelo foi dividido em quatro núcleos arquiteturais:
+* Núcleo processual: entidades Processo e Tramite (com especializações em Audiencia e Decisao), registrando a linha cronológica dos eventos.
+* Atores e partes: especialização da entidade Pessoa em ramificações para Advogado e Agente Judiciario (subdividido em Juiz e Servidor Publico).
+* Estrutura jurisdicional: mapeamento de Comarca e Vara para estabelecer a distribuição geográfica e a competência de julgamento.
+* Base legal e peças: entidades Documento e Lei, associando petições e fundamentações aos eventos do processo.
 
-* ***Núcleo do Processo:*** Composto pelas entidades ***Processo*** e ***Tramite*** (com especializações em ***Audiencia*** e ***Decisao***), representando o histórico cronológico dos eventos.
-* ***Atores e Participantes:*** Utilizando o conceito de generalização na entidade base ***Pessoa***, com ramificações estruturadas para ***Advogado*** e ***Agente Judiciario*** (especializado em ***Juiz*** e ***Servidor Publico***).
-* ***Estrutura Organizacional:*** Mapeamento da hierarquia e localização jurisdicional através das entidades ***Comarca*** e ***Vara***.
-* ***Fundamentação e Conteúdo:*** As entidades ***Documento*** e ***Lei***, que representam os artefatos e a base legal dos eventos processuais.
+## Integridade e regras de negócio
 
-## Integridade e Regras de Negócio
+O sistema depende de regras de integridade declaradas no dicionário de dados e no esquema relacional:
 
-A confiabilidade de um sistema jurídico exige restrições rigorosas no banco de dados. Algumas das principais regras de negócio mapeadas no Dicionário de Dados incluem:
+* Lotação: um juiz vincula-se a uma única vara (1:N), e cada vara pertence a uma única comarca (1:N).
+* Responsabilidade: cada processo tramita sob a jurisdição de um juiz responsável e exige ao menos um trâmite associado.
+* Defesa: a atuação de advogados nos autos é modelada por um relacionamento ternário (N:N:N) entre Advogado, Pessoa e Processo.
 
-* ***Lotação e Hierarquia:*** Um ***Juiz*** deve estar lotado em uma única ***Vara*** (1:N), e uma ***Vara*** pertence a uma única ***Comarca*** (1:N).
-* ***Fluxo Processual:*** Todo ***Processo*** deve tramitar sob a responsabilidade de um único ***Juiz*** e possuir pelo menos um ***Tramite*** associado para existir no sistema.
-* ***Relacionamentos Complexos:*** A defesa de uma parte em um processo exige um relacionamento ternário (N:N:N) conectando ***Advogado***, ***Pessoa*** e ***Processo***.
-
-Abaixo está a representação visual do Esquema Entidade-Relacionamento Estendido (EER):
+O diagrama conceitual no padrão Entidade-Relacionamento Estendido (EER):
 
 ![Esquema Conceitual EER](https://github.com/hertonnn/Sistema-Juridico/blob/main/refs/Parte%201%20-%20Corrigida/Conceitual_1.png?raw=true)
 
-## Construindo a API Relacional em Java
+## Construindo a API relacional em Java
 
-A segunda fase do projeto consistiu em abstrair a complexidade do banco através de uma aplicação. A API foi desenvolvida em ***Java*** adotando o padrão arquitetural ***MVC (Model-View-Controller)***, garantindo a separação de responsabilidades entre a lógica de acesso aos dados, as regras da aplicação e a interface com o usuário.
+A segunda etapa do trabalho implementou uma API em Java seguindo o padrão MVC (Model-View-Controller) para intermediar as requisições entre a interface e o banco PostgreSQL.
 
-A aplicação consome um subconjunto do banco de dados (no mínimo 5 tabelas relacionadas) e fornece funcionalidades completas de manipulação:
+A aplicação consome tabelas centrais do esquema e oferece:
 
-* Inserção e remoção de registros em todas as tabelas mapeadas.
-* Listagens simples e consultas analíticas complexas envolvendo ***JOINs***, subconsultas e funções de agregação.
+* Operações de inserção e remoção em tabelas mapeadas.
+* Consultas parametrizadas com junções (JOINs), subconsultas e funções agregadas.
 
 ![Interface da API](https://github.com/hertonnn/Sistema-Juridico/blob/main/refs/Parte%201%20-%20Corrigida/c%C3%B3digo.png?raw=true)
 
 ### Considerações finais
 
-Em sumo, esse trabalho de conclusão final da disciplina de BAN1 foi crucial para relembrar e sintetizar todo conteúdo teórico e prático visto no decorrer do semestre. O repositório do projeto está disponível no [GitHub](https://github.com/hertonnn/Sistema-Juridico), contendo todo o código fonte e os artefatos do banco de dados.
+O projeto serviu para aplicar na prática as etapas de normalização, integridade referencial e consultas relacionais vistas na disciplina de Banco de Dados I. O código-fonte e os scripts de definição do banco estão no [GitHub](https://github.com/hertonnn/Sistema-Juridico).
 
 **Disciplina:** Banco de Dados I  
 
-**Instituição:** Universidade do Estado de Santa Catarina (UDESC) - Centro de Ciências Tecnológicas (CCT)   
+**Instituição:** Universidade do Estado de Santa Catarina (UDESC), Centro de Ciências Tecnológicas (CCT)   
 
 **Autores:** Adriano Silva, Herton Silveira   
 
-**Professora**: Dra. Rebeca Schroeder Freitas 
+**Professora:** Dra. Rebeca Schroeder Freitas 
 
 **Ano:** 2025 
 

@@ -8,15 +8,15 @@ image: https://img.youtube.com/vi/W3SZnzQo-sg/maxresdefault.jpg
 ---
 [![Demonstração do Projeto](https://img.youtube.com/vi/W3SZnzQo-sg/maxresdefault.jpg)](https://www.youtube.com/watch?v=W3SZnzQo-sg)
 
-Na disciplina de **Programação Orientada a Objetos** ministrada em minha faculdade (Universidade Estadual de Santa Catarina - UDESC), foi apresentada como proposta de trabalho individual final a implementação de um programa em três etapas. Na primeira fase, serão modeladas e implementadas, em Java, as camadas de **dados** e **negócio**; na segunda, a **interface gráfica**. Por fim, na terceira etapa, ocorrerá a projeção e implementação do **banco de dados** para a aplicação, denominada persistência.
+Na disciplina de Programação Orientada a Objetos na Universidade do Estado de Santa Catarina (UDESC), a proposta de trabalho final foi implementar uma aplicação em três etapas: modelagem das camadas de dados e negócio em Java, desenvolvimento da interface gráfica e integração com banco de dados para persistência.
 
-Neste post, detalharei as etapas do projeto, do **backend** ao **frontend**, com o tema Sistema de Finanças. Trata-se de uma aplicação ligeiramente complexa que visa ser um programa de gerenciamento de finanças pessoais. Nessa aplicação, o usuário adiciona suas receitas e despesas em categorias específicas, permitindo que o programa:
+A aplicação gerencia finanças pessoais por meio do cadastro de receitas e despesas em categorias específicas, incluindo:
 
-* Plote **gráficos** e faça estimativas a partir dos dados de entradas e saídas financeiras do usuário no **dashboard** principal.
-* Possibilite que o usuário gerencie e monitore suas transações financeiras por meio de históricos de registros em suas próprias categorias pré-definidas.
-* Ofereça uma interface intuitiva e de fácil uso, incorporando elementos de **experiência do usuário (UX)**.
-* Possua sistema de login e cadastro.
-* Permita a previsão de receitas/despesas através da adição de orçamentos pelo usuário.
+* Gráficos e estimativas no painel principal a partir das entradas e saídas financeiras.
+* Histórico de transações filtrado por categorias pré-definidas.
+* Interface gráfica pensada para facilitar o uso diário.
+* Sistema de login e cadastro de usuários.
+* Previsão orçamentária para controle de gastos.
 
 ![Imagem 1](/assets/images/projects/projeto3/img1.0.png)
 ![Imagem 2](/assets/images/projects/projeto3/img1.1.png)
@@ -24,72 +24,66 @@ Neste post, detalharei as etapas do projeto, do **backend** ao **frontend**, com
 ![Imagem 4](/assets/images/projects/projeto3/img1.3.png)
 ![Imagem 5](/assets/images/projects/projeto3/img1.4.png)
 
-## Arquitetura do Back-end
+## Arquitetura do back-end
 
 ### O banco de dados
 
-Inicialmente, a ferramenta utilizada para a persistência de dados é o **PostgreSQL.** Conforme a documentação oficial, o PostgreSQL é um sistema de gerenciamento de banco de dados objeto-relacional capaz de suportar os principais recursos da área, tais como consultas complexas, chaves estrangeiras, controle de concorrência de várias versões, além da adição de novos tipos de dados, funções, entre outros.
-
-Em uma análise mais aprofundada, destaca-se a organização do projeto em tabelas que representam as classes da camada de dados, concebida para armazenar os objetos que o programa manipulará, juntamente com seus atributos e métodos. Além disso, como linguagem para documentar e visualizar o banco de dados, optou-se pelo tradicional e eficiente diagrama de classes da **UML (Unified Modeling Language).**
+A persistência de dados utiliza PostgreSQL. A organização do esquema reflete as classes da camada de dados, projetadas para armazenar os registros manipulados pelo programa. O banco foi documentado por meio de um diagrama de classes UML (Unified Modeling Language).
 
 ![Diagrama de Classes](/assets/images/projects/projeto3/img2.png)
 
-Portanto, a UML de classes acima representa a organização dos dados no banco, incluindo as cardinalidades que representam os relacionamentos entre as tabelas Usuário, Conta, Categoria, Registro e Orçamento. Isso possibilita uma visualização organizada da estrutura dos dados. Por exemplo, a tabela Registro possui duas chaves estrangeiras (FK): uma referente à conta e outra à categoria de receita/despesa daquele registro. Adicionalmente, a tabela Conta faz referência a um usuário da tabela Usuário, sendo este o proprietário da conta que realizou o registro.
+O diagrama acima descreve as relações entre as tabelas Usuário, Conta, Categoria, Registro e Orçamento. A tabela Registro possui duas chaves estrangeiras: uma apontando para a conta e outra para a categoria correspondente. A tabela Conta referencia o usuário proprietário da conta que registrou a movimentação.
 
-### Encapsulamento e Padrão de projeto DAO
+### Encapsulamento e padrão DAO
 
-De forma geral, estabelecer a conexão com o banco de dados e realizar operações **CRUD (Create, Update e Delete)** em tabelas parece ser inicialmente simples. Basta consultar a documentação oficial da biblioteca utilizada, seguir as etapas de conexão, baixar o driver necessário na pasta lib e escrever algumas poucas linhas de código, incluindo informações como usuário, senha e caminho do banco de dados.
-
-Contudo, dependendo do projeto e se realizado de maneira incorreta, o código pode se tornar confuso, com várias conexões ao banco espalhadas em camadas que nem foram criadas para essa finalidade. Isso pode resultar em futuros erros e dificultar a manutenção do código. Pensando nisso, esse projeto adota o padrão **DAO (Data Access Object)**, que, embora relativamente simples, tem se mostrado altamente eficaz, simplificando significativamente o processo de implementação desse código.
+Em projetos em Java, manter chamadas SQL dispersas por diferentes camadas prejudica a manutenção. Por isso, a camada de acesso adota o padrão DAO (Data Access Object).
 
 ![Código DAO 1](/assets/images/projects/projeto3/img3.0.png)
 ![Código DAO 2](/assets/images/projects/projeto3/img3.1.png)
 
-Em resumo, esse padrão consiste em criar uma classe DAO para cada objeto de domínio, e cada uma dessas classes terá as operações de CRUD correspondentes, comunicando-se com o banco e encapsulando o acesso aos dados. Dessa forma, ao utilizar também o padrão singleton, em que apenas uma instância pode ser criada de cada classe, o projeto não só se torna mais organizado e limpo, mas também limita o número de conexões desnecessárias ao banco, resultando em uma **otimização** mais eficiente.
+Cada entidade possui uma classe DAO dedicada que concentra as operações de inserção, leitura, atualização e remoção. Combinado com o padrão singleton, em que cada DAO mantém uma única instância ativa, o acesso aos dados fica centralizado e evita conexões redundantes com o banco.
 
-A estrutura do banco de dados final ficou assim:
+A estrutura do banco final:
 
 ![Estrutura do banco](/assets/images/projects/projeto3/img4.png)
 
-### O Sistema
+### Camada de negócio
 
-Na camada de **negócios**, a lógica da aplicação atua como uma ponte, conectando-se às camadas DAO, para possibilitar a persistência, acesso ou remoção de dados específicos na camada de apresentação. As operações, tais como cadastro, validação e remoção de cada objeto do programa, são executadas pela classe Sistema nessa camada. Essa abordagem possibilita a integração eficiente das camadas visíveis da aplicação, como as telas de login, cadastro, etc.
+A lógica da aplicação atua como intermediária entre as classes DAO e a interface gráfica. Operações como validação de dados, cadastro de contas e encerramento de sessão são coordenadas pela classe central do sistema antes de refletir os dados nas telas.
 
-A estrutura geral do projeto ficará assim:
+A estrutura geral do projeto:
 
 ![Estrutura Geral do Projeto](/assets/images/projects/projeto3/img5.png)
 
-## A experiência do usuário
+## Interface e experiência de uso
 
-### Paleta de cores, formas e fonte
+### Identidade visual e tipografia
 
-A primeira etapa que decidi seguir ao criar a interface dessa aplicação (camada de apresentação) foi criar uma identidade visual para ser usada em todas as janelas do programa. Dessa forma, a aplicação vai possuir ícones, paleta de cores, fonte e vários outros elementos gráficos que são de suma importância para dar **personalidade** ao projeto.
+A interface adota uma identidade visual consistente em todas as telas do programa, com paleta de cores em tons de azul, tipografia padronizada e conjunto próprio de ícones para compor a navegação.
 
 ![Identidade Visual](/assets/images/projects/projeto3/img6.png)
 
-A paleta de cores é composta por tons azuis que estão por toda parte, seja em botões, textos, fundos ou em bordas. Da mesma forma, a fonte escolhida está na maioria dos textos em destaque, assim como os ícones que seguem os mesmos padrões.
+### Layouts em Java Swing
 
-### Janelas intuitivas e Designer
-
-A intenção por trás de cada janela ou função era torná-las intuitivas, buscando uma semelhança com o design de programas de desktop ou web, utilizando HTML e CSS como referência. No entanto, a ferramenta **Java Swing**, que foi utilizada, não oferece nativamente um layout com elementos tão modernos quanto as ferramentas mais atualizadas, o que tornou o processo de design um tanto mais desafiador. Por exemplo, componentes como botões, comboboxes ou campos de texto possuem, por padrão, uma aparência antiquada e são mais difíceis de manipular, mas eu os modifiquei ao máximo para se aproximarem de aparências mais modernas e minimalistas.
+O desenvolvimento gráfico utilizou Java Swing. Como a biblioteca possui componentes visuais com aparência clássica, os botões, campos de texto e listas foram personalizados manualmente para criar um visual mais limpo e próximo de aplicações desktop modernas.
 
 ![Interface Java Swing](/assets/images/projects/projeto3/img7.png)
 
-### Gráficos e tabelas
+### Gráficos e relatórios
 
-Os gráficos do painel principal foram elaborados utilizando a biblioteca **JFreeChart** do Java, que oferece uma variedade de modelos, como gráficos de linha, de barras, radiais, entre outros. Os dados selecionados são alimentados nos eixos x e y, representando os registros financeiros da pessoa, sendo filtrados e modificados dinamicamente durante a aplicação. Além disso, as tabelas são atualizadas em conjunto com os gráficos, refletindo as alterações feitas pelo usuário nos filtros.
+Os gráficos do painel principal foram construídos com a biblioteca JFreeChart, exibindo séries temporais e barras comparativas. Os dados nos eixos X e Y são recalculados dinamicamente conforme o usuário altera os filtros de período e categoria, e as tabelas associadas são sincronizadas na mesma tela.
 
 ![Gráficos e Tabelas](/assets/images/projects/projeto3/img8.png)
 
 ## Conclusão
 
-Em resumo, este projeto, parcialmente pronto para a fase beta, incluiria: um executável testado em pelo menos algumas máquinas com sistemas Linux e Windows, uma implementação eficiente de criptografia, uma bateria de testes de performance e, pelo menos, a disponibilização para download durante a fase beta para testes com usuários. No entanto, cada um desses tópicos é complexo o suficiente para demandar vários meses de estudo e renderia um post exclusivo nesta página se fossem implementados por uma única pessoa (eu), o que não é viável neste momento. Portanto, ainda é necessário dedicar mais tempo de estudo a este projeto, o que resultará em mais aprendizado, bem como mais prática em **Java**.
+O projeto atendeu aos requisitos da disciplina ao cobrir a modelagem de domínio, a persistência com DAO no PostgreSQL e a construção da interface gráfica em Java Swing. Próximos passos incluiriam testes automatizados de integração, geração de instaladores para Linux e Windows e aperfeiçoamentos no fluxo de orçamentos.
 
-Link do repositório em meu Github - [https://github.com/hertonnn/API-Financas](https://github.com/hertonnn/API-Financas)
+Repositório no GitHub: [https://github.com/hertonnn/API-Financas](https://github.com/hertonnn/API-Financas)
 
 ## Referências
 
-* PostgreSQL Documentation - [https://www.postgresql.org/docs/current/intro-whatis.html](https://www.postgresql.org/docs/current/intro-whatis.html)
-* Programação orientada a objetos (IBM) - [https://www.ibm.com/docs/pt-br/watsonx-as-a-service?topic=language-object-oriented-programming](https://www.ibm.com/docs/pt-br/watsonx-as-a-service?topic=language-object-oriented-programming)
-* UML - [https://www.microsoft.com/pt-br/microsoft-365/business-insights-ideas/resources/guide-to-uml-diagramming-and-database-modeling](https://www.microsoft.com/pt-br/microsoft-365/business-insights-ideas/resources/guide-to-uml-diagramming-and-database-modeling)
-* Padrão DAO - [https://www.macoratti.net/11/10/pp_dao1.htm](https://www.macoratti.net/11/10/pp_dao1.htm)
+* PostgreSQL Documentation: [https://www.postgresql.org/docs/current/intro-whatis.html](https://www.postgresql.org/docs/current/intro-whatis.html)
+* Programação orientada a objetos (IBM): [https://www.ibm.com/docs/pt-br/watsonx-as-a-service?topic=language-object-oriented-programming](https://www.ibm.com/docs/pt-br/watsonx-as-a-service?topic=language-object-oriented-programming)
+* UML (Microsoft): [https://www.microsoft.com/pt-br/microsoft-365/business-insights-ideas/resources/guide-to-uml-diagramming-and-database-modeling](https://www.microsoft.com/pt-br/microsoft-365/business-insights-ideas/resources/guide-to-uml-diagramming-and-database-modeling)
+* Padrão DAO: [https://www.macoratti.net/11/10/pp_dao1.htm](https://www.macoratti.net/11/10/pp_dao1.htm)

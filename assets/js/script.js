@@ -24,16 +24,16 @@ const projectsPt = [
     {
         title: "Far.IA Agent",
         category: "Generative AI & LLM Agents",
-        description: "Estágio Ottimizza - Agente autônomo para extração contábil complexa.",
+        description: "Estágio na Ottimizza: agente autônomo para extração contábil.",
         tech: ["Python", "LangChain", "OpenAI API", "Vector DB"],
         type: "dev",
         link: "https://www.linkedin.com/in/herton-silveira-70509a243",
         image: "assets/images/global/WhatsApp Image 2025-11-13 at 10.12.05.jpeg"
     },
     {
-        title: "JusDigital — Front-End & IA",
+        title: "JusDigital: Front-End e IA",
         category: "Full-Stack & Generative AI",
-        description: "Interface web completa para o Sistema Jurídico + API com IA que traduz linguagem natural em SQL e gera resumos processuais usando LLM local (Ollama).",
+        description: "Interface web para o Sistema Jurídico e API com IA para converter linguagem natural em SQL e gerar resumos processuais com LLM local (Ollama).",
         tech: ["HTML", "CSS", "JavaScript", "FastAPI", "Ollama"],
         type: "dev",
         link: "blog/SistemaJuridico-FrontEnd-IA/",
@@ -60,7 +60,7 @@ const projectsPt = [
     {
         title: "Ciclo de Vida em Estrela",
         category: "Human-Computer Interaction",
-        description: "Trabalho da disciplina IHC - Interação Humano Computador sobre o Ciclo de Vida em Estrela, validada com o professor e colegas de turma.",
+        description: "Estudo sobre o modelo de Ciclo de Vida em Estrela para a disciplina de Interação Humano-Computador.",
         tech: ["HTML", "CSS", "JavaScript", "IHC"],
         type: "research",
         link: "https://hertonnn.github.io/case_studies/hci_lifecycle",
@@ -69,7 +69,7 @@ const projectsPt = [
     {
         title: "API Finance",
         category: "Software Architecture",
-        description: "Aplicação desktop robusta para gestão financeira, aplicando rigorosos padrões de POO e persistência PostgreSQL.",
+        description: "Aplicação desktop para gestão financeira, com padrões de POO e persistência no PostgreSQL.",
         tech: ["Java", "PostgreSQL", "POO"],
         type: "dev",
         link: "https://www.youtube.com/watch?v=W3SZnzQo-sg&t=79s",
@@ -87,7 +87,7 @@ const projectsPt = [
     {
         title: "Sistema Jurídico",
         category: "Backend & Database Architecture",
-        description: "Sistema centralizado para gestão de dados jurídicos, otimizando o fluxo documental com backend Java e SQL.",
+        description: "Esquema relacional e API para gestão de dados jurídicos, com backend em Java e PostgreSQL.",
         tech: ["Java", "PostgreSQL", "BAN1"],
         type: "dev",
         link: "https://hertonnn.github.io/blog/SistemaJuridico/",
@@ -114,7 +114,7 @@ const projectsPt = [
     {
         title: "Sistema Login",
         category: "Basic Learning",
-        description: "Meu primeiro projeto 🥺. Sistema Login em Python, com uma interface gráfica e conexão ao banco de dados MySQL.",
+        description: "Primeiro projeto prático: sistema de login em Python com interface gráfica Tkinter e banco MySQL.",
         tech: ["Python", "MySQL", "Tkinter"],
         type: "dev",
         link: "case_studies/login_system.html",
@@ -126,7 +126,7 @@ const projectsEn = [
     {
         title: "Timing Attacks: The Invisible Leak in Web APIs",
         category: "Cybersecurity & Side-Channel",
-        description: "Hands-on article & POC: How subtle variances in string comparison expose cryptographic tokens in web APIs. I developed a vulnerable server, a character-by-character exploit script, and constant-time mitigations across multiple languages.",
+        description: "Practical guide and POC: how early-exit string comparisons expose tokens in web APIs, with exploit automation and constant-time fixes across multiple languages.",
         tech: ["Python", "Cryptography", "FastAPI", "Networks"],
         type: "research",
         status: "pin",
@@ -136,16 +136,16 @@ const projectsEn = [
     {
         title: "Far.IA Agent",
         category: "Generative AI & LLM Agents",
-        description: "Ottimizza Internship - Autonomous agent for complex accounting extraction.",
+        description: "Ottimizza internship: autonomous agent for accounting data extraction.",
         tech: ["Python", "LangChain", "OpenAI API", "Vector DB"],
         type: "dev",
         link: "https://www.linkedin.com/in/herton-silveira-70509a243",
         image: "assets/images/global/WhatsApp Image 2025-11-13 at 10.12.05.jpeg"
     },
     {
-        title: "JusDigital — Front-End & AI",
+        title: "JusDigital: Front-End and AI",
         category: "Full-Stack & Generative AI",
-        description: "Full web interface for the Legal System + AI-powered API that translates natural language into SQL and generates case summaries using a local LLM (Ollama).",
+        description: "Web interface for the Legal System paired with an AI API that converts natural language into SQL and generates case summaries with local LLMs (Ollama).",
         tech: ["HTML", "CSS", "JavaScript", "FastAPI", "Ollama"],
         type: "dev",
         link: "/en/blog/SistemaJuridico-FrontEnd-IA/",
@@ -172,7 +172,7 @@ const projectsEn = [
     {
         title: "Star Lifecycle",
         category: "Human-Computer Interaction",
-        description: "Work for the HCI - Human-Computer Interaction course about the Star Lifecycle, validated with the professor and classmates.",
+        description: "Case study on the Star Lifecycle model for the Human-Computer Interaction course.",
         tech: ["HTML", "CSS", "JavaScript", "IHC"],
         type: "research",
         link: "https://hertonnn.github.io/case_studies/hci_lifecycle",
@@ -181,7 +181,7 @@ const projectsEn = [
     {
         title: "Finance API",
         category: "Software Architecture",
-        description: "Robust desktop application for financial management, applying strict OOP patterns and PostgreSQL persistence.",
+        description: "Desktop application for personal finance management using OOP design patterns and PostgreSQL persistence.",
         tech: ["Java", "PostgreSQL", "POO"],
         type: "dev",
         link: "https://www.youtube.com/watch?v=W3SZnzQo-sg&t=79s",
@@ -199,7 +199,7 @@ const projectsEn = [
     {
         title: "Legal System",
         category: "Backend & Database Architecture",
-        description: "Centralized system for legal data management, optimizing the document flow with a Java and SQL backend.",
+        description: "Relational schema and API for legal case management, with a Java and PostgreSQL backend.",
         tech: ["Java", "PostgreSQL", "BAN1"],
         type: "dev",
         link: "https://hertonnn.github.io/en/blog/SistemaJuridico/",
@@ -226,7 +226,7 @@ const projectsEn = [
     {
         title: "Login System",
         category: "Basic Learning",
-        description: "My first project 🥺. Login System in Python, with a graphical interface and MySQL database connection.",
+        description: "First coding project: authentication system in Python with a Tkinter graphical interface and MySQL persistence.",
         tech: ["Python", "MySQL", "Tkinter"],
         type: "dev",
         link: "case_studies/login_system.html",

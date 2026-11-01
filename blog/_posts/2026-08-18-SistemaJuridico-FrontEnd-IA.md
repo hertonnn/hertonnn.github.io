@@ -7,36 +7,28 @@ tags: [Java, HTML, CSS, JavaScript, FastAPI, LLM, Ollama, IA, PostgreSQL]
 image: assets/images/projects/projeto4/index_arte.jpg
 ---
 
-Há um tempo atrás, [escrevi no meu blog](https://hertonnn.github.io/blog/SistemaJuridico/) a respeito de um projeto que nasceu de uma disciplina de Banco de Dados na UDESC. Naquele post, eu cobri a parte que talvez seja a menos glamourosa, mas sem dúvida a mais importante de qualquer sistema: a **modelagem relacional**. Tabelas, chaves, cardinalidades, gatilhos. O alicerce invisível que segura tudo de pé.
+No post anterior sobre o [Sistema Jurídico](https://hertonnn.github.io/blog/SistemaJuridico/), descrevi a modelagem relacional feita na disciplina de Banco de Dados da UDESC: tabelas, chaves, cardinalidades e regras de integridade no PostgreSQL.
 
-Agora é hora de contar o que veio depois.
+Esta segunda etapa expande o projeto para torná-lo utilizável por pessoas que não operam via SQL:
 
-Se no primeiro post o assunto era "como organizar dados jurídicos num banco relacional", neste aqui a pergunta é diferente: **como um ser humano normal interage com esses dados?** Porque não adianta ter o banco mais bem modelado do mundo se o usuário final precisa abrir um terminal e digitar SQL para descobrir o status de um processo.
+1. Uma interface web desenvolvida em HTML, CSS e JavaScript vanilla, chamada JusDigital.
+2. Uma API em Python que traduz consultas em linguagem natural para SQL e gera resumos explicativos de processos.
 
-Este post cobre duas frentes que completam o sistema:
-
-1. **Uma interface web** pensada para ser limpa, navegável e útil — chamada JusDigital.
-2. **Uma API com IA** que traduz linguagem natural em SQL, e que gera resumos processuais compreensíveis para qualquer pessoa.
-
-Vamos por partes.
-
----
-
-## A Interface: JusDigital
+## A interface: JusDigital
 
 ### A decisão de ir para a web
 
-O projeto original tinha uma interface de linha de comando (CLI) com menu numerado — aquele estilo clássico de projeto acadêmico. Funcionava, mas era o tipo de coisa que só quem desenvolveu consegue usar sem perder a paciência.
+O projeto acadêmico original utilizava uma interface de linha de comando (CLI) baseada em menus numéricos. Embora funcional para testes de CRUD, o modelo era pouco prático para consultas do dia a dia.
 
-A alternativa óbvia seria um frontend web, e foi exatamente o que fizemos. **HTML puro, CSS puro, JavaScript vanilla.** O servidor? O próprio `com.sun.net.httpserver.HttpServer` que já vem embutido no Java.
+A interface foi então portada para a web utilizando apenas HTML, CSS e JavaScript no navegador, sem frameworks ou etapas de build. No backend, as páginas estáticas e as rotas de dados são servidas pelo `com.sun.net.httpserver.HttpServer`, componente nativo da biblioteca padrão do Java.
 
-O resultado é que quando você roda `java -jar Run.jar` e digita `20` no menu, o servidor sobe na porta 8081 e você acessa `http://localhost:8081/` no navegador. Sem instalação de nada além do Java.
+Ao executar `java -jar Run.jar` e selecionar a opção 20 no menu, o servidor inicia na porta 8081 e permite o acesso imediato por `http://localhost:8081/`.
 
-### A arquitetura do front
+### A arquitetura do front-end
 
-O front-end é composto por **13 páginas HTML** que se comunicam com o servidor Java via `fetch()`. Não tem SPA, não tem routing do lado do cliente. Cada página é um arquivo `.html` independente que faz suas próprias requisições e renderiza o resultado com manipulação direta do DOM.
+A camada visual é composta por 13 páginas HTML independentes que se comunicam com o servidor Java por meio da Fetch API. A renderização de dados ocorre diretamente no DOM do cliente, sem necessidade de roteador de SPA.
 
-A estrutura:
+Estrutura de arquivos:
 
 ```
 src/view/
@@ -56,15 +48,15 @@ src/view/
 └── modelos.html                 # Modelos de petições
 ```
 
-É muito código? Não. Cada arquivo tem entre 70 e 200 linhas. Sem build step, sem transpilação. Você abre no bloco de notas e entende.
+Cada arquivo mantém entre 70 e 200 linhas de código, facilitando a inspeção direta em qualquer editor de texto.
 
-### Design: o que guiou as decisões visuais
+### Critérios visuais de design
 
-Nos inspiramos bastante no [JusBrasil](https://www.jusbrasil.com.br/) — tanto na organização da informação quanto na experiência de uso. A ideia era criar algo que um profissional da área jurídica já se sentisse familiarizado ao abrir.
+A organização das informações e a hierarquia visual foram inspiradas em plataformas de consulta processual como o [JusBrasil](https://www.jusbrasil.com.br/).
 
-A fonte é a **Inter** (Google Fonts), que é basicamente a fonte padrão de qualquer interface que quer parecer profissional sem chamar atenção pra si mesma. As cores seguem uma paleta sóbria: azul institucional (`#1a56db`) como cor primária, cinzas para texto e fundo, e badges de status com semântica visual — verde para concluído, azul para em andamento, amarelo para suspenso.
+A tipografia utiliza a família Inter (Google Fonts). As cores baseiam-se em uma paleta neutra com azul institucional (`#1a56db`) como cor de destaque, tons de cinza para tipografia e fundos, e etiquetas coloridas para indicar o andamento processual (verde para concluído, azul para em andamento e amarelo para suspenso).
 
-O CSS usa variáveis `:root` como design system. Nenhuma cor, tamanho de fonte ou espaçamento é hardcoded nos componentes. Tudo referencia tokens. Isso é uma decisão que parece perfumaria até o dia que você precisa mudar o tom de azul do sistema inteiro.
+Todas as cores, espaçamentos e tamanhos de fonte foram centralizados em variáveis `:root` no CSS:
 
 ```css
 :root {
@@ -75,52 +67,47 @@ O CSS usa variáveis `:root` como design system. Nenhuma cor, tamanho de fonte o
 }
 ```
 
+### Principais telas da aplicação
 
-### As telas que importam
-
-**Página inicial** — Uma busca global no topo e três cards de acesso rápido: Processos, Diários Oficiais, e Modelos de Documentos. Sem menu hamburguer, sem sidebar, sem tutorial de onboarding. Você abre e sabe o que fazer.
+Página inicial: campo de busca global na seção superior e cartões de acesso rápido para Processos, Diários Oficiais e Modelos de Petições.
 
 ![Página inicial do JusDigital - hero com busca e cards de acesso rápido](/assets/images/projects/projeto4/index_img.png)
 
-**Autenticação** — Login e cadastro com formulários simples. O back-end Java valida contra uma tabela `Usuario` no banco. A sessão é gerenciada com `localStorage` — quando logado, o botão "Entrar" do header vira "Olá, {nome}" com opção de sair. O `auth.js` roda em todas as páginas no `DOMContentLoaded`.
+Autenticação: formulários de login e cadastro validados pelo backend Java na tabela `Usuario`. A sessão é preservada no `localStorage`, atualizando o cabeçalho das páginas com o nome do usuário e o botão de logout.
 
 ![Página de login](/assets/images/projects/projeto4/login_img.png)
 
-**Lista de processos** — Uma tabela que consome `/api/processos` e renderiza número, tipo, assunto e status com badges coloridas. Cada linha tem um botão "Visualizar" que leva ao detalhe.
+Listagem de processos: tabela que consome o endpoint `/api/processos`, exibindo número do processo, tipo de ação, assunto e status com etiquetas coloridas.
+
 ![Lista de processos com badges de status](/assets/images/projects/projeto4/processos_img.png)
 
-**Detalhe do processo** — Essa é a tela mais rica. Mostra o número do processo, a vara, as partes envolvidas (autor, réu), e uma **linha do tempo** com todo o histórico de trâmites. Mas o destaque é a seção "Resumo Inteligente", que conecta o front com a API de IA. Mais sobre isso adiante.
-![Detalhe do processo — partes e histórico de trâmites](/assets/images/projects/projeto4/processo1_detalhes.png)
+Detalhe do processo: exibe os dados da vara, as partes envolvidas (autor e réu), o histórico cronológico de trâmites e uma área para geração de resumo textual via IA.
+
+![Detalhe do processo: partes e histórico de trâmites](/assets/images/projects/projeto4/processo1_detalhes.png)
 ![Gerando resumo inteligente do processo](/assets/images/projects/projeto4/processo1_detalhes_gerando_resumo.png)
 ![Resumo inteligente gerado pela IA](/assets/images/projects/projeto4/processo1_detalhes_resumo_gerado.png)
 
-
-**Busca unificada** — A busca da página inicial redireciona para `busca.html?query=...`, que dispara `Promise.all` contra três endpoints (`/api/processos`, `/api/advogados`, `/api/leis`) e filtra os resultados no cliente. É uma busca fulltext bruta — sem Elasticsearch, sem índices especiais. Funciona porque o volume de dados é pequeno, e a simplicidade compensa.
+Busca unificada: formulário que consulta em paralelo três rotas da API (`/api/processos`, `/api/advogados` e `/api/leis`), filtrando os termos no navegador por correspondência de texto.
 
 ![Busca unificada com resultados de processos, advogados e leis](/assets/images/projects/projeto4/busca_resultados.png)
 
-**Advogados** — Um grid responsivo com cards mostrando nome, OAB e área de atuação. Clicar em "Ver Perfil" leva a uma página com sidebar contendo os dados pessoais e a lista de processos em que o advogado atua.
+Catálogo de advogados: grade responsiva com dados profissionais (nome, inscrição na OAB e área de atuação), com link para o histórico individual de processos.
 
 ![Catálogo de advogados em grid](/assets/images/projects/projeto4/advogados_img.png)
 
-
-
-**Jurisprudência e Acórdãos** — A página de jurisprudência lista as leis cadastradas. Clicar em uma lei abre a tela de acórdão, que além de mostrar o texto da lei, lista automaticamente todos os processos que a citam — com link direto para cada um.
+Jurisprudência e acórdãos: catálogo de leis cadastradas com tela de detalhe que lista os processos que citam cada dispositivo legal.
 
 ![Jurisprudência](/assets/images/projects/projeto4/jurisprudencia_img.png)
 
-
-
-**Modelos de documentos** — Petições e contratos prontos com um botão "Copiar Texto" que usa a Clipboard API. Copiou? O botão vira "Copiado! ✓" por dois segundos e volta ao normal. Micro-interação simples que faz diferença.
+Modelos de documentos: minutas de petições com botão para transferir o conteúdo diretamente para a área de transferência usando a Clipboard API.
 
 ![Modelos de peças judiciais](/assets/images/projects/projeto4/modelos_pecas_judiciais.png)
 
 ![Diários eletrônicos](/assets/images/projects/projeto4/diarios_eletronicos.png)
-### O servidor por trás: Java puro, sem Spring
 
-O `ServidorWeb.java` é provavelmente a parte mais incomum da stack. Em vez de usar Spring Boot ou Javalin, o servidor HTTP é o `com.sun.net.httpserver.HttpServer` — uma classe que existe no JDK desde o Java 6 e que quase ninguém usa em produção, mas que é perfeita para projetos acadêmicos e protótipos.
+### Servidor HTTP em Java padrão
 
-O servidor expõe 9 rotas:
+O arquivo `ServidorWeb.java` implementa a comunicação HTTP utilizando a classe `com.sun.net.httpserver.HttpServer` do JDK, sem frameworks externos como Spring Boot:
 
 | Endpoint | Método | Descrição |
 |---|---|---|
@@ -134,27 +121,25 @@ O servidor expõe 9 rotas:
 | `/api/login` | POST | Autenticação |
 | `/api/cadastro` | POST | Registro de novo usuário |
 
-Cada handler é uma inner class que recebe a `Connection` JDBC no construtor e monta o JSON manualmente com `StringBuilder`. Sim, sem Jackson, sem Gson. Cada campo é escapado na mão. É feio? Um pouco. Funciona? Perfeitamente.
+Cada manipulador de rota recebe a conexão JDBC ativa e formata as respostas em JSON com `StringBuilder`, escapando caracteres textuais manualmente.
 
----
+## A camada de IA: conversão de linguagem natural em SQL
 
-## A IA: Quando o Usuário Não Sabe SQL
+### O problema das consultas em linguagem natural
 
-### O problema real
+A interface visual organiza a navegação comum, mas não atende perguntas compostas em linguagem livre, tais como:
 
-Vamos ser honestos: o front-end resolve o problema de navegação. Se você quer ver a lista de processos, clica em "Processos". Se quer detalhes, clica em "Visualizar". Mas e quando a pergunta é mais sofisticada?
+- "Quais ações de despejo foram abertas contra o Adriano em 2026?"
+- "Liste os processos da Fazenda Estadual com valor acima de 50 mil"
+- "Resumo do processo 0001234-55.2026.8.26.0001"
 
-- *"Quais ações de despejo foram abertas contra o Adriano em 2026?"*
-- *"Liste os processos da Fazenda Estadual com valor acima de 50 mil"*
-- *"Resumo do processo 0001234-55.2026.8.26.0001"*
+A API complementar foi construída para converter essas perguntas em comandos SQL e devolver os dados formatados.
 
-Essas perguntas existem na cabeça do usuário em **linguagem natural**. Para respondê-las, alguém teria que escrever SQL. A ideia da API com IA é eliminar essa tradução manual.
+### Pilha tecnológica: FastAPI, LiteLLM e Ollama
 
-### A stack: FastAPI + LiteLLM + Ollama
+A API roda em Python com FastAPI na porta 8000. A comunicação com o modelo de linguagem é mediada pela biblioteca LiteLLM, permitindo alternar entre provedores locais e remotos por variáveis de ambiente.
 
-A API foi construída em Python com **FastAPI** e roda na porta 8000. A comunicação com o modelo de linguagem usa **LiteLLM** como camada de abstração, o que significa que trocar de provedor (Ollama local → OpenAI → OpenRouter) é questão de mudar uma variável de ambiente.
-
-O modelo padrão é o **Qwen 2.5 (3B)** rodando localmente via **Ollama**. Sim, 3 bilhões de parâmetros. Roda na CPU de um notebook comum. Não é GPT-4, mas para gerar SQL a partir de queries simples, funciona surpreendentemente bem.
+O modelo padrão configurado é o Qwen 2.5 (3B), executado localmente pelo Ollama em CPU.
 
 ```
 LLM-Juridica/
@@ -167,20 +152,21 @@ LLM-Juridica/
 └── pyproject.toml     # Dependências (uv)
 ```
 
-### O pipeline: 3 camadas de IA
+### Pipeline de três camadas
 
-Essa é a parte que mais me interessou no desenvolvimento. Em vez de jogar a pergunta do usuário direto para o modelo e torcer para sair um SQL válido, o sistema usa um **pipeline de três estágios**, cada um com seu próprio prompt e responsabilidade:
+Em vez de enviar a pergunta bruta do usuário diretamente para a geração do SQL, o sistema organiza o fluxo em três etapas independentes:
 
-#### Camada 1 — NER (Reconhecimento de Entidades)
+#### Camada 1: extração de entidades (NER)
 
-A primeira camada recebe a pergunta em linguagem natural e extrai entidades estruturadas. O modelo retorna um JSON com campos como `tipo_acao`, `autor`, `reu`, `ano`, `numero_processo`, `valor_causa`, `comarca`.
+A primeira etapa extrai parâmetros estruturados a partir da consulta do usuário. O modelo retorna um JSON contendo campos como `tipo_acao`, `autor`, `reu`, `ano`, `numero_processo`, `valor_causa` e `comarca`.
 
-**Prompt (simplificado):**
+Prompt base:
 > "Você é um especialista em extração de entidades jurídicas. Analise a consulta e retorne APENAS um JSON válido. Use null para campos não encontrados."
 
-**Entrada:** `"Ação de despejo do Condomínio Edifício Central contra o Adriano em 2026"`
+Exemplo de entrada:
+`"Ação de despejo do Condomínio Edifício Central contra o Adriano em 2026"`
 
-**Saída:**
+Exemplo de saída:
 ```json
 {
   "tipo_acao": "despejo",
@@ -194,13 +180,11 @@ A primeira camada recebe a pergunta em linguagem natural e extrai entidades estr
 }
 ```
 
-O parsing da resposta é robusto: usa regex para extrair o bloco `{...}` mesmo se o modelo embrulhar em markdown, e valida contra um schema Pydantic. Se o JSON vier malformado, retorna HTTP 502 com mensagem clara.
+O código extrai o bloco JSON com expressões regulares mesmo se o modelo adicionar marcadores markdown e valida os campos contra um esquema do Pydantic.
 
-#### Camada 2 — Geração de SQL
+#### Camada 2: geração de SQL
 
-A segunda camada recebe as entidades extraídas + o schema do banco (opcionalmente enviado pelo cliente) e gera uma query PostgreSQL `SELECT`.
-
-O ponto mais interessante aqui é a **injeção de contexto do banco**. O cliente pode enviar no request um `db_context` com as tabelas, colunas e até dados de exemplo:
+A segunda camada recebe as entidades extraídas e a descrição do esquema relacional (`db_context`) enviada pelo cliente:
 
 ```json
 {
@@ -214,23 +198,19 @@ O ponto mais interessante aqui é a **injeção de contexto do banco**. O client
 }
 ```
 
-Isso faz o modelo usar os **nomes exatos** de tabelas e colunas do banco real, em vez de inventar. É a diferença entre gerar um SQL que roda e um que dá erro de "tabela não encontrada".
+O envio do contexto reduz alucinações sobre nomes de tabelas e colunas. As regras do prompt determinam:
+- Apenas consultas de leitura (`SELECT`).
+- Comparação de texto com `ILIKE`.
+- Junções explícitas (`JOIN`) entre tabelas relacionadas.
+- Cláusula `LIMIT 100` obrigatória.
 
-**Regras do prompt:**
-- Apenas `SELECT` (leitura).
-- `ILIKE` para buscas textuais (case-insensitive).
-- `JOIN` entre tabelas relacionadas.
-- `LIMIT 100` sempre.
+#### Camada 3: resumo processual
 
-#### Camada 3 — Resumo Jurídico
+A terceira camada recebe os dados brutos de um processo (número, vara, partes e histórico de trâmites) e gera uma explicação simplificada em linguagem acessível. Essa rota é acionada pelo botão "Gerar Resumo" na interface do JusDigital via requisição `POST` para `/summary`.
 
-A terceira camada é independente das duas primeiras. Ela recebe dados brutos de um processo (número, vara, partes, trâmites) e gera um **resumo em linguagem acessível** para o público geral.
+### Validação contra SQL destrutivo
 
-Essa é a camada que o front-end do JusDigital consome quando o usuário clica em "Gerar Resumo" na tela de detalhe do processo. O JavaScript coleta todas as informações visíveis na página, formata em texto, e faz um `POST` para `http://localhost:8000/summary`.
-
-### Uma validação básica contra SQL destrutivo
-
-Quando um LLM gera SQL, a pergunta natural é: *"e se ele gerar um DROP TABLE?"*. Implementamos uma validação simples com regex em `llm_service.py`, na função `validate_sql_safety()`:
+Para evitar a execução de operações destrutivas em banco geradas pelo modelo, a função `validate_sql_safety()` em `llm_service.py` aplica verificações básicas antes do retorno:
 
 ```python
 _DANGEROUS_PATTERN = re.compile(
@@ -246,25 +226,23 @@ def validate_sql_safety(sql: str) -> None:
         raise HTTPException(status_code=422, detail=f"Palavra proibida: {match.group()}")
 ```
 
-Duas checagens básicas:
-1. A query **deve** começar com `SELECT`.
-2. A query **não pode** conter nenhuma das 11 palavras destrutivas.
+Regras aplicadas:
+1. A instrução deve iniciar estritamente com `SELECT`.
+2. A instrução não pode conter comandos de modificação de dados ou alteração de esquema (como `DROP`, `DELETE`, `UPDATE` ou `ALTER`).
 
-Se qualquer uma falhar, a API retorna HTTP 422 e a query nunca chega ao banco. Não é uma solução robusta de segurança — é uma checagem mínima com regex que, combinada com o prompt que instrui o modelo a gerar apenas `SELECT`, já evita os cenários mais óbvios para o contexto desse projeto.
+Se qualquer condição for violada, a API responde com código HTTP 422.
 
-### Os endpoints
+### Endpoints da API
 
-| Endpoint | Método | O que faz |
+| Endpoint | Método | Descrição |
 |---|---|---|
-| `/health` | GET | Health check (`{"status": "ok"}`) |
-| `/search` | POST | Pipeline NER + SQL Gen. Recebe `query` + `db_context` opcional |
-| `/summary` | POST | Resumo jurídico. Recebe `process_data` (texto bruto) |
+| `/health` | GET | Verificação de integridade do serviço (`{"status": "ok"}`) |
+| `/search` | POST | Pipeline de NER e geração de SQL. Recebe `query` e `db_context` opcional |
+| `/summary` | POST | Geração de resumo processual a partir de texto bruto |
 
-A documentação automática está em `/docs` (Swagger) e `/redoc`.
+### Configuração de modelos
 
-### Configuração: troque o modelo em 1 linha
-
-O `config.py` usa `pydantic-settings` com `.env`. Cada camada pode usar um modelo diferente:
+As variáveis de ambiente do `config.py` permitem apontar cada camada para um modelo ou provedor distinto:
 
 ```env
 NER_MODEL=ollama/qwen2.5:3B
@@ -277,111 +255,96 @@ SUMMARY_MODEL=ollama/qwen2.5:3B
 SUMMARY_API_BASE=http://localhost:11434
 ```
 
-Quer usar GPT-4 para a geração de SQL e manter o Ollama local para NER? Muda duas linhas:
+É possível redirecionar a camada de SQL para provedores externos alterando apenas as variáveis de configuração, sem modificar o código-fonte da aplicação:
 
 ```env
 SQL_MODEL=gpt-4o
 SQL_API_KEY=sk-...
 ```
 
-O LiteLLM cuida do resto. Sem alterar uma linha de código.
-
----
-
-## Como Rodar Tudo
+## Como executar o projeto
 
 ### Pré-requisitos
 
-- **Java 17+** (para o servidor web e a API de dados)
-- **PostgreSQL** (com o banco `sistema_juridico` configurado)
-- **Python 3.12+** (para a API com IA)
-- **Ollama** (para rodar o modelo de linguagem localmente)
+- Java 17+ (para o servidor web e a camada de dados)
+- PostgreSQL (com a base `sistema_juridico` configurada)
+- Python 3.12+ (para a API com IA)
+- Ollama (para execução do modelo de linguagem local)
 
-### 1. Banco de Dados
+### 1. Banco de dados
 
-Garanta que o PostgreSQL está rodando e execute os scripts de criação e população na ordem:
+Com o PostgreSQL em execução, aplique os scripts de criação do esquema e inserção de dados:
 
 ```bash
-# Conecte ao PostgreSQL e execute:
 psql -U seu_usuario -d sistema_juridico -f refs/Script_BD.sql
 psql -U seu_usuario -d sistema_juridico -f refs/PopularBanco.sql
 ```
 
-### 2. Servidor Web (Java)
+### 2. Servidor web (Java)
 
 ```bash
-# Compilar (se necessário)
+# Compilar os fontes
 javac -d out src/*.java src/bean/*.java src/controller/*.java src/db/*.java src/model/*.java
 
-# Empacotar
+# Empacotar arquivo JAR
 jar cfm Run.jar MANIFEST.MF -C out .
 
-# Rodar
+# Executar a aplicação
 java -jar Run.jar
 ```
 
-No menu, digite `20` para iniciar o servidor web. Acesse `http://localhost:8081/`.
+No menu principal, informe `20` para iniciar o servidor web e abra `http://localhost:8081/`.
 
-![Terminal com a opção 20 — servidor web rodando](/assets/images/projects/projeto4/servidor_api_opcao_20.png)
+![Terminal com a opção 20: servidor web em execução](/assets/images/projects/projeto4/servidor_api_opcao_20.png)
 
 ### 3. API com IA
 
 ```bash
-# Instalar Ollama (se ainda não tem)
-# https://ollama.com/download
-
-# Baixar o modelo
+# Baixar o modelo no Ollama
 ollama pull qwen2.5:3b
 
-# Instalar dependências da API
+# Instalar as dependências da API
 cd LLM-Juridica
 pip install -r requirements.txt
-# ou, se usar uv:
+# ou com uv:
 uv sync
 
-# Configurar variáveis de ambiente
+# Configurar as variáveis de ambiente
 cp .env.example .env
-# Edite o .env se necessário
 
-# Rodar a API
+# Executar a API
 uvicorn main:app --reload
 ```
 
-A API estará disponível em `http://localhost:8000/`. Documentação Swagger em `http://localhost:8000/docs`.
+A API estará acessível em `http://localhost:8000/`, com documentação Swagger disponível em `/docs`.
 
 ![Swagger UI da API com IA](/assets/images/projects/projeto4/Swagger_api_local.png)
 
-### 4. Testando a integração Front + IA
+### 4. Integração front-end e IA
 
-Com os dois servidores rodando (Java na 8081 e Python na 8000):
+Com os serviços ativos nas portas 8081 (Java) e 8000 (Python):
 
 1. Acesse `http://localhost:8081/`
-2. Navegue até um processo
-3. Clique em "Gerar Resumo"
-4. O front faz o request para a API de IA e exibe o resumo processual
+2. Abra a página de detalhes de um processo.
+3. Clique em "Gerar Resumo".
+4. O navegador envia os dados para a rota `/summary` da API em Python e exibe o texto gerado na tela.
 
 ![Detalhe do processo (exemplo 2)](/assets/images/projects/projeto4/processo2_detalhes.png)
-
 ![Gerando resumo pela IA (exemplo 2)](/assets/images/projects/projeto4/processo2_detalhes_gerando_resumo.png)
-
 ![Resumo gerado pela IA (exemplo 2)](/assets/images/projects/projeto4/processo2_detalhes_resumo_gerado.png)
 
-Para testar a API de IA isoladamente:
+Para executar os testes automatizados da API:
 
 ```bash
 cd LLM-Juridica
 python test_client.py
 ```
 
-![Retorno da API — teste 1 (entidades extraídas)](/assets/images/projects/projeto4/retorno_api_teste1.png)
+![Retorno da API: teste 1 (entidades extraídas)](/assets/images/projects/projeto4/retorno_api_teste1.png)
+![Retorno da API: teste 2 (SQL gerado)](/assets/images/projects/projeto4/retorno_api_teste2.png)
+![Retorno da API: teste 3 (resumo)](/assets/images/projects/projeto4/retorno_api_teste3.png)
 
-![Retorno da API — teste 2 (SQL gerado)](/assets/images/projects/projeto4/retorno_api_teste2.png)
-
-![Retorno da API — teste 3 (resumo)](/assets/images/projects/projeto4/retorno_api_teste3.png)
-
----
-
-## Diagrama de Integração
+## Diagrama de integração
 
 ```
 ┌─────────────────────────────────────────────────────────┐
@@ -410,24 +373,18 @@ python test_client.py
 └────────────────────────┘  └──────────────────────────────┘
 ```
 
----
+## Aprendizados do projeto
 
-## O Que Eu Aprendi
+O projeto evoluiu da modelagem relacional para uma aplicação completa com interface visual e tradução de consultas. Principais observações do desenvolvimento:
 
-Esse projeto começou como uma tarefa de faculdade sobre modelagem relacional e foi crescendo. Cada etapa adicionou uma camada de complexidade, mas também de utilidade real. Algumas reflexões:
+- O pipeline em duas etapas (extração de entidades seguida por geração de SQL) mostrou-se mais estável do que solicitar a consulta SQL diretamente ao modelo, pois o segundo estágio recebe parâmetros delimitados e um esquema de dados conhecido.
+- Modelos compactos executados localmente em CPU (como o Qwen 2.5 3B via Ollama) atenderam com precisão as tarefas de extração estruturada e escrita de consultas `SELECT`, sem dependência de serviços externos.
+- A validação sintática prévia por expressões regulares e restrições de comandos impediu que instruções de alteração ou exclusão de tabelas chegassem ao banco.
 
-**Sobre LLMs para SQL**: O pipeline de dois estágios (NER → SQL) é significativamente mais confiável do que jogar a pergunta direto para o modelo e pedir SQL. A extração de entidades primeiro cria uma representação intermediária estruturada que o segundo estágio usa como input bem definido. É o mesmo princípio de compiladores: tokenizar primeiro, parsear depois.
-
-**Sobre rodar IA localmente**: O Qwen 2.5 3B via Ollama é surpreendentemente capaz para tarefas focadas como geração de SQL. Não precisa de GPU dedicada, não depende de API externa, não tem custo por token. Para prototipagem, é imbatível.
-
-**Sobre segurança de LLMs**: A validação de SQL com regex não é um WAF. Mas a combinação de instruções no prompt ("apenas SELECT") + validação hard-coded no código ("deve começar com SELECT, não pode conter DROP/DELETE/...") cria uma defesa em profundidade razoável para um projeto desse porte.
-
----
-
-O código completo está disponível no [repositório do GitHub](https://github.com/hertonnn/Sistema-Juridico-BD).
+O código-fonte completo está disponível no [repositório do GitHub](https://github.com/hertonnn/Sistema-Juridico-BD).
 
 **Disciplina:** Banco de Dados II  
-**Instituição:** Universidade do Estado de Santa Catarina (UDESC) - CCT  
+**Instituição:** Universidade do Estado de Santa Catarina (UDESC), Centro de Ciências Tecnológicas (CCT)  
 **Autores:** Herton Silveira, Arthur Bertoli Silva  
 **Ano:** 2025/2026  
 
