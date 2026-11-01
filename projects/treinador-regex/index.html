@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Treinador de Regex</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="topo">
+    <div class="topo-conteudo">
+      <h1>Treinador de Regex</h1>
+      <div class="progresso" aria-live="polite">
+        <span id="contador-desafio">Desafio -/-</span>
+        <span class="separador">·</span>
+        <span id="contador-concluidos">0 concluídos</span>
+      </div>
+    </div>
+    <div class="barra"><div id="barra-preenchida" class="barra-preenchida"></div></div>
+  </header>
+
+  <main class="container">
+    <nav id="mapa" class="mapa" aria-label="Lista de desafios"></nav>
+
+    <p id="erro-carregamento" class="erro-carregamento" hidden></p>
+
+    <section id="desafio" class="cartao" hidden>
+      <div class="cabecalho-desafio">
+        <span id="titulo-desafio" class="etiqueta"></span>
+        <span id="selo-concluido" class="selo" hidden>Concluído</span>
+      </div>
+      <p id="enunciado" class="enunciado"></p>
+
+      <div class="colunas">
+        <div class="coluna aceitar">
+          <h2>Deve aceitar</h2>
+          <ul id="lista-aceitar" class="exemplos"></ul>
+        </div>
+        <div class="coluna rejeitar">
+          <h2>Deve rejeitar</h2>
+          <ul id="lista-rejeitar" class="exemplos"></ul>
+        </div>
+      </div>
+
+      <form id="formulario" class="formulario" autocomplete="off">
+        <label for="expressao">Digite sua expressão regular</label>
+        <div class="linha-entrada">
+          <div class="campo">
+            <span class="barra-regex" aria-hidden="true">/^</span>
+            <input id="expressao" type="text" spellcheck="false" autocapitalize="off" placeholder="ex.: [01]+">
+            <span class="barra-regex" aria-hidden="true">$/</span>
+          </div>
+          <button type="submit" class="botao primario">Testar</button>
+        </div>
+        <p class="observacao">A expressão precisa casar o exemplo inteiro, do início ao fim.</p>
+      </form>
+
+      <div id="resultado" class="resultado" aria-live="polite" hidden></div>
+
+      <div id="caixa-dica" class="caixa-dica" hidden></div>
+    </section>
+  </main>
+
+  <footer id="rodape" class="rodape" hidden>
+    <div class="rodape-conteudo">
+      <button id="botao-dica" type="button" class="botao">Dica</button>
+      <div class="navegacao">
+        <button id="botao-anterior" type="button" class="botao">Anterior</button>
+        <button id="botao-proximo" type="button" class="botao">Próximo</button>
+      </div>
+    </div>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>
