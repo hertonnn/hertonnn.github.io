@@ -12,6 +12,16 @@ const repoLinks = {
 // --- DATA: PROJECTS ---
 const projectsPt = [
     {
+        title: "Compilador Java (j--) em Haskell: Da Gramática ao Bytecode JVM",
+        category: "Compiler Design & Engineering",
+        description: "Construção de um compilador completo para a linguagem j-- em Haskell, cobrindo análise léxica (Alex), sintática LALR(1) (Happy), semântica com mônadas e geração de bytecode JVM via Jasmin.",
+        tech: ["Haskell", "Java", "Jasmin", "Alex", "Happy", "COM"],
+        type: "research",
+        status: "pin",
+        link: "blog/compilador-java/",
+        image: "https://optim.tildacdn.net/tild6638-3234-4266-b630-646530643738/-/resize/760x/-/format/webp/compiler.jpg.webp"
+    },
+    {
         title: "Timing Attacks: O Vazamento Invisível em APIs",
         category: "Cybersecurity & Side-Channel",
         description: "Artigo prático & POC: Como falhas em validações de igualdade expõem segredos e tokens em APIs. Desenvolvi um servidor vulnerável, um exploit de extração caractere a caractere e as mitigações em várias linguagens.",
@@ -47,15 +57,6 @@ const projectsPt = [
         type: "research",
         link: "https://github.com/hertonnn/UDESC-Computacao/tree/main/TEG%20-%20Teoria%20dos%20Grafos/Trabalhos/Grafo%20%C3%8Dris",
         image: "assets/images/global/project-cover-1.png"
-    },
-    {
-        title: "Descomplicando um Compilador!",
-        category: "Compiler Design & Engineering",
-        description: "Desenvolvimento de um compilador em Haskell para geração de bytecodes JVM. Engenharia de linguagens na prática.",
-        tech: ["Haskell", "Java", "Shell", "Jasmim", "COM"],
-        type: "research",
-        link: "https://github.com/hertonnn/Compilador-Java",
-        image: "https://optim.tildacdn.net/tild6638-3234-4266-b630-646530643738/-/resize/760x/-/format/webp/compiler.jpg.webp"
     },
     {
         title: "Ciclo de Vida em Estrela",
@@ -124,6 +125,16 @@ const projectsPt = [
 
 const projectsEn = [
     {
+        title: "Java (j--) Compiler in Haskell: From Grammar to JVM Bytecode",
+        category: "Compiler Design & Engineering",
+        description: "Building a complete compiler for the j-- language in Haskell, covering lexical analysis (Alex), LALR(1) parsing (Happy), monadic type checking, and JVM bytecode generation via Jasmin.",
+        tech: ["Haskell", "Java", "Jasmin", "Alex", "Happy", "COM"],
+        type: "research",
+        status: "pin",
+        link: "/en/blog/compilador-java/",
+        image: "https://optim.tildacdn.net/tild6638-3234-4266-b630-646530643738/-/resize/760x/-/format/webp/compiler.jpg.webp"
+    },
+    {
         title: "Timing Attacks: The Invisible Leak in Web APIs",
         category: "Cybersecurity & Side-Channel",
         description: "Practical guide and POC: how early-exit string comparisons expose tokens in web APIs, with exploit automation and constant-time fixes across multiple languages.",
@@ -159,15 +170,6 @@ const projectsEn = [
         type: "research",
         link: "https://github.com/hertonnn/UDESC-Computacao/tree/main/TEG%20-%20Teoria%20dos%20Grafos/Trabalhos/Grafo%20%C3%8Dris",
         image: "assets/images/global/project-cover-1.png"
-    },
-    {
-        title: "Uncomplicating a Compiler!",
-        category: "Compiler Design & Engineering",
-        description: "Development of a compiler in Haskell for generating JVM bytecodes. Language engineering in practice.",
-        tech: ["Haskell", "Java", "Shell", "Jasmim", "COM"],
-        type: "research",
-        link: "https://github.com/hertonnn/Compilador-Java",
-        image: "https://optim.tildacdn.net/tild6638-3234-4266-b630-646530643738/-/resize/760x/-/format/webp/compiler.jpg.webp"
     },
     {
         title: "Star Lifecycle",
