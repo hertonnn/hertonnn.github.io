@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" width="100%" height="100%">
+  <rect width="1200" height="630" fill="#0f172a"/>
+
+  <!-- Subtle terminal window frame -->
+  <rect x="90" y="75" width="1020" height="480" rx="6" fill="#020617" stroke="#334155" stroke-width="1.5"/>
+  <line x1="90" y1="115" x2="1110" y2="115" stroke="#1e293b" stroke-width="1.5"/>
+  <text x="115" y="100" font-family="monospace" font-size="14" fill="#94a3b8">Compilador-Java — Lexico.x → Analisador.y → Semantico.hs → Gerador_de_codigo.hs → Jasmin</text>
+
+  <!-- Left column: Source + AST -->
+  <text x="125" y="155" font-family="monospace" font-size="14" font-weight="700" fill="#e2e8f0">// 1. Código-fonte (testes.j--)</text>
+  <text x="125" y="182" font-family="monospace" font-size="14" fill="#94a3b8">int a, b, c;</text>
+  <text x="125" y="204" font-family="monospace" font-size="14" fill="#94a3b8">a = 1; b = 20;</text>
+  <text x="125" y="226" font-family="monospace" font-size="14" fill="#f8fafc">c = b + a * 2;</text>
+
+  <text x="125" y="275" font-family="monospace" font-size="14" font-weight="700" fill="#e2e8f0">-- 2. Árvore Sintática (SintaxeAbstrata.hs)</text>
+  <text x="125" y="302" font-family="monospace" font-size="13.5" fill="#cbd5e1">Atrib "c" (Add (IdVar "b")</text>
+  <text x="125" y="324" font-family="monospace" font-size="13.5" fill="#cbd5e1">               (Mul (IdVar "a") (Const (CInt 2))))</text>
+
+  <text x="125" y="375" font-family="monospace" font-size="14" font-weight="700" fill="#e2e8f0">-- 3. Verificação Monádica (Semantico.hs)</text>
+  <text x="125" y="402" font-family="monospace" font-size="13.5" fill="#cbd5e1">data Result a = Result (Bool, String, a)</text>
+  <text x="125" y="424" font-family="monospace" font-size="13.5" fill="#94a3b8">-- Coerções: IntDouble, DoubleInt, IntFloat</text>
+
+  <line x1="620" y1="135" x2="620" y2="525" stroke="#1e293b" stroke-width="1.5"/>
+
+  <!-- Right column: Jasmin Bytecode -->
+  <text x="655" y="155" font-family="monospace" font-size="14" font-weight="700" fill="#e2e8f0">; 4. Saída Jasmin (output.j → Teste.class)</text>
+  <text x="655" y="185" font-family="monospace" font-size="14" fill="#94a3b8">.method public static main([Ljava/lang/String;)V</text>
+  <text x="655" y="209" font-family="monospace" font-size="14" fill="#94a3b8">    .limit stack 20</text>
+  <text x="655" y="233" font-family="monospace" font-size="14" fill="#94a3b8">    .limit locals 4</text>
+  <text x="655" y="265" font-family="monospace" font-size="14" fill="#cbd5e1">    iconst_1</text>
+  <text x="655" y="289" font-family="monospace" font-size="14" fill="#cbd5e1">    istore 1</text>
+  <text x="655" y="313" font-family="monospace" font-size="14" fill="#cbd5e1">    bipush 20</text>
+  <text x="655" y="337" font-family="monospace" font-size="14" fill="#cbd5e1">    istore 2</text>
+  <text x="655" y="369" font-family="monospace" font-size="14" fill="#f8fafc">    iload 2</text>
+  <text x="655" y="393" font-family="monospace" font-size="14" fill="#f8fafc">    iload 1</text>
+  <text x="655" y="417" font-family="monospace" font-size="14" fill="#f8fafc">    iconst_2</text>
+  <text x="655" y="441" font-family="monospace" font-size="14" fill="#f8fafc">    imul</text>
+  <text x="655" y="465" font-family="monospace" font-size="14" fill="#f8fafc">    iadd</text>
+  <text x="655" y="489" font-family="monospace" font-size="14" fill="#f8fafc">    istore 3</text>
+  <text x="655" y="513" font-family="monospace" font-size="14" fill="#94a3b8">.end method</text>
+</svg>

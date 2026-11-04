@@ -1,0 +1,162 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 920 510" width="100%" height="100%">
+  <!-- White Paper Background (Academic IEEE/ACM Paper Style) -->
+  <rect width="920" height="510" fill="#ffffff" rx="8" stroke="#cbd5e1" stroke-width="1.5"/>
+
+  <!-- Figure Header -->
+  <g transform="translate(36, 34)">
+    <text x="0" y="0" font-family="'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="15.5" font-weight="700" fill="#0f172a">
+      Figura 1: Pipeline de Cinco Estágios e Arquitetura do Frame de Execução da JVM
+    </text>
+    <text x="0" y="19" font-family="'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="11.5" font-style="italic" fill="#475569">
+      Baseado em Aho, Sethi &amp; Ullman (1986), Wadler (1995) e Lindholm &amp; Yellin — The Java™ Virtual Machine Specification (1999)
+    </text>
+  </g>
+
+  <line x1="36" y1="68" x2="884" y2="68" stroke="#e2e8f0" stroke-width="1"/>
+
+  <!-- LEFT PANEL: (a) 5-Stage Compiler Pipeline -->
+  <g transform="translate(36, 84)">
+    <text x="0" y="18" font-family="'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="13.5" font-weight="700" fill="#1e293b">
+      (a) Fases de Tradução do Compilador j-- em Haskell
+    </text>
+    <text x="0" y="34" font-family="'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="10.5" fill="#64748b">
+      Transformação de texto fonte em bytecode via AST tipada e mônadas
+    </text>
+
+    <!-- Stage 1 -->
+    <rect x="0" y="50" width="390" height="48" rx="6" fill="#f8fafc" stroke="#94a3b8" stroke-width="1.2"/>
+    <rect x="0" y="50" width="6" height="48" rx="3" fill="#ea580c"/>
+    <text x="16" y="69" font-family="monospace" font-size="11" font-weight="700" fill="#0f172a">1. Análise Léxica — Lexico.x (Alex / DFA)</text>
+    <text x="16" y="86" font-family="monospace" font-size="10" fill="#475569">Entrada: "c = b + a * 2;" → [ID "c", ATRIB, ID "b", ADD, ...]</text>
+
+    <line x1="195" y1="98" x2="195" y2="114" stroke="#64748b" stroke-width="1.5"/>
+    <polygon points="191,111 195,117 199,111" fill="#64748b"/>
+
+    <!-- Stage 2 -->
+    <rect x="0" y="118" width="390" height="48" rx="6" fill="#f8fafc" stroke="#94a3b8" stroke-width="1.2"/>
+    <rect x="0" y="118" width="6" height="48" rx="3" fill="#ea580c"/>
+    <text x="16" y="137" font-family="monospace" font-size="11" font-weight="700" fill="#0f172a">2. Análise Sintática — Analisador.y (Happy / LALR(1))</text>
+    <text x="16" y="154" font-family="monospace" font-size="10" fill="#475569">Árvore (AST): Atrib "c" (Add (IdVar "b") (Mul (IdVar "a") (Const 2)))</text>
+
+    <line x1="195" y1="166" x2="195" y2="182" stroke="#64748b" stroke-width="1.5"/>
+    <polygon points="191,179 195,185 199,179" fill="#64748b"/>
+
+    <!-- Stage 3 -->
+    <rect x="0" y="186" width="390" height="54" rx="6" fill="#fff7ed" stroke="#f97316" stroke-width="1.4"/>
+    <rect x="0" y="186" width="6" height="54" rx="3" fill="#c2410c"/>
+    <text x="16" y="205" font-family="monospace" font-size="11" font-weight="700" fill="#9a3412">3. Análise Semântica — Semantico.hs (Mônada Result)</text>
+    <text x="16" y="221" font-family="monospace" font-size="10" fill="#7c2d12">Result (Bool, String, a): Checa escopo/aridade e injeta coerções</text>
+    <text x="16" y="234" font-family="monospace" font-size="9.5" fill="#9a3412">Ex: Int + Double ⇒ Add (IntDouble e1) e2 | Narrowing ⇒ Warning</text>
+
+    <line x1="195" y1="240" x2="195" y2="256" stroke="#64748b" stroke-width="1.5"/>
+    <polygon points="191,253 195,259 199,253" fill="#64748b"/>
+
+    <!-- Stage 4 -->
+    <rect x="0" y="260" width="390" height="52" rx="6" fill="#f8fafc" stroke="#94a3b8" stroke-width="1.2"/>
+    <rect x="0" y="260" width="6" height="52" rx="3" fill="#0284c7"/>
+    <text x="16" y="279" font-family="monospace" font-size="11" font-weight="700" fill="#0f172a">4. Síntese de Código — Gerador_de_codigo.hs (State Int)</text>
+    <text x="16" y="295" font-family="monospace" font-size="10" fill="#475569">Alocação de slots no Frame e emissão de mnemônicos Jasmin</text>
+    <text x="16" y="307" font-family="monospace" font-size="9.5" fill="#0369a1">Geração monádica de rótulos: novoLabel ⇒ l0, l1, l2...</text>
+
+    <line x1="195" y1="312" x2="195" y2="328" stroke="#64748b" stroke-width="1.5"/>
+    <polygon points="191,325 195,331 199,325" fill="#64748b"/>
+
+    <!-- Stage 5 -->
+    <rect x="0" y="332" width="390" height="50" rx="6" fill="#ecfdf5" stroke="#10b981" stroke-width="1.3"/>
+    <rect x="0" y="332" width="6" height="50" rx="3" fill="#047857"/>
+    <text x="16" y="351" font-family="monospace" font-size="11" font-weight="700" fill="#065f46">5. Montagem e Execução — Jasmin 2.4 &amp; JVM</text>
+    <text x="16" y="368" font-family="monospace" font-size="10" fill="#047857">output.j → jasmin.jar → Teste.class (Bytecode JVM)</text>
+  </g>
+
+  <!-- Vertical Divider -->
+  <line x1="452" y1="88" x2="452" y2="480" stroke="#cbd5e1" stroke-width="1" stroke-dasharray="4,4"/>
+
+  <!-- RIGHT PANEL: (b) JVM Frame & Operand Stack Evaluation -->
+  <g transform="translate(476, 84)">
+    <text x="0" y="18" font-family="'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="13.5" font-weight="700" fill="#1e293b">
+      (b) Frame de Ativação JVM e Pilha de Operandos (LIFO)
+    </text>
+    <text x="0" y="34" font-family="'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="10.5" fill="#64748b">
+      Avaliação da expressão: a = 1; b = 20; c = b + a * 2; (Vasconcellos, UDESC)
+    </text>
+
+    <!-- Local Variable Array Box -->
+    <g transform="translate(0, 50)">
+      <rect x="0" y="0" width="185" height="190" rx="6" fill="#f8fafc" stroke="#cbd5e1" stroke-width="1.2"/>
+      <text x="92" y="20" font-family="'Helvetica Neue', Arial, sans-serif" font-size="11" font-weight="700" fill="#334155" text-anchor="middle">
+        Vetor de Variáveis Locais
+      </text>
+      <text x="92" y="33" font-family="monospace" font-size="9.5" fill="#64748b" text-anchor="middle">(.limit locals N)</text>
+
+      <!-- Slot 0 -->
+      <rect x="14" y="44" width="157" height="26" fill="#e2e8f0" stroke="#94a3b8" stroke-width="1"/>
+      <text x="22" y="61" font-family="monospace" font-size="10" font-weight="700" fill="#475569">Slot 0:</text>
+      <text x="72" y="61" font-family="monospace" font-size="10" fill="#334155">String[] args</text>
+
+      <!-- Slot 1 -->
+      <rect x="14" y="70" width="157" height="26" fill="#dbeafe" stroke="#60a5fa" stroke-width="1"/>
+      <text x="22" y="87" font-family="monospace" font-size="10" font-weight="700" fill="#1e40af">Slot 1:</text>
+      <text x="72" y="87" font-family="monospace" font-size="10" fill="#1e3a8a">int a = 1 (32b)</text>
+
+      <!-- Slot 2 -->
+      <rect x="14" y="96" width="157" height="26" fill="#dbeafe" stroke="#60a5fa" stroke-width="1"/>
+      <text x="22" y="113" font-family="monospace" font-size="10" font-weight="700" fill="#1e40af">Slot 2:</text>
+      <text x="72" y="113" font-family="monospace" font-size="10" fill="#1e3a8a">int b = 20 (32b)</text>
+
+      <!-- Slot 3 -->
+      <rect x="14" y="122" width="157" height="26" fill="#dcfce7" stroke="#4ade80" stroke-width="1"/>
+      <text x="22" y="139" font-family="monospace" font-size="10" font-weight="700" fill="#166534">Slot 3:</text>
+      <text x="72" y="139" font-family="monospace" font-size="10" fill="#14532d">int c = 22 (32b)</text>
+
+      <!-- Slot 4 & 5 (Double 64-bit note) -->
+      <rect x="14" y="148" width="157" height="30" fill="#fef3c7" stroke="#fbbf24" stroke-width="1"/>
+      <text x="22" y="162" font-family="monospace" font-size="9.5" font-weight="700" fill="#92400e">Slots 4-5:</text>
+      <text x="82" y="162" font-family="monospace" font-size="9.5" fill="#78350f">double (64b)</text>
+      <text x="22" y="173" font-family="sans-serif" font-size="8.5" fill="#92400e">getSlots TDouble = 2 slots</text>
+    </g>
+
+    <!-- Operand Stack Transitions -->
+    <g transform="translate(200, 50)">
+      <rect x="0" y="0" width="208" height="190" rx="6" fill="#f8fafc" stroke="#cbd5e1" stroke-width="1.2"/>
+      <text x="104" y="20" font-family="'Helvetica Neue', Arial, sans-serif" font-size="11" font-weight="700" fill="#334155" text-anchor="middle">
+        Pilha de Operandos (LIFO)
+      </text>
+      <text x="104" y="33" font-family="monospace" font-size="9.5" fill="#64748b" text-anchor="middle">(.limit stack 20)</text>
+
+      <!-- Stack state 1: iload 2, iload 1, iconst_2 -->
+      <text x="14" y="54" font-family="monospace" font-size="9.5" font-weight="700" fill="#475569">1) Empilha operandos:</text>
+      <rect x="14" y="60" width="54" height="22" fill="#fee2e2" stroke="#f87171"/>
+      <text x="41" y="75" font-family="monospace" font-size="9.5" fill="#991b1b" text-anchor="middle">20 (b)</text>
+      <rect x="72" y="60" width="54" height="22" fill="#ffedd5" stroke="#fb923c"/>
+      <text x="99" y="75" font-family="monospace" font-size="9.5" fill="#9a3412" text-anchor="middle">1 (a)</text>
+      <rect x="130" y="60" width="64" height="22" fill="#fef9c3" stroke="#facc15"/>
+      <text x="162" y="75" font-family="monospace" font-size="9.5" fill="#854d0e" text-anchor="middle">2 (topo)</text>
+
+      <!-- Stack state 2: imul -->
+      <text x="14" y="102" font-family="monospace" font-size="9.5" font-weight="700" fill="#475569">2) Instrução imul (1 * 2):</text>
+      <rect x="14" y="108" width="54" height="22" fill="#fee2e2" stroke="#f87171"/>
+      <text x="41" y="123" font-family="monospace" font-size="9.5" fill="#991b1b" text-anchor="middle">20 (b)</text>
+      <rect x="72" y="108" width="80" height="22" fill="#dbeafe" stroke="#60a5fa"/>
+      <text x="112" y="123" font-family="monospace" font-size="9.5" fill="#1e40af" text-anchor="middle">2 (a * 2)</text>
+
+      <!-- Stack state 3: iadd & istore 3 -->
+      <text x="14" y="150" font-family="monospace" font-size="9.5" font-weight="700" fill="#475569">3) Instrução iadd → istore 3:</text>
+      <rect x="14" y="156" width="138" height="22" fill="#dcfce7" stroke="#4ade80"/>
+      <text x="83" y="171" font-family="monospace" font-size="9.5" font-weight="700" fill="#166534" text-anchor="middle">22 → Slot 3 (c)</text>
+    </g>
+
+    <!-- Generated Jasmin Assembly Box -->
+    <g transform="translate(0, 254)">
+      <rect x="0" y="0" width="408" height="128" rx="6" fill="#0f172a" stroke="#334155" stroke-width="1.2"/>
+      <text x="14" y="19" font-family="monospace" font-size="10.5" font-weight="700" fill="#fb923c">
+        ; Mnemônicos Jasmin Emitidos (Pós-Ordem na AST):
+      </text>
+      <text x="14" y="38" font-family="monospace" font-size="10" fill="#e2e8f0">iconst_1          ; empilha constante 1</text>
+      <text x="14" y="53" font-family="monospace" font-size="10" fill="#e2e8f0">istore 1          ; a = 1 (salva no slot 1)</text>
+      <text x="14" y="68" font-family="monospace" font-size="10" fill="#e2e8f0">bipush 20         ; empilha byte 20</text>
+      <text x="14" y="83" font-family="monospace" font-size="10" fill="#e2e8f0">istore 2          ; b = 20 (salva no slot 2)</text>
+      <text x="14" y="98" font-family="monospace" font-size="10" fill="#38bdf8">iload 2 → iload 1 → iconst_2 → imul → iadd</text>
+      <text x="14" y="113" font-family="monospace" font-size="10" fill="#4ade80">istore 3          ; desempilha 22 no slot 3 (c = 22)</text>
+    </g>
+  </g>
+</svg>

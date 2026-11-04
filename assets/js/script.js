@@ -407,41 +407,74 @@ document.addEventListener('DOMContentLoaded', () => {
         tocList.appendChild(li);
     });
 
-    // 3. Lógica do ScrollSpy (Acender o item ativo)
-    const observerOptions = {
-        root: null,
-        // Configuração crucial: A margem superior negativa faz com que o título 
-        // só seja considerado "ativo" quando passar da metade superior da tela.
-        rootMargin: '0px 0px -70% 0px',
-        threshold: 0
-    };
-
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                // Tira o destaque de todos os links
-                document.querySelectorAll('.toc-link').forEach(link => {
-                    link.classList.remove('text-orange-500', 'font-bold');
-                    link.classList.add('text-slate-400');
-                });
-
-                // Dá destaque ao link correspondente ao título que está na tela
-                const activeLink = document.querySelector(`.toc-link[data-target="${entry.target.id}"]`);
-                if (activeLink) {
-                    activeLink.classList.remove('text-slate-400');
-                    activeLink.classList.add('text-orange-500', 'font-bold');
-                }
-            }
-        });
-    }, observerOptions);
-
-    // Coloca o "olheiro" em todos os títulos
-    headings.forEach(h => observer.observe(h));
-
-    // Previne sobreposicao do ToC com o rodape ao rolar ate o final
+    // 3. Lógica do ScrollSpy (Acender o item ativo e rolar a barra lateral automaticamente)
     const desktopToc = document.getElementById('desktop-toc');
     const footer = document.querySelector('footer');
+    let currentActiveId = null;
 
+    const setActiveTocLink = (id) => {
+        if (!id || id === currentActiveId) return;
+        currentActiveId = id;
+
+        document.querySelectorAll('.toc-link').forEach(link => {
+            link.classList.remove('text-orange-500', 'font-bold');
+            link.classList.add('text-slate-400');
+        });
+
+        const activeLink = document.querySelector(`.toc-link[data-target="${CSS.escape(id)}"]`);
+        if (activeLink) {
+            activeLink.classList.remove('text-slate-400');
+            activeLink.classList.add('text-orange-500', 'font-bold');
+
+            if (desktopToc && desktopToc.scrollHeight > desktopToc.clientHeight) {
+                const tocRect = desktopToc.getBoundingClientRect();
+                const linkRect = activeLink.getBoundingClientRect();
+                const relativeTop = linkRect.top - tocRect.top + desktopToc.scrollTop;
+                const targetScroll = relativeTop - (desktopToc.clientHeight / 2) + (linkRect.height / 2);
+
+                desktopToc.scrollTo({
+                    top: Math.max(0, targetScroll),
+                    behavior: 'smooth'
+                });
+            }
+        }
+    };
+
+    const updateScrollSpy = () => {
+        const triggerOffset = Math.min(220, window.innerHeight * 0.3);
+        let activeHeading = headings[0];
+
+        for (const heading of headings) {
+            if (heading.getBoundingClientRect().top <= triggerOffset) {
+                activeHeading = heading;
+            } else {
+                break;
+            }
+        }
+
+        if ((window.innerHeight + window.scrollY) >= (document.documentElement.scrollHeight - 24)) {
+            activeHeading = headings[headings.length - 1];
+        }
+
+        if (activeHeading) {
+            setActiveTocLink(activeHeading.id);
+        }
+    };
+
+    let isScrollingToc = false;
+    window.addEventListener('scroll', () => {
+        if (!isScrollingToc) {
+            window.requestAnimationFrame(() => {
+                updateScrollSpy();
+                isScrollingToc = false;
+            });
+            isScrollingToc = true;
+        }
+    }, { passive: true });
+
+    updateScrollSpy();
+
+    // Previne sobreposicao do ToC com o rodape ao rolar ate o final
     if (desktopToc && footer) {
         const checkFooterCollision = () => {
             const footerRect = footer.getBoundingClientRect();

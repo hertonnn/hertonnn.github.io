@@ -116,6 +116,8 @@
 
     // Do not display if already on the post page itself
     const currentPath = window.location.pathname.replace(/\/$/, '');
+    const isHomePage = currentPath === '' || currentPath === '/index.html' || currentPath === '/en' || currentPath === '/en.html';
+    if (!isHomePage) return;
     const targetPath = postUrl.replace(/\/$/, '');
     if (currentPath === targetPath || (targetPath && currentPath.endsWith(targetPath))) {
         return;
